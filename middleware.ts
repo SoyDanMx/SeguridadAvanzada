@@ -1,42 +1,13 @@
-import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-export async function middleware(request: NextRequest) {
-  try {
-    // API routes: no Supabase auth
-    if (request.nextUrl.pathname.startsWith("/api")) {
-      return NextResponse.next();
-    }
-
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-    if (!supabaseUrl || !supabaseAnonKey) {
-      return NextResponse.next();
-    }
-
-    const response = NextResponse.next({
-      request: { headers: request.headers },
-    });
-
-    const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => {
-            response.cookies.set(name, value, options);
-          });
-        },
-      },
-    });
-
-    await supabase.auth.getUser();
-    return response;
-  } catch {
-    return NextResponse.next();
-  }
+/**
+ * Middleware: pass-through para evitar MIDDLEWARE_INVOCATION_FAILED en Vercel Edge.
+ * La autenticación Supabase sigue funcionando en cliente vía AuthProvider.
+ * El refresh de sesión en middleware falla en Edge; se puede re-activar cuando
+ * Supabase/Next.js lo soporten correctamente.
+ */
+export async function middleware(_request: NextRequest) {
+  return NextResponse.next();
 }
 
 export const config = {
