@@ -18,6 +18,9 @@ dist
 # Scraped data (opcional: quitar si quieres versionar data/)
 /data/*.json
 
+# Screenshots con datos sensibles (API tokens, etc.)
+/public/images/apify-*.png
+
 # Misc
 .DS_Store
 *.pem

@@ -2,9 +2,7 @@
 
 [Apify](https://apify.com/) es una plataforma de web scraping y automatización. Puedes usarla para extraer datos de [Syscom](https://www.syscom.mx/) y [Seguridad Avanzada](https://www.seguridad-avanzada.com/) sin mantener servidores ni preocuparte por bloqueos (proxies, anti-bot).
 
-**Consola de Apify (Home, runs recientes, Actors sugeridos):**
-
-![Consola de Apify](/images/apify-console-screenshot.png)
+**Consola de Apify (Home, runs recientes, Actors sugeridos):** Accede a [console.apify.com](https://console.apify.com).
 
 ## 1. Cuenta y API Token
 
@@ -15,9 +13,7 @@
    APIFY_TOKEN="apify_api_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
    ```
 
-**Configuración de API en Apify (token y referencia):**
-
-![API de Apify - Token y endpoints](/images/apify-api-settings-screenshot.png)
+**Configuración de API en Apify (token y referencia):** Ve a **Settings → API & Integrations → API** en Apify.
 
 En esa pantalla también tienes el enlace a la **API reference** (documentación completa) y ejemplos como *Get public user data* y *Get private user data*. **No compartas las URLs que incluyen tu token** con terceros.
 
@@ -104,8 +100,6 @@ El endpoint inicia el run en Apify y, cuando termina, devuelve los items del dat
 ## 4. Dónde encontrar el data sheet (datos scrapeados)
 
 Cuando un run termina (por ejemplo del E-commerce Scraping Tool), el **data sheet** es el dataset de resultados. Lo encuentras así:
-
-![Output del E-commerce Scraping Tool en Apify](/images/apify-ecommerce-output-screenshot.png)
 
 1. **Pestaña Output** — En la página del run, abre la pestaña **Output**. Ahí ves la tabla con **Product Details** (URL, Name, Image, Offers, Brand, Description).
 2. **Botón Export** — Arriba a la derecha, el botón azul **Export** permite descargar todo el dataset en **JSON, CSV, Excel o XML**. Ese archivo es tu data sheet descargable.
