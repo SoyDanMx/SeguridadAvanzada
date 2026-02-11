@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   title: "Seguridad Avanzada | Donde los profesionales encuentran soluciones",
   description:
     "Videovigilancia, control de acceso y redes. Cámaras IP, DVR, NVR, las mejores marcas. Entregas en CDMX y todo México.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 /** Mobile-first: mayor tráfico en celulares. docs/design-mobile-first.md */
