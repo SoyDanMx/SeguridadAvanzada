@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import {
   ChevronDown,
   ChevronUp,
@@ -166,19 +166,25 @@ export default function ProductFilters({
     setExpandedSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
 
-  const handleConditionToggle = (condition: string) => {
-    const next = filters.condition.includes(condition)
-      ? filters.condition.filter((c) => c !== condition)
-      : [...filters.condition, condition];
-    onFiltersChange({ ...filters, condition: next });
-  };
+  const handleConditionToggle = useCallback(
+    (condition: string) => {
+      const next = filters.condition.includes(condition)
+        ? filters.condition.filter((c) => c !== condition)
+        : [...filters.condition, condition];
+      onFiltersChange({ ...filters, condition: next });
+    },
+    [filters, onFiltersChange]
+  );
 
-  const handleBrandToggle = (brand: string) => {
-    const next = filters.brands.includes(brand)
-      ? filters.brands.filter((b) => b !== brand)
-      : [...filters.brands, brand];
-    onFiltersChange({ ...filters, brands: next });
-  };
+  const handleBrandToggle = useCallback(
+    (brand: string) => {
+      const next = filters.brands.includes(brand)
+        ? filters.brands.filter((b) => b !== brand)
+        : [...filters.brands, brand];
+      onFiltersChange({ ...filters, brands: next });
+    },
+    [filters, onFiltersChange]
+  );
 
   const handlePriceChange = (type: "min" | "max", value: string) => {
     const num = value === "" ? null : parseInt(value, 10);
@@ -218,7 +224,7 @@ export default function ProductFilters({
       });
     }
     return chips;
-  }, [filters, priceStats]);
+  }, [filters, priceStats, handleConditionToggle, handleBrandToggle, onFiltersChange]);
 
   return (
     <div className="w-full flex-shrink-0 lg:w-72">

@@ -99,7 +99,7 @@ function ProductosContent() {
   };
 
   const total = data?.total ?? 0;
-  const products = data?.products ?? [];
+  const products = React.useMemo(() => data?.products ?? [], [data?.products]);
   const filteredProducts = React.useMemo(
     () => applyFilters(products, filters),
     [products, filters]
