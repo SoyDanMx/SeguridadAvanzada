@@ -1,0 +1,9 @@
+import { createBrowserClient } from "@supabase/ssr";
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
+
+/** Cliente Supabase para uso en componentes del navegador (con persistencia de sesión). */
+export function createClient() {
+  return createBrowserClient(supabaseUrl, supabaseAnonKey);
+}

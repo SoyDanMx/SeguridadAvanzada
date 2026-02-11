@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design system — Paleta SYSCOM + Seguridad Avanzada
+ * docs/design-system-palette.md · docs/design-system-style-guide.md
+ * Base 60% / Identidad 30% / Acento 10% · WCAG AA
+ */
+
+:root {
+  /* Tipografía — Montserrat (headings) + Inter (body) */
+  --font-heading: var(--font-montserrat), system-ui, sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jb-mono), ui-monospace, "Roboto Mono", monospace;
+  --text-h1-size: 2rem;
+  --text-h1-weight: 700;
+  --text-h2-size: 1.5rem;
+  --text-h2-weight: 600;
+  --text-body-size: 1rem;
+  --text-body-weight: 400;
+  --text-caption-size: 0.875rem;
+  --text-caption-weight: 500;
+  --text-caption-tech-size: 0.8125rem;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0.01em;
+  --tracking-wide: 0.02em;
+  --tracking-wider: 0.03em;
+  /* Base (60%) */
+  --color-background: #F4F5F6;
+  --color-background-alt: #FFFFFF;
+  /* Identidad (30%) — Azul corporativo */
+  --color-primary: #0088D8;
+  --color-primary-nav: #0064A8;
+  --color-on-primary: #FFFFFF;
+  /* Acento (10%) — Cotizar / Comprar */
+  --color-accent: #E85D04;
+  --color-accent-hover: #CC4D00;
+  --color-on-accent: #FFFFFF;
+  /* Texto — gris oscuro (nunca #000), menos fatiga visual */
+  --color-foreground: #212529;
+  --color-foreground-muted: #495057;
+  /* Semántica de seguridad */
+  --color-success: #0D9488;
+  --color-success-bg: #CCFBF1;
+  --color-error: #B91C1C;
+  --color-error-bg: #FEE2E2;
+  --color-warning: #D97706;
+  --color-warning-bg: #FFFBEB;
+  --color-info: #0064A8;
+  --color-info-bg: #DBEAFE;
+  /* Bordes */
+  --color-border: #E5E7EB;
+  --color-border-subtle: #F0F1F3;
+  /* Compatibilidad con nombres existentes (alias) */
+  --syscom-primary: var(--color-primary);
+  --syscom-primary-dark: var(--color-primary-nav);
+  --syscom-secondary: var(--color-foreground-muted);
+  --syscom-accent: var(--color-accent);
+  --syscom-accent-hover: var(--color-accent-hover);
+  --syscom-background: var(--color-background);
+  --syscom-surface: var(--color-background-alt);
+  --syscom-border: var(--color-border);
+  --syscom-nav-dark: var(--color-primary-nav);
+  --syscom-text: var(--color-foreground);
+  --syscom-text-muted: var(--color-foreground-muted);
+}
+
+/* Modo oscuro — Base Azul medianoche (Dark Navy) */
+.dark,
+[data-theme="dark"] {
+  --color-background: #0D1421;
+  --color-background-alt: #151D2E;
+  --color-primary: #3B9AE8;
+  --color-primary-nav: #0F2847;
+  --color-on-primary: #F1F5F9;
+  --color-accent: #F97316;
+  --color-accent-hover: #EA580C;
+  --color-on-accent: #FFFFFF;
+  --color-foreground: #F1F5F9;
+  --color-foreground-muted: #94A3B8;
+  --color-success: #2DD4BF;
+  --color-success-bg: #0F766E;
+  --color-error: #F87171;
+  --color-error-bg: #7F1D1D;
+  --color-warning: #FBBF24;
+  --color-warning-bg: #78350F;
+  --color-info: #3B9AE8;
+  --color-info-bg: #0F2847;
+  --color-border: #1E293B;
+  --color-border-subtle: #27303F;
+  /* Alias */
+  --syscom-primary: var(--color-primary);
+  --syscom-primary-dark: var(--color-primary-nav);
+  --syscom-accent: var(--color-accent);
+  --syscom-accent-hover: var(--color-accent-hover);
+  --syscom-background: var(--color-background);
+  --syscom-surface: var(--color-background-alt);
+  --syscom-border: var(--color-border);
+  --syscom-nav-dark: var(--color-primary-nav);
+  --syscom-text: var(--color-foreground);
+  --syscom-text-muted: var(--color-foreground-muted);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  font-weight: var(--text-body-weight);
+  line-height: 1.5;
+  letter-spacing: var(--tracking-normal);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-foreground);
+  }
+  h1 { font-size: var(--text-h1-size); font-weight: var(--text-h1-weight); letter-spacing: var(--tracking-tight); line-height: 1.2; }
+  h2 { font-size: var(--text-h2-size); font-weight: var(--text-h2-weight); line-height: 1.3; }
+}
+
+/* -----------------------------------------------------------------------------
+   Vista móvil (viewport < 768px) — UX Mobile, 60-30-10
+   Azul #0088D8 navegación | Naranja #F2711C solo CTA principal | Fondo #FFFFFF
+   ----------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  :root {
+    --color-accent: #F2711C;
+    --color-accent-hover: #E06510;
+    --text-h1-size: clamp(1.375rem, 5vw, 1.625rem); /* 22px - 26px */
+    --text-body-size: 1rem; /* 16px, evita zoom en iOS */
+  }
+  body {
+    font-size: 1rem;
+  }
+}
+
+/* Móvil: fondo blanco en contenido principal para máximo contraste */
+@media (max-width: 767px) {
+  body {
+    background-color: #FFFFFF;
+  }
+}
+
+/* Imágenes: reescalado proporcional sin perder foco en el producto (caja/kit) */
+@layer components {
+  .hero-banner-image {
+    object-fit: cover;
+    object-position: center center;
+  }
+  .product-image-responsive {
+    object-fit: contain;
+    object-position: center center;
+  }
+  @media (max-width: 767px) {
+    .hero-banner-image {
+      object-fit: contain;
+      object-position: center center;
+    }
+  }
+}
+
+/* Mobile-first: mínimo 44px para áreas táctiles (WCAG 2.5.5) — docs/design-mobile-first.md */
+@layer components {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .text-caption {
+    font-size: var(--text-caption-size);
+    font-weight: var(--text-caption-weight);
+    color: var(--color-foreground-muted);
+    letter-spacing: var(--tracking-wide);
+    line-height: 1.4;
+  }
+  .text-caption-tech {
+    font-size: var(--text-caption-tech-size);
+    font-weight: var(--text-caption-weight);
+    font-family: var(--font-mono);
+    color: var(--color-foreground-muted);
+    letter-spacing: var(--tracking-wider);
+    line-height: 1.4;
+  }
+}
