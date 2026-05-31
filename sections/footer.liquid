@@ -655,28 +655,53 @@
     <div class="footer-grid">
       
       <div class="footer-brand">
-        <h3 class="footer-heading" style="margin-bottom: 1rem; color: #ffffff;">Sobre Nosotros</h3>
-        <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1rem;">
-          Expertos en diseño, venta y ejecución de proyectos de Seguridad Industrial, CCTV, Control de Acceso, Redes y Energía Renovable. Brindamos soluciones integrales de clase mundial para corporativos e industrias en México y USA.
-        </p>
-        <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem;">
-          <strong>{{ shop.name }}</strong> forma parte orgullosamente del corporativo <strong>Nuo Networks, Inc.</strong>
-        </p>
-        
-        <!-- Delaware US C-Corp Card -->
-        <div class="usa-corp-card" id="openUsaModalBtn">
-          <div class="usa-corp-card-header">
-            <span class="usa-flag-pulse">🇺🇸</span>
-            <strong>¿Te ubicas en Estados Unidos?</strong>
-          </div>
-          <p class="usa-corp-card-body">
-            Somos una empresa establecida en Delaware, US. Podemos gestionar tu compra dentro de EE.UU. con nuestra C-Corp.
+        {% if request.locale.iso_code == 'en' %}
+          <h3 class="footer-heading" style="margin-bottom: 1rem; color: #ffffff;">About Us</h3>
+          <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1rem;">
+            Experts in design, sale and execution of Industrial Security, CCTV, Access Control, Networks and Renewable Energy projects. We provide world-class integrated solutions for corporates and industries in Mexico and the USA.
           </p>
-          <div class="usa-corp-card-footer">
-            <span>Ver detalles corporativos</span>
-            <svg class="arrow-right-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#3b82f6" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem;">
+            <strong>{{ shop.name }}</strong> is proudly part of the corporate group <strong>Nuo Networks, Inc.</strong>
+          </p>
+          
+          <!-- Delaware US C-Corp Card (EN) -->
+          <div class="usa-corp-card" id="openUsaModalBtn">
+            <div class="usa-corp-card-header">
+              <span class="usa-flag-pulse">🇺🇸</span>
+              <strong>Located in the United States?</strong>
+            </div>
+            <p class="usa-corp-card-body">
+              We are established in Delaware, US. We can process and fulfill your purchase within the USA through our C-Corp.
+            </p>
+            <div class="usa-corp-card-footer">
+              <span>View Corporate Details</span>
+              <svg class="arrow-right-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#3b82f6" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </div>
           </div>
-        </div>
+        {% else %}
+          <h3 class="footer-heading" style="margin-bottom: 1rem; color: #ffffff;">Sobre Nosotros</h3>
+          <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1rem;">
+            Expertos en diseño, venta y ejecución de proyectos de Seguridad Industrial, CCTV, Control de Acceso, Redes y Energía Renovable. Brindamos soluciones integrales de clase mundial para corporativos e industrias en México y USA.
+          </p>
+          <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem;">
+            <strong>{{ shop.name }}</strong> forma parte orgullosamente del corporativo <strong>Nuo Networks, Inc.</strong>
+          </p>
+          
+          <!-- Delaware US C-Corp Card (ES) -->
+          <div class="usa-corp-card" id="openUsaModalBtn">
+            <div class="usa-corp-card-header">
+              <span class="usa-flag-pulse">🇺🇸</span>
+              <strong>¿Te ubicas en Estados Unidos?</strong>
+            </div>
+            <p class="usa-corp-card-body">
+              Somos una empresa establecida en Delaware, US. Podemos gestionar tu compra dentro de EE.UU. con nuestra C-Corp.
+            </p>
+            <div class="usa-corp-card-footer">
+              <span>Ver detalles corporativos</span>
+              <svg class="arrow-right-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#3b82f6" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </div>
+          </div>
+        {% endif %}
         
         <ul class="footer-contact-list">
           {% if section.settings.phone != blank %}
@@ -845,55 +870,107 @@
     </div>
     
     <div class="usa-modal-body">
-      <div class="usa-modal-badge">Operación Corporativa Transfronteriza</div>
-      
-      <p class="usa-modal-description">
-        Si te encuentras en <strong>Estados Unidos</strong> y deseas adquirir equipamiento de seguridad y telecomunicaciones de alta gama, te ofrecemos un canal de facturación y entrega local 100% legal y optimizado.
-      </p>
-      
-      <div class="usa-modal-grid">
-        <div class="usa-modal-feature">
-          <div class="usa-feature-icon">🛡️</div>
-          <h3>Facturación Local en US</h3>
-          <p>Operamos mediante nuestra C-Corp registrada en Delaware, brindándote facturas comerciales válidas en EE.UU.</p>
+      {% if request.locale.iso_code == 'en' %}
+        <div class="usa-modal-badge">Cross-Border Corporate Operations</div>
+        
+        <p class="usa-modal-description">
+          If you are located in the <strong>United States</strong> and want to purchase high-end security and telecom equipment, we offer a 100% legal, optimized domestic billing and shipping channel.
+        </p>
+        
+        <div class="usa-modal-grid">
+          <div class="usa-modal-feature">
+            <div class="usa-feature-icon">🛡️</div>
+            <h3>US Domestic Billing</h3>
+            <p>We operate through our registered C-Corp in Delaware, providing you with valid commercial US invoices.</p>
+          </div>
+          <div class="usa-modal-feature">
+            <div class="usa-feature-icon">📦</div>
+            <h3>Domestic Logistics</h3>
+            <p>We manage equipment delivery directly within US territory, completely hassle-free with no customs issues.</p>
+          </div>
         </div>
-        <div class="usa-modal-feature">
-          <div class="usa-feature-icon">📦</div>
-          <h3>Logística Doméstica</h3>
-          <p>Gestionamos la entrega de equipos directamente dentro del territorio estadounidense, sin complicaciones de aduana.</p>
-        </div>
-      </div>
 
-      <div class="usa-corp-specs">
-        <div class="spec-row">
-          <span>Razón Social:</span>
-          <strong>Nuo Networks, Inc.</strong>
+        <div class="usa-corp-specs">
+          <div class="spec-row">
+            <span>Company Name:</span>
+            <strong>Nuo Networks, Inc.</strong>
+          </div>
+          <div class="spec-row">
+            <span>Jurisdiction:</span>
+            <strong>State of Delaware, USA</strong>
+          </div>
+          <div class="spec-row">
+            <span>Entity Type:</span>
+            <strong>C-Corporation</strong>
+          </div>
         </div>
-        <div class="spec-row">
-          <span>Jurisdicción:</span>
-          <strong>Estado de Delaware, EE.UU.</strong>
+        
+        <p class="usa-modal-disclaimer">
+          Explore our corporate catalog of infrastructure and network solutions through our international division.
+        </p>
+      {% else %}
+        <div class="usa-modal-badge">Operación Corporativa Transfronteriza</div>
+        
+        <p class="usa-modal-description">
+          Si te encuentras en <strong>Estados Unidos</strong> y deseas adquirir equipamiento de seguridad y telecomunicaciones de alta gama, te ofrecemos un canal de facturación y entrega local 100% legal y optimizado.
+        </p>
+        
+        <div class="usa-modal-grid">
+          <div class="usa-modal-feature">
+            <div class="usa-feature-icon">🛡️</div>
+            <h3>Facturación Local en US</h3>
+            <p>Operamos mediante nuestra C-Corp registrada en Delaware, brindándote facturas comerciales válidas en EE.UU.</p>
+          </div>
+          <div class="usa-modal-feature">
+            <div class="usa-feature-icon">📦</div>
+            <h3>Logística Doméstica</h3>
+            <p>Gestionamos la entrega de equipos directamente dentro del territorio estadounidense, sin complicaciones de aduana.</p>
+          </div>
         </div>
-        <div class="spec-row">
-          <span>Tipo de Entidad:</span>
-          <strong>C-Corporation</strong>
+
+        <div class="usa-corp-specs">
+          <div class="spec-row">
+            <span>Razón Social:</span>
+            <strong>Nuo Networks, Inc.</strong>
+          </div>
+          <div class="spec-row">
+            <span>Jurisdicción:</span>
+            <strong>Estado de Delaware, EE.UU.</strong>
+          </div>
+          <div class="spec-row">
+            <span>Tipo de Entidad:</span>
+            <strong>C-Corporation</strong>
+          </div>
         </div>
-      </div>
-      
-      <p class="usa-modal-disclaimer">
-        Explora nuestro catálogo corporativo de soluciones de infraestructura y redes a través de nuestra división internacional.
-      </p>
+        
+        <p class="usa-modal-disclaimer">
+          Explora nuestro catálogo corporativo de soluciones de infraestructura y redes a través de nuestra división internacional.
+        </p>
+      {% endif %}
     </div>
     
     <div class="usa-modal-footer">
-      <a href="https://www.nuo-networks.com/" target="_blank" class="usa-modal-btn-primary" style="flex-grow: 1;">
-        Visitar Nuo Networks
-        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </a>
-      <a href="https://wa.me/14243553283?text=Hello%20Nuo%20Networks,%20I'm%20interested%20in%20US%20B2B%20equipment%20purchases" target="_blank" class="usa-modal-btn-whatsapp" style="background-color: #25D366; color: #ffffff !important; border: none; border-radius: 10px; padding: 0.85rem 1.5rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); flex-grow: 1;">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="margin-right: 4px;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 2.766 1.488 4.887 1.489 5.4 0 9.791-4.387 9.795-9.778 0-2.61-1.017-5.064-2.865-6.915C16.62 2.1 14.167 1.08 11.57 1.08c-5.4 0-9.79 4.39-9.795 9.78 0 2.02.527 3.996 1.528 5.73l-.99 3.612 3.734-.976zm13.136-7.47c-.29-.145-1.71-.845-1.975-.94-.266-.097-.46-.145-.653.145-.193.29-.747.94-.916 1.13-.17.19-.34.213-.63.067-.29-.145-1.22-.45-2.325-1.434-.86-.767-1.44-1.716-1.61-2.004-.17-.29-.018-.445.127-.59.13-.13.29-.34.435-.51.145-.17.193-.29.29-.48.097-.19.048-.36-.024-.51-.07-.145-.653-1.57-.895-2.15-.236-.57-.495-.49-.653-.5-.153-.006-.33-.007-.5-.007-.17 0-.447.064-.68.312-.234.248-.893.873-.893 2.13 0 1.257.915 2.47 1.04 2.64.128.17 1.8 2.75 4.36 3.856.61.264 1.086.42 1.457.538.613.195 1.172.167 1.613.1.49-.074 1.71-.698 1.95-1.373.24-.675.24-1.253.17-1.373-.07-.12-.26-.192-.55-.337z"/></svg>
-        WhatsApp USA
-      </a>
-      <button class="usa-modal-btn-secondary" id="closeUsaModalBtnSec" style="flex-grow: 1;">Cerrar ventana</button>
+      {% if request.locale.iso_code == 'en' %}
+        <a href="https://www.nuo-networks.com/" target="_blank" class="usa-modal-btn-primary" style="flex-grow: 1;">
+          Visit Nuo Networks
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </a>
+        <a href="https://wa.me/14243553283?text=Hello%20Nuo%20Networks,%20I'm%20interested%20in%20US%20B2B%20equipment%20purchases" target="_blank" class="usa-modal-btn-whatsapp" style="background-color: #25D366; color: #ffffff !important; border: none; border-radius: 10px; padding: 0.85rem 1.5rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); flex-grow: 1;">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="margin-right: 4px;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 2.766 1.488 4.887 1.489 5.4 0 9.791-4.387 9.795-9.778 0-2.61-1.017-5.064-2.865-6.915C16.62 2.1 14.167 1.08 11.57 1.08c-5.4 0-9.79 4.39-9.795 9.78 0 2.02.527 3.996 1.528 5.73l-.99 3.612 3.734-.976zm13.136-7.47c-.29-.145-1.71-.845-1.975-.94-.266-.097-.46-.145-.653.145-.193.29-.747.94-.916 1.13-.17.19-.34.213-.63.067-.29-.145-1.22-.45-2.325-1.434-.86-.767-1.44-1.716-1.61-2.004-.17-.29-.018-.445.127-.59.13-.13.29-.34.435-.51.145-.17.193-.29.29-.48.097-.19.048-.36-.024-.51-.07-.145-.653-1.57-.895-2.15-.236-.57-.495-.49-.653-.5-.153-.006-.33-.007-.5-.007-.17 0-.447.064-.68.312-.234.248-.893.873-.893 2.13 0 1.257.915 2.47 1.04 2.64.128.17 1.8 2.75 4.36 3.856.61.264 1.086.42 1.457.538.613.195 1.172.167 1.613.1.49-.074 1.71-.698 1.95-1.373.24-.675.24-1.253.17-1.373-.07-.12-.26-.192-.55-.337z"/></svg>
+          WhatsApp USA
+        </a>
+        <button class="usa-modal-btn-secondary" id="closeUsaModalBtnSec" style="flex-grow: 1;">Close Window</button>
+      {% else %}
+        <a href="https://www.nuo-networks.com/" target="_blank" class="usa-modal-btn-primary" style="flex-grow: 1;">
+          Visitar Nuo Networks
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </a>
+        <a href="https://wa.me/14243553283?text=Hello%20Nuo%20Networks,%20I'm%20interested%20in%20US%20B2B%20equipment%20purchases" target="_blank" class="usa-modal-btn-whatsapp" style="background-color: #25D366; color: #ffffff !important; border: none; border-radius: 10px; padding: 0.85rem 1.5rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); flex-grow: 1;">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="margin-right: 4px;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 2.766 1.488 4.887 1.489 5.4 0 9.791-4.387 9.795-9.778 0-2.61-1.017-5.064-2.865-6.915C16.62 2.1 14.167 1.08 11.57 1.08c-5.4 0-9.79 4.39-9.795 9.78 0 2.02.527 3.996 1.528 5.73l-.99 3.612 3.734-.976zm13.136-7.47c-.29-.145-1.71-.845-1.975-.94-.266-.097-.46-.145-.653.145-.193.29-.747.94-.916 1.13-.17.19-.34.213-.63.067-.29-.145-1.22-.45-2.325-1.434-.86-.767-1.44-1.716-1.61-2.004-.17-.29-.018-.445.127-.59.13-.13.29-.34.435-.51.145-.17.193-.29.29-.48.097-.19.048-.36-.024-.51-.07-.145-.653-1.57-.895-2.15-.236-.57-.495-.49-.653-.5-.153-.006-.33-.007-.5-.007-.17 0-.447.064-.68.312-.234.248-.893.873-.893 2.13 0 1.257.915 2.47 1.04 2.64.128.17 1.8 2.75 4.36 3.856.61.264 1.086.42 1.457.538.613.195 1.172.167 1.613.1.49-.074 1.71-.698 1.95-1.373.24-.675.24-1.253.17-1.373-.07-.12-.26-.192-.55-.337z"/></svg>
+          WhatsApp USA
+        </a>
+        <button class="usa-modal-btn-secondary" id="closeUsaModalBtnSec" style="flex-grow: 1;">Cerrar ventana</button>
+      {% endif %}
     </div>
   </div>
 </div>
