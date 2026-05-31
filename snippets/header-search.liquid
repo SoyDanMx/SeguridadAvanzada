@@ -16,6 +16,9 @@
   {%- endif -%}
     <form action="{{ routes.search_url }}" method="get" role="search" class="search search-b2b-form">
       <div class="field b2b-search-field">
+        <span class="b2b-search-left-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </span>
         <input
           class="search__input field__input b2b-search-input"
           id="{{ input_id }}"
@@ -86,10 +89,17 @@
     height: 44px;
     position: relative;
   }
+  .b2b-search-left-icon {
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+    pointer-events: none;
+    flex-shrink: 0;
+  }
   .b2b-search-input {
     flex-grow: 1;
     border: none;
-    padding: 0 1rem;
+    padding: 0 0.75rem;
     height: 100%;
     font-size: 1.4rem;
     color: #333;
