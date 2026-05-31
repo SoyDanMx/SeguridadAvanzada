@@ -1,0 +1,63 @@
+/* =========================================================
+   CUSTOM CSS: MENÚ EN CASCADA TIPO TIENDANUBE (CORREGIDO)
+   ========================================================= */
+
+@media screen and (min-width: 990px) {
+  /* 1. Activar CUALQUIER menú al pasar el mouse (Nivel 2 y Nivel 3) */
+  header-menu details:hover > summary + .header__submenu {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  header-menu details[open] > summary + .header__submenu {
+    display: block !important;
+  }
+
+  /* 2. Estilizar el Nivel 2 (El que cae debajo de 'Productos') */
+  .header__submenu {
+    background-color: #ffffff;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.15);
+    border: 1px solid #eaeaea;
+    padding: 1rem 0;
+    min-width: 260px;
+  }
+
+  /* 3. LA MAGIA DEL TERCER NIVEL: Posicionar a la derecha */
+  /* Necesitamos que el 'li' padre sea relativo para que el submenú absoluto se ancle a él */
+  .header__submenu > li {
+    position: relative;
+  }
+
+  .header__submenu .header__submenu {
+    position: absolute;
+    top: 0; /* Se alinea con la parte superior del elemento que estás tocando */
+    left: 100%; /* Lo empuja completamente hacia la derecha */
+    margin-left: 0;
+    min-width: 260px;
+    z-index: 100; /* Asegura que pase por encima de cualquier otro elemento */
+  }
+
+  /* 4. Diseño de los enlaces */
+  .header__menu-item {
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+    font-family: inherit;
+    color: #333333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+  }
+
+  .header__submenu .header__menu-item:hover {
+    background-color: #f8f9fa;
+    color: #0056b3; /* Tu azul */
+    text-decoration: none;
+  }
+
+  /* Rotar la flechita para que apunte a la derecha en el submenú */
+  .header__submenu .icon-caret {
+    transform: rotate(-90deg);
+  }
+}

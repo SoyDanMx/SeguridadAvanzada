@@ -1,0 +1,557 @@
+{
+  "source": "SYSCOM",
+  "url": "https://www.syscom.mx/",
+  "scrapedAt": "2026-02-10T16:03:13.799Z",
+  "categories": [
+    {
+      "name": "Enlaces Inalámbricos",
+      "url": "https://www.syscom.mx/categories/65877"
+    },
+    {
+      "name": "Cableado Cat6, Cat6A y Cat7",
+      "url": "https://www.syscom.mx/categories/65812"
+    },
+    {
+      "name": "Videovigilancia Multi-megapixel",
+      "url": "https://www.syscom.mx/categories/214"
+    },
+    {
+      "name": "Energia Solar",
+      "url": "https://www.syscom.mx/categories/66409"
+    },
+    {
+      "name": "SSD y Discos Duros",
+      "url": "https://www.syscom.mx/categories/66672"
+    },
+    {
+      "name": "Wi-Fi Empresarial",
+      "url": "https://www.syscom.mx/categories/65887"
+    },
+    {
+      "name": "Videovigilancia TurboHD",
+      "url": "https://www.syscom.mx/categories/476"
+    },
+    {
+      "name": "Detección de Incendio",
+      "url": "https://www.syscom.mx/categories/38"
+    },
+    {
+      "name": "Radiocomunicación",
+      "url": "https://www.syscom.mx/categories/533"
+    },
+    {
+      "name": "Switches PoE",
+      "url": "https://www.syscom.mx/categories/1927"
+    },
+    {
+      "name": "Baterías",
+      "url": "https://www.syscom.mx/categories/66404"
+    },
+    {
+      "name": "Redes FTTH/PON",
+      "url": "https://www.syscom.mx/categories/66097"
+    },
+    {
+      "name": "Gabinetes para Exterior / Interior",
+      "url": "https://www.syscom.mx/categories/66496"
+    },
+    {
+      "name": "Telefonía y Colaboración IP",
+      "url": "https://www.syscom.mx/categories/301"
+    },
+    {
+      "name": "Acceso Vehícular",
+      "url": "https://www.syscom.mx/categories/499"
+    },
+    {
+      "name": "Paneles de Intrusión",
+      "url": "https://www.syscom.mx/categories/351"
+    },
+    {
+      "name": "Fibra Óptica",
+      "url": "https://www.syscom.mx/categories/66107"
+    },
+    {
+      "name": "Cybersecurity",
+      "url": "https://www.syscom.mx/categories/3045"
+    },
+    {
+      "name": "Drones y Robots",
+      "url": "https://www.syscom.mx/categories/66369"
+    },
+    {
+      "name": "Climatización",
+      "url": "https://www.syscom.mx/categories/66451"
+    },
+    {
+      "name": "Videoporteros e Interfones",
+      "url": "https://www.syscom.mx/categories/469"
+    },
+    {
+      "name": "Acceso de Personal",
+      "url": "https://www.syscom.mx/categories/66061"
+    },
+    {
+      "name": "Biometría para Acceso Seguro",
+      "url": "https://www.syscom.mx/categories/429"
+    },
+    {
+      "name": "Pantallas y Monitores",
+      "url": "https://www.syscom.mx/categories/66530"
+    },
+    {
+      "name": "Conferencias y Reuniones",
+      "url": "https://www.syscom.mx/categories/66032"
+    },
+    {
+      "name": "Paneles LED Profesionales",
+      "url": "https://www.syscom.mx/categories/66348"
+    },
+    {
+      "name": "Respaldo de Energía",
+      "url": "https://www.syscom.mx/categories/66447"
+    },
+    {
+      "name": "Casa inteligente",
+      "url": "https://www.syscom.mx/categories/523"
+    },
+    {
+      "name": "Sensores LoRa",
+      "url": "https://www.syscom.mx/categories/66345"
+    },
+    {
+      "name": "Herramientas",
+      "url": "https://www.syscom.mx/categories/66457"
+    },
+    {
+      "name": "Video Móvil para Flotillas",
+      "url": "https://www.syscom.mx/categories/525"
+    },
+    {
+      "name": "Señalizacion Audiovisual",
+      "url": "https://www.syscom.mx/categories/27"
+    },
+    {
+      "name": "Protección Perimetral",
+      "url": "https://www.syscom.mx/categories/387"
+    },
+    {
+      "name": "Racks para Telecomunicaciones",
+      "url": "https://www.syscom.mx/categories/65815"
+    },
+    {
+      "name": "Rayos X y Detección de Metales",
+      "url": "https://www.syscom.mx/categories/37"
+    },
+    {
+      "name": "Protección y Tierra Física",
+      "url": "https://www.syscom.mx/categories/66424"
+    }
+  ],
+  "products": [
+    {
+      "name": "Producto 217670",
+      "url": "https://www.syscom.mx/products/217670",
+      "sku": "217670"
+    },
+    {
+      "name": "Producto 238549",
+      "url": "https://www.syscom.mx/products/238549",
+      "sku": "238549"
+    },
+    {
+      "name": "Producto 210196",
+      "url": "https://www.syscom.mx/products/210196",
+      "sku": "210196"
+    },
+    {
+      "name": "Producto 230014",
+      "url": "https://www.syscom.mx/products/230014",
+      "sku": "230014"
+    },
+    {
+      "name": "Producto 234821",
+      "url": "https://www.syscom.mx/products/234821",
+      "sku": "234821"
+    },
+    {
+      "name": "Producto 163611",
+      "url": "https://www.syscom.mx/products/163611",
+      "sku": "163611"
+    },
+    {
+      "name": "Producto 190675",
+      "url": "https://www.syscom.mx/products/190675",
+      "sku": "190675"
+    },
+    {
+      "name": "Producto 239842",
+      "url": "https://www.syscom.mx/products/239842",
+      "sku": "239842"
+    },
+    {
+      "name": "Producto 176761",
+      "url": "https://www.syscom.mx/products/176761",
+      "sku": "176761"
+    },
+    {
+      "name": "Producto 222203",
+      "url": "https://www.syscom.mx/products/222203",
+      "sku": "222203"
+    },
+    {
+      "name": "Producto 242179",
+      "url": "https://www.syscom.mx/products/242179",
+      "sku": "242179"
+    },
+    {
+      "name": "Producto 196378",
+      "url": "https://www.syscom.mx/products/196378",
+      "sku": "196378"
+    },
+    {
+      "name": "Producto 221353",
+      "url": "https://www.syscom.mx/products/221353",
+      "sku": "221353"
+    },
+    {
+      "name": "Producto 222952",
+      "url": "https://www.syscom.mx/products/222952",
+      "sku": "222952"
+    },
+    {
+      "name": "Producto 195386",
+      "url": "https://www.syscom.mx/products/195386",
+      "sku": "195386"
+    },
+    {
+      "name": "Producto 196110",
+      "url": "https://www.syscom.mx/products/196110",
+      "sku": "196110"
+    },
+    {
+      "name": "Producto 225541",
+      "url": "https://www.syscom.mx/products/225541",
+      "sku": "225541"
+    },
+    {
+      "name": "Producto 221792",
+      "url": "https://www.syscom.mx/products/221792",
+      "sku": "221792"
+    },
+    {
+      "name": "Producto 224248",
+      "url": "https://www.syscom.mx/products/224248",
+      "sku": "224248"
+    },
+    {
+      "name": "Producto 211887",
+      "url": "https://www.syscom.mx/products/211887",
+      "sku": "211887"
+    },
+    {
+      "name": "Producto 191656",
+      "url": "https://www.syscom.mx/products/191656",
+      "sku": "191656"
+    },
+    {
+      "name": "Producto 211050",
+      "url": "https://www.syscom.mx/products/211050",
+      "sku": "211050"
+    },
+    {
+      "name": "Producto 226037",
+      "url": "https://www.syscom.mx/products/226037",
+      "sku": "226037"
+    },
+    {
+      "name": "Producto 204500",
+      "url": "https://www.syscom.mx/products/204500",
+      "sku": "204500"
+    },
+    {
+      "name": "Producto 224257",
+      "url": "https://www.syscom.mx/products/224257",
+      "sku": "224257"
+    },
+    {
+      "name": "Producto 205282",
+      "url": "https://www.syscom.mx/products/205282",
+      "sku": "205282"
+    },
+    {
+      "name": "Producto 193823",
+      "url": "https://www.syscom.mx/products/193823",
+      "sku": "193823"
+    },
+    {
+      "name": "Producto 211889",
+      "url": "https://www.syscom.mx/products/211889",
+      "sku": "211889"
+    },
+    {
+      "name": "Producto 227651",
+      "url": "https://www.syscom.mx/products/227651",
+      "sku": "227651"
+    },
+    {
+      "name": "Producto 211045",
+      "url": "https://www.syscom.mx/products/211045",
+      "sku": "211045"
+    },
+    {
+      "name": "Producto 208612",
+      "url": "https://www.syscom.mx/products/208612",
+      "sku": "208612"
+    },
+    {
+      "name": "Producto 211040",
+      "url": "https://www.syscom.mx/products/211040",
+      "sku": "211040"
+    },
+    {
+      "name": "Producto 227206",
+      "url": "https://www.syscom.mx/products/227206",
+      "sku": "227206"
+    },
+    {
+      "name": "Producto 221194",
+      "url": "https://www.syscom.mx/products/221194",
+      "sku": "221194"
+    },
+    {
+      "name": "Producto 225190",
+      "url": "https://www.syscom.mx/products/225190",
+      "sku": "225190"
+    },
+    {
+      "name": "Producto 205641",
+      "url": "https://www.syscom.mx/products/205641",
+      "sku": "205641"
+    },
+    {
+      "name": "Producto 196708",
+      "url": "https://www.syscom.mx/products/196708",
+      "sku": "196708"
+    },
+    {
+      "name": "Producto 196778",
+      "url": "https://www.syscom.mx/products/196778",
+      "sku": "196778"
+    },
+    {
+      "name": "Producto 213134",
+      "url": "https://www.syscom.mx/products/213134",
+      "sku": "213134"
+    },
+    {
+      "name": "Producto 215867",
+      "url": "https://www.syscom.mx/products/215867",
+      "sku": "215867"
+    },
+    {
+      "name": "Producto 217484",
+      "url": "https://www.syscom.mx/products/217484",
+      "sku": "217484"
+    },
+    {
+      "name": "Producto 215847",
+      "url": "https://www.syscom.mx/products/215847",
+      "sku": "215847"
+    },
+    {
+      "name": "Producto 171767",
+      "url": "https://www.syscom.mx/products/171767",
+      "sku": "171767"
+    },
+    {
+      "name": "Producto 214640",
+      "url": "https://www.syscom.mx/products/214640",
+      "sku": "214640"
+    },
+    {
+      "name": "Producto 184750",
+      "url": "https://www.syscom.mx/products/184750",
+      "sku": "184750"
+    },
+    {
+      "name": "Producto 222097",
+      "url": "https://www.syscom.mx/products/222097",
+      "sku": "222097"
+    },
+    {
+      "name": "Producto 215635",
+      "url": "https://www.syscom.mx/products/215635",
+      "sku": "215635"
+    },
+    {
+      "name": "Producto 221465",
+      "url": "https://www.syscom.mx/products/221465",
+      "sku": "221465"
+    },
+    {
+      "name": "Producto 219337",
+      "url": "https://www.syscom.mx/products/219337",
+      "sku": "219337"
+    },
+    {
+      "name": "Producto 220963",
+      "url": "https://www.syscom.mx/products/220963",
+      "sku": "220963"
+    },
+    {
+      "name": "Producto 220199",
+      "url": "https://www.syscom.mx/products/220199",
+      "sku": "220199"
+    },
+    {
+      "name": "Producto 193748",
+      "url": "https://www.syscom.mx/products/193748",
+      "sku": "193748"
+    },
+    {
+      "name": "Producto 224429",
+      "url": "https://www.syscom.mx/products/224429",
+      "sku": "224429"
+    },
+    {
+      "name": "Producto 220044",
+      "url": "https://www.syscom.mx/products/220044",
+      "sku": "220044"
+    },
+    {
+      "name": "Producto 193745",
+      "url": "https://www.syscom.mx/products/193745",
+      "sku": "193745"
+    },
+    {
+      "name": "Producto 141365",
+      "url": "https://www.syscom.mx/products/141365",
+      "sku": "141365"
+    },
+    {
+      "name": "Producto 212351",
+      "url": "https://www.syscom.mx/products/212351",
+      "sku": "212351"
+    },
+    {
+      "name": "Producto 75932",
+      "url": "https://www.syscom.mx/products/75932",
+      "sku": "75932"
+    },
+    {
+      "name": "Producto 212589",
+      "url": "https://www.syscom.mx/products/212589",
+      "sku": "212589"
+    },
+    {
+      "name": "Producto 212590",
+      "url": "https://www.syscom.mx/products/212590",
+      "sku": "212590"
+    },
+    {
+      "name": "Producto 224832",
+      "url": "https://www.syscom.mx/products/224832",
+      "sku": "224832"
+    },
+    {
+      "name": "Producto 176136",
+      "url": "https://www.syscom.mx/products/176136",
+      "sku": "176136"
+    },
+    {
+      "name": "Producto 176311",
+      "url": "https://www.syscom.mx/products/176311",
+      "sku": "176311"
+    },
+    {
+      "name": "Producto 141454",
+      "url": "https://www.syscom.mx/products/141454",
+      "sku": "141454"
+    },
+    {
+      "name": "Producto 96382",
+      "url": "https://www.syscom.mx/products/96382",
+      "sku": "96382"
+    },
+    {
+      "name": "Producto 5995",
+      "url": "https://www.syscom.mx/products/5995",
+      "sku": "5995"
+    },
+    {
+      "name": "Producto 95528",
+      "url": "https://www.syscom.mx/products/95528",
+      "sku": "95528"
+    },
+    {
+      "name": "Producto 96931",
+      "url": "https://www.syscom.mx/products/96931",
+      "sku": "96931"
+    },
+    {
+      "name": "Producto 26548",
+      "url": "https://www.syscom.mx/products/26548",
+      "sku": "26548"
+    },
+    {
+      "name": "Producto 203785",
+      "url": "https://www.syscom.mx/products/203785",
+      "sku": "203785"
+    },
+    {
+      "name": "Producto 203902",
+      "url": "https://www.syscom.mx/products/203902",
+      "sku": "203902"
+    },
+    {
+      "name": "Producto 216564",
+      "url": "https://www.syscom.mx/products/216564",
+      "sku": "216564"
+    },
+    {
+      "name": "Producto 204102",
+      "url": "https://www.syscom.mx/products/204102",
+      "sku": "204102"
+    },
+    {
+      "name": "Producto 203985",
+      "url": "https://www.syscom.mx/products/203985",
+      "sku": "203985"
+    },
+    {
+      "name": "Producto 168028",
+      "url": "https://www.syscom.mx/products/168028",
+      "sku": "168028"
+    },
+    {
+      "name": "Producto 204814",
+      "url": "https://www.syscom.mx/products/204814",
+      "sku": "204814"
+    },
+    {
+      "name": "Producto 69413",
+      "url": "https://www.syscom.mx/products/69413",
+      "sku": "69413"
+    },
+    {
+      "name": "Producto 193882",
+      "url": "https://www.syscom.mx/products/193882",
+      "sku": "193882"
+    },
+    {
+      "name": "Producto 212444",
+      "url": "https://www.syscom.mx/products/212444",
+      "sku": "212444"
+    },
+    {
+      "name": "Producto 213936",
+      "url": "https://www.syscom.mx/products/213936",
+      "sku": "213936"
+    }
+  ],
+  "raw": {
+    "title": "SYSCOM - Donde los PROs Encuentran TODO | Mayorista Tecnológico México",
+    "linksCount": 791
+  }
+}

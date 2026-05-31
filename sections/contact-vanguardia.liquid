@@ -1,0 +1,238 @@
+{% comment %}
+  SECCIÓN DE CONTACTO: ESTILO TIENDANUBE (Limpio y Minimalista)
+{% endcomment %}
+
+<style>
+  .page-contacto-wrapper {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+  }
+
+  .page-contacto-title {
+    font-size: 2.8rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 1rem;
+    color: #222;
+  }
+
+  .page-contacto-intro {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    margin-bottom: 4rem;
+    color: #555;
+  }
+
+  .contacto-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5rem;
+  }
+
+  .contacto-form-col {
+    flex: 1 1 500px;
+  }
+
+  .contacto-info-col {
+    flex: 1 1 400px;
+  }
+
+  /* Formulario (Estilo Tiendanube) */
+  .form-group {
+    margin-bottom: 2rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #444;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1.4rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    background-color: #fff;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: #3b82f6; /* Azul al hacer clic */
+    outline: none;
+  }
+
+  .form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .btn-submit {
+    background-color: #333; /* Botón oscuro clásico */
+    color: white;
+    padding: 1.4rem 3rem;
+    font-size: 1.4rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+    width: 100%;
+  }
+
+  .btn-submit:hover {
+    background-color: #555;
+  }
+
+  .form-success {
+    background: #d4edda;
+    color: #155724;
+    padding: 1.5rem;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+    border: 1px solid #c3e6cb;
+  }
+
+  /* Información de Contacto */
+  .contacto-info-col h3 {
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 1rem;
+    color: #222;
+  }
+
+  .info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 3rem 0;
+  }
+
+  .info-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.8rem;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  .info-list svg {
+    width: 22px;
+    height: 22px;
+    margin-right: 1.5rem;
+    fill: #666;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 250px;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>
+
+<div class="page-contacto-wrapper">
+  
+  <h1 class="page-contacto-title">Contacto</h1>
+  
+  <div class="page-contacto-intro">
+    <p>Domicilio: Atenas 1, San Alvaro, Azcapotzalco, 02090 Ciudad de México, CDMX. Oficina: 55 6728 3971, Whatsapp 56 36741156<br>
+    Somos integradores de proyectos, ¿tienes dudas? Hablemos...</p>
+  </div>
+
+  <div class="contacto-layout">
+    
+    <div class="contacto-form-col">
+      {%- form 'contact', id: 'ContactForm' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="form-success">
+            Gracias por contactarnos. Te responderemos a la brevedad.
+          </div>
+        {%- endif -%}
+
+        <div class="form-group">
+          <label for="ContactForm-name">Nombre</label>
+          <input type="text" id="ContactForm-name" name="contact[name]" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="ContactForm-email">Email</label>
+          <input type="email" id="ContactForm-email" name="contact[email]" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="ContactForm-phone">Teléfono</label>
+          <input type="tel" id="ContactForm-phone" name="contact[phone]">
+        </div>
+        
+        <div class="form-group">
+          <label for="ContactForm-body">Mensaje</label>
+          <textarea id="ContactForm-body" name="contact[body]" required></textarea>
+        </div>
+        
+        <button type="submit" class="btn-submit">Enviar</button>
+      {%- endform -%}
+    </div>
+
+    <div class="contacto-info-col">
+      <h3>Datos de contacto</h3>
+      
+      <ul class="info-list">
+        <li>
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          <span>Atenas 1, San Alvaro, Azcapotzalco,<br>02090 Ciudad de México, CDMX</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.03 21c.76 0 1-.66 1-1.21v-3.42c0-.54-.45-.99-.99-.99z"/></svg>
+          <span>Oficina: 55 6728 3971<br>Whatsapp: 55 5636741156</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <span>proyectos@seguridad-avanzada.com</span>
+        </li>
+      </ul>
+
+      <h3>Mapa de ubicación</h3>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.644146316279!2d-99.1837699!3d19.4674393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8ab4a0e917d%3A0xc314b9ab47a82fb1!2sAtenas%201%2C%20San%20Alvaro%2C%20Azcapotzalco%2C%2002090%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1sen!2smx!4v1717000000000!5m2!1sen!2smx" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contacto Tiendanube",
+  "presets": [
+    {
+      "name": "Contacto Tiendanube"
+    }
+  ]
+}
+{% endschema %}

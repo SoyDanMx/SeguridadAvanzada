@@ -1,0 +1,32 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "company_description": "Integradores de proyectos en seguridad y tecnología.",
+        "phone": "55 6728 3971",
+        "whatsapp": "55 5636741156",
+        "email": "proyectos@seguridad-avanzada.com",
+        "show_google_reviews": true,
+        "google_reviews_link": "",
+        "google_reviews_score": "4.9 Excelente",
+        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_text": "Suscríbete para recibir novedades."
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}
