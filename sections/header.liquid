@@ -132,7 +132,7 @@
         render 'header-drawer'
       endif
 
-      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
+      if section.settings.logo_position == 'top-center' or section.settings.logo_position == 'top-left' or section.settings.menu == blank
         render 'header-search', input_id: 'Search-In-Modal-1'
       endif
     -%}
@@ -155,6 +155,7 @@
                   width: settings.logo_width,
                   alt: logo_alt,
                   sizes: sizes,
+                  fetchpriority: 'high',
                   preload: true
                 }}
               </div>
@@ -195,6 +196,7 @@
                   width: settings.logo_width,
                   alt: logo_alt,
                   sizes: sizes,
+                  fetchpriority: 'high',
                   preload: true
                 }}
               </div>
@@ -231,8 +233,7 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
-
+      <!-- second search bar removed for B2B layout -->
       {%- if shop.customer_accounts_enabled -%}
         <a
           href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"

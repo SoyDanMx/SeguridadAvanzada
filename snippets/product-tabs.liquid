@@ -1,0 +1,314 @@
+{%- comment -%}
+  Pestañas Técnicas B2B — product-tabs.liquid
+  Acepta:
+    - product: {Object} el objeto Liquid del producto actual
+    - section: {Object} la sección padre (para leer settings y blocks)
+  Las pestañas se alimentan de:
+    1. Descripción del producto (siempre)
+    2. Metafields  product.metafields.b2b.specs_table  (tabla HTML)
+    3. Metafields  product.metafields.b2b.downloads     (lista HTML de enlaces)
+{%- endcomment -%}
+
+<style>
+  /* ============================
+     Pestañas B2B (Product Tabs)
+  ============================== */
+  .b2b-tabs {
+    margin: 3.2rem 0 2.4rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+
+  .b2b-tabs__nav {
+    display: flex;
+    border-bottom: 1px solid #e2e8f0;
+    background: #f8fafc;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .b2b-tabs__nav::-webkit-scrollbar { display: none; }
+
+  .b2b-tabs__btn {
+    flex-shrink: 0;
+    padding: 1.4rem 2.4rem;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #64748b;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color .2s ease, border-color .2s ease, background .2s ease;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+  }
+  .b2b-tabs__btn:hover {
+    color: #1e40af;
+    background: #eff6ff;
+  }
+  .b2b-tabs__btn.is-active {
+    color: #1e40af;
+    border-bottom-color: #1e40af;
+    background: #fff;
+  }
+
+  .b2b-tabs__panels { background: #fff; }
+
+  .b2b-tab-panel {
+    display: none;
+    padding: 2.4rem;
+    animation: fadeTabIn .22s ease;
+  }
+  .b2b-tab-panel.is-active { display: block; }
+
+  @keyframes fadeTabIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Tabla de Especificaciones */
+  .b2b-specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.35rem;
+  }
+  .b2b-specs-table tr:nth-child(even) { background: #f8fafc; }
+  .b2b-specs-table tr:hover { background: #eff6ff; }
+  .b2b-specs-table th,
+  .b2b-specs-table td {
+    padding: 1rem 1.6rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+  .b2b-specs-table th {
+    width: 38%;
+    font-weight: 700;
+    color: #334155;
+    background: #f1f5f9;
+  }
+  .b2b-specs-table td { color: #475569; }
+
+  /* Downloads list */
+  .b2b-downloads { list-style: none; padding: 0; margin: 0; }
+  .b2b-downloads li {
+    padding: .8rem 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .b2b-downloads a {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    color: #1e40af;
+    font-size: 1.35rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .b2b-downloads a:hover { color: #1d4ed8; text-decoration: underline; }
+
+  /* SKU / Meta pill bar */
+  .b2b-meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .8rem;
+    margin-bottom: 1.6rem;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .b2b-meta-pill {
+    font-size: 1.15rem;
+    font-weight: 600;
+    padding: .35rem 1rem;
+    border-radius: 20px;
+    background: #eff6ff;
+    color: #1e40af;
+    letter-spacing: .3px;
+  }
+  .b2b-meta-pill span.label {
+    color: #64748b;
+    font-weight: 400;
+    margin-right: .3rem;
+  }
+
+  @media screen and (max-width: 750px) {
+    .b2b-tab-panel { padding: 1.6rem; }
+    .b2b-tabs__btn { padding: 1.1rem 1.4rem; font-size: 1.25rem; }
+    .b2b-specs-table th { width: 44%; }
+  }
+</style>
+
+<div class="b2b-tabs page-width" id="b2b-tabs-{{ section.id }}" aria-label="Información del Producto">
+
+  <!-- Barra de Pestañas -->
+  <nav class="b2b-tabs__nav" role="tablist">
+    <button
+      class="b2b-tabs__btn is-active"
+      id="tab-desc-{{ section.id }}"
+      role="tab"
+      aria-controls="panel-desc-{{ section.id }}"
+      aria-selected="true"
+      data-b2b-tab="panel-desc-{{ section.id }}"
+    >
+      📋 Características
+    </button>
+    <button
+      class="b2b-tabs__btn"
+      id="tab-specs-{{ section.id }}"
+      role="tab"
+      aria-controls="panel-specs-{{ section.id }}"
+      aria-selected="false"
+      data-b2b-tab="panel-specs-{{ section.id }}"
+    >
+      🔧 Especificaciones Técnicas
+    </button>
+    <button
+      class="b2b-tabs__btn"
+      id="tab-downloads-{{ section.id }}"
+      role="tab"
+      aria-controls="panel-downloads-{{ section.id }}"
+      aria-selected="false"
+      data-b2b-tab="panel-downloads-{{ section.id }}"
+    >
+      📥 Descargas y Soporte
+    </button>
+  </nav>
+
+  <!-- Paneles -->
+  <div class="b2b-tabs__panels">
+
+    <!-- Panel 1: Características -->
+    <div
+      class="b2b-tab-panel is-active"
+      id="panel-desc-{{ section.id }}"
+      role="tabpanel"
+      aria-labelledby="tab-desc-{{ section.id }}"
+    >
+      {%- comment -%} Meta bar: SKU + Vendor + Availability {%- endcomment -%}
+      <div class="b2b-meta-bar">
+        {%- if product.selected_or_first_available_variant.sku != blank -%}
+          <span class="b2b-meta-pill"><span class="label">SKU:</span>{{ product.selected_or_first_available_variant.sku }}</span>
+        {%- endif -%}
+        {%- if product.vendor != blank -%}
+          <span class="b2b-meta-pill"><span class="label">Marca:</span>{{ product.vendor }}</span>
+        {%- endif -%}
+        <span class="b2b-meta-pill">
+          <span class="label">Disponibilidad:</span>
+          {%- if product.available -%}✅ En Stock{%- else -%}⏳ Bajo Pedido{%- endif -%}
+        </span>
+        {%- if product.type != blank -%}
+          <span class="b2b-meta-pill"><span class="label">Tipo:</span>{{ product.type }}</span>
+        {%- endif -%}
+      </div>
+
+      {%- if product.description != blank -%}
+        <div class="rte">{{ product.description }}</div>
+      {%- else -%}
+        <p style="color:#94a3b8;">Sin descripción disponible.</p>
+      {%- endif -%}
+    </div>
+
+    <!-- Panel 2: Especificaciones Técnicas -->
+    <div
+      class="b2b-tab-panel"
+      id="panel-specs-{{ section.id }}"
+      role="tabpanel"
+      aria-labelledby="tab-specs-{{ section.id }}"
+    >
+      {%- if product.metafields.b2b.specs_table != blank -%}
+        <div class="rte">{{ product.metafields.b2b.specs_table.value }}</div>
+      {%- else -%}
+        {%- comment -%} Tabla de demostración generada automáticamente desde metafields estándar {%- endcomment -%}
+        <table class="b2b-specs-table">
+          <tbody>
+            <tr><th>Modelo</th><td>{{ product.title }}</td></tr>
+            {%- if product.selected_or_first_available_variant.sku != blank -%}
+              <tr><th>SKU / Referencia</th><td>{{ product.selected_or_first_available_variant.sku }}</td></tr>
+            {%- endif -%}
+            {%- if product.vendor != blank -%}
+              <tr><th>Marca / Fabricante</th><td>{{ product.vendor }}</td></tr>
+            {%- endif -%}
+            {%- if product.type != blank -%}
+              <tr><th>Categoría</th><td>{{ product.type }}</td></tr>
+            {%- endif -%}
+            {%- for tag in product.tags -%}
+              {%- if tag contains ':' -%}
+                {%- assign tag_parts = tag | split: ':' -%}
+                <tr>
+                  <th>{{ tag_parts[0] | capitalize | replace: '-', ' ' }}</th>
+                  <td>{{ tag_parts[1] | strip }}</td>
+                </tr>
+              {%- endif -%}
+            {%- endfor -%}
+            <tr><th>Disponibilidad</th><td>{% if product.available %}En Stock{% else %}Bajo Pedido{% endif %}</td></tr>
+            {%- if product.selected_or_first_available_variant.weight > 0 -%}
+              <tr><th>Peso</th><td>{{ product.selected_or_first_available_variant.weight }} {{ product.selected_or_first_available_variant.weight_unit }}</td></tr>
+            {%- endif -%}
+          </tbody>
+        </table>
+        <p style="margin-top:1.4rem;font-size:1.2rem;color:#94a3b8;">
+          💡 Para agregar especificaciones técnicas detalladas, crea un metafield de tipo HTML llamado <strong>b2b.specs_table</strong> desde tu panel de Shopify.
+        </p>
+      {%- endif -%}
+    </div>
+
+    <!-- Panel 3: Descargas y Soporte -->
+    <div
+      class="b2b-tab-panel"
+      id="panel-downloads-{{ section.id }}"
+      role="tabpanel"
+      aria-labelledby="tab-downloads-{{ section.id }}"
+    >
+      {%- if product.metafields.b2b.downloads != blank -%}
+        <div class="rte">{{ product.metafields.b2b.downloads.value }}</div>
+      {%- else -%}
+        <div style="text-align:center;padding:3rem 1rem;">
+          <p style="font-size:3.6rem;margin:0;">📄</p>
+          <h3 style="margin:.8rem 0 .4rem;color:#334155;">Fichas Técnicas y Manuales</h3>
+          <p style="color:#64748b;font-size:1.35rem;max-width:400px;margin:0 auto 1.6rem;">
+            Agrega PDFs, manuales y hojas de datos técnicos creando el metafield <strong>b2b.downloads</strong> de tipo HTML en tu panel de Shopify.
+          </p>
+          <a
+            href="https://wa.me/525636741156?text=Hola,%20necesito%20la%20ficha%20técnica%20de%20{{ product.title | url_encode }}"
+            target="_blank"
+            rel="noopener"
+            style="display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 2rem;background:#25D366;color:#fff;border-radius:8px;font-weight:700;text-decoration:none;font-size:1.35rem;"
+          >
+            💬 Solicitar ficha técnica por WhatsApp
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+
+  </div><!-- /.b2b-tabs__panels -->
+</div><!-- /.b2b-tabs -->
+
+<script>
+  (function() {
+    var container = document.getElementById('b2b-tabs-{{ section.id }}');
+    if (!container) return;
+    var btns = container.querySelectorAll('[data-b2b-tab]');
+    btns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var targetId = btn.getAttribute('data-b2b-tab');
+        // Buttons
+        btns.forEach(function(b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+        // Panels
+        container.querySelectorAll('.b2b-tab-panel').forEach(function(p) {
+          p.classList.remove('is-active');
+        });
+        var panel = document.getElementById(targetId);
+        if (panel) panel.classList.add('is-active');
+      });
+    });
+  })();
+</script>

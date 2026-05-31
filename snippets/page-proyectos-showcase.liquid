@@ -1,0 +1,372 @@
+{% comment %}
+  Página de Proyectos B2B y Vanguardia Tecnológica
+{% endcomment %}
+
+<style>
+  :root {
+    /* Tema Claro (Blanco permanente) */
+    --proy-bg: #ffffff;
+    --proy-bg-alt: #f8fafc;
+    --proy-text: #334155;
+    --proy-title: #0f172a;
+    --proy-accent: #2A75D3;
+    --proy-accent-hover: #1d4ed8;
+    --proy-border: rgba(0, 0, 0, 0.1);
+    --proy-hero-gradient: radial-gradient(circle at top center, rgba(42,117,211,0.1) 0%, #ffffff 70%);
+    --proy-cta-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  }
+
+  .proyectos-page {
+    background-color: var(--proy-bg);
+    color: var(--proy-text);
+    font-family: inherit;
+    line-height: 1.6;
+    overflow: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* --- HERO SECTION --- */
+  .proy-hero {
+    position: relative;
+    padding: 8rem 2rem;
+    text-align: center;
+    background: var(--proy-hero-gradient);
+  }
+
+  .proy-hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(var(--proy-text) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  .proy-hero__content {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    z-index: 2;
+  }
+
+  .proy-hero__tag {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    background: rgba(42, 117, 211, 0.1);
+    color: var(--proy-accent);
+    border: 1px solid rgba(42, 117, 211, 0.3);
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+  }
+
+  .proy-hero__title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    color: var(--proy-title);
+    margin: 0 0 1.5rem;
+    line-height: 1.1;
+  }
+
+  .proy-hero__title span {
+    background: linear-gradient(to right, #3b82f6, #1d4ed8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .proy-hero__subtitle {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+  }
+
+  .proy-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background-color: #25D366;
+    color: #fff;
+    padding: 1.2rem 2.5rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.4);
+  }
+
+  .proy-hero__cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px -5px rgba(37, 211, 102, 0.6);
+  }
+
+  /* --- GRID DE ESPECIALIDADES --- */
+  .proy-grid-section {
+    padding: 5rem 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .proy-section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: var(--proy-title);
+    margin-bottom: 4rem;
+    font-weight: 700;
+  }
+
+  .proy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .proy-card {
+    background: var(--proy-bg-alt);
+    border: 1px solid var(--proy-border);
+    border-radius: 12px;
+    padding: 2.5rem;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .proy-card::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: var(--proy-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .proy-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(42, 117, 211, 0.3);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  }
+
+  .proy-card:hover::after {
+    transform: scaleX(1);
+  }
+
+  .proy-card__icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(42, 117, 211, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: var(--proy-accent);
+  }
+
+  .proy-card__icon svg {
+    width: 30px;
+    height: 30px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+  }
+
+  .proy-card__title {
+    font-size: 1.4rem;
+    color: var(--proy-title);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .proy-card__desc {
+    font-size: 1rem;
+  }
+
+  /* --- METODOLOGÍA / PASOS --- */
+  .proy-steps-section {
+    background: var(--proy-bg-alt);
+    padding: 6rem 2rem;
+  }
+
+  .proy-steps-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .proy-steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .proy-steps-list {
+      flex-direction: row;
+      justify-content: space-between;
+      position: relative;
+    }
+    
+    .proy-steps-list::before {
+      content: "";
+      position: absolute;
+      top: 30px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: rgba(42, 117, 211, 0.3);
+      z-index: 1;
+    }
+  }
+
+  .proy-step {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    flex: 1;
+  }
+
+  .proy-step__number {
+    width: 60px;
+    height: 60px;
+    background: var(--proy-accent);
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 0 0 10px var(--proy-bg-alt);
+  }
+
+  .proy-step__title {
+    color: var(--proy-title);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  /* --- CTA FINAL --- */
+  .proy-final-cta {
+    padding: 8rem 2rem;
+    text-align: center;
+    background: var(--proy-cta-gradient);
+  }
+
+</style>
+
+<div class="proyectos-page">
+  
+  <!-- HERO -->
+  <section class="proy-hero">
+    <div class="proy-hero__content">
+      <div class="proy-hero__tag">División de Proyectos B2B</div>
+      <h1 class="proy-hero__title">Ingeniería de vanguardia para <span>tu negocio</span></h1>
+      <p class="proy-hero__subtitle">
+        Desarrollamos proyectos integrales "Llave en Mano": desde sistemas de videovigilancia y control de acceso corporativo, hasta infraestructura de redes, ciberseguridad y soluciones de energía renovable.
+      </p>
+      <a href="https://wa.me/555636741156?text=Hola,%20tengo%20un%20proyecto%20tecnologico%20en%20puerta%20y%20necesito%20asesoria" target="_blank" class="proy-hero__cta">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Cuéntanos tu proyecto
+      </a>
+    </div>
+  </section>
+
+  <!-- GRID ESPECIALIDADES -->
+  <section class="proy-grid-section">
+    <h2 class="proy-section-title">Especialidades Tecnológicas</h2>
+    <div class="proy-grid">
+      
+      <div class="proy-card">
+        <div class="proy-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+        </div>
+        <h3 class="proy-card__title">CCTV y Videovigilancia</h3>
+        <p class="proy-card__desc">Sistemas de monitoreo 4K, análisis inteligente de video (AI) y reconocimiento facial para corporativos y naves industriales.</p>
+      </div>
+
+      <div class="proy-card">
+        <div class="proy-card__icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0110 0v4"></path></svg>
+        </div>
+        <h3 class="proy-card__title">Control de Acceso</h3>
+        <p class="proy-card__desc">Tornos, biometría dactilar y de iris, cerraduras magnéticas y gestión de visitantes centralizada.</p>
+      </div>
+
+      <div class="proy-card">
+        <div class="proy-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        </div>
+        <h3 class="proy-card__title">Redes y Telecom</h3>
+        <p class="proy-card__desc">Cableado estructurado de alto rendimiento, switches administrables y enlaces inalámbricos punto a punto.</p>
+      </div>
+
+      <div class="proy-card">
+        <div class="proy-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+        </div>
+        <h3 class="proy-card__title">Energía y Solares</h3>
+        <p class="proy-card__desc">Implementación de paneles solares, sistemas de respaldo UPS y estaciones de carga rápida para vehículos eléctricos.</p>
+      </div>
+
+      <div class="proy-card">
+        <div class="proy-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <h3 class="proy-card__title">Ciberseguridad</h3>
+        <p class="proy-card__desc">Firewalls de siguiente generación, protección de endpoints y aseguramiento de redes corporativas críticas.</p>
+      </div>
+
+      <div class="proy-card">
+        <div class="proy-card__icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"></path></svg>
+        </div>
+        <h3 class="proy-card__title">Integración General</h3>
+        <p class="proy-card__desc">Unificamos todos los sistemas en centros de mando (C2/C4) y automatizamos operaciones industriales y comerciales.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- METODOLOGÍA -->
+  <section class="proy-steps-section">
+    <div class="proy-steps-container">
+      <h2 class="proy-section-title">¿Cómo trabajamos?</h2>
+      <div class="proy-steps-list">
+        
+        <div class="proy-step">
+          <div class="proy-step__number">1</div>
+          <h4 class="proy-step__title">Platícanos tu necesidad</h4>
+          <p class="proy-card__desc">Contáctanos vía WhatsApp o correo. Escuchamos tus objetivos, problemas actuales y alcances del proyecto.</p>
+        </div>
+
+        <div class="proy-step">
+          <div class="proy-step__number">2</div>
+          <h4 class="proy-step__title">Diseñamos la Solución</h4>
+          <p class="proy-card__desc">Nuestros ingenieros estructuran una propuesta técnica y económica adaptada a tu presupuesto con las mejores marcas.</p>
+        </div>
+
+        <div class="proy-step">
+          <div class="proy-step__number">3</div>
+          <h4 class="proy-step__title">Implementación Experta</h4>
+          <p class="proy-card__desc">Instalamos, configuramos y capacitamos a tu equipo. Entregamos el proyecto llave en mano operando al 100%.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="proy-final-cta">
+    <h2 class="proy-hero__title" style="font-size: 2.5rem; margin-bottom: 2rem;">¿Listo para llevar tu infraestructura al siguiente nivel?</h2>
+    <a href="https://wa.me/555636741156?text=Deseo%20cotizar%20un%20proyecto" target="_blank" class="proy-hero__cta" style="font-size: 1.3rem; padding: 1.5rem 3rem;">
+      Hablar con un Ingeniero
+    </a>
+  </section>
+
+</div>

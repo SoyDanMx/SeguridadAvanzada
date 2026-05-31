@@ -1,0 +1,78 @@
+<style>
+  .breadcrumbs {
+    margin: 1.5rem 0 2rem;
+    font-size: 1.3rem;
+    color: #64748b;
+  }
+  .breadcrumbs__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .breadcrumbs__item {
+    display: inline-flex;
+    align-items: center;
+  }
+  .breadcrumbs__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 0.8rem;
+    color: #cbd5e1;
+  }
+  .breadcrumbs__link {
+    color: #475569;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .breadcrumbs__link:hover {
+    color: #2A75D3;
+    text-decoration: underline;
+  }
+  .breadcrumbs__link[aria-current="page"] {
+    color: #0f172a;
+    font-weight: 600;
+  }
+</style>
+
+<nav class="breadcrumbs page-width" aria-label="breadcrumbs">
+  <ol class="breadcrumbs__list">
+    <li class="breadcrumbs__item">
+      <a class="breadcrumbs__link" href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t | default: 'Inicio' }}</a>
+    </li>
+    {%- if template contains 'page' -%}
+      <li class="breadcrumbs__item">
+        <a class="breadcrumbs__link" href="{{ page.url }}" aria-current="page">{{ page.title }}</a>
+      </li>
+    {%- elsif template contains 'product' -%}
+      {%- if collection.url -%}
+        <li class="breadcrumbs__item">
+          <a class="breadcrumbs__link" href="{{ collection.url }}">{{ collection.title }}</a>
+        </li>
+      {%- endif -%}
+      <li class="breadcrumbs__item">
+        <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
+      </li>
+    {%- elsif template contains 'collection' and collection.handle -%}
+      <li class="breadcrumbs__item">
+        <a class="breadcrumbs__link" href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
+      </li>
+    {%- elsif template == 'blog' -%}
+      <li class="breadcrumbs__item">
+        <a class="breadcrumbs__link" href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
+      </li>
+    {%- elsif template == 'article' -%}
+      <li class="breadcrumbs__item">
+        <a class="breadcrumbs__link" href="{{ blog.url }}">{{ blog.title }}</a>
+      </li>
+      <li class="breadcrumbs__item">
+        <a class="breadcrumbs__link" href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+      </li>
+    {%- else -%}
+      <li class="breadcrumbs__item">
+        <a class="breadcrumbs__link" href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
+      </li>
+    {%- endif -%}
+  </ol>
+</nav>

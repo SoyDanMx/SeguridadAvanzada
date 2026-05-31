@@ -36,6 +36,49 @@ class HeaderMenu extends DetailsDisclosure {
   constructor() {
     super();
     this.header = document.querySelector('.header-wrapper');
+    this.setupHoverBehavior();
+  }
+
+  setupHoverBehavior() {
+    const isDesktop = window.matchMedia('(min-width: 990px)');
+    
+    const enableHover = () => {
+      this.addEventListener('mouseenter', this.onMouseEnter.bind(this));
+      this.addEventListener('mouseleave', this.onMouseLeave.bind(this));
+      this.mainDetailsToggle.querySelector('summary').addEventListener('click', this.onSummaryClick.bind(this));
+    };
+
+    const disableHover = () => {
+      this.removeEventListener('mouseenter', this.onMouseEnter.bind(this));
+      this.removeEventListener('mouseleave', this.onMouseLeave.bind(this));
+    };
+
+    if (isDesktop.matches) enableHover();
+    
+    isDesktop.addEventListener('change', (e) => {
+      if (e.matches) enableHover();
+      else disableHover();
+    });
+  }
+
+  onMouseEnter() {
+    if (this.hoverTimeout) clearTimeout(this.hoverTimeout);
+    this.mainDetailsToggle.setAttribute('open', '');
+    this.mainDetailsToggle.querySelector('summary').setAttribute('aria-expanded', 'true');
+    this.onToggle();
+  }
+
+  onMouseLeave() {
+    // Retardo suave de 400ms para evitar cierres accidentales al mover el mouse
+    this.hoverTimeout = setTimeout(() => {
+      this.close();
+    }, 400);
+  }
+
+  onSummaryClick(event) {
+    if (window.matchMedia('(min-width: 990px)').matches) {
+      event.preventDefault(); // Evita que el click cierre abruptamente el menú en desktop si ya está abierto
+    }
   }
 
   onToggle() {

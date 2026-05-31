@@ -25,6 +25,12 @@
           "settings": {
           }
         },
+        "sku": {
+          "type": "sku",
+          "settings": {
+            "text_style": "uppercase"
+          }
+        },
         "price": {
           "type": "price",
           "settings": {
@@ -66,6 +72,7 @@
       "block_order": [
         "vendor",
         "title",
+        "sku",
         "price",
         "description",
         "variant-picker",

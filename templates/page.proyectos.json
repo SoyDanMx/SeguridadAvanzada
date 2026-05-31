@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-proyectos-showcase",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -11,7 +11,7 @@
   "sections": {
     "main": {
       "type": "main-list-collections",
-      "disabled": true,
+      "disabled": false,
       "settings": {
         "title": "Catalogo Completo",
         "sort": "alphabetical",

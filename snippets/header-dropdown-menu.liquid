@@ -32,6 +32,10 @@
   .sa-menu-link:hover { color: #2563eb; }
 
   /* Contenedor del Mega Menú (Full-Width moderno) */
+  .sa-has-mega {
+    position: static;
+  }
+
   .sa-mega-wrapper {
     position: absolute;
     top: 100%;
@@ -40,25 +44,37 @@
     background: #ffffff;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
     border-top: 1px solid #f1f5f9;
-    border-bottom: 3px solid #2563eb;
-    display: none;
+    border-bottom: 3px solid #2A75D3;
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
     z-index: 999;
     padding: 4rem 0;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+    /* Retraso al OCULTAR para dar tiempo al usuario de mover el mouse */
+    transition-delay: 0.35s;
   }
 
-  /* Mostrar con Hover Suave */
-  .sa-has-mega:hover .sa-mega-wrapper {
-    display: block;
+  /* Puente invisible: cierra el gap entre el enlace y el panel desplegable */
+  .sa-mega-wrapper::before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: transparent;
+  }
+
+  /* Mostrar con Hover Suave - SIN retraso al mostrar */
+  .sa-has-mega:hover > .sa-mega-wrapper,
+  .sa-mega-wrapper:hover {
     opacity: 1;
     visibility: visible;
-    animation: saFadeUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  @keyframes saFadeUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    pointer-events: auto;
+    transform: translateY(0);
+    transition-delay: 0s;
   }
 
   /* Grid del Contenido interno */
@@ -215,42 +231,42 @@
           <div class="sa-categories-grid">
             
             <div>
-              <div class="sa-cat-group-title">Videovigilancia <span class="sa-badge sa-badge-hot">Top</span></div>
+              <div class="sa-cat-group-title"><a href="/collections/videovigilancia" style="text-decoration:none; color:inherit;">Videovigilancia</a> <span class="sa-badge sa-badge-hot">Top</span></div>
               <ul class="sa-subcat-list">
-                <li><a href="/collections/camaras" class="sa-subcat-link">Cámaras IP y Análogas</a></li>
-                <li><a href="/collections/grabadores" class="sa-subcat-link">Grabadores NVR / DVR</a></li>
-                <li><a href="/collections/discos-duros" class="sa-subcat-link">Discos Duros Especializados</a></li>
-                <li><a href="/collections/fuentes-de-poder" class="sa-subcat-link">Fuentes de Poder</a></li>
-                <li><a href="/collections/cableado" class="sa-subcat-link">Cableado Coaxial y UTP</a></li>
-                <li><a href="/collections/accesorios" class="sa-subcat-link">Transceptores y Accesorios</a></li>
-                <li><a href="/collections/dash-cams-body-cams" class="sa-subcat-link">Dash Cams y Body Cams</a></li>
+                <li><a href="/search?q=Camaras" class="sa-subcat-link">Cámaras IP y Análogas</a></li>
+                <li><a href="/search?q=Grabadores+NVR+DVR" class="sa-subcat-link">Grabadores NVR / DVR</a></li>
+                <li><a href="/search?q=Discos+Duros" class="sa-subcat-link">Discos Duros Especializados</a></li>
+                <li><a href="/search?q=Fuentes+de+Poder" class="sa-subcat-link">Fuentes de Poder</a></li>
+                <li><a href="/search?q=Cableado" class="sa-subcat-link">Cableado Coaxial y UTP</a></li>
+                <li><a href="/search?q=Transceptores" class="sa-subcat-link">Transceptores y Accesorios</a></li>
+                <li><a href="/search?q=Dash+Cams" class="sa-subcat-link">Dash Cams y Body Cams</a></li>
               </ul>
             </div>
 
             <div>
-              <div class="sa-cat-group-title">Control y Redes</div>
+              <div class="sa-cat-group-title"><a href="/collections/redes-e-it" style="text-decoration:none; color:inherit;">Control y Redes</a></div>
               <ul class="sa-subcat-list">
                 <li><a href="/collections/control-de-acceso" class="sa-subcat-link">Control de Acceso Biométrico</a></li>
-                <li><a href="/collections/redes" class="sa-subcat-link">Switches y ruteadores de Red</a></li>
+                <li><a href="/search?q=Switches" class="sa-subcat-link">Switches y ruteadores de Red</a></li>
                 <li><a href="/collections/redes-e-it" class="sa-subcat-link">Soluciones Redes e IT</a></li>
-                <li><a href="/collections/firewalls" class="sa-subcat-link">Firewalls de Seguridad</a></li>
-                <li><a href="/collections/balanceadores" class="sa-subcat-link">Balanceadores de Carga</a></li>
+                <li><a href="/search?q=Firewalls" class="sa-subcat-link">Firewalls de Seguridad</a></li>
+                <li><a href="/search?q=Balanceadores" class="sa-subcat-link">Balanceadores de Carga</a></li>
                 <li><a href="/collections/cableado-estructurado" class="sa-subcat-link">Cableado Estructurado</a></li>
-                <li><a href="/collections/cat6" class="sa-subcat-link">Bobinas y Patch Cords Cat6</a></li>
-                <li><a href="/collections/70-y-80-ghz" class="sa-subcat-link">Enlaces 70 y 80 GHz</a></li>
+                <li><a href="/search?q=Cat6" class="sa-subcat-link">Bobinas y Patch Cords Cat6</a></li>
+                <li><a href="/search?q=Enlaces+GHz" class="sa-subcat-link">Enlaces 70 y 80 GHz</a></li>
               </ul>
             </div>
 
             <div>
-              <div class="sa-cat-group-title">Intrusión y Audio</div>
+              <div class="sa-cat-group-title"><a href="/collections/automatizacion-e-intrusion" style="text-decoration:none; color:inherit;">Intrusión y Audio</a></div>
               <ul class="sa-subcat-list">
-                <li><a href="/collections/alarmas" class="sa-subcat-link">Sistemas de Alarmas</a></li>
+                <li><a href="/collections/automatizacion-e-intrusion" class="sa-subcat-link">Sistemas de Alarmas</a></li>
                 <li><a href="/collections/automatizacion-e-intrusion" class="sa-subcat-link">Automatización e Intrusión</a></li>
                 <li><a href="/collections/deteccion-de-fuego" class="sa-subcat-link">Detección de Fuego e Incendio</a></li>
                 <li><a href="/collections/audio-y-video-profesional" class="sa-subcat-link">Audio y Video Profesional</a></li>
-                <li><a href="/collections/redes-y-audio-video" class="sa-subcat-link">Sistemas Híbridos A/V</a></li>
-                <li><a href="/collections/iot-gps-telematica" class="sa-subcat-link">IoT, GPS y Telemática <span class="sa-badge sa-badge-new">Nuevo</span></a></li>
-                <li><a href="/collections/seguridad-industrial" class="sa-subcat-link">Seguridad Industrial y Protección</a></li>
+                <li><a href="/search?q=Hibridos" class="sa-subcat-link">Sistemas Híbridos A/V</a></li>
+                <li><a href="/search?q=IoT+GPS" class="sa-subcat-link">IoT, GPS y Telemática <span class="sa-badge sa-badge-new">Nuevo</span></a></li>
+                <li><a href="/search?q=Seguridad+Industrial" class="sa-subcat-link">Seguridad Industrial y Protección</a></li>
               </ul>
             </div>
 
@@ -283,6 +299,14 @@
 
     <li>
       <a href="/pages/proyectos" class="sa-menu-link">Proyectos</a>
+    </li>
+
+    <li>
+      <a href="/pages/registro-repse" class="sa-menu-link">Registro REPSE</a>
+    </li>
+
+    <li>
+      <a href="/blogs/noticias" class="sa-menu-link">Blog</a>
     </li>
 
   </ul>

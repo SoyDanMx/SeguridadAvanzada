@@ -1,0 +1,13 @@
+{
+  "name": "seguridad-avanzada-theme",
+  "version": "1.0.0",
+  "description": "Shopify Theme para Seguridad Avanzada",
+  "scripts": {
+    "dev": "shopify theme dev",
+    "pull": "shopify theme pull --store q5akvk-19.myshopify.com",
+    "push": "shopify theme push",
+    "collections": "node scripts/create-collections.js"
+  },
+  "author": "Seguridad Avanzada",
+  "license": "ISC"
+}

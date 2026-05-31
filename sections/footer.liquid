@@ -5,11 +5,11 @@
 
 <style>
   .footer-moderno {
-    background-color: #0f172a; 
+    background-color: #121212; 
     color: #94a3b8;
     padding: 5rem 2rem 2rem;
     font-family: inherit;
-    border-top: 4px solid #2563eb; 
+    border-top: 4px solid #2A75D3; 
   }
 
   .footer-container {
@@ -252,8 +252,10 @@
 
   @media (min-width: 768px) {
     .footer-bottom {
-      flex-direction: row;
-      justify-content: space-between;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
+      text-align: center;
     }
   }
 
@@ -292,8 +294,13 @@
     <div class="footer-grid">
       
       <div class="footer-brand">
-        <h2>{{ shop.name }}</h2>
-        <p>{{ section.settings.company_description }}</p>
+        <h3 class="footer-heading" style="margin-bottom: 1rem; color: #ffffff;">{{ 'general.about.title' | t | default: 'Sobre Nosotros' }}</h3>
+        <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1rem;">
+          Expertos en diseño, venta y ejecución de proyectos de Seguridad Industrial, CCTV, Control de Acceso, Redes y Energía Renovable. Brindamos soluciones integrales de clase mundial para corporativos e industrias en México y USA.
+        </p>
+        <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6;">
+          <strong>{{ shop.name }}</strong> forma parte orgullosamente del corporativo <strong>Nuo Networks, Inc.</strong>
+        </p>
         
         <ul class="footer-contact-list">
           {% if section.settings.phone != blank %}
@@ -429,12 +436,13 @@
 
     <div class="footer-bottom">
       <div class="footer-copyright">
-        &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. Todos los derechos reservados.
+        &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. Todos los derechos reservados.<br>
+        <span style="opacity: 0.6; font-size: 0.9em; display: inline-block; margin-top: 0.5rem;">
+          {{ shop.name }} es una marca registrada y operada por <strong>Nuo Networks, Inc.</strong>
+        </span>
       </div>
       <div class="footer-socials">
-        {%- if settings.social_facebook_link != blank -%}
-          <a href="{{ settings.social_facebook_link }}" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-        {%- endif -%}
+        <a href="https://www.facebook.com/seguridadavanzadacdmx" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
         {%- if settings.social_instagram_link != blank -%}
           <a href="{{ settings.social_instagram_link }}" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
         {%- endif -%}

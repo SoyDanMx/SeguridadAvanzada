@@ -1,0 +1,48 @@
+<div class="page-width page-width--narrow section-{{ section.id }}-padding">
+  <h1 class="main-page-title page-title h0">
+    {{ page.title | escape }}
+  </h1>
+  <div class="rte">
+    {{ page.content }}
+    
+    <div class="repse-content center" style="margin-top: 3rem;">
+      <p style="font-size: 1.8rem; font-weight: bold; line-height: 1.5; color: #333; margin-bottom: 3rem;">
+        Seguridad Avanzada es tu socio confiable en sistemas de seguridad especializados, respaldado por el registro REPSE para actividades especializadas. Ofrecemos soluciones en seguridad informática, ciberseguridad, telecomunicaciones, y seguridad industrial en México. Cumplimos con los más altos estándares legales y operativos, garantizando protección integral para tu empresa.
+      </p>
+      
+      {%- if section.settings.repse_image != blank -%}
+        <img src="{{ section.settings.repse_image | image_url: width: 1200 }}" 
+             alt="Registro REPSE" 
+             loading="lazy" 
+             width="{{ section.settings.repse_image.width }}" 
+             height="{{ section.settings.repse_image.height }}"
+             style="max-width: 100%; height: auto; border: 1px solid #eaeaea; box-shadow: 0 4px 10px rgba(0,0,0,0.05);"
+        >
+      {%- else -%}
+        <div style="padding: 4rem; background: #f4f4f4; border: 1px dashed #ccc;">
+          <p>Sube la imagen de tu certificado REPSE en la configuración del tema.</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contenido REPSE",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "repse_image",
+      "label": "Imagen del Certificado REPSE"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contenido REPSE"
+    }
+  ]
+}
+{% endschema %}
