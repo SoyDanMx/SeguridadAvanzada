@@ -287,6 +287,367 @@
     height: 20px;
     fill: currentColor;
   }
+
+  /* Delaware USA Corp Card & Modal Styles */
+  .usa-corp-card {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+  }
+
+  .usa-corp-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.05), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .usa-corp-card:hover::before {
+    transform: translateX(100%);
+  }
+
+  .usa-corp-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(59, 130, 246, 0.6);
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.15);
+  }
+
+  .usa-corp-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #f8fafc;
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .usa-flag-pulse {
+    font-size: 1.4rem;
+    animation: flagPulse 2s infinite alternate;
+  }
+
+  @keyframes flagPulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15); filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.5)); }
+  }
+
+  .usa-corp-card-body {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #94a3b8;
+    margin: 0 0 1rem 0 !important;
+  }
+
+  .usa-corp-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #3b82f6;
+  }
+
+  .arrow-right-icon {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+  }
+
+  .usa-corp-card:hover .arrow-right-icon {
+    transform: translateX(5px);
+  }
+
+  /* Modal Overlay styling with glassmorphism */
+  .usa-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 1.5rem;
+  }
+
+  .usa-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Modal Container styling */
+  .usa-modal-container {
+    background: radial-gradient(circle at top left, #1e293b 0%, #0f172a 100%);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 580px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(59, 130, 246, 0.15);
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+  }
+
+  .usa-modal-overlay.active .usa-modal-container {
+    transform: scale(1);
+  }
+
+  .usa-modal-glow {
+    position: absolute;
+    top: -150px;
+    left: -150px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .usa-modal-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .usa-modal-close:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #ef4444;
+    transform: rotate(90deg);
+  }
+
+  .usa-modal-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .usa-modal-flag {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.75rem;
+    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
+  }
+
+  .usa-modal-header h2 {
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  .usa-modal-subtitle {
+    color: #3b82f6;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .usa-modal-badge {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.25rem;
+  }
+
+  .usa-modal-body {
+    text-align: center;
+  }
+
+  .usa-modal-description {
+    color: #cbd5e1;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0 0 2rem 0;
+  }
+
+  .usa-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 480px) {
+    .usa-modal-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .usa-modal-feature {
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: left;
+    transition: background 0.3s ease;
+  }
+
+  .usa-modal-feature:hover {
+    background: rgba(30, 41, 59, 0.8);
+  }
+
+  .usa-feature-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .usa-modal-feature h3 {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .usa-modal-feature p {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .usa-corp-specs {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .spec-row:last-child {
+    border-bottom: none;
+  }
+
+  .spec-row span {
+    color: #64748b;
+  }
+
+  .spec-row strong {
+    color: #f8fafc;
+    font-weight: 600;
+  }
+
+  .usa-modal-disclaimer {
+    color: #64748b;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 1.5rem 0 0 0;
+  }
+
+  .usa-modal-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  @media (min-width: 480px) {
+    .usa-modal-footer {
+      flex-direction: row;
+    }
+  }
+
+  .usa-modal-btn-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: #ffffff !important;
+    border: none;
+    border-radius: 10px;
+    padding: 0.85rem 1.75rem;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-grow: 2;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  }
+
+  .usa-modal-btn-primary:hover {
+    background: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  }
+
+  .usa-modal-btn-primary svg {
+    transition: transform 0.3s ease;
+  }
+
+  .usa-modal-btn-primary:hover svg {
+    transform: translate(2px, -2px);
+  }
+
+  .usa-modal-btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+    border-radius: 10px;
+    padding: 0.85rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-grow: 1;
+  }
+
+  .usa-modal-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+  }
 </style>
 
 <footer class="footer-moderno">
@@ -294,13 +655,28 @@
     <div class="footer-grid">
       
       <div class="footer-brand">
-        <h3 class="footer-heading" style="margin-bottom: 1rem; color: #ffffff;">{{ 'general.about.title' | t | default: 'Sobre Nosotros' }}</h3>
+        <h3 class="footer-heading" style="margin-bottom: 1rem; color: #ffffff;">Sobre Nosotros</h3>
         <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1rem;">
           Expertos en diseño, venta y ejecución de proyectos de Seguridad Industrial, CCTV, Control de Acceso, Redes y Energía Renovable. Brindamos soluciones integrales de clase mundial para corporativos e industrias en México y USA.
         </p>
-        <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6;">
+        <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem;">
           <strong>{{ shop.name }}</strong> forma parte orgullosamente del corporativo <strong>Nuo Networks, Inc.</strong>
         </p>
+        
+        <!-- Delaware US C-Corp Card -->
+        <div class="usa-corp-card" id="openUsaModalBtn">
+          <div class="usa-corp-card-header">
+            <span class="usa-flag-pulse">🇺🇸</span>
+            <strong>¿Te ubicas en Estados Unidos?</strong>
+          </div>
+          <p class="usa-corp-card-body">
+            Somos una empresa establecida en Delaware, US. Podemos gestionar tu compra dentro de EE.UU. con nuestra C-Corp.
+          </p>
+          <div class="usa-corp-card-footer">
+            <span>Ver detalles corporativos</span>
+            <svg class="arrow-right-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#3b82f6" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+        </div>
         
         <ul class="footer-contact-list">
           {% if section.settings.phone != blank %}
@@ -309,8 +685,9 @@
             <div>
               <a href="tel:{{ section.settings.phone | remove: ' ' }}">{{ section.settings.phone }}</a>
               {% if section.settings.whatsapp != blank %}
-                <br><a href="https://wa.me/{{ section.settings.whatsapp | remove: ' ' | remove: '+' }}?text=Deseo%20Informacion%20de%20sistemas%20de%20seguridad" target="_blank" style="color: #25D366; font-weight: 600;">WhatsApp: {{ section.settings.whatsapp }}</a>
+                <br><a href="https://wa.me/{{ section.settings.whatsapp | remove: ' ' | remove: '+' }}?text=Deseo%20Informacion%20de%20sistemas%20de%20seguridad" target="_blank" style="color: #25D366; font-weight: 600;">WhatsApp MX: {{ section.settings.whatsapp }}</a>
               {% endif %}
+              <br><a href="https://wa.me/14243553283?text=Hello,%20I'm%20interested%20in%20purchasing%20equipment%20in%20the%20US" target="_blank" style="color: #25D366; font-weight: 600;">WhatsApp USA: +1 (424) 355-3283</a>
             </div>
           </li>
           {% endif %}
@@ -450,6 +827,116 @@
     </div>
   </div>
 </footer>
+
+<!-- High-Tech Glassmorphic Modal for US C-Corp -->
+<div class="usa-modal-overlay" id="usaCorpModal">
+  <div class="usa-modal-container">
+    <button class="usa-modal-close" id="closeUsaModalBtn">&times;</button>
+    
+    <div class="usa-modal-glow"></div>
+    
+    <div class="usa-modal-header">
+      <span class="usa-modal-flag">🇺🇸</span>
+      <h2>Nuo Networks, Inc.</h2>
+      <p class="usa-modal-subtitle">Est. Delaware, United States &bull; C-Corporation</p>
+    </div>
+    
+    <div class="usa-modal-body">
+      <div class="usa-modal-badge">Operación Corporativa Transfronteriza</div>
+      
+      <p class="usa-modal-description">
+        Si te encuentras en <strong>Estados Unidos</strong> y deseas adquirir equipamiento de seguridad y telecomunicaciones de alta gama, te ofrecemos un canal de facturación y entrega local 100% legal y optimizado.
+      </p>
+      
+      <div class="usa-modal-grid">
+        <div class="usa-modal-feature">
+          <div class="usa-feature-icon">🛡️</div>
+          <h3>Facturación Local en US</h3>
+          <p>Operamos mediante nuestra C-Corp registrada en Delaware, brindándote facturas comerciales válidas en EE.UU.</p>
+        </div>
+        <div class="usa-modal-feature">
+          <div class="usa-feature-icon">📦</div>
+          <h3>Logística Doméstica</h3>
+          <p>Gestionamos la entrega de equipos directamente dentro del territorio estadounidense, sin complicaciones de aduana.</p>
+        </div>
+      </div>
+
+      <div class="usa-corp-specs">
+        <div class="spec-row">
+          <span>Razón Social:</span>
+          <strong>Nuo Networks, Inc.</strong>
+        </div>
+        <div class="spec-row">
+          <span>Jurisdicción:</span>
+          <strong>Estado de Delaware, EE.UU.</strong>
+        </div>
+        <div class="spec-row">
+          <span>Tipo de Entidad:</span>
+          <strong>C-Corporation</strong>
+        </div>
+      </div>
+      
+      <p class="usa-modal-disclaimer">
+        Explora nuestro catálogo corporativo de soluciones de infraestructura y redes a través de nuestra división internacional.
+      </p>
+    </div>
+    
+    <div class="usa-modal-footer">
+      <a href="https://www.nuo-networks.com/" target="_blank" class="usa-modal-btn-primary" style="flex-grow: 1;">
+        Visitar Nuo Networks
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </a>
+      <a href="https://wa.me/14243553283?text=Hello%20Nuo%20Networks,%20I'm%20interested%20in%20US%20B2B%20equipment%20purchases" target="_blank" class="usa-modal-btn-whatsapp" style="background-color: #25D366; color: #ffffff !important; border: none; border-radius: 10px; padding: 0.85rem 1.5rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); flex-grow: 1;">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="margin-right: 4px;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 2.766 1.488 4.887 1.489 5.4 0 9.791-4.387 9.795-9.778 0-2.61-1.017-5.064-2.865-6.915C16.62 2.1 14.167 1.08 11.57 1.08c-5.4 0-9.79 4.39-9.795 9.78 0 2.02.527 3.996 1.528 5.73l-.99 3.612 3.734-.976zm13.136-7.47c-.29-.145-1.71-.845-1.975-.94-.266-.097-.46-.145-.653.145-.193.29-.747.94-.916 1.13-.17.19-.34.213-.63.067-.29-.145-1.22-.45-2.325-1.434-.86-.767-1.44-1.716-1.61-2.004-.17-.29-.018-.445.127-.59.13-.13.29-.34.435-.51.145-.17.193-.29.29-.48.097-.19.048-.36-.024-.51-.07-.145-.653-1.57-.895-2.15-.236-.57-.495-.49-.653-.5-.153-.006-.33-.007-.5-.007-.17 0-.447.064-.68.312-.234.248-.893.873-.893 2.13 0 1.257.915 2.47 1.04 2.64.128.17 1.8 2.75 4.36 3.856.61.264 1.086.42 1.457.538.613.195 1.172.167 1.613.1.49-.074 1.71-.698 1.95-1.373.24-.675.24-1.253.17-1.373-.07-.12-.26-.192-.55-.337z"/></svg>
+        WhatsApp USA
+      </a>
+      <button class="usa-modal-btn-secondary" id="closeUsaModalBtnSec" style="flex-grow: 1;">Cerrar ventana</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const openBtn = document.getElementById('openUsaModalBtn');
+    const closeBtn = document.getElementById('closeUsaModalBtn');
+    const closeBtnSec = document.getElementById('closeUsaModalBtnSec');
+    const modal = document.getElementById('usaCorpModal');
+
+    if (openBtn && modal) {
+      openBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      });
+    }
+
+    function closeModal() {
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (closeBtnSec) closeBtnSec.addEventListener('click', closeModal);
+
+    // Close on clicking outside container
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+
+    // Close on Esc keypress
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+  });
+</script>
 
 {% schema %}
 {
