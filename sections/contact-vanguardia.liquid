@@ -154,6 +154,56 @@
     height: 100%;
     border: none;
   }
+
+  /* Binational HQ Tabs styling */
+  .binational-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 2px solid #eaeaea;
+    padding-bottom: 0.5rem;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #888;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+  }
+
+  .tab-btn:hover {
+    color: #222;
+    background-color: #f5f5f5;
+  }
+
+  .tab-btn.active {
+    color: #2A75D3;
+    border-bottom: 3px solid #2A75D3;
+    background-color: rgba(42, 117, 211, 0.05);
+  }
+
+  .hq-content {
+    display: none;
+  }
+
+  .hq-content.active {
+    display: block;
+  }
+
+  /* Fade animation for maps */
+  .animate-fade {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 </style>
 
 <div class="page-contacto-wrapper">
@@ -161,8 +211,7 @@
   <h1 class="page-contacto-title">Contacto</h1>
   
   <div class="page-contacto-intro">
-    <p>Domicilio: Atenas 1, San Alvaro, Azcapotzalco, 02090 Ciudad de México, CDMX. Oficina: 55 6728 3971, Whatsapp 56 36741156<br>
-    Somos integradores de proyectos, ¿tienes dudas? Hablemos...</p>
+    <p>Somos integradores globales de proyectos de tecnología y seguridad industrial. Contamos con operaciones binacionales en México y Estados Unidos para gestionar tus compras corporativas y proyectos de forma eficiente.</p>
   </div>
 
   <div class="contacto-layout">
@@ -200,31 +249,83 @@
     </div>
 
     <div class="contacto-info-col">
-      <h3>Datos de contacto</h3>
+      <div class="binational-tabs">
+        <button class="tab-btn active" onclick="switchHq('mx')">🇲🇽 México HQ</button>
+        <button class="tab-btn" onclick="switchHq('us')">🇺🇸 United States HQ</button>
+      </div>
       
-      <ul class="info-list">
-        <li>
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          <span>Atenas 1, San Alvaro, Azcapotzalco,<br>02090 Ciudad de México, CDMX</span>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.03 21c.76 0 1-.66 1-1.21v-3.42c0-.54-.45-.99-.99-.99z"/></svg>
-          <span>Oficina: 55 6728 3971<br>Whatsapp: 55 5636741156</span>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          <span>proyectos@seguridad-avanzada.com</span>
-        </li>
-      </ul>
+      <!-- Mexico HQ Info -->
+      <div id="hq-mx-content" class="hq-content active">
+        <h3>Corporativo México</h3>
+        <ul class="info-list">
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span>Atenas 1, San Alvaro, Azcapotzalco,<br>02090 Ciudad de México, CDMX</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.03 21c.76 0 1-.66 1-1.21v-3.42c0-.54-.45-.99-.99-.99z"/></svg>
+            <span>Oficina: 55 6728 3971<br>WhatsApp MX: <a href="https://wa.me/52555636741156?text=Deseo%20informacion%20de%20sistemas%20de%20seguridad" target="_blank" style="color: #25D366; font-weight: bold; text-decoration: none;">55 5636741156</a></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <span><a href="mailto:proyectos@seguridad-avanzada.com" style="color: #2A75D3; text-decoration: none;">proyectos@seguridad-avanzada.com</a></span>
+          </li>
+        </ul>
 
-      <h3>Mapa de ubicación</h3>
-      <div class="map-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.644146316279!2d-99.1837699!3d19.4674393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8ab4a0e917d%3A0xc314b9ab47a82fb1!2sAtenas%201%2C%20San%20Alvaro%2C%20Azcapotzalco%2C%2002090%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1sen!2smx!4v1717000000000!5m2!1sen!2smx" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <h3>Ubicación México</h3>
+        <div class="map-container animate-fade">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.644146316279!2d-99.1837699!3d19.4674393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8ab4a0e917d%3A0xc314b9ab47a82fb1!2sAtenas%201%2C%20San%20Alvaro%2C%20Azcapotzalco%2C%2002090%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1sen!2smx!4v1717000000000!5m2!1sen!2smx" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+
+      <!-- USA HQ Info -->
+      <div id="hq-us-content" class="hq-content">
+        <h3>Corporativo United States</h3>
+        <ul class="info-list">
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span><strong>Nuo Networks, Inc.</strong><br>131 Continental Dr, Suite 305,<br>Newark, DE 19713, United States</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.03 21c.76 0 1-.66 1-1.21v-3.42c0-.54-.45-.99-.99-.99z"/></svg>
+            <span>WhatsApp USA: <a href="https://wa.me/14243553283?text=Hello%20Nuo%20Networks,%20I'm%20interested%20in%20US%20B2B%20equipment%20purchases" target="_blank" style="color: #25D366; font-weight: bold; text-decoration: none;">+1 (424) 355-3283</a></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <span><a href="mailto:contact@nuo-networks.com" style="color: #2A75D3; text-decoration: none;">contact@nuo-networks.com</a></span>
+          </li>
+        </ul>
+
+        <h3>Ubicación United States</h3>
+        <div class="map-container animate-fade">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3077.568326629705!2d-75.7277259!3d39.6738914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c77c68832a82df%3A0xe9f79bd4467bd0a5!2s131%20Continental%20Dr%2C%20Newark%2C%20DE%2019713%2C%20USA!5e0!3m2!1sen!2sus!4v1717000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </div>
     </div>
 
   </div>
 </div>
+
+<script>
+  function switchHq(market) {
+    // Remove active class from all tabs
+    const tabs = document.querySelectorAll('.tab-btn');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    
+    // Add active class to clicked tab
+    event.currentTarget.classList.add('active');
+    
+    // Hide all HQ contents
+    const contents = document.querySelectorAll('.hq-content');
+    contents.forEach(content => content.classList.remove('active'));
+    
+    // Show active HQ content
+    const activeContent = document.getElementById('hq-' + market + '-content');
+    if (activeContent) {
+      activeContent.classList.add('active');
+    }
+  }
+</script>
 
 {% schema %}
 {
