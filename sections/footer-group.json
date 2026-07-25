@@ -1,16 +1,25 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "facebook_community": {
+      "type": "facebook-community",
+      "settings": {
+        "badge_text": "Nuestra Comunidad Principal",
+        "heading": "Únete a la red de Seguridad Avanzada en Facebook",
+        "subheading": "Sigue nuestra página oficial de Facebook para recibir en tiempo real pruebas de equipos, lanzamientos y promociones:",
+        "feature_1_title": "Videos & Pruebas en Vivo",
+        "feature_1_text": "Demostraciones en tiempo real de cámaras CCTV, control de acceso y novedades tecnológicas.",
+        "feature_2_title": "Ofertas & Promociones Exclusivas",
+        "feature_2_text": "Descuentos directos y lanzamientos publicados en nuestra red antes que en cualquier otro lugar.",
+        "feature_3_title": "Casos de Éxito & Asesoría",
+        "feature_3_text": "Proyectos reales de instalación y atención personalizada de nuestros ingenieros.",
+        "button_label": "Seguir en Facebook",
+        "facebook_url": "https://www.facebook.com/seguridadavanzadacdmx/",
+        "facebook_tabs": "timeline",
+        "facebook_height": 500
+      }
+    },
     "footer": {
       "type": "footer",
       "settings": {
@@ -27,6 +36,7 @@
     }
   },
   "order": [
+    "facebook_community",
     "footer"
   ]
 }
