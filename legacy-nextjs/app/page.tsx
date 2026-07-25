@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { HeroVisual } from "@/components/HeroVisual";
 import { HomeContentSection } from "@/components/HomeContentSection";
+import { FacebookCommunity } from "@/components/FacebookCommunity";
 import { SYSCOM_CATEGORIES, getCategoryParam } from "@/lib/categories";
 
 const SUBTITLES: Record<string, string> = {
@@ -65,7 +66,7 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      <FacebookCommunity />
     </div>
   );
 }
