@@ -1,4 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rootDirectory": "legacy-nextjs"
+  "buildCommand": "npm --prefix legacy-nextjs run build",
+  "outputDirectory": "legacy-nextjs/.next",
+  "installCommand": "npm --prefix legacy-nextjs install"
 }
