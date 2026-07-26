@@ -7,10 +7,23 @@ const prisma = new PrismaClient();
 export async function POST(req: Request) {
   try {
     const payload = await req.json();
-    const { customerName, customerPhone, serviceName, items, subtotal, tax, total } = payload;
+    let { customerName, customerPhone, serviceName, items, subtotal, tax, total } = payload;
 
-    if (!customerName || !items || !total) {
+    if (!customerName || !items) {
       return NextResponse.json({ error: "Faltan campos requeridos" }, { status: 400 });
+    }
+
+    // Auto-calculate math for Kapso AI integration if totals are 0 or missing
+    if (!total || total === 0) {
+      subtotal = 0;
+      if (items.products && Array.isArray(items.products)) {
+        items.products.forEach((p: any) => {
+          if (!p.amount) p.amount = (p.quantity || 1) * (p.unitPrice || 0);
+          subtotal += p.amount;
+        });
+      }
+      tax = subtotal * 0.16;
+      total = subtotal + tax;
     }
 
     // Generar un folio único para Seguridad Avanzada
