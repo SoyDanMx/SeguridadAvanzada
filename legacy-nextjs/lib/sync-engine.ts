@@ -152,7 +152,6 @@ export async function runSync(): Promise<SyncResult> {
                   brand,
                   image_url: imageUrl,
                   category,
-                  syscom_category_id: catId,
                 },
                 update: {
                   name,
@@ -163,7 +162,6 @@ export async function runSync(): Promise<SyncResult> {
                   brand,
                   image_url: imageUrl,
                   category,
-                  syscom_category_id: catId,
                 },
               });
 
