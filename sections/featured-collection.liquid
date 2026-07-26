@@ -104,11 +104,16 @@
 
         {%- if section.settings.collection.products.size > 0 -%}
           {% assign lazy_load = false %}
-          {% paginate section.settings.collection.products by section.settings.products_to_show %}
-            {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
-              {% if lazy_load == false and forloop.index > max_columns_to_show %}
+          {% assign products_rendered_count = 0 %}
+            {%- for product in section.settings.collection.products limit: 50 -%}
+              {%- if product.featured_media == blank -%}
+                {%- continue -%}
+              {%- endif -%}
+
+              {% if lazy_load == false and products_rendered_count >= max_columns_to_show %}
                 {% assign lazy_load = true %}
               {% endif %}
+              
               <li
                 id="Slide-{{ section.id }}-{{ forloop.index }}"
                 class="grid__item{% if show_mobile_slider or show_desktop_slider %} slider__slide{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -131,8 +136,11 @@
                 %}
               </li>
               {%- assign skip_card_product_styles = true -%}
+              {% assign products_rendered_count = products_rendered_count | plus: 1 %}
+              {% if products_rendered_count >= section.settings.products_to_show %}
+                {% break %}
+              {% endif %}
             {%- endfor -%}
-          {% endpaginate %}
         {%- else -%}
           {%- for i in (1..section.settings.columns_desktop) -%}
             <li

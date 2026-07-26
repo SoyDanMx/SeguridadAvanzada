@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
 /*
  * Design system — Paleta SYSCOM + Seguridad Avanzada
  * docs/design-system-palette.md · docs/design-system-style-guide.md

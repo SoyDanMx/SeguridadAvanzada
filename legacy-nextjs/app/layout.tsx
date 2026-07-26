@@ -54,17 +54,9 @@ export default function RootLayout({
         className={`${inter.variable} ${montserrat.variable} ${jetbrainsMono.variable} font-sans antialiased min-h-screen bg-background text-foreground`}
       >
         <Providers>
-          <Suspense fallback={<header className="h-[180px] w-full bg-primary-nav" aria-hidden />}>
-            <Header />
-          </Suspense>
-          <AnnouncementBanner />
-          <div className="min-h-[60vh]">
-            <main id="main-content" className="min-w-0 flex-1 px-4 py-4 sm:px-4 lg:px-6 lg:py-6" tabIndex={-1}>
-              {children}
-            </main>
-          </div>
-          <Footer />
-          <WhatsAppFloat />
+          <main className="min-w-0 flex-1" tabIndex={-1}>
+            {children}
+          </main>
         </Providers>
       </body>
     </html>

@@ -454,7 +454,16 @@
     </style>
 
     {% assign whatsapp_number = '525636741156' %}
-    {% assign whatsapp_message = 'Hola,%20Deseo%20solicitar%20un%20servicio%20o%20información%20de%20Seguridad%20Avanzada' %}
+    {% if template.name == 'product' %}
+      {% if product.selected_or_first_available_variant.sku != blank %}
+        {% assign base_msg = 'Vengo del catálogo web (Seguridad Avanzada), me interesa el SKU: ' | append: product.selected_or_first_available_variant.sku %}
+      {% else %}
+        {% assign base_msg = 'Vengo del catálogo web (Seguridad Avanzada), me interesa el producto: ' | append: product.title %}
+      {% endif %}
+      {% assign whatsapp_message = base_msg | url_encode %}
+    {% else %}
+      {% assign whatsapp_message = 'Vengo del catálogo web (Seguridad Avanzada). Deseo solicitar un servicio o información' | url_encode %}
+    {% endif %}
 
     <a href="https://wa.me/{{ whatsapp_number }}?text={{ whatsapp_message }}" target="_blank" rel="noopener noreferrer" class="whatsapp-float-container" aria-label="Solicitar Servicio por WhatsApp">
       <div class="whatsapp-button-pill">

@@ -593,3 +593,15 @@
     clip-path: polygon(var(--shape--blob-5));
   }
 }
+
+/* Custom Premium Hover Effects for Featured Products */
+.card-wrapper:hover .card--card {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border-color: rgba(var(--color-foreground), 0.1);
+}
+.card--card {
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+

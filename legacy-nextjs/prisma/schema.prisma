@@ -9,6 +9,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Product {
@@ -22,10 +23,23 @@ model Product {
   brand              String?
   image_url          String?
   category           String?
-  syscom_category_id String?  // ID de disciplina Syscom (22, 26, etc.) para filtrar
   last_updated       DateTime @updatedAt
 
   @@index([sku])
   @@index([category])
-  @@index([syscom_category_id])
+}
+
+model Quote {
+  id                 String   @id @default(cuid())
+  folio              String   @unique
+  customerName       String
+  customerPhone      String?
+  serviceName        String?
+  items              Json     // { concept, quantity, unitPrice, amount }
+  subtotal           Float
+  tax                Float
+  total              Float
+  status             String   @default("PENDING")
+  createdAt          DateTime @default(now())
+  expiresAt          DateTime
 }

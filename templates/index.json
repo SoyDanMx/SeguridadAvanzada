@@ -48,16 +48,15 @@
     "all-products": {
       "type": "featured-collection",
       "settings": {
-        "collection": "all",
-        "products_to_show": 24,
-        "title": "Productos Destacados",
+        "title": "🔥 Top Tendencias en Sistemas",
         "heading_size": "h1",
-        "description": "",
+        "description": "<p>Explora los equipos más instalados y buscados en el mercado actual.</p>",
         "show_description": true,
         "description_style": "subtitle",
-        "columns_desktop": 6,
-        "enable_desktop_slider": false,
-        "full_width": false,
+        "collection": "top-tendencias-en-sistemas",
+        "products_to_show": 12,
+        "columns_desktop": 4,
+        "full_width": true,
         "show_view_all": true,
         "view_all_style": "solid",
         "color_scheme": "scheme-1",
@@ -65,12 +64,13 @@
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
+        "show_rating": true,
+        "enable_desktop_slider": true,
+        "quick_add": "standard",
         "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 24,
-        "padding_bottom": 24
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     }
   },
