@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { getProducts } from "@/lib/syscom-client";
 import OpenAI from "openai";
-import pdf from "pdf-parse";
+const pdf = require("pdf-parse");
 
 const prisma = new PrismaClient();
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
