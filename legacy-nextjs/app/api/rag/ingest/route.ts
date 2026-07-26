@@ -2,7 +2,12 @@ import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { getProducts } from "@/lib/syscom-client";
 import OpenAI from "openai";
-const pdf = require("pdf-parse");
+let pdf: any;
+try {
+  pdf = require("pdf-parse");
+} catch (e: any) {
+  console.error("Failed to load pdf-parse:", e);
+}
 
 const prisma = new PrismaClient();
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -64,6 +69,10 @@ export async function POST(req: Request) {
     const arrayBuffer = await response.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     
+    if (!pdf) {
+      return NextResponse.json({ error: "Librería pdf-parse falló al cargar en Vercel." }, { status: 500 });
+    }
+
     const pdfData = await pdf(buffer);
     const text = pdfData.text.replace(/\n+/g, " ").replace(/\s+/g, " ").trim();
 
