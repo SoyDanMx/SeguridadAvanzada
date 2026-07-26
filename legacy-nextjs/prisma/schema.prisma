@@ -3,13 +3,22 @@
 // Migraciones: npx prisma migrate dev
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  directUrl  = env("DIRECT_URL")
+  extensions = [vector]
+}
+
+model RagDocument {
+  id        String   @id @default(cuid())
+  content   String
+  metadata  Json?
+  embedding Unsupported("vector(1536)")
 }
 
 model Product {
