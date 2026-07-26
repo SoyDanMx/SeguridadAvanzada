@@ -152,7 +152,7 @@ export default async function CotizacionPage({ params }: { params: { id: string 
                     </span>
                   </div>
                   <p className="text-yellow-500 text-xs tracking-widest mb-2">★★★★★ <span className="text-gray-400 tracking-normal ml-1">Hace un año</span></p>
-                  <p className="text-xs text-gray-700 italic">"Hace una semana necesite de sus servicios de circuito cerrado para mi hogar. Cabe resaltar qué desde la planeación estratégica de la ubicación del equipo, y lo presupuestado. fue una grata experiencia de adquisición. la instalación de primera . el equipo en general digno de recomendar."</p>
+                  <p className="text-xs text-gray-700 italic">&quot;Hace una semana necesite de sus servicios de circuito cerrado para mi hogar. Cabe resaltar qué desde la planeación estratégica de la ubicación del equipo, y lo presupuestado. fue una grata experiencia de adquisición. la instalación de primera . el equipo en general digno de recomendar.&quot;</p>
                 </div>
               </div>
             </div>
