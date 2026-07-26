@@ -4,9 +4,10 @@ import PrintButton from "./PrintButton";
 
 const prisma = new PrismaClient();
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const quote = await prisma.quote.findUnique({
-    where: { id: params.id },
+    where: { id },
     select: { folio: true }
   });
   return {
@@ -21,9 +22,10 @@ interface QuoteItem {
   amount: number;
 }
 
-export default async function CotizacionPage({ params }: { params: { id: string } }) {
+export default async function CotizacionPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const quote = await prisma.quote.findUnique({
-    where: { id: params.id }
+    where: { id }
   });
 
   if (!quote) {
