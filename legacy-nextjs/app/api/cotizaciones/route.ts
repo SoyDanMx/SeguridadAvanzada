@@ -15,15 +15,27 @@ export async function POST(req: Request) {
 
     // Auto-calculate math for Kapso AI integration if totals are 0 or missing
     if (!total || total === 0) {
-      subtotal = 0;
+      let tempTotal = 0;
       if (items.products && Array.isArray(items.products)) {
         items.products.forEach((p: any) => {
-          if (!p.amount) p.amount = (p.quantity || 1) * (p.unitPrice || 0);
-          subtotal += p.amount;
+          // Auto-extract SKU if embedded in concept
+          if (!p.sku && p.concept) {
+            const match = p.concept.match(/SKU:\s*([^\)]+)/i);
+            if (match) {
+              p.sku = match[1].trim();
+              p.concept = p.concept.replace(/\s*\(\s*SKU:\s*[^\)]+\s*\)/i, '').trim();
+            }
+          }
+          const originalPrice = p.unitPrice || 0;
+          const basePrice = originalPrice / 1.16;
+          p.unitPrice = basePrice;
+          p.amount = (p.quantity || 1) * basePrice;
+          tempTotal += (p.quantity || 1) * originalPrice;
         });
       }
-      tax = subtotal * 0.16;
-      total = subtotal + tax;
+      total = tempTotal;
+      subtotal = total / 1.16;
+      tax = total - subtotal;
     }
 
     // Generar un folio único para Seguridad Avanzada
@@ -49,9 +61,9 @@ export async function POST(req: Request) {
       }
     });
 
-    // Construir la URL pública que el agente enviará al cliente
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-    const quoteUrl = `${baseUrl}/cotizador-rapido/${quote.id}`;
+    // Construir la URL pública del PDF que el agente enviará al cliente
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://seguridad-avanzada.vercel.app";
+    const quoteUrl = `${baseUrl}/api/cotizaciones/${quote.id}/pdf`;
 
     return NextResponse.json({ 
       success: true, 

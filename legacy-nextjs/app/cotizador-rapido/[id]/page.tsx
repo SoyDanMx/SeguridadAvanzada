@@ -34,38 +34,38 @@ export default async function CotizacionPage({ params }: { params: Promise<{ id:
 
   const quoteData = quote.items as any;
   const products = Array.isArray(quoteData) ? quoteData : quoteData.products || [];
-  const profName = !Array.isArray(quoteData) && quoteData.professionalName ? quoteData.professionalName : "Marco Rangel";
-  const profPhone = !Array.isArray(quoteData) && quoteData.professionalPhone ? quoteData.professionalPhone : "5519388056";
+  const profName = !Array.isArray(quoteData) && quoteData.professionalName ? quoteData.professionalName : "Daniel Nuño";
+  const profPhone = !Array.isArray(quoteData) && quoteData.professionalPhone ? quoteData.professionalPhone : "+52 56 3674 1156";
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 font-sans text-gray-800">
       <div className="max-w-4xl mx-auto bg-white shadow-2xl">
         
         {/* Encabezado Corporativo estilo Minimalista (Facturama / Clean) */}
-        <div className="bg-white p-10 flex items-start justify-between border-b border-gray-200">
-          <div>
-            <img src="/logo.png" alt="Seguridad Avanzada" className="h-28 w-auto object-contain" />
+        <div className="bg-white p-4 sm:p-6 md:p-10 print:p-10 flex flex-col md:flex-row print:flex-row items-center md:items-start justify-between border-b border-gray-200 gap-4 md:gap-0">
+          <div className="w-full flex justify-center md:justify-start print:justify-start">
+            <img src="/logo.png" alt="Seguridad Avanzada" className="h-20 sm:h-24 md:h-28 print:h-28 w-auto object-contain" />
           </div>
-          <div className="text-right">
-            <h1 className="text-2xl font-bold text-gray-900 mb-1">Cotización de Servicio</h1>
-            <p className="text-sm text-gray-800 font-semibold mb-1">Cotización con respaldo de NUO Integraciones y Servicios</p>
-            <p className="text-xs text-gray-600"><span className="font-semibold text-gray-800">NUO INTEGRACIONES Y SERVICIOS | RFC: NIS230310Q9A</span></p>
-            <p className="text-xs text-gray-500 mt-1">Atenas 1-1, Col. San Alvaro, Azcapotzalco, CDMX, C.P. 02090</p>
-            <p className="text-xs text-gray-500 mt-1">proyectos@seguridad-avanzada.com | Tel: +52 56 3674 1156 | www.seguridad-avanzada.com</p>
+          <div className="text-center md:text-right print:text-right w-full">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Cotización de Servicio</h1>
+            <p className="text-xs sm:text-sm text-gray-800 font-semibold mb-1">Cotización con respaldo de NUO Integraciones y Servicios</p>
+            <p className="text-[10px] sm:text-xs text-gray-600"><span className="font-semibold text-gray-800">NUO INTEGRACIONES Y SERVICIOS | RFC: NIS230310Q9A</span></p>
+            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">Atenas 1-1, Col. San Alvaro, Azcapotzalco, CDMX, C.P. 02090</p>
+            <p className="text-[10px] sm:text-xs text-gray-500 mt-1 break-words">proyectos@seguridad-avanzada.com | Tel: +52 56 3674 1156 | www.seguridad-avanzada.com</p>
           </div>
         </div>
 
-        <div className="p-10 pt-6">
+        <div className="p-4 sm:p-6 md:p-10 print:p-10 pt-6">
           
-          <div className="flex justify-end mb-8 text-sm text-gray-700">
-            <div className="text-right bg-gray-50 p-4 rounded border border-gray-100">
+          <div className="flex justify-start md:justify-end print:justify-end mb-6 md:mb-8 text-xs sm:text-sm text-gray-700 w-full">
+            <div className="text-left md:text-right print:text-right bg-gray-50 p-4 rounded border border-gray-100 w-full md:w-auto">
               <p><span className="font-bold text-gray-900">Folio:</span> {quote.folio}</p>
               <p><span className="font-bold text-gray-900">Fecha:</span> {new Date(quote.createdAt).toLocaleDateString('es-MX')}</p>
               <p><span className="font-bold text-gray-900">Validez:</span> {new Date(quote.expiresAt).toLocaleDateString('es-MX')} (7 días)</p>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 mb-8 text-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-2 print:grid-cols-2 gap-6 sm:gap-8 mb-6 md:mb-8 text-sm">
             <div>
               <p className="font-bold text-gray-900 mb-2 border-b pb-1">Profesional</p>
               <p className="text-gray-800">{profName}</p>
@@ -79,13 +79,13 @@ export default async function CotizacionPage({ params }: { params: Promise<{ id:
             </div>
           </div>
           
-          <div className="text-sm mb-10">
+          <div className="text-sm mb-8 md:mb-10">
              <p className="text-gray-800"><span className="font-medium">Direccion:</span> Por definir con el cliente</p>
           </div>
 
           {/* Tabla de Productos estilo Minimalista */}
-          <div className="border border-gray-200 rounded-lg overflow-hidden mb-8">
-            <table className="w-full text-sm text-left text-gray-800">
+          <div className="border border-gray-200 rounded-lg overflow-x-auto mb-8">
+            <table className="w-full min-w-[600px] text-sm text-left text-gray-800">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
                   <th scope="col" className="py-4 px-4 font-bold text-gray-900 w-32">SKU</th>
@@ -111,7 +111,7 @@ export default async function CotizacionPage({ params }: { params: Promise<{ id:
 
           {/* Totales */}
           <div className="flex justify-end mb-12">
-            <div className="w-72 text-sm bg-gray-50 border border-gray-200 p-4 rounded-lg">
+            <div className="w-full sm:w-72 text-sm bg-gray-50 border border-gray-200 p-4 rounded-lg">
               <div className="flex justify-between mb-3 text-gray-600">
                 <span>Subtotal:</span>
                 <span className="font-semibold text-gray-900">${quote.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
@@ -163,7 +163,7 @@ export default async function CotizacionPage({ params }: { params: Promise<{ id:
           {/* Datos Bancarios y Footer */}
           <div className="border-t border-gray-200 pt-6 mt-12">
             <h4 className="font-bold text-gray-900 mb-3 text-sm">Datos para Transferencia Bancaria</h4>
-            <div className="bg-gray-50 border border-gray-100 p-4 rounded-md text-sm text-gray-800 grid grid-cols-2 gap-y-2 mb-6">
+            <div className="bg-gray-50 border border-gray-100 p-4 rounded-md text-sm text-gray-800 grid grid-cols-1 sm:grid-cols-2 print:grid-cols-2 gap-y-2 mb-6">
               <p><span className="font-bold text-gray-900">Beneficiario:</span> NUO INTEGRACIONES Y SERVICIOS</p>
               <p><span className="font-bold text-gray-900">Banco:</span> BBVA</p>
               <p><span className="font-bold text-gray-900">Cuenta:</span> 0120314730</p>
