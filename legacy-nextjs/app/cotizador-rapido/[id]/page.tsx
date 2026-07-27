@@ -100,8 +100,8 @@ export default async function CotizacionPage({ params }: { params: Promise<{ id:
                     <td className="py-4 px-4 text-xs font-mono text-gray-500">{item.sku || '-'}</td>
                     <td className="py-4 px-4 text-gray-700">{item.concept}</td>
                     <td className="py-4 px-4 text-center text-gray-700">{item.quantity}</td>
-                    <td className="py-4 px-4 text-right text-gray-700">${item.unitPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
-                    <td className="py-4 px-4 text-right text-gray-900 font-medium">${item.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
+                    <td className="py-4 px-4 text-right text-gray-700">${item.unitPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                    <td className="py-4 px-4 text-right text-gray-900 font-medium">${item.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
                   </tr>
                 ))}
               </tbody>
@@ -113,15 +113,15 @@ export default async function CotizacionPage({ params }: { params: Promise<{ id:
             <div className="w-full sm:w-72 text-sm bg-gray-50 border border-gray-200 p-4 rounded-lg">
               <div className="flex justify-between mb-3 text-gray-600">
                 <span>Subtotal:</span>
-                <span className="font-semibold text-gray-900">${quote.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                <span className="font-semibold text-gray-900">${quote.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
               </div>
               <div className="flex justify-between mb-3 text-gray-600">
                 <span>IVA (16%):</span>
-                <span className="font-semibold text-gray-900">${quote.tax.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                <span className="font-semibold text-gray-900">${quote.tax.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
               </div>
               <div className="flex justify-between pt-3 border-t border-gray-200 text-lg font-bold text-gray-900">
                 <span>Total:</span>
-                <span>${quote.total.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                <span>${quote.total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
               </div>
             </div>
           </div>

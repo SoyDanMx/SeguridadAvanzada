@@ -73,7 +73,7 @@ export async function POST(request: Request) {
       responseObj.title = p.name;
       responseObj.sku = p.sku;
       responseObj.price = `$${p.price_mxn.toFixed(2)} MXN`;
-      responseObj.vendor = p.marca || 'Generica';
+      responseObj.vendor = p.brand || 'Generica';
       responseObj.description = p.description?.substring(0, 100) || '';
     } else {
       products.forEach((p, index) => {

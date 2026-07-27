@@ -145,7 +145,7 @@ export default function CotizacionesDashboard() {
                           {profName}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 text-right">
-                          ${quote.total.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN
+                          ${quote.total.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-center">
                           <select

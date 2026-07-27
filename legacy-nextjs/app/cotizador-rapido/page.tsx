@@ -208,9 +208,9 @@ export default function CotizadorRapidoClient() {
       doc.text(item.sku || "-", colSku, y);
       const splitConcept = doc.splitTextToSize(item.concept || "-", 200);
       doc.text(splitConcept, colConcept, y);
-      const priceText = `$${item.unitPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+      const priceText = `$${item.unitPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
       doc.text(priceText, colUnit, y, { align: "right" });
-      const amountText = `$${item.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+      const amountText = `$${item.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
       doc.text(amountText, colTotal, y, { align: "right" });
       
       y += (splitConcept.length * 12) + 8;
@@ -222,9 +222,9 @@ export default function CotizadorRapidoClient() {
     y += 15;
 
     // 5. Totals
-    const subtotalText = `$${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
-    const taxText = `$${tax.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
-    const totalText = `$${total.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+    const subtotalText = `$${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    const taxText = `$${tax.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    const totalText = `$${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
     doc.setFont("helvetica", "bold");
     doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
@@ -285,7 +285,7 @@ export default function CotizadorRapidoClient() {
       targetPhone = '52' + targetPhone;
     }
     
-    const message = `¡Hola ${customerName}! 👋\nTe comparto tu cotización folio *${folio}* por el servicio de *${serviceName || "Seguridad Avanzada"}*.\n\nTotal: *$${total.toLocaleString('en-US', { minimumFractionDigits: 2 })}*\n\nSi tienes alguna duda, estoy a tus órdenes.\nAtte. ${professionalName}`;
+    const message = `¡Hola ${customerName}! 👋\nTe comparto tu cotización folio *${folio}* por el servicio de *${serviceName || "Seguridad Avanzada"}*.\n\nTotal: *$${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}*\n\nSi tienes alguna duda, estoy a tus órdenes.\nAtte. ${professionalName}`;
     const url = targetPhone 
       ? `https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`
       : `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
@@ -535,7 +535,7 @@ export default function CotizadorRapidoClient() {
                           </div>
                         </td>
                         <td className="p-3 text-right font-bold text-gray-900">
-                          ${item.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                          ${item.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </td>
                         <td className="p-3 text-center">
                           <button 
@@ -622,18 +622,18 @@ export default function CotizadorRapidoClient() {
                   <div className="p-6 space-y-4">
                     <div className="flex justify-between items-center text-gray-600">
                       <span className="font-medium">Subtotal</span>
-                      <span className="font-semibold text-gray-900">${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                      <span className="font-semibold text-gray-900">${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     </div>
                     <div className="flex justify-between items-center text-gray-600">
                       <span className="font-medium">IVA (16%)</span>
-                      <span className="font-semibold text-gray-900">${tax.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                      <span className="font-semibold text-gray-900">${tax.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     </div>
                     <div className="pt-4 mt-2 border-t border-gray-100 flex justify-between items-end">
                       <div>
                         <span className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Total a Pagar</span>
                         <span className="block text-xs text-gray-400">MXN</span>
                       </div>
-                      <span className="text-3xl font-extrabold text-red-600">${total.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                      <span className="text-3xl font-extrabold text-red-600">${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     </div>
                   </div>
                   <div className="bg-red-50/50 px-6 py-4 border-t border-red-50/80">
