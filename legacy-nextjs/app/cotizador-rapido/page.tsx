@@ -128,10 +128,10 @@ export default function CotizadorRapidoClient() {
       doc.text("Seguridad Avanzada", margin, y + 20);
     }
 
-    doc.setFontSize(12);
+    doc.setFontSize(10);
     doc.setTextColor(darkColor[0], darkColor[1], darkColor[2]);
     doc.setFont("helvetica", "bold");
-    doc.text("Cotización con respaldo de NUO Integraciones y Servicios", pageWidth - margin, y + 15, { align: "right" });
+    doc.text("Cotizacion - NUO INTEGRACIONES Y SERVICIOS | RFC: NIS230310Q9A", pageWidth - margin, y + 15, { align: "right" });
 
     doc.setFontSize(10);
     doc.setTextColor(textColor[0], textColor[1], textColor[2]);
@@ -376,8 +376,7 @@ export default function CotizadorRapidoClient() {
           </div>
           <div className="relative z-10 mt-6 md:mt-0 bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/20 flex flex-col items-center justify-center text-center">
             <img src="/logo-white.png" alt="Seguridad Avanzada" className="h-10 sm:h-12 w-auto object-contain mb-2" />
-            <p className="text-[10px] sm:text-xs text-red-100 font-bold tracking-wide">Cotización con respaldo de NUO Integraciones y Servicios</p>
-            <p className="text-[8px] sm:text-[9px] text-red-100/80 mt-1">NUO INTEGRACIONES Y SERVICIOS | RFC: NIS230310Q9A</p>
+            <p className="text-[10px] sm:text-xs text-red-100 font-bold tracking-wide">Cotizacion - NUO INTEGRACIONES Y SERVICIOS | RFC: NIS230310Q9A</p>
             <p className="text-[8px] sm:text-[9px] text-red-100/80 mt-1">Contacto: proyectos@seguridad-avanzada.com | WhatsApp MX: +525636741156</p>
           </div>
         </div>
