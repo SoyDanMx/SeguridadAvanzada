@@ -48,10 +48,9 @@ export default async function CotizacionPage({ params }: { params: Promise<{ id:
           </div>
           <div className="text-center md:text-right print:text-right w-full">
             <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Cotización de Servicio</h1>
-            <p className="text-xs sm:text-sm text-gray-800 font-semibold mb-1">Cotización con respaldo de NUO Integraciones y Servicios</p>
-            <p className="text-[10px] sm:text-xs text-gray-600"><span className="font-semibold text-gray-800">NUO INTEGRACIONES Y SERVICIOS | RFC: NIS230310Q9A</span></p>
-            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">Atenas 1-1, Col. San Alvaro, Azcapotzalco, CDMX, C.P. 02090</p>
-            <p className="text-[10px] sm:text-xs text-gray-500 mt-1 break-words">proyectos@seguridad-avanzada.com | Tel: +52 56 3674 1156 | www.seguridad-avanzada.com</p>
+            <p className="text-xs sm:text-sm text-gray-800 font-semibold mb-1">Cotizacion - NUO INTEGRACIONES Y SERVICIOS | RFC: NIS230310Q9A</p>
+            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">Atenas 1-1, Col. San Alvaro, Alcaldía Azcapotzalco, Ciudad de México, C.P. 02090</p>
+            <p className="text-[10px] sm:text-xs text-gray-500 mt-1 break-words">Contacto: proyectos@seguridad-avanzada.com | WhatsApp MX: +525636741156 | www.seguridad-avanzada.com</p>
           </div>
         </div>
 
