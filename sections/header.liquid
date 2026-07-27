@@ -168,6 +168,18 @@
       {%- endif -%}
     {%- endif -%}
 
+    <div class="header__contact small-hide" style="display: flex; align-items: center; margin-left: 2rem; margin-right: auto;">
+      <div class="header__contact-icon" style="margin-right: 12px; color: #0056b3;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      </div>
+      <div class="header__contact-text" style="display: flex; flex-direction: column;">
+        <a href="https://wa.me/52555636741156" target="_blank" style="text-decoration: none; font-size: 1.8rem; font-weight: bold; color: #1a1a1a; line-height: 1.2;">
+          WhatsApp MX: 55 5636741156
+        </a>
+        <span style="font-size: 1.2rem; color: #666; margin-top: 4px;">Horarios de atención L-V de 9:00 a 18:00 horas</span>
+      </div>
+    </div>
+
     {%- liquid
       if section.settings.menu != blank
         if section.settings.menu_type_desktop == 'dropdown'
@@ -208,19 +220,6 @@
         </h1>
       {%- endif -%}
     {%- endif -%}
-
-    <div class="header__contact small-hide" style="display: flex; align-items: center; margin-right: 2rem; margin-left: auto;">
-      <div class="header__contact-icon" style="margin-right: 12px; color: #0056b3;">
-        <!-- Phone icon similar to Sily -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-      </div>
-      <div class="header__contact-text" style="display: flex; flex-direction: column;">
-        <a href="https://wa.me/52555636741156" target="_blank" style="text-decoration: none; font-size: 1.8rem; font-weight: bold; color: #1a1a1a; line-height: 1.2;">
-          WhatsApp MX: 55 5636741156
-        </a>
-        <span style="font-size: 1.2rem; color: #666; margin-top: 4px;">Horarios de atención L-V de 9:00 a 18:00 horas</span>
-      </div>
-    </div>
 
     <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
       <div class="desktop-localization-wrapper">
@@ -299,16 +298,6 @@
           </div>
         {%- endif -%}
       </a>
-    </div>
-    <div class="header__secondary-bar page-width small-hide" style="display: flex; gap: 20px; padding: 10px 0; margin-top: 10px;">
-      <div class="header__search-extended" style="flex-grow: 1;">
-        <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form" style="display: flex; width: 100%; border: 1px solid #ccc; border-radius: 4px; overflow: hidden; background: #f8f9fa;">
-          <input class="search__input field__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Buscar productos..." style="flex-grow: 1; border: none; padding: 12px; background: transparent; outline: none; box-shadow: none;" />
-          <button class="search__button field__button" style="background: transparent; border: none; padding: 0 15px; cursor: pointer; color: #2b70f0;">
-            <svg class="icon icon-search" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          </button>
-        </form>
-      </div>
     </div>
   </header>
 </{{ header_tag }}>
