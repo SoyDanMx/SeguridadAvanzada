@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import { PricingService } from "@/lib/pricing-service";
 
 // Force Next.js to reload the new Prisma Client
 const prisma = new PrismaClient();
@@ -15,10 +16,9 @@ export async function POST(req: Request) {
 
     // Auto-calculate math for Kapso AI integration if totals are 0 or missing
     if (!total || total === 0) {
-      let tempTotal = 0;
       if (items.products && Array.isArray(items.products)) {
+        // Auto-extract SKU if embedded in concept
         items.products.forEach((p: any) => {
-          // Auto-extract SKU if embedded in concept
           if (!p.sku && p.concept) {
             const match = p.concept.match(/SKU:\s*([^\)]+)/i);
             if (match) {
@@ -26,16 +26,16 @@ export async function POST(req: Request) {
               p.concept = p.concept.replace(/\s*\(\s*SKU:\s*[^\)]+\s*\)/i, '').trim();
             }
           }
-          const originalPrice = p.unitPrice || 0;
-          const basePrice = originalPrice / 1.16;
-          p.unitPrice = basePrice;
-          p.amount = (p.quantity || 1) * basePrice;
-          tempTotal += (p.quantity || 1) * originalPrice;
         });
+
+        // Aplicar el PricingService para limpiar precios sucios (ej. "$313.83 MXN") y extraer el IVA
+        const cartMath = PricingService.calculateCartTotals(items.products);
+        
+        items.products = cartMath.items;
+        subtotal = cartMath.subtotal;
+        tax = cartMath.tax;
+        total = cartMath.total;
       }
-      total = tempTotal;
-      subtotal = total / 1.16;
-      tax = total - subtotal;
     }
 
     // Generar un folio único para Seguridad Avanzada
