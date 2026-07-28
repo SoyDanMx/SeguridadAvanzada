@@ -6,30 +6,44 @@ export async function POST(req: Request) {
     const payload = await req.json();
     console.log("[Kapso Webhook] Recibido payload:", JSON.stringify(payload));
 
-    // 2. Validar que sea un evento de inactividad
-    const eventType = payload.event || payload.type || payload.event_type || payload.data?.event;
+    // 2. Normalizar payload (puede ser objeto o array de eventos)
+    const eventData = Array.isArray(payload) ? payload[0] : payload;
+    const eventType = eventData?.event || eventData?.type || eventData?.event_type || eventData?.data?.event || "";
     const normalizedEvent = typeof eventType === "string" ? eventType.toLowerCase().trim() : "";
-
-    const isInactiveEvent =
-      normalizedEvent === "conversation.inactive" ||
-      normalizedEvent === "whatsapp.conversation.inactive" ||
-      normalizedEvent === "conversation_inactive" ||
-      normalizedEvent === "conversation inactive";
+    
+    // Fallback: si no encontramos el evento, pero la palabra "inactive" viene en todo el JSON, asumimos que es este
+    const payloadStr = JSON.stringify(payload).toLowerCase();
+    const isInactiveEvent = 
+      normalizedEvent.includes("inactive") || 
+      payloadStr.includes("conversation.inactive") || 
+      payloadStr.includes("whatsapp.conversation.inactive") ||
+      payloadStr.includes("conversation_inactive") ||
+      payloadStr.includes("conversation inactive");
 
     if (!isInactiveEvent) {
-      console.log(`[Kapso Webhook] Evento ignorado (tipo recibido: "${eventType}")`);
-      return NextResponse.json({ message: `Ignored: event ${eventType} is not an inactive event` }, { status: 200 });
+      console.log(`[Kapso Webhook] Evento ignorado (tipo detectado: "${eventType}"). Payload: ${JSON.stringify(payload).substring(0, 100)}`);
+      return NextResponse.json({ message: `Ignored: not an inactive event` }, { status: 200 });
     }
 
-    const conversationId =
-      payload.conversation_id ||
-      payload.data?.conversation?.id ||
-      payload.data?.id ||
-      payload.conversation?.id ||
-      payload.id;
+    // Función recursiva segura para buscar el conversation_id en cualquier parte del payload
+    const findConversationId = (obj: any): string | undefined => {
+      if (!obj || typeof obj !== 'object') return undefined;
+      if (obj.conversation_id) return obj.conversation_id;
+      if (obj.conversation?.id) return obj.conversation.id;
+      if (obj.id && typeof obj.id === 'string' && (obj.id.startsWith('conv_') || obj.id.includes('-'))) return obj.id;
+      for (const key in obj) {
+        if (typeof obj[key] === 'object') {
+          const found = findConversationId(obj[key]);
+          if (found) return found;
+        }
+      }
+      return undefined;
+    };
+
+    const conversationId = findConversationId(eventData);
 
     if (!conversationId) {
-      console.error("[Kapso Webhook] Error: No se encontró conversation ID en el payload");
+      console.error("[Kapso Webhook] Error: No se encontró conversation ID en el payload completo:", JSON.stringify(payload));
       return NextResponse.json({ error: "Missing conversation ID" }, { status: 400 });
     }
 
