@@ -62,7 +62,7 @@ export async function POST(req: Request) {
     });
 
     // Construir la URL pública del PDF que el agente enviará al cliente
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://seguridad-avanzada.vercel.app";
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://seguridad-avanzada-iodc.vercel.app";
     const quoteUrl = `${baseUrl}/api/cotizaciones/${quote.id}/pdf`;
 
     return NextResponse.json({ 
