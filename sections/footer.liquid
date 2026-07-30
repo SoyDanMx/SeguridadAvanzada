@@ -648,6 +648,323 @@
     background: rgba(255, 255, 255, 0.1);
     color: #ffffff;
   }
+
+  /* Tulbox Servicios Técnicos Card & Modal Styles */
+  .tulbox-corp-card {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(15, 23, 42, 0.9) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.35);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.12);
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+  }
+
+  .tulbox-corp-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .tulbox-corp-card:hover::before {
+    transform: translateX(100%);
+  }
+
+  .tulbox-corp-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(167, 139, 250, 0.8);
+    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
+  }
+
+  .tulbox-corp-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.65rem;
+  }
+
+  .tulbox-card-logo {
+    height: 38px;
+    max-width: 180px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+  }
+
+  .tulbox-cert-badge {
+    background: rgba(124, 58, 237, 0.25);
+    color: #c4b5fd;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    border: 1px solid rgba(139, 92, 246, 0.4);
+    letter-spacing: 0.03em;
+  }
+
+  .tulbox-corp-card-body {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #cbd5e1;
+    margin: 0 0 0.85rem 0 !important;
+  }
+
+  .tulbox-corp-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #a78bfa;
+  }
+
+  .tulbox-corp-card:hover .arrow-right-icon {
+    transform: translateX(5px);
+  }
+
+  /* Tulbox Modal Styling */
+  .tulbox-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 1.5rem;
+  }
+
+  .tulbox-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .tulbox-modal-container {
+    background: #ffffff;
+    color: #0f172a;
+    width: 100%;
+    max-width: 560px;
+    border-radius: 24px;
+    padding: 2.25rem 2rem;
+    box-shadow: 0 25px 60px -12px rgba(124, 58, 237, 0.35), 0 0 40px rgba(139, 92, 246, 0.2);
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+    text-align: left;
+  }
+
+  .tulbox-modal-overlay.active .tulbox-modal-container {
+    transform: scale(1);
+  }
+
+  .tulbox-modal-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: #f1f5f9;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .tulbox-modal-close:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+
+  .tulbox-modal-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .tulbox-modal-logo {
+    height: 48px;
+    max-width: 220px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(124, 58, 237, 0.15));
+  }
+
+  .tulbox-modal-tag {
+    background: #f3e8ff;
+    color: #7c3aed;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.3rem 0.75rem;
+    border-radius: 30px;
+  }
+
+  .tulbox-modal-body h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .tulbox-modal-intro {
+    font-size: 0.95rem;
+    color: #475569;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .tulbox-modal-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tulbox-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    background: #f8fafc;
+    padding: 0.9rem 1rem;
+    border-radius: 14px;
+    border: 1px solid #f1f5f9;
+  }
+
+  .tulbox-feature-item .feature-icon {
+    font-size: 1.35rem;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .tulbox-feature-item strong {
+    display: block;
+    font-size: 0.92rem;
+    color: #0f172a;
+    margin-bottom: 0.2rem;
+  }
+
+  .tulbox-feature-item p {
+    font-size: 0.84rem;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  .tulbox-modal-footer {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .tulbox-modal-btn-primary {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    color: #ffffff !important;
+    border-radius: 12px;
+    padding: 0.85rem 1.4rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+    transition: all 0.3s ease;
+    flex: 1;
+    text-align: center;
+  }
+
+  .tulbox-modal-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+  }
+
+  .tulbox-modal-btn-secondary {
+    background: #f1f5f9;
+    color: #475569;
+    border: none;
+    border-radius: 12px;
+    padding: 0.85rem 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .tulbox-modal-btn-secondary:hover {
+    background: #e2e8f0;
+  }
+
+  /* Tulbox PRO Technician Banner Styles */
+  .tulbox-pro-banner {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 1.1rem 1.25rem;
+    margin-top: 1rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid rgba(139, 92, 246, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25);
+  }
+
+  .tulbox-pro-banner-content strong {
+    font-size: 0.95rem;
+    color: #f8fafc;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .tulbox-pro-banner-content p {
+    font-size: 0.84rem;
+    color: #cbd5e1;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .tulbox-pro-btn {
+    background: #7c3aed;
+    color: #ffffff !important;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 0.65rem 1.1rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
+  }
+
+  .tulbox-pro-btn:hover {
+    background: #6d28d9;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(124, 58, 237, 0.5);
+  }
 </style>
 
 <footer class="footer-moderno">
@@ -709,6 +1026,21 @@
             <div class="usa-corp-card-footer">
               <span>Ver detalles corporativos</span>
               <svg class="arrow-right-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#3b82f6" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </div>
+          </div>
+
+          <!-- Tulbox Servicios Técnicos Card (ES) -->
+          <div class="tulbox-corp-card" id="openTulboxModalBtn">
+            <div class="tulbox-corp-card-header">
+              <img src="{{ 'tulbox-logo-dark.png' | asset_url }}" alt="Tulbox Servicios Técnicos" class="tulbox-card-logo">
+              <span class="tulbox-cert-badge">Certificado ⚡</span>
+            </div>
+            <p class="tulbox-corp-card-body">
+              Ejecutamos nuestras instalaciones y servicios técnicos con la plataforma oficial de <strong>Tulbox Servicios Técnicos</strong>.
+            </p>
+            <div class="tulbox-corp-card-footer">
+              <span>Conocer garantía y servicios</span>
+              <svg class="arrow-right-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#8b5cf6" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
             </div>
           </div>
         {% endif %}
@@ -987,8 +1319,66 @@
   </div>
 </div>
 
+<!-- Modal Corporativo de Tulbox Servicios Técnicos -->
+<div class="tulbox-modal-overlay" id="tulboxModal" aria-hidden="true" role="dialog">
+  <div class="tulbox-modal-container">
+    <button class="tulbox-modal-close" id="closeTulboxModalBtn" aria-label="Cerrar modal">&times;</button>
+    <div class="tulbox-modal-header">
+      <img src="{{ 'tulbox-logo-light.png' | asset_url }}" alt="Tulbox Servicios Técnicos" class="tulbox-modal-logo">
+      <span class="tulbox-modal-tag">Plataforma Oficial de Instaladores</span>
+    </div>
+    <div class="tulbox-modal-body">
+      <h3>Instalación Certificada y Mantenimiento Profesional ⚡</h3>
+      <p class="tulbox-modal-intro">
+        En <strong>Seguridad Avanzada</strong>, ejecutamos nuestras instalaciones, soporte en sitio y diagnóstico con la plataforma oficial de <strong>Tulbox Servicios Técnicos</strong> para darte total certeza de un trabajo profesional.
+      </p>
+      <div class="tulbox-modal-features">
+        <div class="tulbox-feature-item">
+          <span class="feature-icon">🛠️</span>
+          <div>
+            <strong>Técnicos Certificados</strong>
+            <p>Especialistas calificados en CCTV, alarmas, redes WiFi, cableado estructurado y electricidad.</p>
+          </div>
+        </div>
+        <div class="tulbox-feature-item">
+          <span class="feature-icon">🔒</span>
+          <div>
+            <strong>Garantía de Servicio</strong>
+            <p>Diagnóstico profesional con agendamiento rápido, seguimiento en línea y soporte continuo.</p>
+          </div>
+        </div>
+        <div class="tulbox-feature-item">
+          <span class="feature-icon">💳</span>
+          <div>
+            <strong>Certeza y Pago Transparente</strong>
+            <p>Reserva tu visita con garantía reembolsable o 100% deducible de tu cotización final de mano de obra.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRO Captation Banner -->
+      <div class="tulbox-pro-banner">
+        <div class="tulbox-pro-banner-content">
+          <strong>¿Eres instalador de sistemas, electricista, plomero o técnico?</strong>
+          <p>Regístrate en nuestra plataforma para recibir proyectos y solicitudes de servicio en tu zona.</p>
+        </div>
+        <a href="https://tulbox.pro/join-as-pro" target="_blank" rel="noopener noreferrer" class="tulbox-pro-btn">
+          Regístrate como Profesional 🛠️
+        </a>
+      </div>
+    </div>
+    <div class="tulbox-modal-footer">
+      <a href="https://tulbox.pro/" target="_blank" rel="noopener noreferrer" class="tulbox-modal-btn-primary">
+        Conoce Tulbox Pro (tulbox.pro) 🚀
+      </a>
+      <button class="tulbox-modal-btn-secondary" id="closeTulboxModalBtnSec">Cerrar ventana</button>
+    </div>
+  </div>
+</div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    // Delaware USA Modal Logic
     const openBtn = document.getElementById('openUsaModalBtn');
     const closeBtn = document.getElementById('closeUsaModalBtn');
     const closeBtnSec = document.getElementById('closeUsaModalBtnSec');
@@ -998,7 +1388,7 @@
       openBtn.addEventListener('click', function(e) {
         e.preventDefault();
         modal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        document.body.style.overflow = 'hidden';
       });
     }
 
@@ -1012,7 +1402,6 @@
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
     if (closeBtnSec) closeBtnSec.addEventListener('click', closeModal);
 
-    // Close on clicking outside container
     if (modal) {
       modal.addEventListener('click', function(e) {
         if (e.target === modal) {
@@ -1021,10 +1410,43 @@
       });
     }
 
-    // Close on Esc keypress
+    // Tulbox Modal Logic
+    const openTulboxBtn = document.getElementById('openTulboxModalBtn');
+    const closeTulboxBtn = document.getElementById('closeTulboxModalBtn');
+    const closeTulboxBtnSec = document.getElementById('closeTulboxModalBtnSec');
+    const tulboxModal = document.getElementById('tulboxModal');
+
+    if (openTulboxBtn && tulboxModal) {
+      openTulboxBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        tulboxModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    function closeTulboxModal() {
+      if (tulboxModal) {
+        tulboxModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    if (closeTulboxBtn) closeTulboxBtn.addEventListener('click', closeTulboxModal);
+    if (closeTulboxBtnSec) closeTulboxBtnSec.addEventListener('click', closeTulboxModal);
+
+    if (tulboxModal) {
+      tulboxModal.addEventListener('click', function(e) {
+        if (e.target === tulboxModal) {
+          closeTulboxModal();
+        }
+      });
+    }
+
+    // Close any open modal on Esc keypress
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         closeModal();
+        closeTulboxModal();
       }
     });
   });
@@ -1051,7 +1473,7 @@
       "type": "text",
       "id": "whatsapp",
       "label": "Número de WhatsApp",
-      "default": "55 5636741156"
+      "default": "52 5636741156"
     },
     {
       "type": "text",
