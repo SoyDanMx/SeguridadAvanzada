@@ -5,9 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
+    <meta name="theme-color" content="#0f172a">
     <link rel="canonical" href="{{ canonical_url }}">
 
+    <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}">
+    <link rel="manifest" href="{{ 'site.webmanifest' | asset_url }}">
     <link rel="icon" type="image/png" href="{{ 'favicon-16x16.png' | asset_url }}" sizes="16x16">
     <link rel="icon" type="image/png" href="{{ 'favicon-32x32.png' | asset_url }}" sizes="32x32">
     <link rel="icon" type="image/png" href="{{ 'favicon-48x48.png' | asset_url }}" sizes="48x48">
@@ -20,15 +22,17 @@
     {%- endunless -%}
 
     <title>
-      {{ page_title }}
+      {{ page_title | strip_newlines | strip }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
       {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
+    {%- assign seo_description = page_description | default: shop.description | default: 'Seguridad Avanzada ofrece soluciones integrales en videovigilancia CCTV, control de acceso, redes IT, alarmas y equipo eléctrico en México. Envíos a todo el país.' -%}
+    {%- if seo_description.size < 50 -%}
+      {%- assign seo_description = 'Seguridad Avanzada ofrece soluciones integrales en videovigilancia CCTV, control de acceso, redes IT, alarmas y equipo eléctrico en México. Envíos a todo el país.' -%}
+    {%- endif -%}
+    <meta name="description" content="{{ seo_description | escape }}">
 
     {% render 'meta-tags' %}
 
