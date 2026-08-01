@@ -92,17 +92,20 @@ async function run() {
 
       for (const varEdge of variants) {
         const sku = varEdge.node.sku;
-        if (!sku) continue;
+        if (!sku || sku.trim().length < 2) continue;
 
-        // Si el SKU tiene guión o diagonal, generamos la versión limpia sin ellos
-        if (sku.includes('-') || sku.includes('/')) {
-          const cleanSku = sku.replace(/[-/]/g, '');
-          
-          // Solo si tiene caracteres válidos y no está ya en las etiquetas
-          if (cleanSku.length > 2 && !existingTags.includes(cleanSku.toLowerCase())) {
-            if (!newTagsToAdd.includes(cleanSku)) {
-              newTagsToAdd.push(cleanSku);
-            }
+        const trimmedSku = sku.trim();
+        const cleanSku = trimmedSku.replace(/[-/]/g, '');
+
+        // 1. Añadir SKU exacto si no está presente en tags
+        if (!existingTags.includes(trimmedSku.toLowerCase()) && !newTagsToAdd.includes(trimmedSku)) {
+          newTagsToAdd.push(trimmedSku);
+        }
+
+        // 2. Añadir SKU limpio (sin guiones/diagonales) si difiere y no está en tags
+        if (cleanSku !== trimmedSku && cleanSku.length > 2) {
+          if (!existingTags.includes(cleanSku.toLowerCase()) && !newTagsToAdd.includes(cleanSku)) {
+            newTagsToAdd.push(cleanSku);
           }
         }
       }
