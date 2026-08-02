@@ -2,7 +2,7 @@
   assign og_title = page_title | default: shop.name
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
-  assign default_description = 'Seguridad Avanzada ofrece soluciones integrales en videovigilancia CCTV, control de acceso, redes IT, alarmas y equipo eléctrico en México. Envíos a todo el país.'
+  assign default_description = 'Soluciones en videovigilancia CCTV, control de acceso, redes IT, alarmas y equipo eléctrico en México. Envíos a todo el país.'
   assign og_description = page_description | default: shop.description | default: default_description
 
   if og_description.size < 50

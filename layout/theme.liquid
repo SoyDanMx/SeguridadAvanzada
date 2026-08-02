@@ -28,9 +28,9 @@
       {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
-    {%- assign seo_description = page_description | default: shop.description | default: 'Seguridad Avanzada ofrece soluciones integrales en videovigilancia CCTV, control de acceso, redes IT, alarmas y equipo eléctrico en México. Envíos a todo el país.' -%}
-    {%- if seo_description.size < 50 -%}
-      {%- assign seo_description = 'Seguridad Avanzada ofrece soluciones integrales en videovigilancia CCTV, control de acceso, redes IT, alarmas y equipo eléctrico en México. Envíos a todo el país.' -%}
+    {%- assign seo_description = page_description | default: shop.description | default: 'Soluciones en videovigilancia CCTV, control de acceso, redes IT, alarmas y equipo eléctrico en México. Envíos a todo el país.' -%}
+    {%- if seo_description.size < 50 or seo_description.size > 160 -%}
+      {%- assign seo_description = 'Soluciones en videovigilancia CCTV, control de acceso, redes IT, alarmas y equipo eléctrico en México. Envíos a todo el país.' -%}
     {%- endif -%}
     <meta name="description" content="{{ seo_description | escape }}">
 
