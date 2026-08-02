@@ -62,6 +62,12 @@
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
 
+      /* Core Web Vitals CLS Fixes */
+      .header-wrapper { min-height: 64px; contain: layout; }
+      img, svg, video { max-width: 100%; height: auto; }
+      .card__media img, .media img { content-visibility: auto; }
+      body { font-size-adjust: from-font; }
+
       {% for scheme in settings.color_schemes -%}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
         {% if forloop.index == 1 -%}
