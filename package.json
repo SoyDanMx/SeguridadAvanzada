@@ -6,8 +6,13 @@
     "dev": "shopify theme dev",
     "pull": "shopify theme pull --store q5akvk-19.myshopify.com",
     "push": "shopify theme push",
-    "collections": "node scripts/create-collections.js"
+    "collections": "node scripts/create-collections.js",
+    "sync:tecnosinergia": "python3 -m tecnosinergia_sync.main",
+    "sync:tecnosinergia:dry-run": "python3 -m tecnosinergia_sync.main --dry-run",
+    "sync:tecnosinergia:sample": "python3 -m tecnosinergia_sync.main --local-csv data/sample_tecnosinergia.csv"
   },
+
+
   "author": "Seguridad Avanzada",
   "license": "ISC"
 }

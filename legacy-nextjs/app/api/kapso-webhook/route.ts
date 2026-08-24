@@ -64,24 +64,14 @@ export async function POST(req: Request) {
 
     console.log(`[Kapso Webhook] Inactividad detectada en la conversación: ${conversationId}`);
 
-    // 3. Inyectar el mensaje silencioso al agente usando la API de Kapso
-    const KAPSO_API_KEY = process.env.KAPSO_API_KEY || "715d809b3f1409b3523739545729b98b1e1a08fc2f3c57dd5d92cb191a474884";
-
-    if (!KAPSO_API_KEY) {
-      console.error("KAPSO_API_KEY no está configurada en las variables de entorno.");
-      return NextResponse.json({ error: "Internal Configuration Error" }, { status: 500 });
-    }
+    // 3. Inyectar el mensaje de inactividad a Kapso usando X-API-Key
+    const KAPSO_API_KEY = process.env.KAPSO_API_KEY || "640d59aeeca28171f910da5d408d0a8c588e5b0db572d3e42f50087746b70a2e";
 
     const kapsoHeaders = {
-      'Authorization': `Bearer ${KAPSO_API_KEY}`,
       'X-API-Key': KAPSO_API_KEY,
       'Content-Type': 'application/json'
     };
 
-    /* 
-     * Inyectamos el evento de inactividad a la API oficial de eventos de Kapso.
-     * Kapso exige que el campo 'name' tenga formato 'lowercase dotted snake_case' (ej: 'conversation.inactive').
-     */
     let response = await fetch(`https://api.kapso.ai/platform/v1/events`, {
       method: 'POST',
       headers: kapsoHeaders,
@@ -98,31 +88,30 @@ export async function POST(req: Request) {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.warn(`[Kapso Webhook] Falló evento conversation.inactive (${response.status}): ${errorText}. Intentando con inactivity.detected...`);
+      console.warn(`[Kapso Webhook] Falló evento conversation.inactive (${response.status}): ${errorText}. Intentando enviar mensaje de seguimiento directo...`);
       
-      response = await fetch(`https://api.kapso.ai/platform/v1/events`, {
-        method: 'POST',
-        headers: kapsoHeaders,
-        body: JSON.stringify({
-          name: "inactivity.detected",
-          conversation_id: conversationId,
-          properties: {
-            trigger: "Trigger de inactividad detectado",
-            source: "kapso-webhook"
-          }
-        })
-      });
-    }
+      const phoneId = process.env.KAPSO_PHONE_NUMBER_ID;
+      const customerPhone = eventData?.customer_phone || eventData?.phone || eventData?.from;
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("[Kapso Webhook] Error emitiendo evento de inactividad a Kapso:", errorText);
-      return NextResponse.json({ error: "Failed to trigger inactivity event in Kapso", details: errorText }, { status: response.status });
+      if (phoneId && customerPhone) {
+        const formattedPhone = String(customerPhone).replace(/\D/g, "");
+        response = await fetch(`https://api.kapso.ai/meta/whatsapp/v20.0/${phoneId}/messages`, {
+          method: 'POST',
+          headers: kapsoHeaders,
+          body: JSON.stringify({
+            messaging_product: "whatsapp",
+            recipient_type: "individual",
+            to: formattedPhone.startsWith("52") ? `+${formattedPhone}` : `+52${formattedPhone}`,
+            type: "text",
+            text: { body: "Hola, retomo nuestro chat para saber si pudiste visualizar tu información. ¿Tienes alguna duda o te apoyamos con los datos de pago para apartar tu equipo? 📄📦" }
+          })
+        });
+      }
     }
 
     const resData = await response.json().catch(() => ({}));
-    console.log(`[Kapso Webhook] Agente despertado con éxito para conversación ${conversationId}`);
-    return NextResponse.json({ success: true, message: "Agente despertado con éxito", data: resData }, { status: 200 });
+    console.log(`[Kapso Webhook] Proceso de inactividad completado para conversación ${conversationId}`);
+    return NextResponse.json({ success: true, message: "Seguimiento de inactividad procesado", data: resData }, { status: 200 });
 
   } catch (error: any) {
     console.error("Error procesando el webhook de Kapso:", error);
