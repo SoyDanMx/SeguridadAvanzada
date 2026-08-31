@@ -154,17 +154,20 @@
     height: 100%;
   }
 
-  .marca-logo-svg {
-    max-height: 40px;
+  .marca-logo-svg,
+  .marca-logo-img {
+    max-height: 42px;
     max-width: 145px;
     width: auto;
     height: auto;
+    object-fit: contain;
     display: block;
     transition: transform 0.2s ease;
   }
 
-  .marca-card:hover .marca-logo-svg {
-    transform: scale(1.04);
+  .marca-card:hover .marca-logo-svg,
+  .marca-card:hover .marca-logo-img {
+    transform: scale(1.05);
   }
 </style>
 
@@ -257,6 +260,13 @@
           </div>
         </a>
 
+        <!-- Panduit (Oficial) -->
+        <a href="/search?q=Panduit" class="marca-card" title="Panduit">
+          <div class="marca-content">
+            <img src="{{ 'brand-panduit.png' | asset_url }}" alt="Panduit" class="marca-logo-img" loading="lazy">
+          </div>
+        </a>
+
         <!-- FiberHome -->
         <a href="/search?q=FiberHome" class="marca-card" title="FiberHome">
           <div class="marca-content">
@@ -342,13 +352,10 @@
           </div>
         </a>
 
-        <!-- TP-Link -->
+        <!-- TP-Link (Oficial) -->
         <a href="/search?q=TP-Link" class="marca-card" title="TP-Link">
           <div class="marca-content">
-            <svg class="marca-logo-svg" viewBox="0 0 150 40">
-              <path d="M12 12a8 8 0 0 1 12 0v8a4 4 0 0 1-8 0" fill="none" stroke="#00a4b4" stroke-width="3"/>
-              <text x="36" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#00a4b4">tp-link</text>
-            </svg>
+            <img src="{{ 'brand-tplink.png' | asset_url }}" alt="TP-Link" class="marca-logo-img" loading="lazy">
           </div>
         </a>
 
@@ -363,13 +370,17 @@
           </div>
         </a>
 
-        <!-- LinkedPro -->
+        <!-- LinkedPro (Oficial) -->
         <a href="/search?q=Linkedpro" class="marca-card" title="LinkedPro">
           <div class="marca-content">
-            <svg class="marca-logo-svg" viewBox="0 0 150 40">
-              <text x="10" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="21" font-weight="900" fill="#0f172a">linked</text>
-              <text x="75" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="21" font-weight="900" fill="#0284c7">pro</text>
-            </svg>
+            <img src="{{ 'brand-linkedpro.png' | asset_url }}" alt="LinkedPro" class="marca-logo-img" loading="lazy">
+          </div>
+        </a>
+
+        <!-- Hoymiles (Oficial) -->
+        <a href="/search?q=Hoymiles" class="marca-card" title="Hoymiles">
+          <div class="marca-content">
+            <img src="{{ 'brand-hoymiles.png' | asset_url }}" alt="Hoymiles" class="marca-logo-img" loading="lazy">
           </div>
         </a>
 
@@ -412,23 +423,10 @@
           </div>
         </a>
 
-        <!-- KENWOOD -->
-        <a href="/search?q=KENWOOD" class="marca-card" title="KENWOOD">
-          <div class="marca-content">
-            <svg class="marca-logo-svg" viewBox="0 0 150 40">
-              <polygon points="12,12 18,20 12,28" fill="#dc2626"/>
-              <text x="24" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="19" font-weight="900" fill="#0f172a" letter-spacing="0.5">KENWOOD</text>
-            </svg>
-          </div>
-        </a>
-
-        <!-- Dahua Technology -->
+        <!-- Dahua Technology (Oficial) -->
         <a href="/search?q=Dahua" class="marca-card" title="Dahua Technology">
           <div class="marca-content">
-            <svg class="marca-logo-svg" viewBox="0 0 150 40">
-              <text x="10" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="900" fill="#d90429" font-style="italic">alhua</text>
-              <text x="10" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="7" font-weight="700" fill="#64748b" letter-spacing="1.5">TECHNOLOGY</text>
-            </svg>
+            <img src="{{ 'brand-dahua.png' | asset_url }}" alt="Dahua Technology" class="marca-logo-img" loading="lazy">
           </div>
         </a>
 
