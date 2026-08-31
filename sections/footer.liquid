@@ -1,377 +1,376 @@
 {% comment %}
-  FOOTER MODERNO Y DINÁMICO - SEGURIDAD AVANZADA
-  Incluye: Info empresa, Whatsapp dinámico, Enlaces, Newsletter y Reseñas de Google Integradas.
+  FOOTER PROFESIONAL Y MODERNO - SEGURIDAD AVANZADA
+  Inspirado en el estilo limpio y de alta conversión de WebyServicios
+  Incluye: Identidad y marcas autorizadas, Métodos de pago, Legales, Redes Sociales con handles,
+  Modales Corporativos (Delaware US y Tulbox), Badge de Google Reviews y Newsletter.
 {% endcomment %}
 
 <style>
-  .footer-moderno {
-    background-color: #121212; 
+  .ws-footer-root {
+    background-color: #0b0f17;
     color: #94a3b8;
-    padding: 5rem 2rem 2rem;
     font-family: inherit;
-    border-top: 4px solid #2A75D3; 
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    z-index: 10;
   }
 
-  .footer-container {
+  .ws-footer-container {
     max-width: 1280px;
     margin: 0 auto;
+    padding: 4rem 2rem 2rem;
   }
 
-  .footer-grid {
+  /* Grid Principal de 4 Columnas */
+  .ws-footer-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: 2.5rem;
+    margin-bottom: 3.5rem;
   }
 
-  @media (min-width: 768px) {
-    .footer-grid {
-      grid-template-columns: 2fr 1fr 1.5fr 1.5fr; /* Ajustado para dar espacio a las reseñas */
+  @media (min-width: 640px) {
+    .ws-footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .ws-footer-grid {
+      grid-template-columns: 1.35fr 1fr 1fr 1.15fr;
       gap: 3rem;
     }
   }
 
-  .footer-heading {
-    color: #f8fafc;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  /* Info Empresa */
-  .footer-brand h2 {
+  /* Encabezados de Columna */
+  .ws-footer-heading {
     color: #ffffff;
-    font-size: 2rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    margin: 0 0 1rem 0;
-  }
-  
-  .footer-brand p {
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    font-size: 1.05rem;
+    margin: 0 0 1.25rem 0;
+    letter-spacing: -0.01em;
   }
 
-  .footer-contact-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .footer-contact-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 1.2rem;
-  }
-
-  .footer-contact-list svg {
-    flex-shrink: 0;
-    width: 22px;
-    height: 22px;
-    stroke: #3b82f6; 
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .footer-contact-list a {
-    color: #e2e8f0;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  .footer-contact-list a:hover {
-    color: #3b82f6;
-  }
-
-  /* Badge General de Google */
-  .footer-reviews-badge {
-    margin-top: 2rem;
-    padding: 1rem 1.2rem;
-    background-color: #1e293b;
-    border-radius: 8px;
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem;
-    border: 1px solid #334155;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-    text-decoration: none;
-  }
-
-  .footer-reviews-badge:hover {
-    transform: translateY(-3px);
-    border-color: #3b82f6;
-  }
-
-  .google-logo-icon {
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0;
-  }
-
-  .footer-reviews-stars {
-    display: flex;
-    gap: 2px;
-    margin-bottom: 2px;
-  }
-
-  .footer-reviews-stars svg {
-    width: 16px;
-    height: 16px;
-    fill: #FABB05; 
-  }
-
-  .footer-reviews-text {
-    font-size: 0.9rem;
-    line-height: 1.3;
-    color: #94a3b8;
-  }
-
-  .footer-reviews-text strong {
+  /* Columna 1: Identidad de Marca */
+  .ws-brand-title {
     color: #ffffff;
-    font-size: 1.05rem;
-  }
-
-  /* Tarjetas de Reseñas Individuales */
-  .review-card {
-    background-color: #1e293b;
-    border-left: 3px solid #3b82f6;
-    padding: 1.2rem;
-    border-radius: 6px;
-    margin-bottom: 1.2rem;
-  }
-
-  .review-card-text {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #cbd5e1;
-    font-style: italic;
-    margin-bottom: 0.8rem;
-  }
-
-  .review-card-author {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .review-card-name {
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    margin: 0 0 0.85rem 0;
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
 
-  /* Enlaces */
-  .footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .footer-links li {
-    margin-bottom: 1rem;
-  }
-
-  .footer-links a {
-    color: #94a3b8;
-    text-decoration: none;
-    font-size: 1.05rem;
-    transition: all 0.3s ease;
-    display: inline-block;
-  }
-
-  .footer-links a:hover {
+  .ws-brand-title span {
     color: #3b82f6;
-    transform: translateX(5px);
   }
 
-  /* Newsletter */
-  .footer-newsletter-text {
-    font-size: 1.05rem;
-    line-height: 1.5;
-    margin-bottom: 1.5rem;
+  .ws-brand-desc {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
   }
 
-  .footer-form-group {
-    display: flex;
-    position: relative;
-  }
-
-  .footer-input {
-    width: 100%;
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    border: 1px solid #334155;
-    background-color: #1e293b;
+  .ws-brand-desc strong {
     color: #ffffff;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .footer-input:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-  }
-
-  .footer-btn {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    bottom: 5px;
-    background-color: #3b82f6;
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    padding: 0 1.5rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .footer-btn:hover {
-    background-color: #2563eb;
-  }
-
-  /* Bottom */
-  .footer-bottom {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid #1e293b;
+  /* Tarjetas Corporativas Compactas (Nuo USA & Tulbox) */
+  .ws-corp-triggers {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
+    gap: 0.65rem;
   }
 
-  @media (min-width: 768px) {
-    .footer-bottom {
-      flex-direction: column;
-      justify-content: center;
-      gap: 1.5rem;
-      text-align: center;
-    }
-  }
-
-  .footer-socials {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  .footer-socials a {
-    color: #64748b;
-    transition: color 0.3s ease, transform 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #1e293b;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-  }
-
-  .footer-socials a:hover {
-    color: #ffffff;
-    background: #3b82f6;
-    transform: translateY(-3px);
-  }
-
-  .footer-socials svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-  }
-
-  /* Delaware USA Corp Card & Modal Styles */
-  .usa-corp-card {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    border: 1px solid rgba(59, 130, 246, 0.2);
-    border-radius: 12px;
-    padding: 1.25rem;
-    margin-top: 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    position: relative;
-    overflow: hidden;
-    text-align: left;
-  }
-
-  .usa-corp-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.05), transparent);
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-  }
-
-  .usa-corp-card:hover::before {
-    transform: translateX(100%);
-  }
-
-  .usa-corp-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(59, 130, 246, 0.6);
-    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.15);
-  }
-
-  .usa-corp-card-header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: #f8fafc;
-    font-size: 1.05rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .usa-flag-pulse {
-    font-size: 1.4rem;
-    animation: flagPulse 2s infinite alternate;
-  }
-
-  @keyframes flagPulse {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.15); filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.5)); }
-  }
-
-  .usa-corp-card-body {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #94a3b8;
-    margin: 0 0 1rem 0 !important;
-  }
-
-  .usa-corp-card-footer {
+  .ws-corp-pill {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 0.6rem 0.85rem;
+    color: #cbd5e1;
+    font-size: 0.85rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 0.9rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .ws-corp-pill:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.4);
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  .ws-corp-pill span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     font-weight: 600;
+  }
+
+  .ws-corp-pill svg {
+    width: 14px;
+    height: 14px;
+    stroke: #3b82f6;
+  }
+
+  /* Columna 2: Métodos de Pago */
+  .ws-payment-text {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin: 0 0 1.25rem 0;
+  }
+
+  .ws-divider {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 1.25rem 0;
+  }
+
+  .ws-action-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .ws-action-link {
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .ws-action-link:hover {
     color: #3b82f6;
+    transform: translateX(3px);
   }
 
-  .arrow-right-icon {
-    width: 18px;
-    height: 18px;
-    transition: transform 0.3s ease;
+  .ws-action-link.highlight {
+    color: #25D366;
   }
 
-  .usa-corp-card:hover .arrow-right-icon {
-    transform: translateX(5px);
+  .ws-action-link.highlight:hover {
+    color: #4ade80;
   }
 
-  /* Modal Overlay styling with glassmorphism */
-  .usa-modal-overlay {
+  /* Columna 3: Legales */
+  .ws-legal-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .ws-legal-links a {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .ws-legal-links a:hover {
+    color: #ffffff;
+    transform: translateX(4px);
+  }
+
+  /* Columna 4: Redes Sociales con handles */
+  .ws-social-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .ws-social-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .ws-social-item:hover {
+    color: #3b82f6;
+    transform: translateX(4px);
+  }
+
+  .ws-social-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+
+  .ws-social-item:hover .ws-social-icon {
+    background: #3b82f6;
+    color: #ffffff;
+  }
+
+  .ws-social-icon svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  /* Barra Inferior / Sub-Footer */
+  .ws-subfooter {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @media (min-width: 768px) {
+    .ws-subfooter {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  /* Google Reviews Badge Compacto */
+  .ws-google-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .ws-google-badge:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .ws-google-badge svg.google-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .ws-google-stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+
+  .ws-google-stars svg {
+    width: 14px;
+    height: 14px;
+    fill: #FABB05;
+  }
+
+  .ws-google-badge-text {
+    font-size: 0.8rem;
+    line-height: 1.2;
+    color: #94a3b8;
+  }
+
+  .ws-google-badge-text strong {
+    color: #ffffff;
+    font-size: 0.92rem;
+  }
+
+  /* Newsletter Minimalista */
+  .ws-newsletter-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 360px;
+    width: 100%;
+  }
+
+  .ws-newsletter-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 0.6rem 0.9rem;
+    color: #ffffff;
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .ws-newsletter-input:focus {
+    border-color: #3b82f6;
+  }
+
+  .ws-newsletter-btn {
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.1rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .ws-newsletter-btn:hover {
+    background: #1d4ed8;
+  }
+
+  /* Copyright */
+  .ws-copyright {
+    color: #64748b;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: center;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .ws-copyright {
+      text-align: left;
+      width: auto;
+      margin-top: 0;
+    }
+  }
+
+  /* Modales Estilo Glassmorphism (Delaware US y Tulbox) */
+  .usa-modal-overlay,
+  .tulbox-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -386,817 +385,246 @@
     justify-content: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.3s ease;
     padding: 1.5rem;
   }
 
-  .usa-modal-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  /* Modal Container styling */
-  .usa-modal-container {
-    background: radial-gradient(circle at top left, #1e293b 0%, #0f172a 100%);
-    border: 1px solid rgba(59, 130, 246, 0.25);
-    border-radius: 20px;
-    width: 100%;
-    max-width: 580px;
-    padding: 2.5rem 2rem;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(59, 130, 246, 0.15);
-    position: relative;
-    transform: scale(0.9);
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    overflow: hidden;
-  }
-
-  .usa-modal-overlay.active .usa-modal-container {
-    transform: scale(1);
-  }
-
-  .usa-modal-glow {
-    position: absolute;
-    top: -150px;
-    left: -150px;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .usa-modal-close {
-    position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #94a3b8;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-  }
-
-  .usa-modal-close:hover {
-    background: rgba(239, 68, 68, 0.15);
-    border-color: rgba(239, 68, 68, 0.4);
-    color: #ef4444;
-    transform: rotate(90deg);
-  }
-
-  .usa-modal-header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-
-  .usa-modal-flag {
-    font-size: 3rem;
-    display: block;
-    margin-bottom: 0.75rem;
-    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
-  }
-
-  .usa-modal-header h2 {
-    color: #ffffff;
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 0 0 0.5rem 0;
-    letter-spacing: -0.02em;
-  }
-
-  .usa-modal-subtitle {
-    color: #3b82f6;
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0;
-  }
-
-  .usa-modal-badge {
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.2);
-    color: #60a5fa;
-    display: inline-block;
-    padding: 0.35rem 0.85rem;
-    border-radius: 9999px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 1.25rem;
-  }
-
-  .usa-modal-body {
-    text-align: center;
-  }
-
-  .usa-modal-description {
-    color: #cbd5e1;
-    font-size: 1.05rem;
-    line-height: 1.6;
-    margin: 0 0 2rem 0;
-  }
-
-  .usa-modal-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    margin-bottom: 2rem;
-  }
-
-  @media (min-width: 480px) {
-    .usa-modal-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .usa-modal-feature {
-    background: rgba(30, 41, 59, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    border-radius: 12px;
-    padding: 1.25rem;
-    text-align: left;
-    transition: background 0.3s ease;
-  }
-
-  .usa-modal-feature:hover {
-    background: rgba(30, 41, 59, 0.8);
-  }
-
-  .usa-feature-icon {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .usa-modal-feature h3 {
-    color: #ffffff;
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 0 0 0.5rem 0;
-  }
-
-  .usa-modal-feature p {
-    color: #94a3b8;
-    font-size: 0.85rem;
-    line-height: 1.4;
-    margin: 0;
-  }
-
-  .usa-corp-specs {
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 1.5rem;
-    text-align: left;
-  }
-
-  .spec-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-    font-size: 0.9rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .spec-row:last-child {
-    border-bottom: none;
-  }
-
-  .spec-row span {
-    color: #64748b;
-  }
-
-  .spec-row strong {
-    color: #f8fafc;
-    font-weight: 600;
-  }
-
-  .usa-modal-disclaimer {
-    color: #64748b;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    margin: 1.5rem 0 0 0;
-  }
-
-  .usa-modal-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-top: 2rem;
-  }
-
-  @media (min-width: 480px) {
-    .usa-modal-footer {
-      flex-direction: row;
-    }
-  }
-
-  .usa-modal-btn-primary {
-    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-    color: #ffffff !important;
-    border: none;
-    border-radius: 10px;
-    padding: 0.85rem 1.75rem;
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    flex-grow: 2;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-  }
-
-  .usa-modal-btn-primary:hover {
-    background: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
-  }
-
-  .usa-modal-btn-primary svg {
-    transition: transform 0.3s ease;
-  }
-
-  .usa-modal-btn-primary:hover svg {
-    transform: translate(2px, -2px);
-  }
-
-  .usa-modal-btn-secondary {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #cbd5e1;
-    border-radius: 10px;
-    padding: 0.85rem 1.5rem;
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    flex-grow: 1;
-  }
-
-  .usa-modal-btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-  }
-
-  /* Tulbox Servicios Técnicos Card & Modal Styles */
-  .tulbox-corp-card {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(15, 23, 42, 0.9) 100%);
-    border: 1px solid rgba(139, 92, 246, 0.35);
-    border-radius: 12px;
-    padding: 1.25rem;
-    margin-top: 1.25rem;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.12);
-    position: relative;
-    overflow: hidden;
-    text-align: left;
-  }
-
-  .tulbox-corp-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.1), transparent);
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-  }
-
-  .tulbox-corp-card:hover::before {
-    transform: translateX(100%);
-  }
-
-  .tulbox-corp-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(167, 139, 250, 0.8);
-    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
-  }
-
-  .tulbox-corp-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.65rem;
-  }
-
-  .tulbox-card-logo {
-    height: 38px;
-    max-width: 180px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
-  }
-
-  .tulbox-cert-badge {
-    background: rgba(124, 58, 237, 0.25);
-    color: #c4b5fd;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 0.25rem 0.65rem;
-    border-radius: 20px;
-    border: 1px solid rgba(139, 92, 246, 0.4);
-    letter-spacing: 0.03em;
-  }
-
-  .tulbox-corp-card-body {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #cbd5e1;
-    margin: 0 0 0.85rem 0 !important;
-  }
-
-  .tulbox-corp-card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #a78bfa;
-  }
-
-  .tulbox-corp-card:hover .arrow-right-icon {
-    transform: translateX(5px);
-  }
-
-  /* Tulbox Modal Styling */
-  .tulbox-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 1.5rem;
-  }
-
+  .usa-modal-overlay.active,
   .tulbox-modal-overlay.active {
     opacity: 1;
     pointer-events: auto;
   }
 
+  .usa-modal-container,
+  .tulbox-modal-container {
+    background: #0f172a;
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 560px;
+    padding: 2.25rem 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    position: relative;
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+    color: #ffffff;
+  }
+
   .tulbox-modal-container {
     background: #ffffff;
     color: #0f172a;
-    width: 100%;
-    max-width: 560px;
-    border-radius: 24px;
-    padding: 2.25rem 2rem;
-    box-shadow: 0 25px 60px -12px rgba(124, 58, 237, 0.35), 0 0 40px rgba(139, 92, 246, 0.2);
-    position: relative;
-    transform: scale(0.9);
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    overflow: hidden;
-    text-align: left;
+    border-color: rgba(124, 58, 237, 0.25);
   }
 
+  .usa-modal-overlay.active .usa-modal-container,
   .tulbox-modal-overlay.active .tulbox-modal-container {
     transform: scale(1);
   }
 
+  .usa-modal-close,
   .tulbox-modal-close {
     position: absolute;
     top: 1.25rem;
     right: 1.25rem;
-    background: #f1f5f9;
-    border: none;
-    width: 36px;
-    height: 36px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
-    font-size: 1.5rem;
-    color: #64748b;
+    font-size: 1.4rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
+  }
+
+  .tulbox-modal-close {
+    background: #f1f5f9;
+    color: #64748b;
+    border: none;
+  }
+
+  .usa-modal-close:hover {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
   }
 
   .tulbox-modal-close:hover {
     background: #e2e8f0;
     color: #0f172a;
   }
-
-  .tulbox-modal-header {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-    margin-bottom: 1.25rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #e2e8f0;
-  }
-
-  .tulbox-modal-logo {
-    height: 48px;
-    max-width: 220px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 8px rgba(124, 58, 237, 0.15));
-  }
-
-  .tulbox-modal-tag {
-    background: #f3e8ff;
-    color: #7c3aed;
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding: 0.3rem 0.75rem;
-    border-radius: 30px;
-  }
-
-  .tulbox-modal-body h3 {
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: #0f172a;
-    margin: 0 0 0.75rem 0;
-  }
-
-  .tulbox-modal-intro {
-    font-size: 0.95rem;
-    color: #475569;
-    line-height: 1.6;
-    margin-bottom: 1.25rem;
-  }
-
-  .tulbox-modal-features {
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .tulbox-feature-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.85rem;
-    background: #f8fafc;
-    padding: 0.9rem 1rem;
-    border-radius: 14px;
-    border: 1px solid #f1f5f9;
-  }
-
-  .tulbox-feature-item .feature-icon {
-    font-size: 1.35rem;
-    line-height: 1;
-    margin-top: 2px;
-  }
-
-  .tulbox-feature-item strong {
-    display: block;
-    font-size: 0.92rem;
-    color: #0f172a;
-    margin-bottom: 0.2rem;
-  }
-
-  .tulbox-feature-item p {
-    font-size: 0.84rem;
-    color: #64748b;
-    margin: 0;
-    line-height: 1.45;
-  }
-
-  .tulbox-modal-footer {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .tulbox-modal-btn-primary {
-    background: linear-gradient(135deg, #7c3aed, #6d28d9);
-    color: #ffffff !important;
-    border-radius: 12px;
-    padding: 0.85rem 1.4rem;
-    font-weight: 700;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
-    transition: all 0.3s ease;
-    flex: 1;
-    text-align: center;
-  }
-
-  .tulbox-modal-btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
-  }
-
-  .tulbox-modal-btn-secondary {
-    background: #f1f5f9;
-    color: #475569;
-    border: none;
-    border-radius: 12px;
-    padding: 0.85rem 1.2rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-
-  .tulbox-modal-btn-secondary:hover {
-    background: #e2e8f0;
-  }
-
-  /* Tulbox PRO Technician Banner Styles */
-  .tulbox-pro-banner {
-    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-    color: #ffffff;
-    border-radius: 16px;
-    padding: 1.1rem 1.25rem;
-    margin-top: 1rem;
-    margin-bottom: 1.25rem;
-    border: 1px solid rgba(139, 92, 246, 0.4);
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25);
-  }
-
-  .tulbox-pro-banner-content strong {
-    font-size: 0.95rem;
-    color: #f8fafc;
-    display: block;
-    margin-bottom: 0.25rem;
-  }
-
-  .tulbox-pro-banner-content p {
-    font-size: 0.84rem;
-    color: #cbd5e1;
-    margin: 0;
-    line-height: 1.4;
-  }
-
-  .tulbox-pro-btn {
-    background: #7c3aed;
-    color: #ffffff !important;
-    font-size: 0.88rem;
-    font-weight: 700;
-    text-decoration: none;
-    padding: 0.65rem 1.1rem;
-    border-radius: 10px;
-    text-align: center;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
-  }
-
-  .tulbox-pro-btn:hover {
-    background: #6d28d9;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(124, 58, 237, 0.5);
-  }
 </style>
 
-<footer class="footer-moderno">
-  <div class="footer-container">
-    <div class="footer-grid">
+<footer class="ws-footer-root">
+  <div class="ws-footer-container">
+    
+    <div class="ws-footer-grid">
       
-      <div class="footer-brand">
-        {% if request.locale.iso_code == 'en' %}
-          <h3 class="footer-heading" style="margin-bottom: 1rem; color: #ffffff;">About Us</h3>
-          <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1rem;">
-            Experts in design, sale and execution of Industrial Security, CCTV, Access Control, Networks and Renewable Energy projects. We provide world-class integrated solutions for corporates and industries in Mexico and the USA.
-          </p>
-          <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1rem;">
-            <strong>{{ shop.name }}</strong> is proudly part of the corporate group:
-          </p>
-          
-          <!-- Nuo Networks White Logo Link (EN) -->
-          <a href="https://www.nuo-networks.com/" target="_blank" style="display: inline-block; margin-bottom: 1.5rem; outline: none; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'; this.style.filter='drop-shadow(0 0 8px rgba(59,130,246,0.5))';" onmouseout="this.style.transform='none'; this.style.filter='none';">
-            <img src="{{ 'nuo-networks-logo-white.png' | asset_url }}" alt="Nuo Networks, Inc." style="height: 38px; max-width: 100%; object-fit: contain; display: block;">
-          </a>
-          
-          <!-- Delaware US C-Corp Card (EN) -->
-          <div class="usa-corp-card" id="openUsaModalBtn">
-            <div class="usa-corp-card-header">
-              <span class="usa-flag-pulse">🇺🇸</span>
-              <strong>Located in the United States?</strong>
-            </div>
-            <p class="usa-corp-card-body">
-              We are established in Delaware, US. We can process and fulfill your purchase within the USA through our C-Corp.
-            </p>
-            <div class="usa-corp-card-footer">
-              <span>View Corporate Details</span>
-              <svg class="arrow-right-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#3b82f6" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            </div>
-          </div>
-        {% else %}
-          <h3 class="footer-heading" style="margin-bottom: 1rem; color: #ffffff;">Sobre Nosotros</h3>
-          <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1rem;">
-            Expertos en diseño, venta y ejecución de proyectos de Seguridad Industrial, CCTV, Control de Acceso, Redes y Energía Renovable. Brindamos soluciones integrales de clase mundial para corporativos e industrias en México y USA.
-          </p>
-          <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1rem;">
-            <strong>{{ shop.name }}</strong> forma parte orgullosamente del corporativo:
-          </p>
-          
-          <!-- Nuo Networks White Logo Link (ES) -->
-          <a href="https://www.nuo-networks.com/" target="_blank" style="display: inline-block; margin-bottom: 1.5rem; outline: none; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'; this.style.filter='drop-shadow(0 0 8px rgba(59,130,246,0.5))';" onmouseout="this.style.transform='none'; this.style.filter='none';">
-            <img src="{{ 'nuo-networks-logo-white.png' | asset_url }}" alt="Nuo Networks, Inc." style="height: 38px; max-width: 100%; object-fit: contain; display: block;">
-          </a>
-          
-          <!-- Delaware US C-Corp Card (ES) -->
-          <div class="usa-corp-card" id="openUsaModalBtn">
-            <div class="usa-corp-card-header">
-              <span class="usa-flag-pulse">🇺🇸</span>
-              <strong>¿Te ubicas en Estados Unidos?</strong>
-            </div>
-            <p class="usa-corp-card-body">
-              Somos una empresa establecida en Delaware, US. Podemos gestionar tu compra dentro de EE.UU. con nuestra C-Corp.
-            </p>
-            <div class="usa-corp-card-footer">
-              <span>Ver detalles corporativos</span>
-              <svg class="arrow-right-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#3b82f6" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            </div>
-          </div>
-
-          <!-- Tulbox Servicios Técnicos Card (ES) -->
-          <div class="tulbox-corp-card" id="openTulboxModalBtn">
-            <div class="tulbox-corp-card-header">
-              <img src="{{ 'tulbox-logo-dark.png' | asset_url }}" alt="Tulbox Servicios Técnicos" class="tulbox-card-logo">
-              <span class="tulbox-cert-badge">Certificado ⚡</span>
-            </div>
-            <p class="tulbox-corp-card-body">
-              Ejecutamos nuestras instalaciones y servicios técnicos con la plataforma oficial de <strong>Tulbox Servicios Técnicos</strong>.
-            </p>
-            <div class="tulbox-corp-card-footer">
-              <span>Conocer garantía y servicios</span>
-              <svg class="arrow-right-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#8b5cf6" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            </div>
-          </div>
-        {% endif %}
-        
-        <ul class="footer-contact-list">
-          {% if section.settings.phone != blank %}
-          <li>
-            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-            <div>
-              <a href="tel:{{ section.settings.phone | remove: ' ' }}">{{ section.settings.phone }}</a>
-              {% if section.settings.whatsapp != blank %}
-                <br><a href="https://wa.me/{{ section.settings.whatsapp | remove: ' ' | remove: '+' }}?text=Vengo%20del%20catálogo%20web%20(Seguridad%20Avanzada).%20Deseo%20información%20de%20sistemas%20de%20seguridad" target="_blank" style="color: #25D366; font-weight: 600;">WhatsApp MX: {{ section.settings.whatsapp }}</a>
-                <br><a href="https://wa.me/{{ section.settings.whatsapp | remove: ' ' | remove: '+' }}?text=Hola,%20necesito%20generar%20una%20cotización%20formal%20rápida" target="_blank" style="color: #dc2626; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; margin-top: 6px;">📄 Solicitar Cotización</a>
-                <br><a href="https://seguridad-avanzada-iodc.vercel.app/cotizador-rapido" target="_blank" style="color: #3b82f6; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; margin-top: 6px;">🔐 Portal Cotizador Kapso (Asesores)</a>
-              {% endif %}
-              <br><a href="https://wa.me/14243553283?text=Hello,%20I'm%20interested%20in%20purchasing%20equipment%20in%20the%20US" target="_blank" style="color: #25D366; font-weight: 600;">WhatsApp USA: +1 (424) 355-3283</a>
-            </div>
-          </li>
-          {% endif %}
-          
-          {% if section.settings.email != blank %}
-          <li>
-            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            <div>
-              <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
-              <br><a href="mailto:contact@nuo-networks.com" style="opacity: 0.85; font-size: 0.95em;">Email USA: contact@nuo-networks.com</a>
-            </div>
-          </li>
-          {% endif %}
-        </ul>
-
-        {% if section.settings.show_google_reviews %}
-        {% assign reviews_url = section.settings.google_reviews_link | default: "https://share.google/Uoxv3RTwBKQKuGyHZ" %}
-        <a href="{{ reviews_url }}" target="_blank" class="footer-reviews-badge">
-          <svg class="google-logo-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-          </svg>
-          <div>
-            <div class="footer-reviews-stars">
-              <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            </div>
-            <div class="footer-reviews-text">
-              <strong>{{ section.settings.google_reviews_score }}</strong> <br>
-              Opiniones reales
-            </div>
-          </div>
-        </a>
-        {% endif %}
-      </div>
-
-      {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          
-          {%- when 'link_list' -%}
-            <div>
-              <h3 class="footer-heading">{{ block.settings.heading | default: block.settings.menu.title }}</h3>
-              <ul class="footer-links">
-                {%- for link in block.settings.menu.links -%}
-                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-                {%- endfor -%}
-              </ul>
-            </div>
-
-          {%- when 'google_reviews_column' -%}
-            <div>
-              <h3 class="footer-heading">{{ block.settings.heading }}</h3>
-              
-              {% if block.settings.text_1 != blank %}
-              <div class="review-card">
-                <div class="review-card-text">"{{ block.settings.text_1 }}"</div>
-                <div class="review-card-author">
-                  <span class="review-card-name">
-                    <svg style="width:16px; height:16px; fill:#4285F4;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
-                    {{ block.settings.author_1 }}
-                  </span>
-                  <div class="footer-reviews-stars">
-                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                  </div>
-                </div>
-              </div>
-              {% endif %}
-
-              {% if block.settings.text_2 != blank %}
-              <div class="review-card">
-                <div class="review-card-text">"{{ block.settings.text_2 }}"</div>
-                <div class="review-card-author">
-                  <span class="review-card-name">
-                    <svg style="width:16px; height:16px; fill:#4285F4;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
-                    {{ block.settings.author_2 }}
-                  </span>
-                  <div class="footer-reviews-stars">
-                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                  </div>
-                </div>
-              </div>
-              {% endif %}
-            </div>
-
-        {%- endcase -%}
-      {%- endfor -%}
-
+      <!-- COLUMNA 1: Identidad, Propuesta de Valor & Sellos -->
       <div>
-        <h3 class="footer-heading">{{ section.settings.newsletter_heading }}</h3>
-        <p class="footer-newsletter-text">{{ section.settings.newsletter_text }}</p>
-        
-        {%- form 'customer', id: 'ContactFooter', class: 'footer-newsletter-form' -%}
-          <input type="hidden" name="contact[tags]" value="newsletter">
-          <div class="footer-form-group">
-            <input
-              id="NewsletterForm--{{ section.id }}"
-              type="email"
-              name="contact[email]"
-              class="footer-input"
-              value="{{ form.email }}"
-              aria-required="true"
-              placeholder="Ingresa tu correo"
-              required
-            >
-            <button type="submit" class="footer-btn" name="commit">
-              Unirse
-            </button>
+        <h2 class="ws-brand-title">
+          SEGURIDAD <span>AVANZADA</span>
+        </h2>
+        <p class="ws-brand-desc">
+          Seguridad Avanzada – <strong>Tienda autorizada Hikvision, Dahua y Syscom</strong>. Soluciones tecnológicas, CCTV, control de acceso y protección perimetral en México y EE.UU.
+        </p>
+
+        <!-- Triggers a Modales Corporativos -->
+        <div class="ws-corp-triggers">
+          <div class="ws-corp-pill" id="openUsaModalBtn" role="button" tabindex="0">
+            <span>🇺🇸 Nuo Networks, Inc. (Delaware US)</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
-        {%- endform -%}
+          <div class="ws-corp-pill" id="openTulboxModalBtn" role="button" tabindex="0">
+            <span>⚡ Instalaciones Certificadas Tulbox</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMNA 2: Métodos de Pago & Accesos -->
+      <div>
+        <h3 class="ws-footer-heading">Métodos de pago</h3>
+        <p class="ws-payment-text">
+          Transferencia SPEI. Efectivo o depósito.<br>
+          Tarjetas Débito y Crédito. MercadoPago.
+        </p>
+
+        <hr class="ws-divider">
+
+        <ul class="ws-action-links">
+          <li>
+            <a href="/account/login" class="ws-action-link">
+              &rsaquo; INICIAR SESIÓN
+            </a>
+          </li>
+          <li>
+            <a href="https://seguridad-avanzada-iodc.vercel.app/cotizador-rapido" target="_blank" class="ws-action-link">
+              &rsaquo; PORTAL COTIZADOR KAPSO
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/{{ section.settings.whatsapp | default: '525636741156' | remove: ' ' | remove: '+' }}?text=Hola,%20necesito%20generar%20una%20cotizaci%C3%B3n%20formal%20r%C3%A1pida" target="_blank" class="ws-action-link highlight">
+              &rsaquo; 📄 SOLICITAR COTIZACIÓN
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- COLUMNA 3: Legales & Soporte -->
+      <div>
+        <h3 class="ws-footer-heading">Legales</h3>
+        <ul class="ws-legal-links">
+          <li><a href="/account/register">Registrarse en Seguridad Avanzada</a></li>
+          <li><a href="/pages/terminos">Términos y Condiciones</a></li>
+          <li><a href="/pages/aviso-privacidad">Política de Privacidad</a></li>
+          <li><a href="/pages/politica-devolucion">Política de Devoluciones</a></li>
+          <li><a href="/pages/contacto">Garantías y Soporte Técnico</a></li>
+        </ul>
+      </div>
+
+      <!-- COLUMNA 4: Redes Sociales & Contacto Oficial -->
+      <div>
+        <h3 class="ws-footer-heading">Redes Sociales</h3>
+        <ul class="ws-social-list">
+          <li>
+            <a href="https://www.tiktok.com/@seguridadavanzada" target="_blank" class="ws-social-item">
+              <span class="ws-social-icon">
+                <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.88 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .55.04.8.11V9.92a6.38 6.38 0 0 0-.8-.05A6.34 6.34 0 0 0 3 16.21a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.05a8.28 8.28 0 0 0 4.91 1.6V7.2a4.83 4.83 0 0 1-1-.51z"/></svg>
+              </span>
+              <span>@SeguridadAvanzada</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/@seguridadavanzada" target="_blank" class="ws-social-item">
+              <span class="ws-social-icon">
+                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </span>
+              <span>Seguridad Avanzada</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/seguridadavanzadacdmx/" target="_blank" class="ws-social-item">
+              <span class="ws-social-icon">
+                <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </span>
+              <span>Seguridad Avanzada</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/seguridadavanzadacdmx/" target="_blank" class="ws-social-item">
+              <span class="ws-social-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+              </span>
+              <span>@SeguridadAvanzada</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/525636741156?text=Deseo%20informacion%20de%20sistemas%20de%20seguridad" target="_blank" class="ws-social-item" style="color: #25D366;">
+              <span class="ws-social-icon" style="background: rgba(37, 211, 102, 0.15);">
+                <svg viewBox="0 0 24 24" style="fill: #25D366;"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.07-1.745-.392-1.393-.579-2.27-1.996-2.339-2.088-.069-.093-.56-0.745-.56-1.42 0-.675.352-1.008.477-1.144.125-.136.272-.17.363-.17.091 0 .182 0 .261.006.085.006.198-.033.31.236.114.272.39 0.952.424 1.022.034.07.057.151.011.241-.046.09-.068.147-.136.226-.068.079-.143.176-.205.237-.068.068-.139.141-.06.277.079.136.35 0.578.75 0.934.516.459.95.602 1.086.67.136.068.215.057.295-.034.079-.09.34-.396.43-.532.09-.136.182-.113.307-.068.125.045.795.375.932.443.136.068.227.102.261.159.034.057.034.329-.11.734z"/></svg>
+              </span>
+              <span>WhatsApp: 56 3674 1156</span>
+            </a>
+          </li>
+        </ul>
       </div>
 
     </div>
 
-    <div class="footer-bottom">
-      <div class="footer-copyright">
+    <!-- SUBFOOTER -->
+    <div class="ws-subfooter">
+      
+      <!-- Calificación Google -->
+      <a href="{{ section.settings.google_reviews_link | default: 'https://share.google/Uoxv3RTwBKQKuGyHZ' }}" target="_blank" class="ws-google-badge">
+        <svg class="google-icon" viewBox="0 0 24 24">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        <div>
+          <div class="ws-google-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </div>
+          <div class="ws-google-badge-text">
+            <strong>{{ section.settings.google_reviews_score | default: '4.9 Excelente' }}</strong> &bull; Reseñas reales
+          </div>
+        </div>
+      </a>
+
+      <!-- Formulario de Newsletter Minimalista -->
+      {%- form 'customer', id: 'ContactFooter', class: 'ws-newsletter-box' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <input
+          id="NewsletterForm--{{ section.id }}"
+          type="email"
+          name="contact[email]"
+          class="ws-newsletter-input"
+          value="{{ form.email }}"
+          placeholder="Ingresa tu correo"
+          required
+        >
+        <button type="submit" class="ws-newsletter-btn" name="commit">
+          Unirse
+        </button>
+      {%- endform -%}
+
+      <!-- Copyright -->
+      <div class="ws-copyright">
         &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. Todos los derechos reservados.<br>
-        <span style="opacity: 0.6; font-size: 0.9em; display: inline-block; margin-top: 0.5rem;">
-          {{ shop.name }} es una marca registrada y operada por <strong>Nuo Networks, Inc.</strong>
-        </span>
+        <span style="opacity: 0.7;">Operado por <strong>Nuo Networks, Inc.</strong> &bull; Av. Clavería 237, Azcapotzalco, CDMX</span>
       </div>
-      <div class="footer-socials">
-        <a href="https://www.facebook.com/seguridadavanzadacdmx" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-        {%- if settings.social_instagram_link != blank -%}
-          <a href="{{ settings.social_instagram_link }}" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-        {%- endif -%}
-      </div>
+
     </div>
+
   </div>
 </footer>
 
@@ -1204,117 +632,20 @@
 <div class="usa-modal-overlay" id="usaCorpModal">
   <div class="usa-modal-container">
     <button class="usa-modal-close" id="closeUsaModalBtn">&times;</button>
-    
-    <div class="usa-modal-glow"></div>
-    
-    <div class="usa-modal-header">
-      <span class="usa-modal-flag">🇺🇸</span>
-      <h2>Nuo Networks, Inc.</h2>
-      <p class="usa-modal-subtitle">Est. Delaware, United States &bull; C-Corporation</p>
+    <div style="text-align: center; margin-bottom: 1.5rem;">
+      <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">🇺🇸</span>
+      <h2 style="font-size: 1.6rem; font-weight: 700; margin: 0 0 0.25rem 0; color: #ffffff;">Nuo Networks, Inc.</h2>
+      <p style="color: #3b82f6; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin: 0;">Est. Delaware, United States &bull; C-Corporation</p>
     </div>
     
-    <div class="usa-modal-body">
-      {% if request.locale.iso_code == 'en' %}
-        <div class="usa-modal-badge">Cross-Border Corporate Operations</div>
-        
-        <p class="usa-modal-description">
-          If you are located in the <strong>United States</strong> and want to purchase high-end security and telecom equipment, we offer a 100% legal, optimized domestic billing and shipping channel.
-        </p>
-        
-        <div class="usa-modal-grid">
-          <div class="usa-modal-feature">
-            <div class="usa-feature-icon">🛡️</div>
-            <h3>US Domestic Billing</h3>
-            <p>We operate through our registered C-Corp in Delaware, providing you with valid commercial US invoices.</p>
-          </div>
-          <div class="usa-modal-feature">
-            <div class="usa-feature-icon">📦</div>
-            <h3>Domestic Logistics</h3>
-            <p>We manage equipment delivery directly within US territory, completely hassle-free with no customs issues.</p>
-          </div>
-        </div>
-
-        <div class="usa-corp-specs">
-          <div class="spec-row">
-            <span>Company Name:</span>
-            <strong>Nuo Networks, Inc.</strong>
-          </div>
-          <div class="spec-row">
-            <span>Jurisdiction:</span>
-            <strong>State of Delaware, USA</strong>
-          </div>
-          <div class="spec-row">
-            <span>Entity Type:</span>
-            <strong>C-Corporation</strong>
-          </div>
-        </div>
-        
-        <p class="usa-modal-disclaimer">
-          Explore our corporate catalog of infrastructure and network solutions through our international division.
-        </p>
-      {% else %}
-        <div class="usa-modal-badge">Operación Corporativa Transfronteriza</div>
-        
-        <p class="usa-modal-description">
-          Si te encuentras en <strong>Estados Unidos</strong> y deseas adquirir equipamiento de seguridad y telecomunicaciones de alta gama, te ofrecemos un canal de facturación y entrega local 100% legal y optimizado.
-        </p>
-        
-        <div class="usa-modal-grid">
-          <div class="usa-modal-feature">
-            <div class="usa-feature-icon">🛡️</div>
-            <h3>Facturación Local en US</h3>
-            <p>Operamos mediante nuestra C-Corp registrada en Delaware, brindándote facturas comerciales válidas en EE.UU.</p>
-          </div>
-          <div class="usa-modal-feature">
-            <div class="usa-feature-icon">📦</div>
-            <h3>Logística Doméstica</h3>
-            <p>Gestionamos la entrega de equipos directamente dentro del territorio estadounidense, sin complicaciones de aduana.</p>
-          </div>
-        </div>
-
-        <div class="usa-corp-specs">
-          <div class="spec-row">
-            <span>Razón Social:</span>
-            <strong>Nuo Networks, Inc.</strong>
-          </div>
-          <div class="spec-row">
-            <span>Jurisdicción:</span>
-            <strong>Estado de Delaware, EE.UU.</strong>
-          </div>
-          <div class="spec-row">
-            <span>Tipo de Entidad:</span>
-            <strong>C-Corporation</strong>
-          </div>
-        </div>
-        
-        <p class="usa-modal-disclaimer">
-          Explora nuestro catálogo corporativo de soluciones de infraestructura y redes a través de nuestra división internacional.
-        </p>
-      {% endif %}
+    <div style="font-size: 0.95rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 1.5rem;">
+      Si te encuentras en <strong>Estados Unidos</strong> y deseas adquirir equipamiento de seguridad y telecomunicaciones, operamos mediante nuestra C-Corp registrada en Delaware, brindándote facturas comerciales válidas en EE.UU. y logística local sin aduanas.
     </div>
-    
-    <div class="usa-modal-footer">
-      {% if request.locale.iso_code == 'en' %}
-        <a href="https://www.nuo-networks.com/" target="_blank" class="usa-modal-btn-primary" style="flex-grow: 1;">
-          Visit Nuo Networks
-          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-        </a>
-        <a href="https://wa.me/14243553283?text=Hello%20Nuo%20Networks,%20I'm%20interested%20in%20US%20B2B%20equipment%20purchases" target="_blank" class="usa-modal-btn-whatsapp" style="background-color: #25D366; color: #ffffff !important; border: none; border-radius: 10px; padding: 0.85rem 1.5rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); flex-grow: 1;">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="margin-right: 4px;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 2.766 1.488 4.887 1.489 5.4 0 9.791-4.387 9.795-9.778 0-2.61-1.017-5.064-2.865-6.915C16.62 2.1 14.167 1.08 11.57 1.08c-5.4 0-9.79 4.39-9.795 9.78 0 2.02.527 3.996 1.528 5.73l-.99 3.612 3.734-.976zm13.136-7.47c-.29-.145-1.71-.845-1.975-.94-.266-.097-.46-.145-.653.145-.193.29-.747.94-.916 1.13-.17.19-.34.213-.63.067-.29-.145-1.22-.45-2.325-1.434-.86-.767-1.44-1.716-1.61-2.004-.17-.29-.018-.445.127-.59.13-.13.29-.34.435-.51.145-.17.193-.29.29-.48.097-.19.048-.36-.024-.51-.07-.145-.653-1.57-.895-2.15-.236-.57-.495-.49-.653-.5-.153-.006-.33-.007-.5-.007-.17 0-.447.064-.68.312-.234.248-.893.873-.893 2.13 0 1.257.915 2.47 1.04 2.64.128.17 1.8 2.75 4.36 3.856.61.264 1.086.42 1.457.538.613.195 1.172.167 1.613.1.49-.074 1.71-.698 1.95-1.373.24-.675.24-1.253.17-1.373-.07-.12-.26-.192-.55-.337z"/></svg>
-          WhatsApp USA
-        </a>
-        <button class="usa-modal-btn-secondary" id="closeUsaModalBtnSec" style="flex-grow: 1;">Close Window</button>
-      {% else %}
-        <a href="https://www.nuo-networks.com/" target="_blank" class="usa-modal-btn-primary" style="flex-grow: 1;">
-          Visitar Nuo Networks
-          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-        </a>
-        <a href="https://wa.me/14243553283?text=Hello%20Nuo%20Networks,%20I'm%20interested%20in%20US%20B2B%20equipment%20purchases" target="_blank" class="usa-modal-btn-whatsapp" style="background-color: #25D366; color: #ffffff !important; border: none; border-radius: 10px; padding: 0.85rem 1.5rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); flex-grow: 1;">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="margin-right: 4px;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 2.766 1.488 4.887 1.489 5.4 0 9.791-4.387 9.795-9.778 0-2.61-1.017-5.064-2.865-6.915C16.62 2.1 14.167 1.08 11.57 1.08c-5.4 0-9.79 4.39-9.795 9.78 0 2.02.527 3.996 1.528 5.73l-.99 3.612 3.734-.976zm13.136-7.47c-.29-.145-1.71-.845-1.975-.94-.266-.097-.46-.145-.653.145-.193.29-.747.94-.916 1.13-.17.19-.34.213-.63.067-.29-.145-1.22-.45-2.325-1.434-.86-.767-1.44-1.716-1.61-2.004-.17-.29-.018-.445.127-.59.13-.13.29-.34.435-.51.145-.17.193-.29.29-.48.097-.19.048-.36-.024-.51-.07-.145-.653-1.57-.895-2.15-.236-.57-.495-.49-.653-.5-.153-.006-.33-.007-.5-.007-.17 0-.447.064-.68.312-.234.248-.893.873-.893 2.13 0 1.257.915 2.47 1.04 2.64.128.17 1.8 2.75 4.36 3.856.61.264 1.086.42 1.457.538.613.195 1.172.167 1.613.1.49-.074 1.71-.698 1.95-1.373.24-.675.24-1.253.17-1.373-.07-.12-.26-.192-.55-.337z"/></svg>
-          WhatsApp USA
-        </a>
-        <button class="usa-modal-btn-secondary" id="closeUsaModalBtnSec" style="flex-grow: 1;">Cerrar ventana</button>
-      {% endif %}
+
+    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+      <a href="https://www.nuo-networks.com/" target="_blank" style="background: #2563eb; color: #ffffff; text-decoration: none; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 700; flex: 1; text-align: center;">Visitar Nuo Networks</a>
+      <a href="https://wa.me/14243553283?text=Hello%20Nuo%20Networks,%20I'm%20interested%20in%20US%20B2B%20equipment%20purchases" target="_blank" style="background: #25D366; color: #ffffff; text-decoration: none; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 700; flex: 1; text-align: center;">WhatsApp USA</a>
+      <button class="usa-modal-btn-secondary" id="closeUsaModalBtnSec" style="background: rgba(255,255,255,0.08); border: none; color: #ffffff; padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer;">Cerrar</button>
     </div>
   </div>
 </div>
@@ -1323,130 +654,70 @@
 <div class="tulbox-modal-overlay" id="tulboxModal" aria-hidden="true" role="dialog">
   <div class="tulbox-modal-container">
     <button class="tulbox-modal-close" id="closeTulboxModalBtn" aria-label="Cerrar modal">&times;</button>
-    <div class="tulbox-modal-header">
-      <img src="{{ 'tulbox-logo-light.png' | asset_url }}" alt="Tulbox Servicios Técnicos" class="tulbox-modal-logo">
-      <span class="tulbox-modal-tag">Plataforma Oficial de Instaladores</span>
-    </div>
-    <div class="tulbox-modal-body">
-      <h3>Instalación Certificada y Mantenimiento Profesional ⚡</h3>
-      <p class="tulbox-modal-intro">
-        En <strong>Seguridad Avanzada</strong>, ejecutamos nuestras instalaciones, soporte en sitio y diagnóstico con la plataforma oficial de <strong>Tulbox Servicios Técnicos</strong> para darte total certeza de un trabajo profesional.
+    <div style="margin-bottom: 1.25rem;">
+      <span style="background: #f3e8ff; color: #7c3aed; font-size: 0.8rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: 20px;">Plataforma Oficial de Instaladores</span>
+      <h3 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin: 0.75rem 0 0.5rem 0;">Instalación Certificada y Soporte ⚡</h3>
+      <p style="font-size: 0.95rem; color: #475569; line-height: 1.5; margin: 0;">
+        En <strong>Seguridad Avanzada</strong>, ejecutamos instalaciones y soporte en sitio con <strong>Tulbox Servicios Técnicos</strong> para garantizar un trabajo profesional y garantizado.
       </p>
-      <div class="tulbox-modal-features">
-        <div class="tulbox-feature-item">
-          <span class="feature-icon">🛠️</span>
-          <div>
-            <strong>Técnicos Certificados</strong>
-            <p>Especialistas calificados en CCTV, alarmas, redes WiFi, cableado estructurado y electricidad.</p>
-          </div>
-        </div>
-        <div class="tulbox-feature-item">
-          <span class="feature-icon">🔒</span>
-          <div>
-            <strong>Garantía de Servicio</strong>
-            <p>Diagnóstico profesional con agendamiento rápido, seguimiento en línea y soporte continuo.</p>
-          </div>
-        </div>
-        <div class="tulbox-feature-item">
-          <span class="feature-icon">💳</span>
-          <div>
-            <strong>Certeza y Pago Transparente</strong>
-            <p>Reserva tu visita con garantía reembolsable o 100% deducible de tu cotización final de mano de obra.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRO Captation Banner -->
-      <div class="tulbox-pro-banner">
-        <div class="tulbox-pro-banner-content">
-          <strong>¿Eres instalador de sistemas, electricista, plomero o técnico?</strong>
-          <p>Regístrate en nuestra plataforma para recibir proyectos y solicitudes de servicio en tu zona.</p>
-        </div>
-        <a href="https://tulbox.pro/join-as-pro" target="_blank" rel="noopener noreferrer" class="tulbox-pro-btn">
-          Regístrate como Profesional 🛠️
-        </a>
-      </div>
     </div>
-    <div class="tulbox-modal-footer">
-      <a href="https://tulbox.pro/" target="_blank" rel="noopener noreferrer" class="tulbox-modal-btn-primary">
-        Conoce Tulbox Pro (tulbox.pro) 🚀
-      </a>
-      <button class="tulbox-modal-btn-secondary" id="closeTulboxModalBtnSec">Cerrar ventana</button>
+    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+      <a href="https://tulbox.pro/" target="_blank" rel="noopener noreferrer" style="background: #7c3aed; color: #ffffff; text-decoration: none; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 700; flex: 1; text-align: center;">Conoce Tulbox Pro</a>
+      <button id="closeTulboxModalBtnSec" style="background: #f1f5f9; border: none; color: #475569; padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600;">Cerrar</button>
     </div>
   </div>
 </div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Delaware USA Modal Logic
-    const openBtn = document.getElementById('openUsaModalBtn');
-    const closeBtn = document.getElementById('closeUsaModalBtn');
-    const closeBtnSec = document.getElementById('closeUsaModalBtnSec');
-    const modal = document.getElementById('usaCorpModal');
+    // Modal USA
+    const openUsa = document.getElementById('openUsaModalBtn');
+    const closeUsa = document.getElementById('closeUsaModalBtn');
+    const closeUsaSec = document.getElementById('closeUsaModalBtnSec');
+    const modalUsa = document.getElementById('usaCorpModal');
 
-    if (openBtn && modal) {
-      openBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      });
-    }
-
-    function closeModal() {
-      if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
+    function toggleUsa(show) {
+      if (modalUsa) {
+        modalUsa.classList.toggle('active', show);
+        document.body.style.overflow = show ? 'hidden' : '';
       }
     }
 
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    if (closeBtnSec) closeBtnSec.addEventListener('click', closeModal);
-
-    if (modal) {
-      modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-          closeModal();
-        }
+    if (openUsa) openUsa.addEventListener('click', () => toggleUsa(true));
+    if (closeUsa) closeUsa.addEventListener('click', () => toggleUsa(false));
+    if (closeUsaSec) closeUsaSec.addEventListener('click', () => toggleUsa(false));
+    if (modalUsa) {
+      modalUsa.addEventListener('click', (e) => {
+        if (e.target === modalUsa) toggleUsa(false);
       });
     }
 
-    // Tulbox Modal Logic
-    const openTulboxBtn = document.getElementById('openTulboxModalBtn');
-    const closeTulboxBtn = document.getElementById('closeTulboxModalBtn');
-    const closeTulboxBtnSec = document.getElementById('closeTulboxModalBtnSec');
-    const tulboxModal = document.getElementById('tulboxModal');
+    // Modal Tulbox
+    const openTul = document.getElementById('openTulboxModalBtn');
+    const closeTul = document.getElementById('closeTulboxModalBtn');
+    const closeTulSec = document.getElementById('closeTulboxModalBtnSec');
+    const modalTul = document.getElementById('tulboxModal');
 
-    if (openTulboxBtn && tulboxModal) {
-      openTulboxBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        tulboxModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      });
-    }
-
-    function closeTulboxModal() {
-      if (tulboxModal) {
-        tulboxModal.classList.remove('active');
-        document.body.style.overflow = '';
+    function toggleTul(show) {
+      if (modalTul) {
+        modalTul.classList.toggle('active', show);
+        document.body.style.overflow = show ? 'hidden' : '';
       }
     }
 
-    if (closeTulboxBtn) closeTulboxBtn.addEventListener('click', closeTulboxModal);
-    if (closeTulboxBtnSec) closeTulboxBtnSec.addEventListener('click', closeTulboxModal);
-
-    if (tulboxModal) {
-      tulboxModal.addEventListener('click', function(e) {
-        if (e.target === tulboxModal) {
-          closeTulboxModal();
-        }
+    if (openTul) openTul.addEventListener('click', () => toggleTul(true));
+    if (closeTul) closeTul.addEventListener('click', () => toggleTul(false));
+    if (closeTulSec) closeTulSec.addEventListener('click', () => toggleTul(false));
+    if (modalTul) {
+      modalTul.addEventListener('click', (e) => {
+        if (e.target === modalTul) toggleTul(false);
       });
     }
 
-    // Close any open modal on Esc keypress
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        closeModal();
-        closeTulboxModal();
+        toggleUsa(false);
+        toggleTul(false);
       }
     });
   });
@@ -1455,20 +726,7 @@
 {% schema %}
 {
   "name": "Footer Moderno Tech",
-  "max_blocks": 3,
   "settings": [
-    {
-      "type": "textarea",
-      "id": "company_description",
-      "label": "Descripción de la empresa",
-      "default": "Integradores de proyectos en seguridad y tecnología."
-    },
-    {
-      "type": "text",
-      "id": "phone",
-      "label": "Teléfono de Oficina",
-      "default": "55 6728 3971"
-    },
     {
       "type": "text",
       "id": "whatsapp",
@@ -1482,12 +740,6 @@
       "default": "proyectos@seguridad-avanzada.com"
     },
     {
-      "type": "checkbox",
-      "id": "show_google_reviews",
-      "label": "Mostrar insignia General de Google",
-      "default": true
-    },
-    {
       "type": "url",
       "id": "google_reviews_link",
       "label": "Link de Google Reviews"
@@ -1496,100 +748,12 @@
       "type": "text",
       "id": "google_reviews_score",
       "label": "Calificación General",
-      "default": "5.0 Excelente"
-    },
-    {
-      "type": "header",
-      "content": "Newsletter"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_heading",
-      "label": "Título Newsletter",
-      "default": "Mantente Actualizado"
-    },
-    {
-      "type": "textarea",
-      "id": "newsletter_text",
-      "label": "Texto Newsletter",
-      "default": "Suscríbete para recibir novedades."
-    }
-  ],
-  "blocks": [
-    {
-      "type": "link_list",
-      "name": "Menú de Enlaces",
-      "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Título",
-          "default": "Enlaces Rápidos"
-        },
-        {
-          "type": "link_list",
-          "id": "menu",
-          "label": "Menú"
-        }
-      ]
-    },
-    {
-      "type": "google_reviews_column",
-      "name": "Columna de Reseñas",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Título de columna",
-          "default": "Nuestros Clientes"
-        },
-        {
-          "type": "header",
-          "content": "Reseña 1"
-        },
-        {
-          "type": "text",
-          "id": "author_1",
-          "label": "Nombre del cliente",
-          "default": "Carlos Mendoza"
-        },
-        {
-          "type": "textarea",
-          "id": "text_1",
-          "label": "Opinión",
-          "default": "Excelente servicio, la instalación de las cámaras fue muy profesional y rápida. Totalmente recomendados."
-        },
-        {
-          "type": "header",
-          "content": "Reseña 2"
-        },
-        {
-          "type": "text",
-          "id": "author_2",
-          "label": "Nombre del cliente",
-          "default": "Ana Gómez"
-        },
-        {
-          "type": "textarea",
-          "id": "text_2",
-          "label": "Opinión",
-          "default": "Resolvieron todas mis dudas sobre los sistemas de acceso. Muy buena atención y precios justos."
-        }
-      ]
+      "default": "4.9 Excelente"
     }
   ],
   "presets": [
     {
-      "name": "Footer Moderno Tech",
-      "blocks": [
-        {
-          "type": "link_list"
-        },
-        {
-          "type": "google_reviews_column"
-        }
-      ]
+      "name": "Footer Moderno Tech"
     }
   ]
 }

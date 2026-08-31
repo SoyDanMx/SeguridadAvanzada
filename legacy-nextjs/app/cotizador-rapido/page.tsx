@@ -272,7 +272,7 @@ export default function CotizadorRapidoClient() {
     doc.setFontSize(8);
     doc.setTextColor(156, 163, 175);
     doc.text("NUO INTEGRACIONES Y SERVICIOS | RFC: NIS230310Q9A", pageWidth / 2, 790, { align: "center" });
-    doc.text("Atenas 1-1, Col. San Alvaro, Alcaldía Azcapotzalco, Ciudad de México, C.P. 02090", pageWidth / 2, 802, { align: "center" });
+    doc.text("Av. Clavería 237, Claveria, Azcapotzalco, 02080 Ciudad de México, CDMX", pageWidth / 2, 802, { align: "center" });
     doc.text("Contacto: proyectos@seguridad-avanzada.com | WhatsApp MX: +525636741156 | www.seguridad-avanzada.com", pageWidth / 2, 814, { align: "center" });
 
     doc.save(`Cotizacion-${folio}.pdf`);

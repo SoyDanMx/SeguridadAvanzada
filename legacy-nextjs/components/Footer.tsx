@@ -24,7 +24,7 @@ const WHATSAPP_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "525636741156";
 const WHATSAPP_MESSAGE =
   "Hola, Necesito informacion sobre los servicios de Seguridad Avanzada";
-const ADDRESS = "Atenas 1-1, Col. San Álvaro, Azcapotzalco, CDMX";
+const ADDRESS = "Av. Clavería 237, Claveria, Azcapotzalco, 02080 Ciudad de México, CDMX";
 
 // Columnas de enlaces (estilo Sumee adaptado a Seguridad Avanzada)
 const SEGURIDAD_AVANZADA_LINKS = [

@@ -49,7 +49,7 @@ export default async function CotizacionPage({ params }: { params: Promise<{ id:
           <div className="text-center md:text-right print:text-right w-full">
             <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Cotización de Servicio</h1>
             <p className="text-xs sm:text-sm text-gray-800 font-semibold mb-1">Cotizacion - NUO INTEGRACIONES Y SERVICIOS | RFC: NIS230310Q9A</p>
-            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">Atenas 1-1, Col. San Alvaro, Alcaldía Azcapotzalco, Ciudad de México, C.P. 02090</p>
+            <p className="text-[10px] sm:text-xs text-gray-500 mt-1">Av. Clavería 237, Claveria, Azcapotzalco, 02080 Ciudad de México, CDMX</p>
             <p className="text-[10px] sm:text-xs text-gray-500 mt-1 break-words">Contacto: proyectos@seguridad-avanzada.com | WhatsApp MX: +525636741156 | www.seguridad-avanzada.com</p>
           </div>
         </div>
@@ -170,7 +170,7 @@ export default async function CotizacionPage({ params }: { params: Promise<{ id:
             </div>
             
             <p className="text-[11px] text-gray-600 text-center">
-              Seguridad Avanzada | seguridad-avanzada.com | Atenas 1-1, Col. San Alvaro, Alcaldía Azcapotzalco, Ciudad de México, C.P. 02090
+              Seguridad Avanzada | seguridad-avanzada.com | Av. Clavería 237, Claveria, Azcapotzalco, 02080 Ciudad de México, CDMX
             </p>
           </div>
         </div>

@@ -71,42 +71,53 @@ ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.order_items ENABLE ROW LEVEL SECURITY;
 
 -- Políticas: usuarios ven solo sus datos
+DROP POLICY IF EXISTS "Users can view own profile" ON public.profiles;
 CREATE POLICY "Users can view own profile" ON public.profiles
-  FOR SELECT USING (auth.uid() = id);
+  FOR SELECT USING ((select auth.uid()) = id);
 
+DROP POLICY IF EXISTS "Users can update own profile" ON public.profiles;
 CREATE POLICY "Users can update own profile" ON public.profiles
-  FOR UPDATE USING (auth.uid() = id);
+  FOR UPDATE USING ((select auth.uid()) = id);
 
+DROP POLICY IF EXISTS "Users can insert own profile" ON public.profiles;
 CREATE POLICY "Users can insert own profile" ON public.profiles
-  FOR INSERT WITH CHECK (auth.uid() = id);
+  FOR INSERT WITH CHECK ((select auth.uid()) = id);
 
 -- Carts: usuario autenticado gestiona sus carritos; anon puede crear/leer por token_guest
+DROP POLICY IF EXISTS "Users can manage own carts" ON public.carts;
 CREATE POLICY "Users can manage own carts" ON public.carts
-  FOR ALL USING (auth.uid() = user_id);
+  FOR ALL USING ((select auth.uid()) = user_id);
 
+DROP POLICY IF EXISTS "Anyone can create cart" ON public.carts;
 CREATE POLICY "Anyone can create cart" ON public.carts
   FOR INSERT WITH CHECK (true);
 
+DROP POLICY IF EXISTS "Anon can read cart by token" ON public.carts;
 CREATE POLICY "Anon can read cart by token" ON public.carts
   FOR SELECT USING (token_guest IS NOT NULL);
 
 -- Cart items: permisos amplios para desarrollo (refinar RLS en producción)
+DROP POLICY IF EXISTS "Cart items all" ON public.cart_items;
 CREATE POLICY "Cart items all" ON public.cart_items
   FOR ALL USING (true);
 
 -- Orders: usuario ve sus pedidos
+DROP POLICY IF EXISTS "Users can view own orders" ON public.orders;
 CREATE POLICY "Users can view own orders" ON public.orders
-  FOR SELECT USING (auth.uid() = user_id);
+  FOR SELECT USING ((select auth.uid()) = user_id);
 
+DROP POLICY IF EXISTS "Anyone can create order" ON public.orders;
 CREATE POLICY "Anyone can create order" ON public.orders
   FOR INSERT WITH CHECK (true);
 
 -- Order items: quien tenga acceso al order
+DROP POLICY IF EXISTS "Order items follow order" ON public.order_items;
 CREATE POLICY "Order items follow order" ON public.order_items
   FOR SELECT USING (
-    EXISTS (SELECT 1 FROM public.orders o WHERE o.id = order_id AND o.user_id = auth.uid())
+    EXISTS (SELECT 1 FROM public.orders o WHERE o.id = order_id AND o.user_id = (select auth.uid()))
   );
 
+DROP POLICY IF EXISTS "Order items insert on order create" ON public.order_items;
 CREATE POLICY "Order items insert on order create" ON public.order_items
   FOR INSERT WITH CHECK (true);
 
