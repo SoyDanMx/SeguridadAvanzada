@@ -1,98 +1,167 @@
 {% comment %}
   FOOTER PROFESIONAL Y MODERNO - SEGURIDAD AVANZADA
   Inspirado en el estilo limpio y de alta conversión de WebyServicios
-  Incluye: Identidad y marcas autorizadas, Métodos de pago, Legales, Redes Sociales con handles,
-  Modales Corporativos (Delaware US y Tulbox), Badge de Google Reviews y Newsletter.
+  Optimizado con fundamentos UX/UI: alta legibilidad, contraste elevado, tipografía amplia,
+  Logo Seguridad Avanzada blanco, Afiliación a Nuo Networks, Inc., Métodos de pago, Legales y Redes Sociales.
 {% endcomment %}
 
 <style>
   .ws-footer-root {
-    background-color: #0b0f17;
-    color: #94a3b8;
+    background-color: #090d14;
+    color: #cbd5e1;
     font-family: inherit;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
     position: relative;
     z-index: 10;
+    font-size: 1.05rem;
   }
 
   .ws-footer-container {
-    max-width: 1280px;
+    max-width: 1320px;
     margin: 0 auto;
-    padding: 4rem 2rem 2rem;
+    padding: 4.5rem 2rem 2.5rem;
   }
 
   /* Grid Principal de 4 Columnas */
   .ws-footer-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2.5rem;
-    margin-bottom: 3.5rem;
+    gap: 3rem;
+    margin-bottom: 4rem;
   }
 
   @media (min-width: 640px) {
     .ws-footer-grid {
       grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
+      gap: 3rem;
     }
   }
 
   @media (min-width: 1024px) {
     .ws-footer-grid {
-      grid-template-columns: 1.35fr 1fr 1fr 1.15fr;
-      gap: 3rem;
+      grid-template-columns: 1.4fr 1.05fr 1fr 1.15fr;
+      gap: 3.5rem;
     }
   }
 
   /* Encabezados de Columna */
   .ws-footer-heading {
     color: #ffffff;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin: 0 0 1.25rem 0;
-    letter-spacing: -0.01em;
-  }
-
-  /* Columna 1: Identidad de Marca */
-  .ws-brand-title {
-    color: #ffffff;
-    font-size: 1.35rem;
+    font-size: 1.3rem;
     font-weight: 800;
-    letter-spacing: 0.02em;
-    margin: 0 0 0.85rem 0;
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.01em;
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
 
-  .ws-brand-title span {
+  /* Columna 1: Identidad de Marca */
+  .ws-brand-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .ws-sa-logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .ws-sa-logo-img {
+    height: 48px;
+    max-width: 220px;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* Asegura logo en blanco nítido */
+  }
+
+  .ws-sa-logo-fallback {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+  }
+
+  .ws-sa-logo-fallback svg {
+    width: 32px;
+    height: 32px;
+    stroke: #3b82f6;
+    fill: rgba(59, 130, 246, 0.15);
+  }
+
+  .ws-sa-logo-fallback strong {
     color: #3b82f6;
   }
 
   .ws-brand-desc {
-    color: #cbd5e1;
-    font-size: 0.95rem;
-    line-height: 1.6;
+    color: #e2e8f0;
+    font-size: 1.05rem;
+    line-height: 1.65;
     margin: 0 0 1.5rem 0;
   }
 
   .ws-brand-desc strong {
     color: #ffffff;
+    font-weight: 700;
+  }
+
+  /* Afiliación a Nuo Networks */
+  .ws-nuo-affiliation {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .ws-nuo-label {
+    font-size: 0.92rem;
+    color: #94a3b8;
+    margin: 0 0 0.65rem 0;
+    font-weight: 500;
+  }
+
+  .ws-nuo-logo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+  .ws-nuo-logo-link:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.4));
+  }
+
+  .ws-nuo-logo-img {
+    height: 36px;
+    max-width: 180px;
+    object-fit: contain;
+    display: block;
   }
 
   /* Tarjetas Corporativas Compactas (Nuo USA & Tulbox) */
   .ws-corp-triggers {
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
+    gap: 0.75rem;
   }
 
   .ws-corp-pill {
     background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-    padding: 0.6rem 0.85rem;
-    color: #cbd5e1;
-    font-size: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: #e2e8f0;
+    font-size: 0.95rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -102,37 +171,42 @@
   }
 
   .ws-corp-pill:hover {
-    background: rgba(59, 130, 246, 0.1);
-    border-color: rgba(59, 130, 246, 0.4);
+    background: rgba(59, 130, 246, 0.12);
+    border-color: rgba(59, 130, 246, 0.5);
     color: #ffffff;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
   }
 
   .ws-corp-pill span {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     font-weight: 600;
   }
 
   .ws-corp-pill svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     stroke: #3b82f6;
+    transition: transform 0.2s ease;
   }
 
-  /* Columna 2: Métodos de Pago */
+  .ws-corp-pill:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Columna 2: Métodos de Pago & Acciones */
   .ws-payment-text {
-    color: #94a3b8;
-    font-size: 0.95rem;
-    line-height: 1.65;
-    margin: 0 0 1.25rem 0;
+    color: #e2e8f0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin: 0 0 1.5rem 0;
   }
 
   .ws-divider {
     border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin: 1.25rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    margin: 1.5rem 0;
   }
 
   .ws-action-links {
@@ -141,33 +215,36 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
+    gap: 0.9rem;
   }
 
   .ws-action-link {
     color: #ffffff;
-    font-size: 0.88rem;
+    font-size: 0.98rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    transition: color 0.2s ease, transform 0.2s ease;
+    gap: 0.5rem;
+    padding: 0.35rem 0;
+    transition: all 0.2s ease;
   }
 
   .ws-action-link:hover {
-    color: #3b82f6;
-    transform: translateX(3px);
+    color: #60a5fa;
+    transform: translateX(5px);
   }
 
   .ws-action-link.highlight {
-    color: #25D366;
+    color: #22c55e;
+    font-size: 1.02rem;
   }
 
   .ws-action-link.highlight:hover {
     color: #4ade80;
+    transform: translateX(5px);
   }
 
   /* Columna 3: Legales */
@@ -177,52 +254,57 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.9rem;
   }
 
   .ws-legal-links a {
-    color: #94a3b8;
-    font-size: 0.95rem;
+    color: #cbd5e1;
+    font-size: 1.05rem;
     text-decoration: none;
-    transition: color 0.2s ease, transform 0.2s ease;
-    display: inline-block;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0;
   }
 
   .ws-legal-links a:hover {
     color: #ffffff;
-    transform: translateX(4px);
+    transform: translateX(5px);
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 
-  /* Columna 4: Redes Sociales con handles */
+  /* Columna 4: Redes Sociales & Contacto Oficial */
   .ws-social-list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
+    gap: 0.95rem;
   }
 
   .ws-social-item {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.85rem;
     color: #ffffff;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     font-weight: 600;
     text-decoration: none;
+    padding: 0.35rem 0;
     transition: all 0.2s ease;
   }
 
   .ws-social-item:hover {
-    color: #3b82f6;
-    transform: translateX(4px);
+    color: #60a5fa;
+    transform: translateX(5px);
   }
 
   .ws-social-icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
     background: rgba(255, 255, 255, 0.08);
     display: flex;
     align-items: center;
@@ -232,23 +314,24 @@
   }
 
   .ws-social-item:hover .ws-social-icon {
-    background: #3b82f6;
+    background: #2563eb;
     color: #ffffff;
+    transform: scale(1.05);
   }
 
   .ws-social-icon svg {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     fill: currentColor;
   }
 
   /* Barra Inferior / Sub-Footer */
   .ws-subfooter {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 2.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
     align-items: center;
     justify-content: space-between;
   }
@@ -264,97 +347,99 @@
   .ws-google-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 0.6rem 1rem;
-    border-radius: 10px;
+    gap: 0.85rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
     text-decoration: none;
     transition: all 0.2s ease;
   }
 
   .ws-google-badge:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
   }
 
   .ws-google-badge svg.google-icon {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     flex-shrink: 0;
   }
 
   .ws-google-stars {
     display: flex;
-    gap: 2px;
+    gap: 3px;
     margin-bottom: 2px;
   }
 
   .ws-google-stars svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     fill: #FABB05;
   }
 
   .ws-google-badge-text {
-    font-size: 0.8rem;
-    line-height: 1.2;
-    color: #94a3b8;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    color: #cbd5e1;
   }
 
   .ws-google-badge-text strong {
     color: #ffffff;
-    font-size: 0.92rem;
+    font-size: 1.05rem;
   }
 
-  /* Newsletter Minimalista */
+  /* Newsletter */
   .ws-newsletter-box {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    max-width: 360px;
+    gap: 0.65rem;
+    max-width: 400px;
     width: 100%;
   }
 
   .ws-newsletter-input {
     flex: 1;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 8px;
-    padding: 0.6rem 0.9rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
     color: #ffffff;
-    font-size: 0.88rem;
+    font-size: 1rem;
     outline: none;
     transition: border-color 0.2s ease;
   }
 
   .ws-newsletter-input:focus {
     border-color: #3b82f6;
+    background: rgba(255, 255, 255, 0.09);
   }
 
   .ws-newsletter-btn {
     background: #2563eb;
     color: #ffffff;
     border: none;
-    border-radius: 8px;
-    padding: 0.6rem 1.1rem;
-    font-size: 0.88rem;
+    border-radius: 10px;
+    padding: 0.75rem 1.4rem;
+    font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease;
     white-space: nowrap;
   }
 
   .ws-newsletter-btn:hover {
     background: #1d4ed8;
+    transform: translateY(-1px);
   }
 
   /* Copyright */
   .ws-copyright {
-    color: #64748b;
-    font-size: 0.85rem;
-    line-height: 1.5;
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.6;
     text-align: center;
     width: 100%;
     margin-top: 1rem;
@@ -401,8 +486,8 @@
     border: 1px solid rgba(59, 130, 246, 0.25);
     border-radius: 20px;
     width: 100%;
-    max-width: 560px;
-    padding: 2.25rem 2rem;
+    max-width: 580px;
+    padding: 2.5rem 2.25rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
     position: relative;
     transform: scale(0.95);
@@ -430,10 +515,10 @@
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #94a3b8;
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -463,19 +548,50 @@
     
     <div class="ws-footer-grid">
       
-      <!-- COLUMNA 1: Identidad, Propuesta de Valor & Sellos -->
+      <!-- COLUMNA 1: Identidad, Propuesta de Valor, Logo Blanco & Afiliación Nuo Networks -->
       <div>
-        <h2 class="ws-brand-title">
-          SEGURIDAD <span>AVANZADA</span>
-        </h2>
+        <div class="ws-brand-header">
+          <a href="/" class="ws-sa-logo-wrap" aria-label="Seguridad Avanzada">
+            {%- if settings.logo != blank -%}
+              <img
+                src="{{ settings.logo | image_url: width: 400 }}"
+                alt="{{ shop.name }}"
+                class="ws-sa-logo-img"
+                loading="lazy"
+              >
+            {%- else -%}
+              <div class="ws-sa-logo-fallback">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+                <span>SEGURIDAD <strong>AVANZADA</strong></span>
+              </div>
+            {%- endif -%}
+          </a>
+        </div>
+
         <p class="ws-brand-desc">
           Seguridad Avanzada – <strong>Tienda autorizada Hikvision, Dahua y Syscom</strong>. Soluciones tecnológicas, CCTV, control de acceso y protección perimetral en México y EE.UU.
         </p>
 
+        <!-- AFILIACIÓN NUO NETWORKS CON ICONO Y LOGO -->
+        <div class="ws-nuo-affiliation">
+          <p class="ws-nuo-label">Seguridad Avanzada es una empresa operada por:</p>
+          <a href="https://www.nuo-networks.com/" target="_blank" class="ws-nuo-logo-link" title="Nuo Networks, Inc.">
+            <img
+              src="{{ 'nuo-networks-logo-white.png' | asset_url }}"
+              alt="Nuo Networks, Inc."
+              class="ws-nuo-logo-img"
+              loading="lazy"
+            >
+          </a>
+        </div>
+
         <!-- Triggers a Modales Corporativos -->
         <div class="ws-corp-triggers">
           <div class="ws-corp-pill" id="openUsaModalBtn" role="button" tabindex="0">
-            <span>🇺🇸 Nuo Networks, Inc. (Delaware US)</span>
+            <span>🇺🇸 Nuo Networks, Inc. (Delaware US C-Corp)</span>
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
           <div class="ws-corp-pill" id="openTulboxModalBtn" role="button" tabindex="0">
@@ -563,9 +679,9 @@
             </a>
           </li>
           <li>
-            <a href="https://wa.me/525636741156?text=Deseo%20informacion%20de%20sistemas%20de%20seguridad" target="_blank" class="ws-social-item" style="color: #25D366;">
-              <span class="ws-social-icon" style="background: rgba(37, 211, 102, 0.15);">
-                <svg viewBox="0 0 24 24" style="fill: #25D366;"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.07-1.745-.392-1.393-.579-2.27-1.996-2.339-2.088-.069-.093-.56-0.745-.56-1.42 0-.675.352-1.008.477-1.144.125-.136.272-.17.363-.17.091 0 .182 0 .261.006.085.006.198-.033.31.236.114.272.39 0.952.424 1.022.034.07.057.151.011.241-.046.09-.068.147-.136.226-.068.079-.143.176-.205.237-.068.068-.139.141-.06.277.079.136.35 0.578.75 0.934.516.459.95.602 1.086.67.136.068.215.057.295-.034.079-.09.34-.396.43-.532.09-.136.182-.113.307-.068.125.045.795.375.932.443.136.068.227.102.261.159.034.057.034.329-.11.734z"/></svg>
+            <a href="https://wa.me/525636741156?text=Deseo%20informacion%20de%20sistemas%20de%20seguridad" target="_blank" class="ws-social-item" style="color: #22c55e;">
+              <span class="ws-social-icon" style="background: rgba(34, 197, 94, 0.18);">
+                <svg viewBox="0 0 24 24" style="fill: #22c55e;"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.07-1.745-.392-1.393-.579-2.27-1.996-2.339-2.088-.069-.093-.56-0.745-.56-1.42 0-.675.352-1.008.477-1.144.125-.136.272-.17.363-.17.091 0 .182 0 .261.006.085.006.198-.033.31.236.114.272.39 0.952.424 1.022.034.07.057.151.011.241-.046.09-.068.147-.136.226-.068.079-.143.176-.205.237-.068.068-.139.141-.06.277.079.136.35 0.578.75 0.934.516.459.95.602 1.086.67.136.068.215.057.295-.034.079-.09.34-.396.43-.532.09-.136.182-.113.307-.068.125.045.795.375.932.443.136.068.227.102.261.159.034.057.034.329-.11.734z"/></svg>
               </span>
               <span>WhatsApp: 56 3674 1156</span>
             </a>
@@ -620,7 +736,7 @@
       <!-- Copyright -->
       <div class="ws-copyright">
         &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. Todos los derechos reservados.<br>
-        <span style="opacity: 0.7;">Operado por <strong>Nuo Networks, Inc.</strong> &bull; Av. Clavería 237, Azcapotzalco, CDMX</span>
+        <span style="opacity: 0.85;">Operado por <strong>Nuo Networks, Inc.</strong> &bull; Av. Clavería 237, Azcapotzalco, CDMX</span>
       </div>
 
     </div>
@@ -635,17 +751,17 @@
     <div style="text-align: center; margin-bottom: 1.5rem;">
       <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">🇺🇸</span>
       <h2 style="font-size: 1.6rem; font-weight: 700; margin: 0 0 0.25rem 0; color: #ffffff;">Nuo Networks, Inc.</h2>
-      <p style="color: #3b82f6; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin: 0;">Est. Delaware, United States &bull; C-Corporation</p>
+      <p style="color: #3b82f6; font-size: 0.95rem; font-weight: 600; text-transform: uppercase; margin: 0;">Est. Delaware, United States &bull; C-Corporation</p>
     </div>
     
-    <div style="font-size: 0.95rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 1.5rem;">
+    <div style="font-size: 1rem; line-height: 1.65; color: #cbd5e1; margin-bottom: 1.75rem;">
       Si te encuentras en <strong>Estados Unidos</strong> y deseas adquirir equipamiento de seguridad y telecomunicaciones, operamos mediante nuestra C-Corp registrada en Delaware, brindándote facturas comerciales válidas en EE.UU. y logística local sin aduanas.
     </div>
 
     <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-      <a href="https://www.nuo-networks.com/" target="_blank" style="background: #2563eb; color: #ffffff; text-decoration: none; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 700; flex: 1; text-align: center;">Visitar Nuo Networks</a>
-      <a href="https://wa.me/14243553283?text=Hello%20Nuo%20Networks,%20I'm%20interested%20in%20US%20B2B%20equipment%20purchases" target="_blank" style="background: #25D366; color: #ffffff; text-decoration: none; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 700; flex: 1; text-align: center;">WhatsApp USA</a>
-      <button class="usa-modal-btn-secondary" id="closeUsaModalBtnSec" style="background: rgba(255,255,255,0.08); border: none; color: #ffffff; padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer;">Cerrar</button>
+      <a href="https://www.nuo-networks.com/" target="_blank" style="background: #2563eb; color: #ffffff; text-decoration: none; padding: 0.85rem 1.25rem; border-radius: 10px; font-weight: 700; flex: 1; text-align: center;">Visitar Nuo Networks</a>
+      <a href="https://wa.me/14243553283?text=Hello%20Nuo%20Networks,%20I'm%20interested%20in%20US%20B2B%20equipment%20purchases" target="_blank" style="background: #25D366; color: #ffffff; text-decoration: none; padding: 0.85rem 1.25rem; border-radius: 10px; font-weight: 700; flex: 1; text-align: center;">WhatsApp USA</a>
+      <button class="usa-modal-btn-secondary" id="closeUsaModalBtnSec" style="background: rgba(255,255,255,0.08); border: none; color: #ffffff; padding: 0.85rem 1.25rem; border-radius: 10px; cursor: pointer;">Cerrar</button>
     </div>
   </div>
 </div>
@@ -654,16 +770,16 @@
 <div class="tulbox-modal-overlay" id="tulboxModal" aria-hidden="true" role="dialog">
   <div class="tulbox-modal-container">
     <button class="tulbox-modal-close" id="closeTulboxModalBtn" aria-label="Cerrar modal">&times;</button>
-    <div style="margin-bottom: 1.25rem;">
-      <span style="background: #f3e8ff; color: #7c3aed; font-size: 0.8rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: 20px;">Plataforma Oficial de Instaladores</span>
-      <h3 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin: 0.75rem 0 0.5rem 0;">Instalación Certificada y Soporte ⚡</h3>
-      <p style="font-size: 0.95rem; color: #475569; line-height: 1.5; margin: 0;">
+    <div style="margin-bottom: 1.5rem;">
+      <span style="background: #f3e8ff; color: #7c3aed; font-size: 0.85rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 20px;">Plataforma Oficial de Instaladores</span>
+      <h3 style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin: 0.85rem 0 0.5rem 0;">Instalación Certificada y Soporte ⚡</h3>
+      <p style="font-size: 1rem; color: #475569; line-height: 1.6; margin: 0;">
         En <strong>Seguridad Avanzada</strong>, ejecutamos instalaciones y soporte en sitio con <strong>Tulbox Servicios Técnicos</strong> para garantizar un trabajo profesional y garantizado.
       </p>
     </div>
     <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-      <a href="https://tulbox.pro/" target="_blank" rel="noopener noreferrer" style="background: #7c3aed; color: #ffffff; text-decoration: none; padding: 0.75rem 1.25rem; border-radius: 8px; font-weight: 700; flex: 1; text-align: center;">Conoce Tulbox Pro</a>
-      <button id="closeTulboxModalBtnSec" style="background: #f1f5f9; border: none; color: #475569; padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600;">Cerrar</button>
+      <a href="https://tulbox.pro/" target="_blank" rel="noopener noreferrer" style="background: #7c3aed; color: #ffffff; text-decoration: none; padding: 0.85rem 1.25rem; border-radius: 10px; font-weight: 700; flex: 1; text-align: center;">Conoce Tulbox Pro</a>
+      <button id="closeTulboxModalBtnSec" style="background: #f1f5f9; border: none; color: #475569; padding: 0.85rem 1.25rem; border-radius: 10px; cursor: pointer; font-weight: 600;">Cerrar</button>
     </div>
   </div>
 </div>
