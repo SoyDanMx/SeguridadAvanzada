@@ -121,13 +121,6 @@
         "accessibility_info": "Slideshow about our brand"
       }
     },
-    "marcas-destacadas": {
-      "type": "marcas-destacadas",
-      "settings": {
-        "title": "Marcas Destacadas",
-        "subtitle": "Distribuidores autorizados de las marcas líderes en seguridad electrónica y telecomunicaciones."
-      }
-    },
     "all-products": {
       "type": "featured-collection",
       "settings": {
@@ -159,7 +152,6 @@
   },
   "order": [
     "hero-slideshow",
-    "marcas-destacadas",
     "all-products"
   ]
 }
