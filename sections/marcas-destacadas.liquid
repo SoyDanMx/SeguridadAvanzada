@@ -1,0 +1,287 @@
+{% comment %}
+  SECCIÓN: MARCAS DESTACADAS (ESTILO SYSCOM)
+  Carrusel infinito y dinámico de 2 filas con tarjetas de marcas líderes,
+  efectos hover, enlaces de búsqueda por fabricante y personalizable desde el editor.
+{% endcomment %}
+
+<style>
+  .marcas-destacadas-section {
+    padding: 3rem 0 3.5rem;
+    background-color: var(--gradient-background, #f8fafc);
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .marcas-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .marcas-header {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .marcas-title {
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .marcas-subtitle {
+    font-size: 0.98rem;
+    color: #64748b;
+    margin: 0;
+  }
+
+  /* Marquee Track Container */
+  .marcas-marquee-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  }
+
+  .marcas-track {
+    display: flex;
+    gap: 1.25rem;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .marcas-track.track-forward {
+    animation: marcasScroll 45s linear infinite;
+  }
+
+  .marcas-track.track-reverse {
+    animation: marcasScrollReverse 45s linear infinite;
+  }
+
+  .marcas-marquee-wrapper:hover .marcas-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marcasScroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marcasScrollReverse {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  /* Tarjeta de Marca Estilo Syscom */
+  .marca-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 0.85rem 1.4rem;
+    height: 70px;
+    min-width: 160px;
+    max-width: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    user-select: none;
+  }
+
+  .marca-card:hover {
+    transform: translateY(-3px);
+    border-color: #3b82f6;
+    box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.15);
+  }
+
+  .marca-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .marca-name-text {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #1e293b;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+  }
+
+  .marca-card:hover .marca-name-text {
+    color: #2563eb;
+  }
+
+  /* Logos con acentos de color o estilo característico */
+  .marca-hikvision { color: #d32f2f; font-weight: 900; }
+  .marca-dahua { color: #d90429; font-weight: 900; }
+  .marca-hilook { color: #0284c7; font-weight: 900; }
+  .marca-ubiquiti { color: #0066ff; font-weight: 800; }
+  .marca-tplink { color: #00a4b4; font-weight: 800; }
+  .marca-ruijie { color: #e11d48; font-weight: 900; }
+  .marca-huawei { color: #cf0a2c; font-weight: 800; }
+  .marca-zkteco { color: #16a34a; font-weight: 900; }
+  .marca-wd { color: #0f172a; font-weight: 900; }
+  .marca-seagate { color: #059669; font-weight: 800; }
+  .marca-fanvil { color: #dc2626; font-weight: 800; }
+  .marca-grandstream { color: #2563eb; font-weight: 800; }
+  .marca-suprema { color: #be123c; font-weight: 900; }
+  .marca-came { color: #0284c7; font-weight: 900; }
+  .marca-faac { color: #0f172a; font-weight: 900; }
+  .marca-hid { color: #1d4ed8; font-weight: 900; }
+  .marca-synology { color: #334155; font-weight: 800; }
+  .marca-yonusa { color: #ca8a04; font-weight: 900; }
+  .marca-cambium { color: #0369a1; font-weight: 800; }
+  .marca-idemia { color: #6b21a8; font-weight: 900; }
+</style>
+
+<section class="marcas-destacadas-section">
+  <div class="marcas-container">
+    <div class="marcas-header">
+      <h2 class="marcas-title">
+        {{ section.settings.title | default: 'Marcas Destacadas' }}
+      </h2>
+      {% if section.settings.subtitle != blank %}
+        <p class="marcas-subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="marcas-marquee-wrapper">
+    <!-- FILA 1 -->
+    <div class="marcas-track track-forward">
+      {% for i in (1..2) %}
+        <a href="/search?q=HIKVISION" class="marca-card" title="HIKVISION">
+          <div class="marca-content"><span class="marca-name-text marca-hikvision">HIKVISION</span></div>
+        </a>
+        <a href="/search?q=DAHUA" class="marca-card" title="DAHUA">
+          <div class="marca-content"><span class="marca-name-text marca-dahua">alhua</span></div>
+        </a>
+        <a href="/search?q=HUAWEI" class="marca-card" title="HUAWEI">
+          <div class="marca-content"><span class="marca-name-text marca-huawei">HUAWEI</span></div>
+        </a>
+        <a href="/search?q=RUIJIE" class="marca-card" title="RUIJIE NETWORKS">
+          <div class="marca-content"><span class="marca-name-text marca-ruijie">Ruijie</span></div>
+        </a>
+        <a href="/search?q=FANVIL" class="marca-card" title="FANVIL">
+          <div class="marca-content"><span class="marca-name-text marca-fanvil">Fanvil</span></div>
+        </a>
+        <a href="/search?q=FIBERHOME" class="marca-card" title="FIBERHOME">
+          <div class="marca-content"><span class="marca-name-text" style="color:#e056fd; font-weight:800;">FiberHome</span></div>
+        </a>
+        <a href="/search?q=CAMBIUM" class="marca-card" title="CAMBIUM NETWORKS">
+          <div class="marca-content"><span class="marca-name-text marca-cambium">Cambium</span></div>
+        </a>
+        <a href="/search?q=GRANDSTREAM" class="marca-card" title="GRANDSTREAM">
+          <div class="marca-content"><span class="marca-name-text marca-grandstream">GRANDSTREAM</span></div>
+        </a>
+        <a href="/search?q=DJI" class="marca-card" title="DJI ENTERPRISE">
+          <div class="marca-content"><span class="marca-name-text" style="font-weight:900;">DJI ENTERPRISE</span></div>
+        </a>
+        <a href="/search?q=CAME" class="marca-card" title="CAME">
+          <div class="marca-content"><span class="marca-name-text marca-came">CAME &#x2719;</span></div>
+        </a>
+        <a href="/search?q=FAAC" class="marca-card" title="FAAC">
+          <div class="marca-content"><span class="marca-name-text marca-faac">FAAC</span></div>
+        </a>
+        <a href="/search?q=ALTAI" class="marca-card" title="ALTAI SUPER WIFI">
+          <div class="marca-content"><span class="marca-name-text" style="color:#b91c1c; font-weight:900;">ALTAI WiFi</span></div>
+        </a>
+      {% endfor %}
+    </div>
+
+    <!-- FILA 2 -->
+    <div class="marcas-track track-reverse">
+      {% for i in (1..2) %}
+        <a href="/search?q=HILOOK" class="marca-card" title="HiLook">
+          <div class="marca-content"><span class="marca-name-text marca-hilook">HiLook</span></div>
+        </a>
+        <a href="/search?q=TP-LINK" class="marca-card" title="TP-LINK">
+          <div class="marca-content"><span class="marca-name-text marca-tplink">tp-link</span></div>
+        </a>
+        <a href="/search?q=UBIQUITI" class="marca-card" title="UBIQUITI UNIFI">
+          <div class="marca-content"><span class="marca-name-text marca-ubiquiti">UBIQUITI [U]</span></div>
+        </a>
+        <a href="/search?q=SYNOLOGY" class="marca-card" title="SYNOLOGY">
+          <div class="marca-content"><span class="marca-name-text marca-synology">Synology</span></div>
+        </a>
+        <a href="/search?q=SUPREMA" class="marca-card" title="SUPREMA">
+          <div class="marca-content"><span class="marca-name-text marca-suprema">suprema</span></div>
+        </a>
+        <a href="/search?q=ZKTECO" class="marca-card" title="ZKTECO">
+          <div class="marca-content"><span class="marca-name-text marca-zkteco">ZKTeco</span></div>
+        </a>
+        <a href="/search?q=HID" class="marca-card" title="HID GLOBAL">
+          <div class="marca-content"><span class="marca-name-text marca-hid">HID</span></div>
+        </a>
+        <a href="/search?q=IDEMIA" class="marca-card" title="IDEMIA">
+          <div class="marca-content"><span class="marca-name-text marca-idemia">&lang;(&bull;)&rang; IDEMIA</span></div>
+        </a>
+        <a href="/search?q=WESTERN+DIGITAL" class="marca-card" title="WESTERN DIGITAL">
+          <div class="marca-content"><span class="marca-name-text marca-wd">WD Purple</span></div>
+        </a>
+        <a href="/search?q=SEAGATE" class="marca-card" title="SEAGATE SKYHAWK">
+          <div class="marca-content"><span class="marca-name-text marca-seagate">SEAGATE</span></div>
+        </a>
+        <a href="/search?q=YONUSA" class="marca-card" title="YONUSA">
+          <div class="marca-content"><span class="marca-name-text marca-yonusa">YONUSA &#x26a1;</span></div>
+        </a>
+        <a href="/search?q=LINKEDPRO" class="marca-card" title="LINKEDPRO">
+          <div class="marca-content"><span class="marca-name-text" style="color:#0284c7; font-weight:800;">linkedpro</span></div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcas Destacadas",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título de la sección",
+      "default": "Marcas Destacadas"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Distribuidores autorizados de las marcas líderes en seguridad electrónica y telecomunicaciones."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcas Destacadas"
+    }
+  ]
+}
+{% endschema %}
