@@ -12,6 +12,78 @@
     "hero-slideshow": {
       "type": "slideshow",
       "blocks": {
+        "slide_N6eNwt": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/syscom_p2_730x380_enero21_curvas_1.jpg",
+            "image_overlay_opacity": 0,
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "https://seguridad-avanzada.com/collections/redes-mesh",
+            "button_style_secondary": true,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-1"
+          }
+        },
+        "slide_rEppQp": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/homehikax.avif",
+            "image_overlay_opacity": 0,
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-1"
+          }
+        },
+        "slide_GGDweY": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/app-control---1200-x-600.avif",
+            "image_overlay_opacity": 0,
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-1"
+          }
+        },
+        "slide_FFpigR": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/25.avif",
+            "image_overlay_opacity": 0,
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-1"
+          }
+        },
         "slide-0": {
           "type": "slide",
           "settings": {
@@ -32,6 +104,10 @@
         }
       },
       "block_order": [
+        "slide_N6eNwt",
+        "slide_rEppQp",
+        "slide_GGDweY",
+        "slide_FFpigR",
         "slide-0"
       ],
       "settings": {
@@ -48,14 +124,15 @@
     "all-products": {
       "type": "featured-collection",
       "settings": {
+        "collection": "top-tendencias-en-sistemas",
+        "products_to_show": 12,
         "title": "🔥 Top Tendencias en Sistemas",
         "heading_size": "h1",
         "description": "<p>Explora los equipos más instalados y buscados en el mercado actual.</p>",
         "show_description": true,
         "description_style": "subtitle",
-        "collection": "top-tendencias-en-sistemas",
-        "products_to_show": 12,
         "columns_desktop": 4,
+        "enable_desktop_slider": true,
         "full_width": true,
         "show_view_all": true,
         "view_all_style": "solid",
@@ -65,7 +142,6 @@
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": true,
-        "enable_desktop_slider": true,
         "quick_add": "standard",
         "columns_mobile": "2",
         "swipe_on_mobile": true,

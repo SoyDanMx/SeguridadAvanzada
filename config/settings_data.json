@@ -10,7 +10,7 @@
 {
   "current": {
     "logo": "shopify://shop_images/logo_seguridad_avanzada-removebg-preview_8086c7a2-7e58-4140-b6ab-5198b9c9ba64.png",
-    "logo_width": 190,
+    "logo_width": 250,
     "type_header_font": "murecho_n4",
     "heading_scale": 100,
     "type_body_font": "murecho_n4",
@@ -155,7 +155,7 @@
           "background": "#ffffff",
           "background_gradient": "",
           "text": "#121212",
-          "button": "#2A75D3",
+          "button": "#2a75d3",
           "button_label": "#ffffff",
           "secondary_button_label": "#121212",
           "shadow": "#121212"
