@@ -1,7 +1,7 @@
 {% comment %}
   SECCIÓN: MARCAS DESTACADAS (ESTILO SYSCOM)
-  Carrusel infinito y dinámico de 2 filas con tarjetas de marcas líderes,
-  efectos hover, enlaces de búsqueda por fabricante y personalizable desde el editor.
+  Carrusel infinito de 2 filas con logos oficiales de fabricantes,
+  tarjetas estilizadas, efectos hover y enlaces directos de búsqueda.
 {% endcomment %}
 
 <style>
@@ -77,7 +77,7 @@
   .marcas-marquee-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -93,11 +93,11 @@
   }
 
   .marcas-track.track-forward {
-    animation: marcasScroll 45s linear infinite;
+    animation: marcasScroll 50s linear infinite;
   }
 
   .marcas-track.track-reverse {
-    animation: marcasScrollReverse 45s linear infinite;
+    animation: marcasScrollReverse 50s linear infinite;
   }
 
   .marcas-marquee-wrapper:hover .marcas-track {
@@ -126,11 +126,11 @@
   .marca-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 0.85rem 1.4rem;
-    height: 70px;
-    min-width: 160px;
-    max-width: 190px;
+    border-radius: 14px;
+    padding: 0.9rem 1.5rem;
+    height: 76px;
+    min-width: 175px;
+    max-width: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -143,7 +143,7 @@
   .marca-card:hover {
     transform: translateY(-3px);
     border-color: #3b82f6;
-    box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.15);
+    box-shadow: 0 12px 24px -6px rgba(59, 130, 246, 0.18);
   }
 
   .marca-content {
@@ -154,41 +154,18 @@
     height: 100%;
   }
 
-  .marca-name-text {
-    font-size: 1.05rem;
-    font-weight: 800;
-    color: #1e293b;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    white-space: nowrap;
-    transition: color 0.2s ease;
+  .marca-logo-svg {
+    max-height: 40px;
+    max-width: 145px;
+    width: auto;
+    height: auto;
+    display: block;
+    transition: transform 0.2s ease;
   }
 
-  .marca-card:hover .marca-name-text {
-    color: #2563eb;
+  .marca-card:hover .marca-logo-svg {
+    transform: scale(1.04);
   }
-
-  /* Logos con acentos de color o estilo característico */
-  .marca-hikvision { color: #d32f2f; font-weight: 900; }
-  .marca-dahua { color: #d90429; font-weight: 900; }
-  .marca-hilook { color: #0284c7; font-weight: 900; }
-  .marca-ubiquiti { color: #0066ff; font-weight: 800; }
-  .marca-tplink { color: #00a4b4; font-weight: 800; }
-  .marca-ruijie { color: #e11d48; font-weight: 900; }
-  .marca-huawei { color: #cf0a2c; font-weight: 800; }
-  .marca-zkteco { color: #16a34a; font-weight: 900; }
-  .marca-wd { color: #0f172a; font-weight: 900; }
-  .marca-seagate { color: #059669; font-weight: 800; }
-  .marca-fanvil { color: #dc2626; font-weight: 800; }
-  .marca-grandstream { color: #2563eb; font-weight: 800; }
-  .marca-suprema { color: #be123c; font-weight: 900; }
-  .marca-came { color: #0284c7; font-weight: 900; }
-  .marca-faac { color: #0f172a; font-weight: 900; }
-  .marca-hid { color: #1d4ed8; font-weight: 900; }
-  .marca-synology { color: #334155; font-weight: 800; }
-  .marca-yonusa { color: #ca8a04; font-weight: 900; }
-  .marca-cambium { color: #0369a1; font-weight: 800; }
-  .marca-idemia { color: #6b21a8; font-weight: 900; }
 </style>
 
 <section class="marcas-destacadas-section">
@@ -208,89 +185,277 @@
   </div>
 
   <div class="marcas-marquee-wrapper">
-    <!-- FILA 1 -->
+    
+    <!-- FILA 1 (Scroll Hacia la Izquierda) -->
     <div class="marcas-track track-forward">
       {% for i in (1..2) %}
-        <a href="/search?q=HIKVISION" class="marca-card" title="HIKVISION">
-          <div class="marca-content"><span class="marca-name-text marca-hikvision">HIKVISION</span></div>
+        <!-- Allied Telesis -->
+        <a href="/search?q=Allied+Telesis" class="marca-card" title="Allied Telesis">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 160 40">
+              <text x="0" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="900" fill="#0f172a" letter-spacing="-0.5">Allied Telesis</text>
+              <circle cx="150" cy="22" r="4" fill="#dc2626"/>
+            </svg>
+          </div>
         </a>
-        <a href="/search?q=DAHUA" class="marca-card" title="DAHUA">
-          <div class="marca-content"><span class="marca-name-text marca-dahua">alhua</span></div>
+
+        <!-- ALTAI Super WiFi -->
+        <a href="/search?q=ALTAI" class="marca-card" title="ALTAI Super WiFi">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 160 40">
+              <text x="5" y="23" font-family="system-ui, -apple-system, sans-serif" font-size="21" font-weight="900" fill="#dc2626" letter-spacing="1">ALTAI</text>
+              <text x="5" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="800" fill="#475569" letter-spacing="2">SUPER WiFi</text>
+            </svg>
+          </div>
         </a>
-        <a href="/search?q=HUAWEI" class="marca-card" title="HUAWEI">
-          <div class="marca-content"><span class="marca-name-text marca-huawei">HUAWEI</span></div>
+
+        <!-- Cambium Networks -->
+        <a href="/search?q=Cambium" class="marca-card" title="Cambium Networks">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 160 40">
+              <circle cx="18" cy="20" r="11" fill="none" stroke="#003366" stroke-width="3"/>
+              <path d="M14 20a4 4 0 0 1 8 0" stroke="#0099ff" stroke-width="3" fill="none"/>
+              <text x="36" y="19" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800" fill="#003366">Cambium</text>
+              <text x="36" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#64748b">Networks</text>
+            </svg>
+          </div>
         </a>
-        <a href="/search?q=RUIJIE" class="marca-card" title="RUIJIE NETWORKS">
-          <div class="marca-content"><span class="marca-name-text marca-ruijie">Ruijie</span></div>
-        </a>
-        <a href="/search?q=FANVIL" class="marca-card" title="FANVIL">
-          <div class="marca-content"><span class="marca-name-text marca-fanvil">Fanvil</span></div>
-        </a>
-        <a href="/search?q=FIBERHOME" class="marca-card" title="FIBERHOME">
-          <div class="marca-content"><span class="marca-name-text" style="color:#e056fd; font-weight:800;">FiberHome</span></div>
-        </a>
-        <a href="/search?q=CAMBIUM" class="marca-card" title="CAMBIUM NETWORKS">
-          <div class="marca-content"><span class="marca-name-text marca-cambium">Cambium</span></div>
-        </a>
-        <a href="/search?q=GRANDSTREAM" class="marca-card" title="GRANDSTREAM">
-          <div class="marca-content"><span class="marca-name-text marca-grandstream">GRANDSTREAM</span></div>
-        </a>
-        <a href="/search?q=DJI" class="marca-card" title="DJI ENTERPRISE">
-          <div class="marca-content"><span class="marca-name-text" style="font-weight:900;">DJI ENTERPRISE</span></div>
-        </a>
+
+        <!-- CAME -->
         <a href="/search?q=CAME" class="marca-card" title="CAME">
-          <div class="marca-content"><span class="marca-name-text marca-came">CAME &#x2719;</span></div>
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 140 40">
+              <text x="10" y="27" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="900" fill="#0f172a" letter-spacing="1">CAME</text>
+              <path d="M102 18h12M108 12v12" stroke="#00b4d8" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
         </a>
+
+        <!-- HUAWEI -->
+        <a href="/search?q=HUAWEI" class="marca-card" title="HUAWEI">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 150 40">
+              <g fill="#cf0a2c" transform="translate(10, 5) scale(0.65)">
+                <path d="M20 0c-3 8 0 16 0 16s3-8 0-16z"/>
+                <path d="M12 4c-5 7-4 15-4 15s6-6 4-15z"/>
+                <path d="M28 4c5 7 4 15 4 15s-6-6-4-15z"/>
+                <path d="M5 12c-7 5-8 13-8 13s8-3 8-13z"/>
+                <path d="M35 12c7 5 8 13 8 13s-8-3-8-13z"/>
+              </g>
+              <text x="48" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="900" fill="#1e293b" letter-spacing="1.5">HUAWEI</text>
+            </svg>
+          </div>
+        </a>
+
+        <!-- Fanvil -->
+        <a href="/search?q=Fanvil" class="marca-card" title="Fanvil">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 140 40">
+              <text x="10" y="27" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="800" fill="#dc2626" letter-spacing="0.5">Fanvil</text>
+              <rect x="7" y="32" width="80" height="2" fill="#dc2626"/>
+            </svg>
+          </div>
+        </a>
+
+        <!-- FiberHome -->
+        <a href="/search?q=FiberHome" class="marca-card" title="FiberHome">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 150 40">
+              <path d="M15 10c15-8 40-5 50 10" fill="none" stroke="#f97316" stroke-width="3"/>
+              <text x="10" y="27" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="900" fill="#1e3a8a" font-style="italic">FiberHome</text>
+            </svg>
+          </div>
+        </a>
+
+        <!-- Grandstream -->
+        <a href="/search?q=Grandstream" class="marca-card" title="Grandstream">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 160 40">
+              <path d="M15 12l8 8-8 8-4-4 4-4-4-4z" fill="#0284c7"/>
+              <text x="32" y="24" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="900" fill="#0369a1" letter-spacing="1">GRANDSTREAM</text>
+            </svg>
+          </div>
+        </a>
+
+        <!-- DJI Enterprise -->
+        <a href="/search?q=DJI" class="marca-card" title="DJI Enterprise">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 160 40">
+              <text x="10" y="25" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="900" fill="#0f172a" letter-spacing="1">dji</text>
+              <text x="52" y="23" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#475569" letter-spacing="1.5">ENTERPRISE</text>
+            </svg>
+          </div>
+        </a>
+
+        <!-- Ruijie Networks -->
+        <a href="/search?q=Ruijie" class="marca-card" title="Ruijie Networks">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 150 40">
+              <text x="10" y="25" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="900" fill="#e11d48" font-style="italic">Ruijie</text>
+              <text x="10" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="8" font-weight="700" fill="#64748b" letter-spacing="1">NETWORKS</text>
+            </svg>
+          </div>
+        </a>
+
+        <!-- FAAC -->
         <a href="/search?q=FAAC" class="marca-card" title="FAAC">
-          <div class="marca-content"><span class="marca-name-text marca-faac">FAAC</span></div>
-        </a>
-        <a href="/search?q=ALTAI" class="marca-card" title="ALTAI SUPER WIFI">
-          <div class="marca-content"><span class="marca-name-text" style="color:#b91c1c; font-weight:900;">ALTAI WiFi</span></div>
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 140 40">
+              <text x="10" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="900" fill="#0f172a" font-style="italic" letter-spacing="1">FAAC</text>
+            </svg>
+          </div>
         </a>
       {% endfor %}
     </div>
 
-    <!-- FILA 2 -->
+    <!-- FILA 2 (Scroll Hacia la Derecha) -->
     <div class="marcas-track track-reverse">
       {% for i in (1..2) %}
-        <a href="/search?q=HILOOK" class="marca-card" title="HiLook">
-          <div class="marca-content"><span class="marca-name-text marca-hilook">HiLook</span></div>
+        <!-- Hanwha Vision -->
+        <a href="/search?q=Hanwha" class="marca-card" title="Hanwha Vision">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 160 40">
+              <circle cx="15" cy="20" r="6" fill="#f97316"/>
+              <circle cx="23" cy="16" r="4" fill="#64748b"/>
+              <text x="35" y="20" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="900" fill="#0f172a">Hanwha</text>
+              <text x="35" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#f97316">VISION</text>
+            </svg>
+          </div>
         </a>
-        <a href="/search?q=TP-LINK" class="marca-card" title="TP-LINK">
-          <div class="marca-content"><span class="marca-name-text marca-tplink">tp-link</span></div>
+
+        <!-- Synology -->
+        <a href="/search?q=Synology" class="marca-card" title="Synology">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 150 40">
+              <text x="10" y="27" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="800" fill="#334155" letter-spacing="0.5">Synology</text>
+            </svg>
+          </div>
         </a>
-        <a href="/search?q=UBIQUITI" class="marca-card" title="UBIQUITI UNIFI">
-          <div class="marca-content"><span class="marca-name-text marca-ubiquiti">UBIQUITI [U]</span></div>
+
+        <!-- Suprema -->
+        <a href="/search?q=Suprema" class="marca-card" title="Suprema">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 150 40">
+              <text x="10" y="24" font-family="system-ui, -apple-system, sans-serif" font-size="21" font-weight="900" fill="#be123c">suprema</text>
+              <text x="10" y="33" font-family="system-ui, -apple-system, sans-serif" font-size="7" font-weight="700" fill="#64748b" letter-spacing="1">AUTHORIZED PARTNER</text>
+            </svg>
+          </div>
         </a>
-        <a href="/search?q=SYNOLOGY" class="marca-card" title="SYNOLOGY">
-          <div class="marca-content"><span class="marca-name-text marca-synology">Synology</span></div>
+
+        <!-- TP-Link -->
+        <a href="/search?q=TP-Link" class="marca-card" title="TP-Link">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 150 40">
+              <path d="M12 12a8 8 0 0 1 12 0v8a4 4 0 0 1-8 0" fill="none" stroke="#00a4b4" stroke-width="3"/>
+              <text x="36" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#00a4b4">tp-link</text>
+            </svg>
+          </div>
         </a>
-        <a href="/search?q=SUPREMA" class="marca-card" title="SUPREMA">
-          <div class="marca-content"><span class="marca-name-text marca-suprema">suprema</span></div>
+
+        <!-- Ubiquiti (Ui) -->
+        <a href="/search?q=Ubiquiti" class="marca-card" title="Ubiquiti">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 150 40">
+              <rect x="10" y="8" width="24" height="24" rx="6" fill="#0066ff"/>
+              <text x="17" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="900" fill="#ffffff">U</text>
+              <text x="42" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="17" font-weight="800" fill="#0f172a" letter-spacing="0.5">UBIQUITI</text>
+            </svg>
+          </div>
         </a>
-        <a href="/search?q=ZKTECO" class="marca-card" title="ZKTECO">
-          <div class="marca-content"><span class="marca-name-text marca-zkteco">ZKTeco</span></div>
+
+        <!-- LinkedPro -->
+        <a href="/search?q=Linkedpro" class="marca-card" title="LinkedPro">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 150 40">
+              <text x="10" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="21" font-weight="900" fill="#0f172a">linked</text>
+              <text x="75" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="21" font-weight="900" fill="#0284c7">pro</text>
+            </svg>
+          </div>
         </a>
-        <a href="/search?q=HID" class="marca-card" title="HID GLOBAL">
-          <div class="marca-content"><span class="marca-name-text marca-hid">HID</span></div>
+
+        <!-- AUFIT -->
+        <a href="/search?q=AUFIT" class="marca-card" title="AUFIT">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 140 40">
+              <text x="10" y="27" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="900" fill="#1e3a8a" letter-spacing="1">AUFIT</text>
+            </svg>
+          </div>
         </a>
+
+        <!-- HID Global -->
+        <a href="/search?q=HID" class="marca-card" title="HID">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 140 40">
+              <rect x="10" y="8" width="55" height="24" rx="4" fill="#004b87"/>
+              <text x="17" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="17" font-weight="900" fill="#ffffff" letter-spacing="1">HID</text>
+            </svg>
+          </div>
+        </a>
+
+        <!-- HIKVISION -->
+        <a href="/search?q=HIKVISION" class="marca-card" title="HIKVISION">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 160 40">
+              <text x="8" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="21" font-weight="900" fill="#d32f2f" font-style="italic">HIK</text>
+              <text x="50" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="21" font-weight="900" fill="#1e293b" font-style="italic">VISION</text>
+            </svg>
+          </div>
+        </a>
+
+        <!-- IDEMIA -->
         <a href="/search?q=IDEMIA" class="marca-card" title="IDEMIA">
-          <div class="marca-content"><span class="marca-name-text marca-idemia">&lang;(&bull;)&rang; IDEMIA</span></div>
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 150 40">
+              <path d="M12 12a10 10 0 0 1 0 16M16 14a6 6 0 0 1 0 12M20 16a2 2 0 0 1 0 8" fill="none" stroke="#6b21a8" stroke-width="2" stroke-linecap="round"/>
+              <text x="32" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="19" font-weight="900" fill="#6b21a8" letter-spacing="1">IDEMIA</text>
+            </svg>
+          </div>
         </a>
-        <a href="/search?q=WESTERN+DIGITAL" class="marca-card" title="WESTERN DIGITAL">
-          <div class="marca-content"><span class="marca-name-text marca-wd">WD Purple</span></div>
+
+        <!-- KENWOOD -->
+        <a href="/search?q=KENWOOD" class="marca-card" title="KENWOOD">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 150 40">
+              <polygon points="12,12 18,20 12,28" fill="#dc2626"/>
+              <text x="24" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="19" font-weight="900" fill="#0f172a" letter-spacing="0.5">KENWOOD</text>
+            </svg>
+          </div>
         </a>
-        <a href="/search?q=SEAGATE" class="marca-card" title="SEAGATE SKYHAWK">
-          <div class="marca-content"><span class="marca-name-text marca-seagate">SEAGATE</span></div>
+
+        <!-- Dahua Technology -->
+        <a href="/search?q=Dahua" class="marca-card" title="Dahua Technology">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 150 40">
+              <text x="10" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="900" fill="#d90429" font-style="italic">alhua</text>
+              <text x="10" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="7" font-weight="700" fill="#64748b" letter-spacing="1.5">TECHNOLOGY</text>
+            </svg>
+          </div>
         </a>
-        <a href="/search?q=YONUSA" class="marca-card" title="YONUSA">
-          <div class="marca-content"><span class="marca-name-text marca-yonusa">YONUSA &#x26a1;</span></div>
+
+        <!-- Western Digital Purple -->
+        <a href="/search?q=Western+Digital" class="marca-card" title="Western Digital">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 150 40">
+              <text x="10" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="900" fill="#0f172a">WD</text>
+              <text x="44" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="800" fill="#7c3aed">Purple</text>
+              <text x="10" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="7" font-weight="700" fill="#64748b">SURVEILLANCE STORAGE</text>
+            </svg>
+          </div>
         </a>
-        <a href="/search?q=LINKEDPRO" class="marca-card" title="LINKEDPRO">
-          <div class="marca-content"><span class="marca-name-text" style="color:#0284c7; font-weight:800;">linkedpro</span></div>
+
+        <!-- Seagate SkyHawk -->
+        <a href="/search?q=Seagate" class="marca-card" title="Seagate">
+          <div class="marca-content">
+            <svg class="marca-logo-svg" viewBox="0 0 150 40">
+              <circle cx="18" cy="20" r="8" fill="none" stroke="#059669" stroke-width="3"/>
+              <text x="32" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="900" fill="#0f172a">SEAGATE</text>
+              <text x="32" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="800" fill="#059669">SkyHawk</text>
+            </svg>
+          </div>
         </a>
       {% endfor %}
     </div>
+
   </div>
 </section>
 
