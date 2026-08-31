@@ -20,13 +20,6 @@
         "facebook_height": 500
       }
     },
-    "marcas_destacadas": {
-      "type": "marcas-destacadas",
-      "settings": {
-        "title": "Marcas Destacadas",
-        "subtitle": "Distribuidores autorizados de las marcas líderes en seguridad electrónica y telecomunicaciones."
-      }
-    },
     "footer": {
       "type": "footer",
       "settings": {
@@ -44,7 +37,6 @@
   },
   "order": [
     "facebook_community",
-    "marcas_destacadas",
     "footer"
   ]
 }
