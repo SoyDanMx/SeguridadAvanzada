@@ -148,7 +148,99 @@
     display: block;
   }
 
-  /* Tarjetas Corporativas Compactas (Nuo USA & Tulbox) */
+  /* Afiliación a Tulbox Servicios Técnicos */
+  .ws-tulbox-affiliation {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.35);
+    border-radius: 12px;
+    padding: 1.25rem 1.4rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .ws-tulbox-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    align-items: flex-start;
+  }
+
+  .ws-tulbox-badge {
+    background: rgba(124, 58, 237, 0.3);
+    color: #c4b5fd;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    border: 1px solid rgba(139, 92, 246, 0.4);
+    letter-spacing: 0.02em;
+  }
+
+  .ws-tulbox-logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+  .ws-tulbox-logo-link:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.6));
+  }
+
+  .ws-tulbox-logo-img {
+    height: 46px;
+    max-width: 210px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .ws-tulbox-actions {
+    display: flex;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .ws-tulbox-btn {
+    background: #7c3aed;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .ws-tulbox-btn:hover {
+    background: #6d28d9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+  }
+
+  .ws-tulbox-info-btn {
+    background: transparent;
+    border: none;
+    color: #cbd5e1;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    padding: 0.5rem 0;
+    transition: color 0.2s ease;
+  }
+
+  .ws-tulbox-info-btn:hover {
+    color: #ffffff;
+  }
+
+  /* Tarjetas Corporativas Compactas (Nuo USA) */
   .ws-corp-triggers {
     display: flex;
     flex-direction: column;
@@ -588,14 +680,33 @@
           </a>
         </div>
 
+        <!-- AFILIACIÓN TULBOX CON LOGO Y ENLACE -->
+        <div class="ws-tulbox-affiliation">
+          <div class="ws-tulbox-header">
+            <span class="ws-tulbox-badge">⚡ Instalaciones Certificadas</span>
+            <a href="https://tulbox.pro/" target="_blank" class="ws-tulbox-logo-link" title="Tulbox Servicios Técnicos">
+              <img
+                src="{{ 'tulbox-logo-dark.png' | asset_url }}"
+                alt="Tulbox Servicios Técnicos"
+                class="ws-tulbox-logo-img"
+                loading="lazy"
+              >
+            </a>
+          </div>
+          <div class="ws-tulbox-actions">
+            <a href="https://tulbox.pro/" target="_blank" class="ws-tulbox-btn">
+              Conocer Tulbox.pro &rsaquo;
+            </a>
+            <button class="ws-tulbox-info-btn" id="openTulboxModalBtn" type="button">
+              Ver garantía y cobertura
+            </button>
+          </div>
+        </div>
+
         <!-- Triggers a Modales Corporativos -->
         <div class="ws-corp-triggers">
           <div class="ws-corp-pill" id="openUsaModalBtn" role="button" tabindex="0">
             <span>🇺🇸 Nuo Networks, Inc. (Delaware US C-Corp)</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-          <div class="ws-corp-pill" id="openTulboxModalBtn" role="button" tabindex="0">
-            <span>⚡ Instalaciones Certificadas Tulbox</span>
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
         </div>
