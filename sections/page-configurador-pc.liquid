@@ -1140,6 +1140,387 @@
       justify-content: center;
     }
   }
+
+  /* =========================================
+     MODAL DE PLANTILLAS RÁPIDAS (SHOWCASE)
+     ========================================= */
+  .pcb-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease-in-out;
+  }
+
+  .pcb-modal-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .pcb-modal-dialog {
+    background: #ffffff;
+    border-radius: 18px;
+    width: 100%;
+    max-width: 1180px;
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transform: scale(0.95);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+  }
+
+  .pcb-modal-overlay.open .pcb-modal-dialog {
+    transform: scale(1);
+  }
+
+  .pcb-modal-header {
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .pcb-modal-badge {
+    display: inline-block;
+    background: rgba(14, 165, 233, 0.2);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .pcb-modal-title {
+    font-size: 1.65rem;
+    font-weight: 800;
+    margin: 0 0 0.4rem 0;
+    color: #ffffff;
+  }
+
+  .pcb-modal-desc {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    margin: 0;
+    max-width: 750px;
+    line-height: 1.45;
+  }
+
+  .pcb-modal-close-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+
+  .pcb-modal-close-btn:hover {
+    background: rgba(239, 68, 68, 0.9);
+    transform: rotate(90deg);
+  }
+
+  .pcb-modal-tabs {
+    display: flex;
+    gap: 0.6rem;
+    padding: 1rem 2rem;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    overflow-x: auto;
+  }
+
+  .pcb-modal-tab {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    padding: 0.55rem 1.1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+  }
+
+  .pcb-modal-tab.active, .pcb-modal-tab:hover {
+    background: #1e3a8a;
+    color: #ffffff;
+    border-color: #1e3a8a;
+    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.25);
+  }
+
+  .pcb-modal-body {
+    padding: 1.75rem 2rem;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .pcb-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .pcb-modal-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1080px) {
+    .pcb-modal-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .pcb-template-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .pcb-template-card:hover {
+    border-color: #2563eb;
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.15);
+    transform: translateY(-3px);
+  }
+
+  .pcb-tpl-top {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .pcb-tpl-img {
+    width: 78px;
+    height: 78px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 5px;
+    flex-shrink: 0;
+  }
+
+  .pcb-tpl-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .pcb-tpl-cat-badge {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #1e40af;
+    background: #eff6ff;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 0.35rem;
+  }
+
+  .pcb-tpl-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 0.3rem 0;
+    line-height: 1.3;
+  }
+
+  .pcb-tpl-perf {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    margin-bottom: 0.85rem;
+  }
+
+  .pcb-tpl-specs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .pcb-tpl-spec-item {
+    font-size: 0.85rem;
+    color: #475569;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.45rem;
+    line-height: 1.35;
+  }
+
+  .pcb-tpl-spec-item::before {
+    content: "•";
+    color: #2563eb;
+    font-weight: bold;
+  }
+
+  .pcb-tpl-bottom {
+    border-top: 1px solid #f1f5f9;
+    padding-top: 1.1rem;
+  }
+
+  .pcb-tpl-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.95rem;
+  }
+
+  .pcb-tpl-price-label {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 600;
+  }
+
+  .pcb-tpl-price-val {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #0f172a;
+  }
+
+  .pcb-tpl-actions {
+    display: flex;
+    gap: 0.65rem;
+  }
+
+  .pcb-tpl-btn-load {
+    flex: 1;
+    background: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+    padding: 0.75rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+  }
+
+  .pcb-tpl-btn-load:hover {
+    background: #dbeafe;
+    color: #1d4ed8;
+  }
+
+  .pcb-tpl-btn-buy {
+    flex: 1;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
+  }
+
+  .pcb-tpl-btn-buy:hover {
+    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.5);
+  }
+
+  .pcb-modal-footer {
+    padding: 1.15rem 2rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .pcb-modal-guarantee {
+    font-size: 0.85rem;
+    color: #475569;
+  }
+
+  .pcb-modal-btn-secondary {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    padding: 0.55rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .pcb-preset-modal-trigger-btn {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 0.7rem 1.45rem;
+    border-radius: 24px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    transition: all 0.2s;
+    animation: pcbPulse 3s infinite;
+  }
+
+  .pcb-preset-modal-trigger-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 22px rgba(37, 99, 235, 0.6);
+  }
+
+  @keyframes pcbPulse {
+    0%, 100% { box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4); }
+    50% { box-shadow: 0 4px 22px rgba(14, 165, 233, 0.65); }
+  }
 </style>
 
 <div class="pcb-wrapper">
@@ -1155,15 +1536,21 @@
       </p>
 
       <div class="pcb-hero-presets">
-        <span style="font-weight: 700; align-self: center; margin-right: 0.5rem; color: #93c5fd;">Plantillas Rápidas:</span>
-        <button type="button" class="pcb-preset-btn" onclick="pcbApp.loadPreset('office')">
-          💼 Oficina B2B
+        <button type="button" class="pcb-preset-modal-trigger-btn" onclick="pcbApp.openTemplatesModal('all')">
+          ✨ Ver Plantillas y Ensambles Recomendados (6 opciones)
         </button>
-        <button type="button" class="pcb-preset-btn" onclick="pcbApp.loadPreset('gamer')">
+        <span style="font-weight: 700; align-self: center; margin: 0 0.5rem; color: #93c5fd;">o por categoría:</span>
+        <button type="button" class="pcb-preset-btn" onclick="pcbApp.openTemplatesModal('office')">
+          🏢 Oficina & PyME
+        </button>
+        <button type="button" class="pcb-preset-btn" onclick="pcbApp.openTemplatesModal('cctv')">
+          📹 Estación CCTV
+        </button>
+        <button type="button" class="pcb-preset-btn" onclick="pcbApp.openTemplatesModal('gaming')">
           🎮 Gamer E-Sports
         </button>
-        <button type="button" class="pcb-preset-btn" onclick="pcbApp.loadPreset('workstation')">
-          🚀 Workstation Render
+        <button type="button" class="pcb-preset-btn" onclick="pcbApp.openTemplatesModal('workstation')">
+          🏗️ Workstation 3D
         </button>
       </div>
     </div>
@@ -1245,6 +1632,57 @@
 
     </div>
 
+  </div>
+</div>
+
+<!-- MODAL DE PLANTILLAS RÁPIDAS (SHOWCASE) -->
+<div class="pcb-modal-overlay" id="pcbTemplatesModal" style="display: none;" onclick="if(event.target === this) pcbApp.closeTemplatesModal()">
+  <div class="pcb-modal-dialog">
+    <div class="pcb-modal-header">
+      <div>
+        <div class="pcb-modal-badge">⚡ Ensambles Curados por Ingenieros</div>
+        <h2 class="pcb-modal-title">Plantillas Rápidas & Ensambles Recomendados</h2>
+        <p class="pcb-modal-desc">
+          Elige una configuración base lista para usar y ensamble garantizado. Puedes cargarla al configurador para ajustarla a tu medida o comprarla directamente.
+        </p>
+      </div>
+      <button type="button" class="pcb-modal-close-btn" onclick="pcbApp.closeTemplatesModal()" aria-label="Cerrar modal">✕</button>
+    </div>
+
+    <!-- PESTAÑAS DE FILTRO DENTRO DEL MODAL -->
+    <div class="pcb-modal-tabs">
+      <button type="button" class="pcb-modal-tab active" id="pcbTab_all" onclick="pcbApp.filterTemplates('all')">
+        🔘 Todas las Plantillas (6)
+      </button>
+      <button type="button" class="pcb-modal-tab" id="pcbTab_office" onclick="pcbApp.filterTemplates('office')">
+        🏢 Oficina & Facturación (2)
+      </button>
+      <button type="button" class="pcb-modal-tab" id="pcbTab_cctv" onclick="pcbApp.filterTemplates('cctv')">
+        📹 Monitoreo CCTV Pro (1)
+      </button>
+      <button type="button" class="pcb-modal-tab" id="pcbTab_gaming" onclick="pcbApp.filterTemplates('gaming')">
+        🎮 Gaming E-Sports (2)
+      </button>
+      <button type="button" class="pcb-modal-tab" id="pcbTab_workstation" onclick="pcbApp.filterTemplates('workstation')">
+        🏗️ Workstation 3D (1)
+      </button>
+    </div>
+
+    <!-- CUERPO CON GRID DE PLANTILLAS -->
+    <div class="pcb-modal-body">
+      <div class="pcb-modal-grid" id="pcbTemplatesGrid">
+        <!-- Renderizado dinámicamente vía JavaScript -->
+      </div>
+    </div>
+
+    <div class="pcb-modal-footer">
+      <div class="pcb-modal-guarantee">
+        <span>🛡️ <strong>Garantía Total:</strong> 1 año de garantía oficial &bull; Pruebas antiestáticas de 2h &bull; BIOS actualizado &bull; Factura fiscal CFDI 4.0</span>
+      </div>
+      <button type="button" class="pcb-modal-btn-secondary" onclick="pcbApp.closeTemplatesModal()">
+        Cerrar y volver al configurador
+      </button>
+    </div>
   </div>
 </div>
 
@@ -1814,61 +2252,316 @@
         }
       },
 
-      loadPreset: function(type) {
-        this.selected = {};
-        if (type === 'office') {
-          // AMD AM4 Office build
-          const cpu = CATALOG.cpu.find(x => x.socket === 'AM4') || CATALOG.cpu[0];
-          const mobo = CATALOG.mobo.find(x => x.socket === 'AM4') || CATALOG.mobo[0];
-          const ram = CATALOG.ram.find(x => x.ramType === 'DDR4') || CATALOG.ram[0];
-          const ssd = CATALOG.ssd[0];
-          const cs = CATALOG.case[0];
-          const psu = CATALOG.psu[0];
+      templates: [
+        {
+          id: 'pyme-pos',
+          category: 'office',
+          catLabel: '🏪 Punto de Venta & Facturación',
+          title: 'PC PyME Facturación CFDI 4.0',
+          subtitle: 'Arranque ultrarrápido y bajo consumo para tiendas, farmacias y despachos.',
+          perfBadge: '⚡ Facturación y ERPs instantáneos',
+          img: 'https://static.ctonline.mx/imagenes/GABACT320/GABACT320_full.jpg',
+          inStock: true,
+          highlights: [
+            'Procesador AMD Ryzen 7 5700G (8 núcleos / 16 hilos + Gráficos Radeon)',
+            'Tarjeta Madre ASUS PRIME A520M-K',
+            'Memoria RAM 16GB ADATA DDR4',
+            'SSD ADATA M.2 NVMe 512GB',
+            'Gabinete compacto ACTECK GI215 + Fuente 500W'
+          ],
+          components: {
+            cpu: 'amd-ryzen-7-5700g-cpuamd2290',
+            mobo: 'asus-prime-a520m-k-mbdass5820',
+            ram: 'adata-premier-memdat5970',
+            ssd: 'adata-asx8200pnp-512gt-c-ddudat1020',
+            case: 'acteck-gi215-gabact320',
+            psu: 'acteck-ac-938143-gabact340'
+          }
+        },
+        {
+          id: 'cctv-station',
+          category: 'cctv',
+          catLabel: '📹 Seguridad & Videovigilancia',
+          title: 'Estación de Monitoreo CCTV Pro',
+          subtitle: 'Diseñada para VMS Hikvision iVMS-4200, Dahua SmartPSS y Milestone.',
+          perfBadge: '📹 Hasta 32 cámaras H.265 simultáneas (Doble Monitor)',
+          img: 'https://static.ctonline.mx/imagenes/GABACT330/GABACT330_full.jpg',
+          inStock: true,
+          highlights: [
+            'Procesador Intel Core i5-12400F (6 núcleos hasta 4.4 GHz)',
+            'Tarjeta Madre ASUS PRIME H610M-K (LGA1700)',
+            'Memoria RAM 16GB (2x8GB) Kingston FURY Beast',
+            'SSD ADATA LEGEND 860 1TB NVMe Gen4',
+            'GPU MSI GeForce GT 1030 2GB Low Profile (Doble pantalla HDMI/DVI)',
+            'Gabinete ventilado ACTECK GC470 + Fuente FT600EW 600W'
+          ],
+          components: {
+            cpu: 'procesador-intel-core-i5-12400f-lga1700',
+            mobo: 'asus-prime-h610m-k-mbdass6240',
+            ram: 'kingston-technology-fury-beast-memkgn2870',
+            ssd: 'adata-legend-860-ddudat2190',
+            gpu: 'tarjeta-de-video-msi-geforce-gt-1030-2gb',
+            case: 'acteck-gc470-gabact330',
+            psu: 'acteck-ft600ew-gabact510'
+          }
+        },
+        {
+          id: 'corp-exec',
+          category: 'office',
+          catLabel: '💼 Corporativa & PyME',
+          title: 'PC Ejecutiva Multitarea Pro',
+          subtitle: 'Para directores, contadores y gerentes con Excel masivo y múltiples pantallas.',
+          perfBadge: '📊 Multitarea pesada, ERPs y análisis financiero',
+          img: 'https://static.ctonline.mx/imagenes/GABACT260/GABACT260_full.jpg',
+          inStock: true,
+          highlights: [
+            'Procesador Intel Core i5-12400F LGA1700',
+            'Tarjeta Madre GIGABYTE MB H610M K DDR4',
+            'Memoria RAM 16GB ADATA Hunter DDR4',
+            'SSD ADATA LEGEND 860 1TB M.2 NVMe',
+            'Gabinete silencioso ACTECK GM450 + Fuente 600W',
+            'Monitor ACTECK SP270 27" Full HD incluido'
+          ],
+          components: {
+            cpu: 'procesador-intel-core-i5-12400f-lga1700',
+            mobo: 'gigabyte-mb-gigabyte-h610m-k-ddr4-mbdgig5040',
+            ram: 'adata-hunter-memdat7220',
+            ssd: 'adata-legend-860-ddudat2190',
+            case: 'acteck-gm450-gabact260',
+            psu: 'acteck-es-05004e-gabact360',
+            monitor: 'acteck-sp270-monact030'
+          }
+        },
+        {
+          id: 'gaming-esports',
+          category: 'gaming',
+          catLabel: '🎮 Gaming E-Sports',
+          title: 'PC Gamer Delta RTX 5060',
+          subtitle: 'Rendimiento competitivo fluido en 1080p Ultra con Ray Tracing y DLSS 4.0.',
+          perfBadge: '🎯 144+ FPS en Warzone, Valorant, Fortnite y CS2',
+          img: 'https://static.ctonline.mx/imagenes/GABACT170/GABACT170_5_full.jpg',
+          inStock: true,
+          highlights: [
+            'Procesador AMD Ryzen 5 7600X (Socket AM5, DDR5)',
+            'Tarjeta Madre GIGABYTE B650M D3HP (AM5)',
+            'Memoria RAM 16GB ADATA Hunter DDR5',
+            'SSD ADATA LEGEND 900 1TB Gen4 NVMe (Hasta 7000 MB/s)',
+            'GPU GIGABYTE RTX 5060 EAGLE OC 8GB',
+            'Disipador Balam Rush EX50',
+            'Gabinete ACTECK KIOTO GC460 RGB Cristal Templado + Fuente 650W'
+          ],
+          components: {
+            cpu: 'amd-7600x-cpuamd2420',
+            mobo: 'gigabyte-b650m-d3hp-mbdgig5140',
+            ram: 'adata-hunter-ddr5-memdat7410',
+            ssd: 'adata-legend-900-ddudat2090',
+            gpu: 'gigabyte-gv-n506teagle-oc-8gd-tvigig3510',
+            cooler: 'balam-rush-ex50-venblr130',
+            case: 'acteck-kioto-gc460-rgb-essential-gabact170',
+            psu: 'balam-rush-gr650b-gabblr500'
+          }
+        },
+        {
+          id: 'workstation-render',
+          category: 'workstation',
+          catLabel: '🏗️ Arquitectura & 3D',
+          title: 'Apex Workstation Render & BIM',
+          subtitle: 'Certificada para flujos intensivos en AutoCAD, Revit, SolidWorks y Premiere Pro.',
+          perfBadge: '🏗️ Render 3D acelerado por hardware & BIM masivo',
+          img: 'https://static.ctonline.mx/imagenes/GABACT610/GABACT610_full.jpg',
+          inStock: true,
+          highlights: [
+            'Procesador Intel Core i7-14700K (20 núcleos / 28 hilos hasta 5.6 GHz)',
+            'Tarjeta Madre GIGABYTE B760M D3HP',
+            'Memoria RAM 32GB (2x16GB) ADATA Hunter',
+            'SSD ADATA LEGEND 900 2TB Gen4 (7400 MB/s)',
+            'GPU ASUS PRIME RX 9070 XT 16GB GDDR6',
+            'Disipador Balam Rush EX70K',
+            'Gabinete ACTECK ONEX GS455 + Fuente Balam Rush 750W 80+ Gold'
+          ],
+          components: {
+            cpu: 'procesador-intel-core-i7-14700k-lga1700',
+            mobo: 'gigabyte-mb-gigabyte-b760m-d3hp-mbdgig5180',
+            ram: 'adata-hunter-memdat7220',
+            ramQty: 2,
+            ssd: 'adata-legend-900-ddudat2100',
+            gpu: 'tarjeta-de-video-asus-prime-rx-9070-xt-16gb',
+            cooler: 'balam-rush-ex70k-venblr190',
+            case: 'acteck-onex-gs455-gabact610',
+            psu: 'balam-rush-gr750g-gabblr480'
+          }
+        },
+        {
+          id: 'gaming-extreme',
+          category: 'gaming',
+          catLabel: '🚀 Gaming 4K & Streamer',
+          title: 'Titan Gaming 4K Ultra & Creator',
+          subtitle: 'Tope de línea para jugar en 4K Ultra con Ray Tracing y streamear sin límites.',
+          perfBadge: '🏆 4K Ultra 120 FPS con Ray Tracing + Streamer OBS',
+          img: 'https://static.ctonline.mx/imagenes/GABACT600/GABACT600_full.jpg',
+          inStock: false,
+          highlights: [
+            'Procesador Intel Core i9-14900K (24 núcleos / 32 hilos hasta 6.0 GHz)',
+            'Tarjeta Madre GIGABYTE B760M D3HP',
+            'Memoria RAM 32GB (2x16GB) Kingston FURY Beast',
+            'SSD ADATA LEGEND 900 2TB NVMe Gen4',
+            'GPU ASUS PRIME RX 9070 XT 16GB (o RTX 5060 Ti)',
+            'Disipador Balam Rush EX90KW',
+            'Gabinete Gamer ACTECK GM767 + Fuente Balam Rush 850W Gold'
+          ],
+          components: {
+            cpu: 'procesador-intel-core-i9-14900k-lga1700',
+            mobo: 'gigabyte-mb-gigabyte-b760m-d3hp-mbdgig5180',
+            ram: 'kingston-technology-fury-beast-memkgn2870',
+            ramQty: 2,
+            ssd: 'adata-legend-900-ddudat2100',
+            gpu: 'tarjeta-de-video-asus-prime-rx-9070-xt-16gb',
+            cooler: 'balam-rush-ex90kw-venblr240',
+            case: 'acteck-gm767-gabact600',
+            psu: 'balam-rush-gr850g-gabblr470'
+          }
+        }
+      ],
 
-          if (cpu) this.selected['cpu'] = { ...cpu, qty: 1 };
-          if (mobo) this.selected['mobo'] = { ...mobo, qty: 1 };
-          if (ram) this.selected['ram'] = { ...ram, qty: 1 };
-          if (ssd) this.selected['ssd'] = { ...ssd, qty: 1 };
-          if (cs) this.selected['case'] = { ...cs, qty: 1 };
-          if (psu) this.selected['psu'] = { ...psu, qty: 1 };
-        } else if (type === 'gamer') {
-          // AM5 / Intel Gamer build
-          const cpu = CATALOG.cpu.find(x => x.socket === 'AM5' || x.socket === 'LGA1700') || CATALOG.cpu[1];
-          const mobo = CATALOG.mobo.find(x => x.socket === cpu.socket) || CATALOG.mobo[1];
-          const ram = CATALOG.ram.find(x => x.ramType === mobo.ramType) || CATALOG.ram[1];
-          const ssd = CATALOG.ssd.find(x => x.capacity === '1TB') || CATALOG.ssd[0];
-          const cs = CATALOG.case.find(x => x.isGamer) || CATALOG.case[1];
-          const psu = CATALOG.psu.find(x => x.watts === '750W' || x.watts === '650W') || CATALOG.psu[1];
-          const cooler = CATALOG.cooler[0];
+      getTemplatePrice: function(tpl) {
+        let total = 0;
+        for (const cat in tpl.components) {
+          const compId = tpl.components[cat];
+          const item = (CATALOG[cat] || []).find(x => x.id === compId);
+          if (item) {
+            const qty = (cat === 'ram' && tpl.ramQty) ? tpl.ramQty : 1;
+            total += item.price * qty;
+          }
+        }
+        return total;
+      },
 
-          if (cpu) this.selected['cpu'] = { ...cpu, qty: 1 };
-          if (mobo) this.selected['mobo'] = { ...mobo, qty: 1 };
-          if (ram) this.selected['ram'] = { ...ram, qty: 1 };
-          if (ssd) this.selected['ssd'] = { ...ssd, qty: 1 };
-          if (cs) this.selected['case'] = { ...cs, qty: 1 };
-          if (psu) this.selected['psu'] = { ...psu, qty: 1 };
-          if (cooler) this.selected['cooler'] = { ...cooler, qty: 1 };
-        } else if (type === 'workstation') {
-          // Workstation build
-          const cpu = CATALOG.cpu.find(x => x.title.includes('Ryzen 7') || x.title.includes('Core i7')) || CATALOG.cpu[0];
-          const mobo = CATALOG.mobo.find(x => x.socket === cpu.socket) || CATALOG.mobo[0];
-          const ram = CATALOG.ram[0];
-          const ssd = CATALOG.ssd.find(x => x.capacity === '2TB' || x.capacity === '1TB') || CATALOG.ssd[0];
-          const cs = CATALOG.case[0];
-          const psu = CATALOG.psu[0];
-          const monitor = CATALOG.monitor[0];
+      openTemplatesModal: function(category) {
+        const modal = document.getElementById('pcbTemplatesModal');
+        if (!modal) return;
+        this.currentModalCategory = category || 'all';
+        this.filterTemplates(this.currentModalCategory);
+        modal.classList.add('open');
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      },
 
-          if (cpu) this.selected['cpu'] = { ...cpu, qty: 1 };
-          if (mobo) this.selected['mobo'] = { ...mobo, qty: 1 };
-          if (ram) this.selected['ram'] = { ...ram, qty: 2 };
-          if (ssd) this.selected['ssd'] = { ...ssd, qty: 1 };
-          if (cs) this.selected['case'] = { ...cs, qty: 1 };
-          if (psu) this.selected['psu'] = { ...psu, qty: 1 };
-          if (monitor) this.selected['monitor'] = { ...monitor, qty: 1 };
+      closeTemplatesModal: function() {
+        const modal = document.getElementById('pcbTemplatesModal');
+        if (!modal) return;
+        modal.classList.remove('open');
+        setTimeout(() => {
+          modal.style.display = 'none';
+          document.body.style.overflow = '';
+        }, 200);
+      },
+
+      filterTemplates: function(category) {
+        this.currentModalCategory = category;
+        const tabs = document.querySelectorAll('.pcb-modal-tab');
+        tabs.forEach(t => t.classList.remove('active'));
+        const activeTab = document.getElementById('pcbTab_' + category);
+        if (activeTab) activeTab.classList.add('active');
+
+        this.renderTemplatesGrid(category);
+      },
+
+      renderTemplatesGrid: function(category) {
+        const grid = document.getElementById('pcbTemplatesGrid');
+        if (!grid) return;
+
+        let filtered = this.templates;
+        if (category && category !== 'all') {
+          filtered = this.templates.filter(t => t.category === category);
         }
 
+        let html = '';
+        filtered.forEach(tpl => {
+          const price = this.getTemplatePrice(tpl);
+          const inStock = tpl.inStock !== false;
+
+          html += `
+            <div class="pcb-template-card">
+              <div>
+                <div class="pcb-tpl-top">
+                  <img src="${tpl.img}" alt="${tpl.title}" class="pcb-tpl-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=pcbApp.fallbackImg;">
+                  <div class="pcb-tpl-info">
+                    <span class="pcb-tpl-cat-badge">${tpl.catLabel}</span>
+                    <h3 class="pcb-tpl-title">${tpl.title}</h3>
+                    <div style="margin-top: 0.25rem;">
+                      <span class="pcb-opt-stock-badge ${inStock ? 'in-stock' : 'on-order'}">
+                        ${inStock ? '🟢 Entrega Inmediata' : '🟡 Sobre Pedido (3-5d)'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pcb-tpl-perf">
+                  <span>${tpl.perfBadge}</span>
+                </div>
+
+                <p style="font-size: 0.85rem; color: #64748b; margin: 0 0 0.85rem 0; line-height: 1.4;">
+                  ${tpl.subtitle}
+                </p>
+
+                <ul class="pcb-tpl-specs-list">
+                  ${tpl.highlights.map(h => `<li class="pcb-tpl-spec-item">${h}</li>`).join('')}
+                </ul>
+              </div>
+
+              <div class="pcb-tpl-bottom">
+                <div class="pcb-tpl-price-row">
+                  <span class="pcb-tpl-price-label">Total componentes (IVA incl.):</span>
+                  <span class="pcb-tpl-price-val">$${price.toLocaleString('es-MX')} MXN</span>
+                </div>
+                <div class="pcb-tpl-actions">
+                  <button type="button" class="pcb-tpl-btn-load" onclick="pcbApp.loadTemplateIntoConfig('${tpl.id}')" title="Carga estos componentes al configurador para personalizarlos">
+                    🛠️ Cargar al Configurador
+                  </button>
+                  <button type="button" class="pcb-tpl-btn-buy" onclick="pcbApp.buyTemplateDirect('${tpl.id}')" title="Comprar este ensamble de inmediato con servicio de armado">
+                    🛒 Comprar Directo
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+
+        grid.innerHTML = html;
+      },
+
+      loadTemplateIntoConfig: function(templateId) {
+        const tpl = this.templates.find(t => t.id === templateId);
+        if (!tpl) return;
+
+        this.selected = {};
+        for (const cat in tpl.components) {
+          const compId = tpl.components[cat];
+          const item = (CATALOG[cat] || []).find(x => x.id === compId);
+          if (item) {
+            const qty = (cat === 'ram' && tpl.ramQty) ? tpl.ramQty : 1;
+            this.selected[cat] = { ...item, qty };
+          }
+        }
+
+        this.closeTemplatesModal();
         this.renderAccordion();
         this.updateSummary();
+
+        const gridEl = document.querySelector('.pcb-main-grid');
+        if (gridEl) {
+          gridEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      },
+
+      buyTemplateDirect: async function(templateId) {
+        this.loadTemplateIntoConfig(templateId);
+        this.includeAssembly = true;
+        await this.addToCart();
+      },
+
+      loadPreset: function(type) {
+        this.openTemplatesModal(type === 'office' ? 'office' : (type === 'gamer' ? 'gaming' : 'workstation'));
       },
 
       addToCart: async function() {
