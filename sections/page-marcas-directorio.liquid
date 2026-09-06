@@ -1,0 +1,3061 @@
+{% comment %}
+  DIRECTORIO OFICIAL DE MARCAS Y FABRICANTES AUTORIZADOS
+  Seguridad Avanzada - Catálogo oficial con búsqueda en tiempo real e índice alfabético
+{% endcomment %}
+
+<style>
+  :root {
+    --marcas-dir-bg: #f8fafc;
+    --marcas-dir-card-bg: #ffffff;
+    --marcas-dir-title: #0f172a;
+    --marcas-dir-text: #475569;
+    --marcas-dir-primary: #2563eb;
+    --marcas-dir-primary-hover: #1d4ed8;
+    --marcas-dir-border: #e2e8f0;
+  }
+
+  .marcas-directorio-page {
+    background-color: var(--marcas-dir-bg);
+    min-height: 100vh;
+    padding-bottom: 6rem;
+    font-family: inherit;
+  }
+
+  /* --- HERO HEADER --- */
+  .marcas-dir-hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff;
+    padding: 4.5rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .marcas-dir-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .marcas-dir-hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .marcas-dir-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(37, 99, 235, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    color: #93c5fd;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.4rem 1.1rem;
+    border-radius: 9999px;
+    margin-bottom: 1.25rem;
+  }
+
+  .marcas-dir-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 1rem;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+
+  @media (max-width: 768px) {
+    .marcas-dir-title {
+      font-size: 2.1rem;
+    }
+    .marcas-dir-hero {
+      padding: 3rem 1.25rem;
+    }
+  }
+
+  .marcas-dir-subtitle {
+    font-size: 1.2rem;
+    color: #cbd5e1;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+    max-width: 720px;
+  }
+
+  /* --- SEARCH BAR --- */
+  .marcas-search-container {
+    max-width: 650px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .marcas-search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .marcas-search-icon {
+    position: absolute;
+    left: 1.25rem;
+    width: 22px;
+    height: 22px;
+    color: #94a3b8;
+    pointer-events: none;
+  }
+
+  .marcas-search-input {
+    width: 100%;
+    height: 56px;
+    padding: 0.75rem 3rem 0.75rem 3.5rem;
+    font-size: 1.1rem;
+    color: #0f172a;
+    background: #ffffff;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    outline: none;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+  }
+
+  .marcas-search-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+  }
+
+  .marcas-search-clear {
+    position: absolute;
+    right: 1.2rem;
+    background: #e2e8f0;
+    border: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #475569;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  /* --- FILTERS TOOLBAR --- */
+  .marcas-toolbar-wrapper {
+    background: #ffffff;
+    border-bottom: 1px solid var(--marcas-dir-border);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  }
+
+  .marcas-toolbar {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .marcas-az-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .marcas-az-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .marcas-az-btn {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 0.35rem 0.65rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    min-width: 32px;
+    text-align: center;
+  }
+
+  .marcas-az-btn:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+
+  .marcas-az-btn.active {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #ffffff;
+  }
+
+  .marcas-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.92rem;
+    color: #64748b;
+  }
+
+  .marcas-count {
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  /* --- GRID DE MARCAS --- */
+  .marcas-grid-container {
+    max-width: 1320px;
+    margin: 2.5rem auto 0;
+    padding: 0 1.5rem;
+  }
+
+  .marcas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .marcas-grid {
+      grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+      gap: 1rem;
+    }
+  }
+
+  /* --- TARJETA DE MARCA --- */
+  .marca-dir-card {
+    background: var(--marcas-dir-card-bg);
+    border: 1px solid var(--marcas-dir-border);
+    border-radius: 16px;
+    padding: 1.75rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .marca-dir-card:hover {
+    transform: translateY(-4px);
+    border-color: #93c5fd;
+    box-shadow: 0 16px 30px -10px rgba(37, 99, 235, 0.12);
+  }
+
+  .marca-dir-card.highlight {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+    animation: highlightPulse 1.5s ease-out 2;
+  }
+
+  @keyframes highlightPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+  }
+
+  .marca-logo-wrapper {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    padding: 0.5rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #f1f5f9;
+  }
+
+  .marca-dir-logo {
+    max-height: 52px;
+    max-width: 170px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+  }
+
+  .marca-dir-card:hover .marca-dir-logo {
+    transform: scale(1.06);
+  }
+
+  .marca-dir-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .marca-dir-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .marca-dir-name {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .marca-dir-dist-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #047857;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+  }
+
+  .marca-dir-cat {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #2563eb;
+    margin-bottom: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .marca-dir-desc {
+    font-size: 0.92rem;
+    color: #64748b;
+    line-height: 1.5;
+    margin: 0 0 1.25rem;
+    flex-grow: 1;
+  }
+
+  .marca-dir-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: #f1f5f9;
+    color: #1e293b;
+    border: 1px solid #e2e8f0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .marca-dir-cta:hover {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  }
+
+  .marca-dir-cta svg {
+    transition: transform 0.2s ease;
+  }
+
+  .marca-dir-cta:hover svg {
+    transform: translateX(4px);
+  }
+
+  .marcas-empty-state {
+    display: none;
+    text-align: center;
+    padding: 4rem 1.5rem;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px dashed #cbd5e1;
+    grid-column: 1 / -1;
+  }
+
+  .marcas-empty-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0.75rem 0 0.5rem;
+  }
+
+  .marcas-empty-text {
+    font-size: 1rem;
+    color: #64748b;
+    margin: 0;
+  }
+</style>
+
+<div class="marcas-directorio-page" itemscope itemtype="https://schema.org/ItemList">
+  <link itemprop="url" href="{{ shop.url }}/pages/marcas">
+  <meta itemprop="numberOfItems" content="88">
+
+  <!-- HERO SECTION -->
+  <header class="marcas-dir-hero">
+    <div class="marcas-dir-hero-inner">
+      <div class="marcas-dir-badge">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Distribuidor Directo y Autorizado México
+      </div>
+      <h1 class="marcas-dir-title">Directorio Oficial de Marcas</h1>
+      <p class="marcas-dir-subtitle">
+        Representamos y distribuimos las marcas líderes a nivel global en videovigilancia, redes, cómputo empresarial, control de acceso y respaldo de energía con garantía de fábrica y facturación fiscal.
+      </p>
+
+      <!-- SEARCH INPUT -->
+      <div class="marcas-search-container">
+        <div class="marcas-search-input-wrapper">
+          <svg class="marcas-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="marcaSearchInput" class="marcas-search-input" placeholder="Buscar por marca o especialidad (ej. Hikvision, Apple, TP-Link, APC)..." autocomplete="off">
+          <button type="button" id="marcaSearchClear" class="marcas-search-clear" aria-label="Limpiar búsqueda">&times;</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- TOOLBAR & FILTERS -->
+  <nav class="marcas-toolbar-wrapper" aria-label="Filtros del directorio de marcas">
+    <div class="marcas-toolbar">
+      <div class="marcas-az-bar" id="marcasAzBar">
+        <button type="button" class="marcas-az-btn active" data-letter="all">Todos (88)</button>
+        <button type="button" class="marcas-az-btn" data-letter="A">A (12)</button>
+        <button type="button" class="marcas-az-btn" data-letter="B">B (5)</button>
+        <button type="button" class="marcas-az-btn" data-letter="C">C (7)</button>
+        <button type="button" class="marcas-az-btn" data-letter="D">D (3)</button>
+        <button type="button" class="marcas-az-btn" data-letter="E">E (3)</button>
+        <button type="button" class="marcas-az-btn" data-letter="F">F (4)</button>
+        <button type="button" class="marcas-az-btn" data-letter="G">G (3)</button>
+        <button type="button" class="marcas-az-btn" data-letter="H">H (8)</button>
+        <button type="button" class="marcas-az-btn" data-letter="I">I (4)</button>
+        <button type="button" class="marcas-az-btn" data-letter="K">K (4)</button>
+        <button type="button" class="marcas-az-btn" data-letter="L">L (7)</button>
+        <button type="button" class="marcas-az-btn" data-letter="M">M (2)</button>
+        <button type="button" class="marcas-az-btn" data-letter="N">N (1)</button>
+        <button type="button" class="marcas-az-btn" data-letter="O">O (1)</button>
+        <button type="button" class="marcas-az-btn" data-letter="P">P (4)</button>
+        <button type="button" class="marcas-az-btn" data-letter="R">R (1)</button>
+        <button type="button" class="marcas-az-btn" data-letter="S">S (6)</button>
+        <button type="button" class="marcas-az-btn" data-letter="T">T (5)</button>
+        <button type="button" class="marcas-az-btn" data-letter="U">U (2)</button>
+        <button type="button" class="marcas-az-btn" data-letter="V">V (1)</button>
+        <button type="button" class="marcas-az-btn" data-letter="W">W (1)</button>
+        <button type="button" class="marcas-az-btn" data-letter="X">X (1)</button>
+        <button type="button" class="marcas-az-btn" data-letter="Y">Y (1)</button>
+        <button type="button" class="marcas-az-btn" data-letter="Z">Z (2)</button>
+      </div>
+      <div class="marcas-meta-row">
+        <span>Mostrando <span class="marcas-count" id="marcasVisibleCount">88</span> marcas autorizadas</span>
+        <span>Garantía Oficial y Respaldo Técnico</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- GRID DE TARJETAS -->
+  <main class="marcas-grid-container">
+    <div class="marcas-grid" id="marcasGrid">
+      <!-- Acer -->
+      <article class="marca-dir-card" id="acer" data-name="acer" data-letter="A" data-category="cómputo y monitores" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="1">
+        <meta itemprop="name" content="Acer">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Acer">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-acer.png' | asset_url }}" alt="Distribuidor Autorizado Acer México - Seguridad Avanzada" title="Acer México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Acer</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Cómputo y Monitores</div>
+            <p class="marca-dir-desc">Monitores ultra nítidos, laptops para trabajo y soluciones para oficinas y gaming.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Acer" class="marca-dir-cta" title="Ver catálogo de Acer en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Acer">
+          <span>Ver Catálogo Acer</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Acteck -->
+      <article class="marca-dir-card" id="acteck" data-name="acteck" data-letter="A" data-category="accesorios y periféricos" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="2">
+        <meta itemprop="name" content="Acteck">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Acteck">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-acteck.png' | asset_url }}" alt="Distribuidor Autorizado Acteck México - Seguridad Avanzada" title="Acteck México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Acteck</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Accesorios y Periféricos</div>
+            <p class="marca-dir-desc">Teclados, mouse, gabinetes, fuentes de poder y accesorios de conectividad.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Acteck" class="marca-dir-cta" title="Ver catálogo de Acteck en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Acteck">
+          <span>Ver Catálogo Acteck</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- ADATA -->
+      <article class="marca-dir-card" id="adata" data-name="adata" data-letter="A" data-category="memorias y almacenamiento ssd" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="3">
+        <meta itemprop="name" content="ADATA">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=ADATA">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-adata.png' | asset_url }}" alt="Distribuidor Autorizado ADATA México - Seguridad Avanzada" title="ADATA México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">ADATA</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Memorias y Almacenamiento SSD</div>
+            <p class="marca-dir-desc">Unidades de estado sólido portátiles y módulos de memoria de alta durabilidad.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=ADATA" class="marca-dir-cta" title="Ver catálogo de ADATA en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos ADATA">
+          <span>Ver Catálogo ADATA</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- AJAX -->
+      <article class="marca-dir-card" id="ajax" data-name="ajax" data-letter="A" data-category="alarmas inalámbricas grado 2" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="4">
+        <meta itemprop="name" content="AJAX">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=AJAX">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-ajax.png' | asset_url }}" alt="Distribuidor Autorizado AJAX México - Seguridad Avanzada" title="AJAX México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">AJAX</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Alarmas Inalámbricas Grado 2</div>
+            <p class="marca-dir-desc">Sistemas de intrusión inalámbricos de diseño europeo con tecnología Jeweller anti-sabotaje.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=AJAX" class="marca-dir-cta" title="Ver catálogo de AJAX en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos AJAX">
+          <span>Ver Catálogo AJAX</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Allied Telesis -->
+      <article class="marca-dir-card" id="allied-telesis" data-name="allied telesis" data-letter="A" data-category="switches y redes seguras" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="5">
+        <meta itemprop="name" content="Allied Telesis">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Allied%20Telesis">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-alliedtelesis.png' | asset_url }}" alt="Distribuidor Autorizado Allied Telesis México - Seguridad Avanzada" title="Allied Telesis México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Allied Telesis</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Switches y Redes Seguras</div>
+            <p class="marca-dir-desc">Switches gestionables para infraestructura crítica, campus y redes corporativas.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Allied%20Telesis" class="marca-dir-cta" title="Ver catálogo de Allied Telesis en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Allied Telesis">
+          <span>Ver Catálogo Allied Telesis</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- ALTAI Super WiFi -->
+      <article class="marca-dir-card" id="altai-super-wifi" data-name="altai super wifi" data-letter="A" data-category="wi-fi de ultra largo alcance" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="6">
+        <meta itemprop="name" content="ALTAI Super WiFi">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=ALTAI%20Super%20WiFi">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-altai.png' | asset_url }}" alt="Distribuidor Autorizado ALTAI Super WiFi México - Seguridad Avanzada" title="ALTAI Super WiFi México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">ALTAI Super WiFi</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Wi-Fi de Ultra Largo Alcance</div>
+            <p class="marca-dir-desc">Puntos de acceso para almacenes, puertos marítimos y espacios exteriores de gran escala.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=ALTAI%20Super%20WiFi" class="marca-dir-cta" title="Ver catálogo de ALTAI Super WiFi en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos ALTAI Super WiFi">
+          <span>Ver Catálogo ALTAI Super WiFi</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- AMD -->
+      <article class="marca-dir-card" id="amd" data-name="amd" data-letter="A" data-category="procesadores y gráficos" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="7">
+        <meta itemprop="name" content="AMD">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=AMD">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-amd.png' | asset_url }}" alt="Distribuidor Autorizado AMD México - Seguridad Avanzada" title="AMD México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">AMD</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Procesadores y Gráficos</div>
+            <p class="marca-dir-desc">Procesadores AMD Ryzen y EPYC líderes en eficiencia multitarea y potencia de cómputo.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=AMD" class="marca-dir-cta" title="Ver catálogo de AMD en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos AMD">
+          <span>Ver Catálogo AMD</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- APC by Schneider Electric -->
+      <article class="marca-dir-card" id="apc-by-schneider-electric" data-name="apc by schneider electric" data-letter="A" data-category="energía y ups" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="8">
+        <meta itemprop="name" content="APC by Schneider Electric">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=APC">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-apc.png' | asset_url }}" alt="Distribuidor Autorizado APC by Schneider Electric México - Seguridad Avanzada" title="APC by Schneider Electric México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">APC by Schneider Electric</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Energía y UPS</div>
+            <p class="marca-dir-desc">Sistemas ininterrumpibles de energía (UPS/No-Break), PDUs y protección eléctrica para servidores.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=APC" class="marca-dir-cta" title="Ver catálogo de APC by Schneider Electric en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos APC by Schneider Electric">
+          <span>Ver Catálogo APC by Schneider Electric</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Apple -->
+      <article class="marca-dir-card" id="apple" data-name="apple" data-letter="A" data-category="cómputo y dispositivos" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="9">
+        <meta itemprop="name" content="Apple">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Apple">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-apple.png' | asset_url }}" alt="Distribuidor Autorizado Apple México - Seguridad Avanzada" title="Apple México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Apple</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Cómputo y Dispositivos</div>
+            <p class="marca-dir-desc">Equipos de cómputo Mac, iPad y accesorios con soporte y garantía oficial en México.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Apple" class="marca-dir-cta" title="Ver catálogo de Apple en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Apple">
+          <span>Ver Catálogo Apple</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- ASUS -->
+      <article class="marca-dir-card" id="asus" data-name="asus" data-letter="A" data-category="cómputo y componentes" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="10">
+        <meta itemprop="name" content="ASUS">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=ASUS">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-asus.png' | asset_url }}" alt="Distribuidor Autorizado ASUS México - Seguridad Avanzada" title="ASUS México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">ASUS</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Cómputo y Componentes</div>
+            <p class="marca-dir-desc">Tarjetas madre, routers Wi-Fi 6, monitores de grado profesional y laptops.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=ASUS" class="marca-dir-cta" title="Ver catálogo de ASUS en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos ASUS">
+          <span>Ver Catálogo ASUS</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- AUFIT -->
+      <article class="marca-dir-card" id="aufit" data-name="aufit" data-letter="A" data-category="soportes de pared y racks" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="11">
+        <meta itemprop="name" content="AUFIT">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=AUFIT">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-aufit.png' | asset_url }}" alt="Distribuidor Autorizado AUFIT México - Seguridad Avanzada" title="AUFIT México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">AUFIT</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Soportes de Pared y Racks</div>
+            <p class="marca-dir-desc">Soportes para pantallas de TV, monitores y montaje seguro en paredes y techos.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=AUFIT" class="marca-dir-cta" title="Ver catálogo de AUFIT en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos AUFIT">
+          <span>Ver Catálogo AUFIT</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Axceze -->
+      <article class="marca-dir-card" id="axceze" data-name="axceze" data-letter="A" data-category="control de acceso y cerraduras" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="12">
+        <meta itemprop="name" content="Axceze">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Axceze">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-axceze.png' | asset_url }}" alt="Distribuidor Autorizado Axceze México - Seguridad Avanzada" title="Axceze México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Axceze</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Control de Acceso y Cerraduras</div>
+            <p class="marca-dir-desc">Electroimanes de alta sujeción, botones liberadores de emergencia y tarjetas RFID.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Axceze" class="marca-dir-cta" title="Ver catálogo de Axceze en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Axceze">
+          <span>Ver Catálogo Axceze</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Balam Rush -->
+      <article class="marca-dir-card" id="balam-rush" data-name="balam rush" data-letter="B" data-category="gaming y componentes" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="13">
+        <meta itemprop="name" content="Balam Rush">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Balam%20Rush">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-balamrush.png' | asset_url }}" alt="Distribuidor Autorizado Balam Rush México - Seguridad Avanzada" title="Balam Rush México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Balam Rush</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Gaming y Componentes</div>
+            <p class="marca-dir-desc">Periféricos de alta precisión, teclados mecánicos, audífonos y componentes para entusiastas.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Balam%20Rush" class="marca-dir-cta" title="Ver catálogo de Balam Rush en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Balam Rush">
+          <span>Ver Catálogo Balam Rush</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Belden -->
+      <article class="marca-dir-card" id="belden" data-name="belden" data-letter="B" data-category="cableado y conectividad" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="14">
+        <meta itemprop="name" content="Belden">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Belden">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-belden.png' | asset_url }}" alt="Distribuidor Autorizado Belden México - Seguridad Avanzada" title="Belden México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Belden</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Cableado y Conectividad</div>
+            <p class="marca-dir-desc">Cables de par trenzado Cat6/Cat6A, cables para alarma y soluciones de cableado estructurado.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Belden" class="marca-dir-cta" title="Ver catálogo de Belden en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Belden">
+          <span>Ver Catálogo Belden</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- BenQ -->
+      <article class="marca-dir-card" id="benq" data-name="benq" data-letter="B" data-category="monitores y proyectores" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="15">
+        <meta itemprop="name" content="BenQ">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=BenQ">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-benq.png' | asset_url }}" alt="Distribuidor Autorizado BenQ México - Seguridad Avanzada" title="BenQ México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">BenQ</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Monitores y Proyectores</div>
+            <p class="marca-dir-desc">Monitores para diseño y precisión de color, proyectores para auditorios y escuelas.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=BenQ" class="marca-dir-cta" title="Ver catálogo de BenQ en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos BenQ">
+          <span>Ver Catálogo BenQ</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- BRobotix -->
+      <article class="marca-dir-card" id="brobotix" data-name="brobotix" data-letter="B" data-category="cables y conectividad" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="16">
+        <meta itemprop="name" content="BRobotix">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=BRobotix">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-brobotix.png' | asset_url }}" alt="Distribuidor Autorizado BRobotix México - Seguridad Avanzada" title="BRobotix México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">BRobotix</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Cables y Conectividad</div>
+            <p class="marca-dir-desc">Cables para audio, video, red y cómputo con la mejor relación calidad-precio.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=BRobotix" class="marca-dir-cta" title="Ver catálogo de BRobotix en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos BRobotix">
+          <span>Ver Catálogo BRobotix</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Brother -->
+      <article class="marca-dir-card" id="brother" data-name="brother" data-letter="B" data-category="rotuladoras e impresión" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="17">
+        <meta itemprop="name" content="Brother">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Brother">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-brother.png' | asset_url }}" alt="Distribuidor Autorizado Brother México - Seguridad Avanzada" title="Brother México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Brother</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Rotuladoras e Impresión</div>
+            <p class="marca-dir-desc">Rotuladoras industriales P-touch para cableado de telecomunicaciones e impresoras láser.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Brother" class="marca-dir-cta" title="Ver catálogo de Brother en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Brother">
+          <span>Ver Catálogo Brother</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Cambium Networks -->
+      <article class="marca-dir-card" id="cambium-networks" data-name="cambium networks" data-letter="C" data-category="radioenlaces y wi-fi carrier class" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="18">
+        <meta itemprop="name" content="Cambium Networks">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Cambium%20Networks">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-cambium.png' | asset_url }}" alt="Distribuidor Autorizado Cambium Networks México - Seguridad Avanzada" title="Cambium Networks México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Cambium Networks</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Radioenlaces y Wi-Fi Carrier Class</div>
+            <p class="marca-dir-desc">Soluciones inalámbricas de banda ancha punto a punto y punto a multipunto.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Cambium%20Networks" class="marca-dir-cta" title="Ver catálogo de Cambium Networks en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Cambium Networks">
+          <span>Ver Catálogo Cambium Networks</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- CAME -->
+      <article class="marca-dir-card" id="came" data-name="came" data-letter="C" data-category="automatización de puertas y barreras" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="19">
+        <meta itemprop="name" content="CAME">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=CAME">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-came.png' | asset_url }}" alt="Distribuidor Autorizado CAME México - Seguridad Avanzada" title="CAME México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">CAME</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Automatización de Puertas y Barreras</div>
+            <p class="marca-dir-desc">Motores para portones corredizos y abatibles, barreras vehiculares de acceso rápido.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=CAME" class="marca-dir-cta" title="Ver catálogo de CAME en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos CAME">
+          <span>Ver Catálogo CAME</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Canon -->
+      <article class="marca-dir-card" id="canon" data-name="canon" data-letter="C" data-category="fotografía e impresión" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="20">
+        <meta itemprop="name" content="Canon">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Canon">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-canon.png' | asset_url }}" alt="Distribuidor Autorizado Canon México - Seguridad Avanzada" title="Canon México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Canon</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Fotografía e Impresión</div>
+            <p class="marca-dir-desc">Cámaras digitales, óptica avanzada e impresoras de alto rendimiento gráfico.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Canon" class="marca-dir-cta" title="Ver catálogo de Canon en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Canon">
+          <span>Ver Catálogo Canon</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Chicago Digital Power (CDP) -->
+      <article class="marca-dir-card" id="chicago-digital-power-cdp" data-name="chicago digital power (cdp)" data-letter="C" data-category="ups y reguladores" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="21">
+        <meta itemprop="name" content="Chicago Digital Power (CDP)">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=CDP">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-cdp.png' | asset_url }}" alt="Distribuidor Autorizado Chicago Digital Power (CDP) México - Seguridad Avanzada" title="Chicago Digital Power (CDP) México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Chicago Digital Power (CDP)</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">UPS y Reguladores</div>
+            <p class="marca-dir-desc">Soluciones de respaldo y acondicionamiento eléctrico para empresas e industria.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=CDP" class="marca-dir-cta" title="Ver catálogo de Chicago Digital Power (CDP) en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Chicago Digital Power (CDP)">
+          <span>Ver Catálogo Chicago Digital Power (CDP)</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Cisco -->
+      <article class="marca-dir-card" id="cisco" data-name="cisco" data-letter="C" data-category="redes y telecomunicaciones" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="22">
+        <meta itemprop="name" content="Cisco">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Cisco">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-cisco.png' | asset_url }}" alt="Distribuidor Autorizado Cisco México - Seguridad Avanzada" title="Cisco México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Cisco</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Redes y Telecomunicaciones</div>
+            <p class="marca-dir-desc">Switches Catalyst, routers empresariales, firewalls y telefonía IP de estándar mundial.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Cisco" class="marca-dir-cta" title="Ver catálogo de Cisco en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Cisco">
+          <span>Ver Catálogo Cisco</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Corsair -->
+      <article class="marca-dir-card" id="corsair" data-name="corsair" data-letter="C" data-category="memorias y fuentes de poder" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="23">
+        <meta itemprop="name" content="Corsair">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Corsair">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-corsair.png' | asset_url }}" alt="Distribuidor Autorizado Corsair México - Seguridad Avanzada" title="Corsair México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Corsair</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Memorias y Fuentes de Poder</div>
+            <p class="marca-dir-desc">Memorias RAM para overclocking, fuentes certificadas 80 Plus y sistemas de enfriamiento.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Corsair" class="marca-dir-cta" title="Ver catálogo de Corsair en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Corsair">
+          <span>Ver Catálogo Corsair</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- CyberPower -->
+      <article class="marca-dir-card" id="cyberpower" data-name="cyberpower" data-letter="C" data-category="ups y respaldo eléctrico" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="24">
+        <meta itemprop="name" content="CyberPower">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=CyberPower">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-cyberpower.png' | asset_url }}" alt="Distribuidor Autorizado CyberPower México - Seguridad Avanzada" title="CyberPower México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">CyberPower</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">UPS y Respaldo Eléctrico</div>
+            <p class="marca-dir-desc">No-breaks de onda senoidal pura para servidores, reguladores de voltaje e inversores.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=CyberPower" class="marca-dir-cta" title="Ver catálogo de CyberPower en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos CyberPower">
+          <span>Ver Catálogo CyberPower</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Dahua Technology -->
+      <article class="marca-dir-card" id="dahua-technology" data-name="dahua technology" data-letter="D" data-category="videovigilancia y cctv" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="25">
+        <meta itemprop="name" content="Dahua Technology">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Dahua%20Technology">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-dahua.png' | asset_url }}" alt="Distribuidor Autorizado Dahua Technology México - Seguridad Avanzada" title="Dahua Technology México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Dahua Technology</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Videovigilancia y CCTV</div>
+            <p class="marca-dir-desc">Soluciones avanzadas en seguridad electrónica, cámaras térmicas, grabadores y control de acceso.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Dahua%20Technology" class="marca-dir-cta" title="Ver catálogo de Dahua Technology en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Dahua Technology">
+          <span>Ver Catálogo Dahua Technology</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Dell Technologies -->
+      <article class="marca-dir-card" id="dell-technologies" data-name="dell technologies" data-letter="D" data-category="cómputo y servidores" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="26">
+        <meta itemprop="name" content="Dell Technologies">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=DELL">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-dell.png' | asset_url }}" alt="Distribuidor Autorizado Dell Technologies México - Seguridad Avanzada" title="Dell Technologies México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Dell Technologies</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Cómputo y Servidores</div>
+            <p class="marca-dir-desc">Computadoras Latitude, OptiPlex, monitores profesionales y servidores PowerEdge.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=DELL" class="marca-dir-cta" title="Ver catálogo de Dell Technologies en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Dell Technologies">
+          <span>Ver Catálogo Dell Technologies</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- DuoSmart -->
+      <article class="marca-dir-card" id="duosmart" data-name="duosmart" data-letter="D" data-category="domótica y cerraduras digitales" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="27">
+        <meta itemprop="name" content="DuoSmart">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=DuoSmart">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-duosmart.png' | asset_url }}" alt="Distribuidor Autorizado DuoSmart México - Seguridad Avanzada" title="DuoSmart México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">DuoSmart</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Domótica y Cerraduras Digitales</div>
+            <p class="marca-dir-desc">Cerraduras inteligentes con huella y código, apagadores Wi-Fi y sensores Tuya.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=DuoSmart" class="marca-dir-cta" title="Ver catálogo de DuoSmart en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos DuoSmart">
+          <span>Ver Catálogo DuoSmart</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- EcoFlow -->
+      <article class="marca-dir-card" id="ecoflow" data-name="ecoflow" data-letter="E" data-category="estaciones de energía portátil" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="28">
+        <meta itemprop="name" content="EcoFlow">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=EcoFlow">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-ecoflow.png' | asset_url }}" alt="Distribuidor Autorizado EcoFlow México - Seguridad Avanzada" title="EcoFlow México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">EcoFlow</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Estaciones de Energía Portátil</div>
+            <p class="marca-dir-desc">Baterías portátiles de carga ultrarrápida para emergencias, trabajo en campo y energía solar.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=EcoFlow" class="marca-dir-cta" title="Ver catálogo de EcoFlow en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos EcoFlow">
+          <span>Ver Catálogo EcoFlow</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Epson -->
+      <article class="marca-dir-card" id="epson" data-name="epson" data-letter="E" data-category="videoproyección e impresión ecotank" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="29">
+        <meta itemprop="name" content="Epson">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Epson">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-epson.png' | asset_url }}" alt="Distribuidor Autorizado Epson México - Seguridad Avanzada" title="Epson México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Epson</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Videoproyección e Impresión EcoTank</div>
+            <p class="marca-dir-desc">Proyectores interactivos para salas de juntas e impresoras con tanques de tinta continua.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Epson" class="marca-dir-cta" title="Ver catálogo de Epson en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Epson">
+          <span>Ver Catálogo Epson</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- EZVIZ -->
+      <article class="marca-dir-card" id="ezviz" data-name="ezviz" data-letter="E" data-category="videovigilancia y smart home" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="30">
+        <meta itemprop="name" content="EZVIZ">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=EZVIZ">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-ezviz.png' | asset_url }}" alt="Distribuidor Autorizado EZVIZ México - Seguridad Avanzada" title="EZVIZ México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">EZVIZ</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Videovigilancia y Smart Home</div>
+            <p class="marca-dir-desc">Cámaras Wi-Fi inteligentes para hogar y oficinas, timbres de video y automatización.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=EZVIZ" class="marca-dir-cta" title="Ver catálogo de EZVIZ en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos EZVIZ">
+          <span>Ver Catálogo EZVIZ</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- FAAC -->
+      <article class="marca-dir-card" id="faac" data-name="faac" data-letter="F" data-category="control de tráfico y accesos" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="31">
+        <meta itemprop="name" content="FAAC">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=FAAC">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-faac.png' | asset_url }}" alt="Distribuidor Autorizado FAAC México - Seguridad Avanzada" title="FAAC México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">FAAC</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Control de Tráfico y Accesos</div>
+            <p class="marca-dir-desc">Operadores hidráulicos y electromecánicos para accesos vehiculares de alto tráfico.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=FAAC" class="marca-dir-cta" title="Ver catálogo de FAAC en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos FAAC">
+          <span>Ver Catálogo FAAC</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Fanvil -->
+      <article class="marca-dir-card" id="fanvil" data-name="fanvil" data-letter="F" data-category="interfonía y telefonía sip" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="32">
+        <meta itemprop="name" content="Fanvil">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Fanvil">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-fanvil.png' | asset_url }}" alt="Distribuidor Autorizado Fanvil México - Seguridad Avanzada" title="Fanvil México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Fanvil</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Interfonía y Telefonía SIP</div>
+            <p class="marca-dir-desc">Teléfonos ejecutivos SIP, videoporteros para edificios y sistemas de voceo industrial.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Fanvil" class="marca-dir-cta" title="Ver catálogo de Fanvil en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Fanvil">
+          <span>Ver Catálogo Fanvil</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Forza Power Technologies -->
+      <article class="marca-dir-card" id="forza-power-technologies" data-name="forza power technologies" data-letter="F" data-category="respaldo de energía" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="33">
+        <meta itemprop="name" content="Forza Power Technologies">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=FORZA">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-forza.png' | asset_url }}" alt="Distribuidor Autorizado Forza Power Technologies México - Seguridad Avanzada" title="Forza Power Technologies México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Forza Power Technologies</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Respaldo de Energía</div>
+            <p class="marca-dir-desc">UPS interactivos y online para protección de estaciones de trabajo y CCTV.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=FORZA" class="marca-dir-cta" title="Ver catálogo de Forza Power Technologies en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Forza Power Technologies">
+          <span>Ver Catálogo Forza Power Technologies</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Fujitsu -->
+      <article class="marca-dir-card" id="fujitsu" data-name="fujitsu" data-letter="F" data-category="escáneres y gestión documental" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="34">
+        <meta itemprop="name" content="Fujitsu">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Fujitsu">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-fujitsu.png' | asset_url }}" alt="Distribuidor Autorizado Fujitsu México - Seguridad Avanzada" title="Fujitsu México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Fujitsu</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Escáneres y Gestión Documental</div>
+            <p class="marca-dir-desc">Escáneres de documentos de alta velocidad Fi Series para digitalización empresarial.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Fujitsu" class="marca-dir-cta" title="Ver catálogo de Fujitsu en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Fujitsu">
+          <span>Ver Catálogo Fujitsu</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Gigabyte -->
+      <article class="marca-dir-card" id="gigabyte" data-name="gigabyte" data-letter="G" data-category="motherboards y tarjetas gráficas" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="35">
+        <meta itemprop="name" content="Gigabyte">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Gigabyte">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-gigabyte.png' | asset_url }}" alt="Distribuidor Autorizado Gigabyte México - Seguridad Avanzada" title="Gigabyte México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Gigabyte</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Motherboards y Tarjetas Gráficas</div>
+            <p class="marca-dir-desc">Componentes de cómputo para gaming, edición y estaciones de trabajo.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Gigabyte" class="marca-dir-cta" title="Ver catálogo de Gigabyte en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Gigabyte">
+          <span>Ver Catálogo Gigabyte</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Grandstream -->
+      <article class="marca-dir-card" id="grandstream" data-name="grandstream" data-letter="G" data-category="telefonía ip y conmutadores" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="36">
+        <meta itemprop="name" content="Grandstream">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Grandstream">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-grandstream.png' | asset_url }}" alt="Distribuidor Autorizado Grandstream México - Seguridad Avanzada" title="Grandstream México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Grandstream</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Telefonía IP y Conmutadores</div>
+            <p class="marca-dir-desc">Conmutadores PBX IP serie UCM, teléfonos VoIP, videoteléfonos y puntos de acceso Wi-Fi.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Grandstream" class="marca-dir-cta" title="Ver catálogo de Grandstream en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Grandstream">
+          <span>Ver Catálogo Grandstream</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Growatt -->
+      <article class="marca-dir-card" id="growatt" data-name="growatt" data-letter="G" data-category="energía solar e inversores" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="37">
+        <meta itemprop="name" content="Growatt">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Growatt">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-growatt.png' | asset_url }}" alt="Distribuidor Autorizado Growatt México - Seguridad Avanzada" title="Growatt México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Growatt</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Energía Solar e Inversores</div>
+            <p class="marca-dir-desc">Inversores solares interconectados a la red, controladores de carga y sistemas fotovoltaicos.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Growatt" class="marca-dir-cta" title="Ver catálogo de Growatt en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Growatt">
+          <span>Ver Catálogo Growatt</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Hewlett Packard Enterprise -->
+      <article class="marca-dir-card" id="hewlett-packard-enterprise" data-name="hewlett packard enterprise" data-letter="H" data-category="servidores y almacenamiento" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="38">
+        <meta itemprop="name" content="Hewlett Packard Enterprise">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=HPE">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-hpe.png' | asset_url }}" alt="Distribuidor Autorizado Hewlett Packard Enterprise México - Seguridad Avanzada" title="Hewlett Packard Enterprise México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Hewlett Packard Enterprise</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Servidores y Almacenamiento</div>
+            <p class="marca-dir-desc">Servidores ProLiant, almacenamiento masivo y soluciones empresariales de misión crítica.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=HPE" class="marca-dir-cta" title="Ver catálogo de Hewlett Packard Enterprise en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Hewlett Packard Enterprise">
+          <span>Ver Catálogo Hewlett Packard Enterprise</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- HID -->
+      <article class="marca-dir-card" id="hid" data-name="hid" data-letter="H" data-category="credencialización e identidad segura" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="39">
+        <meta itemprop="name" content="HID">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=HID">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-hid.png' | asset_url }}" alt="Distribuidor Autorizado HID México - Seguridad Avanzada" title="HID México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">HID</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Credencialización e Identidad Segura</div>
+            <p class="marca-dir-desc">Lectores iCLASS, tarjetas de proximidad y soluciones de identificación biométrica corporativa.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=HID" class="marca-dir-cta" title="Ver catálogo de HID en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos HID">
+          <span>Ver Catálogo HID</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Hikvision -->
+      <article class="marca-dir-card" id="hikvision" data-name="hikvision" data-letter="H" data-category="videovigilancia y cctv" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="40">
+        <meta itemprop="name" content="Hikvision">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Hikvision">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-hikvision.png' | asset_url }}" alt="Distribuidor Autorizado Hikvision México - Seguridad Avanzada" title="Hikvision México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Hikvision</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Videovigilancia y CCTV</div>
+            <p class="marca-dir-desc">Líder mundial en sistemas de videovigilancia, cámaras IP, NVRs y analítica con Inteligencia Artificial.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Hikvision" class="marca-dir-cta" title="Ver catálogo de Hikvision en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Hikvision">
+          <span>Ver Catálogo Hikvision</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- HiLook -->
+      <article class="marca-dir-card" id="hilook" data-name="hilook" data-letter="H" data-category="videovigilancia económica" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="41">
+        <meta itemprop="name" content="HiLook">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=HILOOK">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-hilook.png' | asset_url }}" alt="Distribuidor Autorizado HiLook México - Seguridad Avanzada" title="HiLook México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">HiLook</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Videovigilancia Económica</div>
+            <p class="marca-dir-desc">Línea costo-beneficio respaldada por Hikvision con excelente fidelidad de video.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=HILOOK" class="marca-dir-cta" title="Ver catálogo de HiLook en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos HiLook">
+          <span>Ver Catálogo HiLook</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Honeywell -->
+      <article class="marca-dir-card" id="honeywell" data-name="honeywell" data-letter="H" data-category="lectores y detección de fuego" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="42">
+        <meta itemprop="name" content="Honeywell">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Honeywell">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-honeywell.png' | asset_url }}" alt="Distribuidor Autorizado Honeywell México - Seguridad Avanzada" title="Honeywell México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Honeywell</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Lectores y Detección de Fuego</div>
+            <p class="marca-dir-desc">Lectores industriales de código 2D, sistemas de alarmas y detección temprana de incendios.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Honeywell" class="marca-dir-cta" title="Ver catálogo de Honeywell en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Honeywell">
+          <span>Ver Catálogo Honeywell</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Hoymiles -->
+      <article class="marca-dir-card" id="hoymiles" data-name="hoymiles" data-letter="H" data-category="microinversores solares" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="43">
+        <meta itemprop="name" content="Hoymiles">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Hoymiles">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-hoymiles.png' | asset_url }}" alt="Distribuidor Autorizado Hoymiles México - Seguridad Avanzada" title="Hoymiles México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Hoymiles</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Microinversores Solares</div>
+            <p class="marca-dir-desc">Microinversores de grado industrial para generación distribuida de energía limpia.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Hoymiles" class="marca-dir-cta" title="Ver catálogo de Hoymiles en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Hoymiles">
+          <span>Ver Catálogo Hoymiles</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- HP -->
+      <article class="marca-dir-card" id="hp" data-name="hp" data-letter="H" data-category="cómputo e impresión" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="44">
+        <meta itemprop="name" content="HP">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=HP">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-hp.png' | asset_url }}" alt="Distribuidor Autorizado HP México - Seguridad Avanzada" title="HP México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">HP</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Cómputo e Impresión</div>
+            <p class="marca-dir-desc">Laptops empresariales, PCs de escritorio, estaciones de trabajo e impresoras profesionales.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=HP" class="marca-dir-cta" title="Ver catálogo de HP en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos HP">
+          <span>Ver Catálogo HP</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- HUAWEI -->
+      <article class="marca-dir-card" id="huawei" data-name="huawei" data-letter="H" data-category="telecomunicaciones y energía" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="45">
+        <meta itemprop="name" content="HUAWEI">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=HUAWEI">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-huawei.png' | asset_url }}" alt="Distribuidor Autorizado HUAWEI México - Seguridad Avanzada" title="HUAWEI México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">HUAWEI</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Telecomunicaciones y Energía</div>
+            <p class="marca-dir-desc">Infraestructura de red empresarial, switches de fibra y sistemas de energía digital.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=HUAWEI" class="marca-dir-cta" title="Ver catálogo de HUAWEI en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos HUAWEI">
+          <span>Ver Catálogo HUAWEI</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- IDEMIA -->
+      <article class="marca-dir-card" id="idemia" data-name="idemia" data-letter="I" data-category="biometría de alta seguridad" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="46">
+        <meta itemprop="name" content="IDEMIA">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=IDEMIA%20(MORPHO)">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-idemia.png' | asset_url }}" alt="Distribuidor Autorizado IDEMIA México - Seguridad Avanzada" title="IDEMIA México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">IDEMIA</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Biometría de Alta Seguridad</div>
+            <p class="marca-dir-desc">Lectores biométricos sin contacto MorphoWave y tecnología de reconocimiento facial.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=IDEMIA%20(MORPHO)" class="marca-dir-cta" title="Ver catálogo de IDEMIA en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos IDEMIA">
+          <span>Ver Catálogo IDEMIA</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- IMOU -->
+      <article class="marca-dir-card" id="imou" data-name="imou" data-letter="I" data-category="seguridad smart home" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="47">
+        <meta itemprop="name" content="IMOU">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=IMOU">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-imou.png' | asset_url }}" alt="Distribuidor Autorizado IMOU México - Seguridad Avanzada" title="IMOU México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">IMOU</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Seguridad Smart Home</div>
+            <p class="marca-dir-desc">Cámaras de seguridad Wi-Fi accesibles con audio bidireccional y visión nocturna a color.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=IMOU" class="marca-dir-cta" title="Ver catálogo de IMOU en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos IMOU">
+          <span>Ver Catálogo IMOU</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Indiana Wire & Cable -->
+      <article class="marca-dir-card" id="indiana-wire-cable" data-name="indiana wire & cable" data-letter="I" data-category="conductores eléctricos y cable" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="48">
+        <meta itemprop="name" content="Indiana Wire & Cable">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=INDIANA">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-indiana.png' | asset_url }}" alt="Distribuidor Autorizado Indiana Wire & Cable México - Seguridad Avanzada" title="Indiana Wire & Cable México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Indiana Wire & Cable</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Conductores Eléctricos y Cable</div>
+            <p class="marca-dir-desc">Cables eléctricos y de comunicación de alta calidad con certificaciones NOM.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=INDIANA" class="marca-dir-cta" title="Ver catálogo de Indiana Wire & Cable en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Indiana Wire & Cable">
+          <span>Ver Catálogo Indiana Wire & Cable</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Intel -->
+      <article class="marca-dir-card" id="intel" data-name="intel" data-letter="I" data-category="procesadores y servidores" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="49">
+        <meta itemprop="name" content="Intel">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Intel">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-intel.png' | asset_url }}" alt="Distribuidor Autorizado Intel México - Seguridad Avanzada" title="Intel México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Intel</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Procesadores y Servidores</div>
+            <p class="marca-dir-desc">Procesadores Intel Core e Intel Xeon para servidores, estaciones de trabajo y PCs.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Intel" class="marca-dir-cta" title="Ver catálogo de Intel en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Intel">
+          <span>Ver Catálogo Intel</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Kensington -->
+      <article class="marca-dir-card" id="kensington" data-name="kensington" data-letter="K" data-category="ergonomía y candados de seguridad" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="50">
+        <meta itemprop="name" content="Kensington">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Kensington">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-kensington.png' | asset_url }}" alt="Distribuidor Autorizado Kensington México - Seguridad Avanzada" title="Kensington México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Kensington</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Ergonomía y Candados de Seguridad</div>
+            <p class="marca-dir-desc">Candados de seguridad física para laptops, docking stations y soportes ergonómicos.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Kensington" class="marca-dir-cta" title="Ver catálogo de Kensington en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Kensington">
+          <span>Ver Catálogo Kensington</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- KENWOOD -->
+      <article class="marca-dir-card" id="kenwood" data-name="kenwood" data-letter="K" data-category="radiocomunicación profesional" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="51">
+        <meta itemprop="name" content="KENWOOD">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=KENWOOD">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-kenwood.png' | asset_url }}" alt="Distribuidor Autorizado KENWOOD México - Seguridad Avanzada" title="KENWOOD México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">KENWOOD</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Radiocomunicación Profesional</div>
+            <p class="marca-dir-desc">Radios portátiles analógicos y digitales DMR/NEXEDGE para seguridad y operaciones.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=KENWOOD" class="marca-dir-cta" title="Ver catálogo de KENWOOD en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos KENWOOD">
+          <span>Ver Catálogo KENWOOD</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Kingston Technology -->
+      <article class="marca-dir-card" id="kingston-technology" data-name="kingston technology" data-letter="K" data-category="memorias y almacenamiento" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="52">
+        <meta itemprop="name" content="Kingston Technology">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Kingston%20Technology">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-kingston.png' | asset_url }}" alt="Distribuidor Autorizado Kingston Technology México - Seguridad Avanzada" title="Kingston Technology México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Kingston Technology</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Memorias y Almacenamiento</div>
+            <p class="marca-dir-desc">Memorias RAM DDR4/DDR5, discos SSD NVMe y memorias USB seguras.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Kingston%20Technology" class="marca-dir-cta" title="Ver catálogo de Kingston Technology en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Kingston Technology">
+          <span>Ver Catálogo Kingston Technology</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Kyocera -->
+      <article class="marca-dir-card" id="kyocera" data-name="kyocera" data-letter="K" data-category="impresión y multifuncionales" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="53">
+        <meta itemprop="name" content="Kyocera">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Kyocera">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-kyocera.png' | asset_url }}" alt="Distribuidor Autorizado Kyocera México - Seguridad Avanzada" title="Kyocera México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Kyocera</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Impresión y Multifuncionales</div>
+            <p class="marca-dir-desc">Multifuncionales láser de bajo costo por página y componentes cerámicos de larga duración.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Kyocera" class="marca-dir-cta" title="Ver catálogo de Kyocera en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Kyocera">
+          <span>Ver Catálogo Kyocera</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Lanix -->
+      <article class="marca-dir-card" id="lanix" data-name="lanix" data-letter="L" data-category="cómputo y movilidad" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="54">
+        <meta itemprop="name" content="Lanix">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Lanix">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-lanix.png' | asset_url }}" alt="Distribuidor Autorizado Lanix México - Seguridad Avanzada" title="Lanix México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Lanix</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Cómputo y Movilidad</div>
+            <p class="marca-dir-desc">Equipos de cómputo ensamblados en México con alta durabilidad y soporte corporativo.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Lanix" class="marca-dir-cta" title="Ver catálogo de Lanix en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Lanix">
+          <span>Ver Catálogo Lanix</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Lenovo -->
+      <article class="marca-dir-card" id="lenovo" data-name="lenovo" data-letter="L" data-category="cómputo y laptops" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="55">
+        <meta itemprop="name" content="Lenovo">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Lenovo">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-lenovo.png' | asset_url }}" alt="Distribuidor Autorizado Lenovo México - Seguridad Avanzada" title="Lenovo México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Lenovo</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Cómputo y Laptops</div>
+            <p class="marca-dir-desc">Portátiles ThinkPad, equipos empresariales y soluciones de cómputo de alto rendimiento.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Lenovo" class="marca-dir-cta" title="Ver catálogo de Lenovo en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Lenovo">
+          <span>Ver Catálogo Lenovo</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- LG -->
+      <article class="marca-dir-card" id="lg" data-name="lg" data-letter="L" data-category="pantallas y monitores ultrawide" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="56">
+        <meta itemprop="name" content="LG">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=LG">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-lg.png' | asset_url }}" alt="Distribuidor Autorizado LG México - Seguridad Avanzada" title="LG México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">LG</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Pantallas y Monitores UltraWide</div>
+            <p class="marca-dir-desc">Monitores de alta definición para multitarea y pantallas comerciales para videowalls.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=LG" class="marca-dir-cta" title="Ver catálogo de LG en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos LG">
+          <span>Ver Catálogo LG</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- LinkedPro -->
+      <article class="marca-dir-card" id="linkedpro" data-name="linkedpro" data-letter="L" data-category="racks, gabinetes y fibra" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="57">
+        <meta itemprop="name" content="LinkedPro">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=LINKEDPRO%20BY%20EPCOM">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-linkedpro.png' | asset_url }}" alt="Distribuidor Autorizado LinkedPro México - Seguridad Avanzada" title="LinkedPro México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">LinkedPro</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Racks, Gabinetes y Fibra</div>
+            <p class="marca-dir-desc">Racks abiertos y de pared, patch cords de cobre y fibra óptica, organizadores verticales.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=LINKEDPRO%20BY%20EPCOM" class="marca-dir-cta" title="Ver catálogo de LinkedPro en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos LinkedPro">
+          <span>Ver Catálogo LinkedPro</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Linksys -->
+      <article class="marca-dir-card" id="linksys" data-name="linksys" data-letter="L" data-category="redes y conectividad" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="58">
+        <meta itemprop="name" content="Linksys">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Linksys">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-linksys.png' | asset_url }}" alt="Distribuidor Autorizado Linksys México - Seguridad Avanzada" title="Linksys México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Linksys</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Redes y Conectividad</div>
+            <p class="marca-dir-desc">Routers Velop Mesh, switches Gigabit y adaptadores de red de alta velocidad.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Linksys" class="marca-dir-cta" title="Ver catálogo de Linksys en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Linksys">
+          <span>Ver Catálogo Linksys</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Logitech -->
+      <article class="marca-dir-card" id="logitech" data-name="logitech" data-letter="L" data-category="periféricos y videoconferencia" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="59">
+        <meta itemprop="name" content="Logitech">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Logitech">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-logitech.png' | asset_url }}" alt="Distribuidor Autorizado Logitech México - Seguridad Avanzada" title="Logitech México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Logitech</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Periféricos y Videoconferencia</div>
+            <p class="marca-dir-desc">Cámaras de videoconferencia Rally/MeetUp, teclados inalámbricos y mouse ergonómicos.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Logitech" class="marca-dir-cta" title="Ver catálogo de Logitech en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Logitech">
+          <span>Ver Catálogo Logitech</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Lutron -->
+      <article class="marca-dir-card" id="lutron" data-name="lutron" data-letter="L" data-category="control de iluminación y persianas" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="60">
+        <meta itemprop="name" content="Lutron">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=LUTRON%20ELECTRONICS">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-lutron.png' | asset_url }}" alt="Distribuidor Autorizado Lutron México - Seguridad Avanzada" title="Lutron México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Lutron</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Control de Iluminación y Persianas</div>
+            <p class="marca-dir-desc">Sistemas de automatización y control inteligente de luz para residencias y edificios.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=LUTRON%20ELECTRONICS" class="marca-dir-cta" title="Ver catálogo de Lutron en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Lutron">
+          <span>Ver Catálogo Lutron</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Manhattan -->
+      <article class="marca-dir-card" id="manhattan" data-name="manhattan" data-letter="M" data-category="cables y accesorios de conectividad" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="61">
+        <meta itemprop="name" content="Manhattan">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Manhattan">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-manhattan.png' | asset_url }}" alt="Distribuidor Autorizado Manhattan México - Seguridad Avanzada" title="Manhattan México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Manhattan</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Cables y Accesorios de Conectividad</div>
+            <p class="marca-dir-desc">Cables HDMI, adaptadores USB-C, hubs multipuerto y soportes para monitor.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Manhattan" class="marca-dir-cta" title="Ver catálogo de Manhattan en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Manhattan">
+          <span>Ver Catálogo Manhattan</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Microsoft -->
+      <article class="marca-dir-card" id="microsoft" data-name="microsoft" data-letter="M" data-category="software y periféricos" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="62">
+        <meta itemprop="name" content="Microsoft">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Microsoft">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-microsoft.png' | asset_url }}" alt="Distribuidor Autorizado Microsoft México - Seguridad Avanzada" title="Microsoft México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Microsoft</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Software y Periféricos</div>
+            <p class="marca-dir-desc">Licenciamiento Windows, Office, teclados y accesorios de oficina con compatibilidad total.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Microsoft" class="marca-dir-cta" title="Ver catálogo de Microsoft en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Microsoft">
+          <span>Ver Catálogo Microsoft</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Naceb -->
+      <article class="marca-dir-card" id="naceb" data-name="naceb" data-letter="N" data-category="cómputo, periféricos y gaming" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="63">
+        <meta itemprop="name" content="Naceb">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Naceb%20Technology">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-naceb.png' | asset_url }}" alt="Distribuidor Autorizado Naceb México - Seguridad Avanzada" title="Naceb México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Naceb</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Cómputo, Periféricos y Gaming</div>
+            <p class="marca-dir-desc">Sillas ergonómicas, teclados, mouse, soportes para monitor y accesorios de cómputo Naceb Technology.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Naceb%20Technology" class="marca-dir-cta" title="Ver catálogo de Naceb en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Naceb">
+          <span>Ver Catálogo Naceb</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- OvalTech -->
+      <article class="marca-dir-card" id="ovaltech" data-name="ovaltech" data-letter="O" data-category="cables y accesorios para cómputo" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="64">
+        <meta itemprop="name" content="OvalTech">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=OvalTech">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-ovaltech.png' | asset_url }}" alt="Distribuidor Autorizado OvalTech México - Seguridad Avanzada" title="OvalTech México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">OvalTech</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Cables y Accesorios para Cómputo</div>
+            <p class="marca-dir-desc">Soluciones de conectividad y accesorios esenciales para estaciones de trabajo.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=OvalTech" class="marca-dir-cta" title="Ver catálogo de OvalTech en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos OvalTech">
+          <span>Ver Catálogo OvalTech</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Panduit -->
+      <article class="marca-dir-card" id="panduit" data-name="panduit" data-letter="P" data-category="cableado estructurado y racks" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="65">
+        <meta itemprop="name" content="Panduit">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Panduit">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-panduit.png' | asset_url }}" alt="Distribuidor Autorizado Panduit México - Seguridad Avanzada" title="Panduit México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Panduit</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Cableado Estructurado y Racks</div>
+            <p class="marca-dir-desc">Conectores RJ45, patch panels, gabinetes para telecomunicaciones y sistemas de canalización.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Panduit" class="marca-dir-cta" title="Ver catálogo de Panduit en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Panduit">
+          <span>Ver Catálogo Panduit</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Perfect Choice -->
+      <article class="marca-dir-card" id="perfect-choice" data-name="perfect choice" data-letter="P" data-category="accesorios y ergonomía" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="66">
+        <meta itemprop="name" content="Perfect Choice">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Perfect%20Choice">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-perfectchoice.png' | asset_url }}" alt="Distribuidor Autorizado Perfect Choice México - Seguridad Avanzada" title="Perfect Choice México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Perfect Choice</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Accesorios y Ergonomía</div>
+            <p class="marca-dir-desc">Mochilas ejecutivas, diademas para llamadas, mousepads y periféricos de cómputo.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Perfect%20Choice" class="marca-dir-cta" title="Ver catálogo de Perfect Choice en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Perfect Choice">
+          <span>Ver Catálogo Perfect Choice</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Planet -->
+      <article class="marca-dir-card" id="planet" data-name="planet" data-letter="P" data-category="switches industriales y poe" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="67">
+        <meta itemprop="name" content="Planet">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Planet">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-planet.png' | asset_url }}" alt="Distribuidor Autorizado Planet México - Seguridad Avanzada" title="Planet México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Planet</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Switches Industriales y PoE</div>
+            <p class="marca-dir-desc">Switches para riel DIN y ambientes adversos, inyectores PoE de ultra alta potencia.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Planet" class="marca-dir-cta" title="Ver catálogo de Planet en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Planet">
+          <span>Ver Catálogo Planet</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Poly -->
+      <article class="marca-dir-card" id="poly" data-name="poly" data-letter="P" data-category="audio y videocolaboración" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="68">
+        <meta itemprop="name" content="Poly">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=POLYCOM">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-poly.png' | asset_url }}" alt="Distribuidor Autorizado Poly México - Seguridad Avanzada" title="Poly México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Poly</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Audio y Videocolaboración</div>
+            <p class="marca-dir-desc">Sistemas de videoconferencia Polycom, auriculares corporativos y teléfonos de conferencia.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=POLYCOM" class="marca-dir-cta" title="Ver catálogo de Poly en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Poly">
+          <span>Ver Catálogo Poly</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Resideo -->
+      <article class="marca-dir-card" id="resideo" data-name="resideo" data-letter="R" data-category="alarmas y termostatos" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="69">
+        <meta itemprop="name" content="Resideo">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=HONEYWELL%20HOME%20RESIDEO">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-resideo.png' | asset_url }}" alt="Distribuidor Autorizado Resideo México - Seguridad Avanzada" title="Resideo México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Resideo</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Alarmas y Termostatos</div>
+            <p class="marca-dir-desc">Sistemas de alarma Honeywell Home, sensores de movimiento y automatización residencial.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=HONEYWELL%20HOME%20RESIDEO" class="marca-dir-cta" title="Ver catálogo de Resideo en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Resideo">
+          <span>Ver Catálogo Resideo</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Samsung -->
+      <article class="marca-dir-card" id="samsung" data-name="samsung" data-letter="S" data-category="monitores y almacenamiento" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="70">
+        <meta itemprop="name" content="Samsung">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Samsung">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-samsung.png' | asset_url }}" alt="Distribuidor Autorizado Samsung México - Seguridad Avanzada" title="Samsung México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Samsung</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Monitores y Almacenamiento</div>
+            <p class="marca-dir-desc">Pantallas profesionales para salas de monitoreo, señalización digital y unidades SSD.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Samsung" class="marca-dir-cta" title="Ver catálogo de Samsung en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Samsung">
+          <span>Ver Catálogo Samsung</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Seagate -->
+      <article class="marca-dir-card" id="seagate" data-name="seagate" data-letter="S" data-category="almacenamiento y cctv" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="71">
+        <meta itemprop="name" content="Seagate">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Seagate">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-seagate.png' | asset_url }}" alt="Distribuidor Autorizado Seagate México - Seguridad Avanzada" title="Seagate México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Seagate</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Almacenamiento y CCTV</div>
+            <p class="marca-dir-desc">Unidades SkyHawk para sistemas de videovigilancia, IronWolf para NAS y Exos para datacenter.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Seagate" class="marca-dir-cta" title="Ver catálogo de Seagate en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Seagate">
+          <span>Ver Catálogo Seagate</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Silimex -->
+      <article class="marca-dir-card" id="silimex" data-name="silimex" data-letter="S" data-category="mantenimiento y limpieza electrónica" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="72">
+        <meta itemprop="name" content="Silimex">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Silimex">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-silimex.png' | asset_url }}" alt="Distribuidor Autorizado Silimex México - Seguridad Avanzada" title="Silimex México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Silimex</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Mantenimiento y Limpieza Electrónica</div>
+            <p class="marca-dir-desc">Aire comprimido, limpiadores de contactos dieléctricos y alcohol isopropílico de grado técnico.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Silimex" class="marca-dir-cta" title="Ver catálogo de Silimex en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Silimex">
+          <span>Ver Catálogo Silimex</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Simon -->
+      <article class="marca-dir-card" id="simon" data-name="simon" data-letter="S" data-category="mecanismos eléctricos y voz/datos" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="73">
+        <meta itemprop="name" content="Simon">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Simon">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-simon.png' | asset_url }}" alt="Distribuidor Autorizado Simon México - Seguridad Avanzada" title="Simon México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Simon</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Mecanismos Eléctricos y Voz/Datos</div>
+            <p class="marca-dir-desc">Placas, contactos, apagadores y conectores modulares de diseño premium.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Simon" class="marca-dir-cta" title="Ver catálogo de Simon en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Simon">
+          <span>Ver Catálogo Simon</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Smartbitt -->
+      <article class="marca-dir-card" id="smartbitt" data-name="smartbitt" data-letter="S" data-category="sistemas de energía" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="74">
+        <meta itemprop="name" content="Smartbitt">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Smartbitt">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-smartbitt.png' | asset_url }}" alt="Distribuidor Autorizado Smartbitt México - Seguridad Avanzada" title="Smartbitt México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Smartbitt</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Sistemas de Energía</div>
+            <p class="marca-dir-desc">UPS confiables, reguladores automáticos de voltaje y baterías selladas de respaldo.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Smartbitt" class="marca-dir-cta" title="Ver catálogo de Smartbitt en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Smartbitt">
+          <span>Ver Catálogo Smartbitt</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Sonoff -->
+      <article class="marca-dir-card" id="sonoff" data-name="sonoff" data-letter="S" data-category="automatización e iot" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="75">
+        <meta itemprop="name" content="Sonoff">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Sonoff">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-sonoff.png' | asset_url }}" alt="Distribuidor Autorizado Sonoff México - Seguridad Avanzada" title="Sonoff México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Sonoff</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Automatización e IoT</div>
+            <p class="marca-dir-desc">Módulos de relevador Wi-Fi, sensores de temperatura y actuadores inteligentes.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Sonoff" class="marca-dir-cta" title="Ver catálogo de Sonoff en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Sonoff">
+          <span>Ver Catálogo Sonoff</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Tenda -->
+      <article class="marca-dir-card" id="tenda" data-name="tenda" data-letter="T" data-category="networking y enlaces wi-fi" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="76">
+        <meta itemprop="name" content="Tenda">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Tenda">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-tenda.png' | asset_url }}" alt="Distribuidor Autorizado Tenda México - Seguridad Avanzada" title="Tenda México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Tenda</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Networking y Enlaces Wi-Fi</div>
+            <p class="marca-dir-desc">Routers de alta velocidad, sistemas Wi-Fi Mesh y switches PoE accesibles.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Tenda" class="marca-dir-cta" title="Ver catálogo de Tenda en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Tenda">
+          <span>Ver Catálogo Tenda</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Tiandy -->
+      <article class="marca-dir-card" id="tiandy" data-name="tiandy" data-letter="T" data-category="videovigilancia ip y colormaker" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="77">
+        <meta itemprop="name" content="Tiandy">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Tiandy">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-tiandy.png' | asset_url }}" alt="Distribuidor Autorizado Tiandy México - Seguridad Avanzada" title="Tiandy México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Tiandy</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Videovigilancia IP y ColorMaker</div>
+            <p class="marca-dir-desc">Cámaras IP con tecnología Super Starlight para visión en oscuridad total sin infrarrojos visibles.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Tiandy" class="marca-dir-cta" title="Ver catálogo de Tiandy en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Tiandy">
+          <span>Ver Catálogo Tiandy</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- TP-Link -->
+      <article class="marca-dir-card" id="tp-link" data-name="tp-link" data-letter="T" data-category="redes y videovigilancia vigi" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="78">
+        <meta itemprop="name" content="TP-Link">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=TP-Link">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-tplink.png' | asset_url }}" alt="Distribuidor Autorizado TP-Link México - Seguridad Avanzada" title="TP-Link México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">TP-Link</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Redes y Videovigilancia VIGI</div>
+            <p class="marca-dir-desc">Switches PoE Omada, access points Wi-Fi 6 y cámaras empresariales VIGI.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=TP-Link" class="marca-dir-cta" title="Ver catálogo de TP-Link en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos TP-Link">
+          <span>Ver Catálogo TP-Link</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Tripp-Lite by Eaton -->
+      <article class="marca-dir-card" id="tripp-lite-by-eaton" data-name="tripp-lite by eaton" data-letter="T" data-category="protección eléctrica y racks" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="79">
+        <meta itemprop="name" content="Tripp-Lite by Eaton">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=TRIPP-LITE">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-tripplite.png' | asset_url }}" alt="Distribuidor Autorizado Tripp-Lite by Eaton México - Seguridad Avanzada" title="Tripp-Lite by Eaton México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Tripp-Lite by Eaton</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Protección Eléctrica y Racks</div>
+            <p class="marca-dir-desc">UPS SmartPro para centros de datos, barras PDU y gabinetes para equipo de telecomunicaciones.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=TRIPP-LITE" class="marca-dir-cta" title="Ver catálogo de Tripp-Lite by Eaton en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Tripp-Lite by Eaton">
+          <span>Ver Catálogo Tripp-Lite by Eaton</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Truper -->
+      <article class="marca-dir-card" id="truper" data-name="truper" data-letter="T" data-category="herramientas y equipo de instalación" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="80">
+        <meta itemprop="name" content="Truper">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=TRUPER">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-truper.png' | asset_url }}" alt="Distribuidor Autorizado Truper México - Seguridad Avanzada" title="Truper México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Truper</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Herramientas y Equipo de Instalación</div>
+            <p class="marca-dir-desc">Herramientas manuales, eléctricas, multímetros, probadores y equipo profesional para instalación de redes y seguridad electrónica.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=TRUPER" class="marca-dir-cta" title="Ver catálogo de Truper en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Truper">
+          <span>Ver Catálogo Truper</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Ubiquiti Networks -->
+      <article class="marca-dir-card" id="ubiquiti-networks" data-name="ubiquiti networks" data-letter="U" data-category="redes y enlaces inalámbricos" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="81">
+        <meta itemprop="name" content="Ubiquiti Networks">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=UBIQUITI">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-ubiquiti.png' | asset_url }}" alt="Distribuidor Autorizado Ubiquiti Networks México - Seguridad Avanzada" title="Ubiquiti Networks México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Ubiquiti Networks</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Redes y Enlaces Inalámbricos</div>
+            <p class="marca-dir-desc">Ecosistema UniFi, access points de largo alcance, switches gestionables y radioenlaces airMAX.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=UBIQUITI" class="marca-dir-cta" title="Ver catálogo de Ubiquiti Networks en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Ubiquiti Networks">
+          <span>Ver Catálogo Ubiquiti Networks</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- UNV (Uniview) -->
+      <article class="marca-dir-card" id="unv-uniview" data-name="unv (uniview)" data-letter="U" data-category="videovigilancia ip profesional" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="82">
+        <meta itemprop="name" content="UNV (Uniview)">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=UNV">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-unv.png' | asset_url }}" alt="Distribuidor Autorizado UNV (Uniview) México - Seguridad Avanzada" title="UNV (Uniview) México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">UNV (Uniview)</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Videovigilancia IP Profesional</div>
+            <p class="marca-dir-desc">Cámaras de vigilancia IP de alta gama con tecnología LightHunter y NVRs ultra confiables.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=UNV" class="marca-dir-cta" title="Ver catálogo de UNV (Uniview) en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos UNV (Uniview)">
+          <span>Ver Catálogo UNV (Uniview)</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Vorago -->
+      <article class="marca-dir-card" id="vorago" data-name="vorago" data-letter="V" data-category="cómputo y accesorios" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="83">
+        <meta itemprop="name" content="Vorago">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Vorago">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-vorago.png' | asset_url }}" alt="Distribuidor Autorizado Vorago México - Seguridad Avanzada" title="Vorago México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Vorago</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Cómputo y Accesorios</div>
+            <p class="marca-dir-desc">Equipos de cómputo accesibles, mochilas para laptop, mouse y cables.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Vorago" class="marca-dir-cta" title="Ver catálogo de Vorago en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Vorago">
+          <span>Ver Catálogo Vorago</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Western Digital -->
+      <article class="marca-dir-card" id="western-digital" data-name="western digital" data-letter="W" data-category="discos duros y almacenamiento" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="84">
+        <meta itemprop="name" content="Western Digital">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=WESTERN%20DIGITAL">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-wd.png' | asset_url }}" alt="Distribuidor Autorizado Western Digital México - Seguridad Avanzada" title="Western Digital México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Western Digital</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Discos Duros y Almacenamiento</div>
+            <p class="marca-dir-desc">Discos duros WD Purple especializados para videovigilancia 24/7 y SSDs WD Red para NAS.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=WESTERN%20DIGITAL" class="marca-dir-cta" title="Ver catálogo de Western Digital en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Western Digital">
+          <span>Ver Catálogo Western Digital</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Xerox -->
+      <article class="marca-dir-card" id="xerox" data-name="xerox" data-letter="X" data-category="multifuncionales y gestión de documentos" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="85">
+        <meta itemprop="name" content="Xerox">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Xerox">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-xerox.png' | asset_url }}" alt="Distribuidor Autorizado Xerox México - Seguridad Avanzada" title="Xerox México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Xerox</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Multifuncionales y Gestión de Documentos</div>
+            <p class="marca-dir-desc">Impresoras y copiadoras para altos volúmenes de oficina y producción gráfica.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=Xerox" class="marca-dir-cta" title="Ver catálogo de Xerox en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Xerox">
+          <span>Ver Catálogo Xerox</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- YONUSA -->
+      <article class="marca-dir-card" id="yonusa" data-name="yonusa" data-letter="Y" data-category="cercas electrificadas perimetrales" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="86">
+        <meta itemprop="name" content="YONUSA">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=YONUSA">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-yonusa.png' | asset_url }}" alt="Distribuidor Autorizado YONUSA México - Seguridad Avanzada" title="YONUSA México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">YONUSA</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Cercas Electrificadas Perimetrales</div>
+            <p class="marca-dir-desc">Energizadores de alto voltaje, aisladores y accesorios para cercados perimetrales de seguridad.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=YONUSA" class="marca-dir-cta" title="Ver catálogo de YONUSA en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos YONUSA">
+          <span>Ver Catálogo YONUSA</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- Zebra Technologies -->
+      <article class="marca-dir-card" id="zebra-technologies" data-name="zebra technologies" data-letter="Z" data-category="código de barras y credencialización" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="87">
+        <meta itemprop="name" content="Zebra Technologies">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=ZEBRA">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-zebra.png' | asset_url }}" alt="Distribuidor Autorizado Zebra Technologies México - Seguridad Avanzada" title="Zebra Technologies México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">Zebra Technologies</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Código de Barras y Credencialización</div>
+            <p class="marca-dir-desc">Impresoras de etiquetas térmicas, lectores de código de barras e impresoras de credenciales PVC.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=ZEBRA" class="marca-dir-cta" title="Ver catálogo de Zebra Technologies en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos Zebra Technologies">
+          <span>Ver Catálogo Zebra Technologies</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+      <!-- ZKTeco -->
+      <article class="marca-dir-card" id="zkteco" data-name="zkteco" data-letter="Z" data-category="control de acceso y asistencia" itemprop="itemListElement" itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="position" content="88">
+        <meta itemprop="name" content="ZKTeco">
+        <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=ZKTeco">
+        
+        <div>
+          <div class="marca-logo-wrapper">
+            <img src="{{ 'brand-zkteco.png' | asset_url }}" alt="Distribuidor Autorizado ZKTeco México - Seguridad Avanzada" title="ZKTeco México Oficial" itemprop="logo" class="marca-dir-logo" loading="lazy">
+          </div>
+          <div class="marca-dir-body">
+            <div class="marca-dir-header-top">
+              <h2 class="marca-dir-name">ZKTeco</h2>
+              <span class="marca-dir-dist-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Oficial
+              </span>
+            </div>
+            <div class="marca-dir-cat">Control de Acceso y Asistencia</div>
+            <p class="marca-dir-desc">Terminales biométricas faciales y de huella, torniquetes, chapas electromagnéticas y barreras vehiculares.</p>
+          </div>
+        </div>
+
+        <a href="/collections/vendors?q=ZKTeco" class="marca-dir-cta" title="Ver catálogo de ZKTeco en Seguridad Avanzada" aria-label="Ver catálogo oficial de productos ZKTeco">
+          <span>Ver Catálogo ZKTeco</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </article>
+
+      <!-- EMPTY STATE -->
+      <div class="marcas-empty-state" id="marcasEmptyState">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <h3 class="marcas-empty-title">No se encontraron marcas</h3>
+        <p class="marcas-empty-text">No hay marcas que coincidan con tu búsqueda. Prueba con otro nombre o revisa el catálogo general.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('marcaSearchInput');
+    const searchClear = document.getElementById('marcaSearchClear');
+    const azBar = document.getElementById('marcasAzBar');
+    const azButtons = azBar ? azBar.querySelectorAll('.marcas-az-btn') : [];
+    const cards = document.querySelectorAll('.marca-dir-card');
+    const countEl = document.getElementById('marcasVisibleCount');
+    const emptyState = document.getElementById('marcasEmptyState');
+
+    let currentLetter = 'all';
+    let currentSearch = '';
+
+    function filterBrands() {
+      let visible = 0;
+      cards.forEach(card => {
+        const name = card.getAttribute('data-name') || '';
+        const cat = card.getAttribute('data-category') || '';
+        const letter = card.getAttribute('data-letter') || '';
+
+        const matchesLetter = (currentLetter === 'all' || letter === currentLetter);
+        const matchesSearch = (!currentSearch || name.includes(currentSearch) || cat.includes(currentSearch));
+
+        if (matchesLetter && matchesSearch) {
+          card.style.display = 'flex';
+          visible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (countEl) countEl.textContent = visible;
+      if (emptyState) {
+        if (visible === 0) {
+          emptyState.style.display = 'block';
+        } else {
+          emptyState.style.display = 'none';
+        }
+      }
+    }
+
+    // Eventos de Búsqueda
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        currentSearch = e.target.value.toLowerCase().trim();
+        if (currentSearch.length > 0) {
+          if (searchClear) searchClear.style.display = 'flex';
+          currentLetter = 'all';
+          azButtons.forEach(b => b.classList.remove('active'));
+          if (azButtons[0]) azButtons[0].classList.add('active');
+        } else {
+          if (searchClear) searchClear.style.display = 'none';
+        }
+        filterBrands();
+      });
+    }
+
+    if (searchClear) {
+      searchClear.addEventListener('click', function() {
+        searchInput.value = '';
+        currentSearch = '';
+        searchClear.style.display = 'none';
+        searchInput.focus();
+        filterBrands();
+      });
+    }
+
+    // Eventos de Filtro A-Z
+    azButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        azButtons.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentLetter = this.getAttribute('data-letter');
+        filterBrands();
+      });
+    });
+
+    // Soporte para URL Hash o Parámetro: ?marca=hikvision o #hikvision
+    const urlParams = new URLSearchParams(window.location.search);
+    const marcaParam = urlParams.get('marca') || window.location.hash.replace('#', '');
+    if (marcaParam) {
+      const cleanTarget = marcaParam.toLowerCase().trim();
+      const targetCard = document.getElementById(cleanTarget);
+      if (targetCard) {
+        setTimeout(() => {
+          targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          targetCard.classList.add('highlight');
+        }, 300);
+      } else if (searchInput) {
+        searchInput.value = marcaParam;
+        currentSearch = cleanTarget;
+        if (searchClear) searchClear.style.display = 'flex';
+        filterBrands();
+      }
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Directorio de Marcas",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Directorio de Marcas"
+    }
+  ]
+}
+{% endschema %}

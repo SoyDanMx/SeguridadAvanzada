@@ -9,6 +9,9 @@
  */
 {
   "general": {
+    "breadcrumbs": {
+      "home": "Inicio"
+    },
     "password_page": {
       "login_form_heading": "Entrar a la tienda usando contraseña:",
       "login_password_button": "Entrar usando contraseña",
@@ -46,6 +49,7 @@
     },
     "search": {
       "search": "Búsqueda",
+      "placeholder": "Buscar por SKU, Modelo o Marca...",
       "reset": "Borrar término de búsqueda"
     },
     "cart": {

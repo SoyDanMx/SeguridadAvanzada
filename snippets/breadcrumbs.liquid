@@ -39,16 +39,21 @@
 <nav class="breadcrumbs page-width" aria-label="breadcrumbs">
   <ol class="breadcrumbs__list">
     <li class="breadcrumbs__item">
-      <a class="breadcrumbs__link" href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t | default: 'Inicio' }}</a>
+      {%- assign home_label = 'general.breadcrumbs.home' | t -%}
+      {%- if home_label contains 'Translation missing' or home_label == blank -%}
+        {%- assign home_label = 'Inicio' -%}
+      {%- endif -%}
+      <a class="breadcrumbs__link" href="{{ routes.root_url }}">{{ home_label }}</a>
     </li>
     {%- if template contains 'page' -%}
       <li class="breadcrumbs__item">
         <a class="breadcrumbs__link" href="{{ page.url }}" aria-current="page">{{ page.title }}</a>
       </li>
     {%- elsif template contains 'product' -%}
-      {%- if collection.url -%}
+      {%- assign product_collection = collection | default: product.collections.first -%}
+      {%- if product_collection -%}
         <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="{{ collection.url }}">{{ collection.title }}</a>
+          <a class="breadcrumbs__link" href="{{ product_collection.url }}">{{ product_collection.title }}</a>
         </li>
       {%- endif -%}
       <li class="breadcrumbs__item">

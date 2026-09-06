@@ -5,7 +5,8 @@ import { Providers } from "./providers";
 import { Header } from "@/components/Header";
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
 import { Footer } from "@/components/Footer";
-import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const inter = Inter({
@@ -58,6 +59,8 @@ export default function RootLayout({
             {children}
           </main>
         </Providers>
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

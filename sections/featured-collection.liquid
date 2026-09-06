@@ -103,7 +103,11 @@
         {% assign skip_card_product_styles = false %}
 
         {%- if section.settings.collection.products.size > 0 -%}
-          {% assign lazy_load = false %}
+          {%- if section.index > 1 -%}
+            {% assign lazy_load = true %}
+          {%- else -%}
+            {% assign lazy_load = false %}
+          {%- endif -%}
           {% assign products_rendered_count = 0 %}
             {%- for product in section.settings.collection.products limit: 50 -%}
               {%- if product.featured_media == blank -%}

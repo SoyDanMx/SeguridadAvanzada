@@ -102,24 +102,27 @@
         "collapsible-row-0": {
           "type": "collapsible_row",
           "settings": {
-            "icon": "none",
-            "row_content": "",
+            "heading": "Garantía y Respaldo Oficial",
+            "icon": "check_mark",
+            "row_content": "<p>Todos nuestros productos son 100% nuevos, originales y cuentan con <strong>garantía oficial de 1 año directo con el fabricante</strong> y respaldo de mayoristas autorizados.</p>",
             "page": ""
           }
         },
         "collapsible-row-1": {
           "type": "collapsible_row",
           "settings": {
-            "icon": "none",
-            "row_content": "",
+            "heading": "Envíos y Tiempos de Entrega",
+            "icon": "truck",
+            "row_content": "<p>Envíos asegurados a todo México a través de paqueterías líderes (FedEx, DHL, Estafeta). Entregas estimadas de <strong>2 a 5 días hábiles</strong> con número de rastreo en tiempo real.</p>",
             "page": ""
           }
         },
         "collapsible-row-2": {
           "type": "collapsible_row",
           "settings": {
-            "icon": "none",
-            "row_content": "",
+            "heading": "Facturación Fiscal y Soporte",
+            "icon": "clipboard",
+            "row_content": "<p>Precios con IVA incluido. Emitimos <strong>factura fiscal CFDI 4.0</strong> al momento de tu compra y contamos con asesoría técnica especializada para tus proyectos.</p>",
             "page": ""
           }
         }
@@ -130,8 +133,9 @@
         "collapsible-row-2"
       ],
       "settings": {
-        "caption": "",
-        "heading_size": "h1",
+        "caption": "COMPRA 100% SEGURA",
+        "heading": "Garantía, Envíos y Facturación",
+        "heading_size": "h2",
         "heading_alignment": "center",
         "layout": "section",
         "color_scheme": "scheme-1",

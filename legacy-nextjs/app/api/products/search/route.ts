@@ -51,6 +51,22 @@ export async function GET(request: Request) {
     }
 
     if (!product) {
+      // Fallback a Shopify GraphQL API
+      try {
+        const shopifyProd = await fetchShopifyProduct(sku);
+        if (shopifyProd) {
+          product = {
+            sku: shopifyProd.sku || sku,
+            name: shopifyProd.name,
+            price_mxn: shopifyProd.price_mxn
+          };
+        }
+      } catch (e) {
+        console.error("Error fetching product by SKU from Shopify fallback:", e);
+      }
+    }
+
+    if (!product) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 });
     }
 

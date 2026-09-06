@@ -145,7 +145,7 @@
     "blocks": {
       "8646517364657662053": {
         "type": "shopify://apps/layouthub-pagebuilder/blocks/app_embed/0199a7fe-f983-74e0-b5da-85bab934cee3",
-        "disabled": false,
+        "disabled": true,
         "settings": {}
       }
     },

@@ -20,6 +20,65 @@
     padding: 0 1.5rem;
   }
 
+
+  .marcas-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .marcas-title-link {
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: color 0.2s ease;
+    cursor: pointer;
+  }
+
+  .marcas-title-link:hover {
+    color: #2563eb;
+  }
+
+  .marcas-title-arrow {
+    font-size: 0.85em;
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .marcas-title-link:hover .marcas-title-arrow {
+    transform: translateX(6px);
+  }
+
+  .marcas-view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.75rem 1.4rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    white-space: nowrap;
+  }
+
+  .marcas-view-all-btn:hover {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.3);
+    transform: translateY(-2px);
+  }
+
   .marcas-header {
     margin-bottom: 2.75rem;
     display: flex;
@@ -93,11 +152,11 @@
   }
 
   .marcas-track.track-forward {
-    animation: marcasScroll 50s linear infinite;
+    animation: marcasScroll 75s linear infinite;
   }
 
   .marcas-track.track-reverse {
-    animation: marcasScrollReverse 50s linear infinite;
+    animation: marcasScrollReverse 75s linear infinite;
   }
 
   .marcas-marquee-wrapper:hover .marcas-track {
@@ -160,6 +219,7 @@
     max-width: 145px;
     width: auto;
     height: auto;
+    aspect-ratio: 145 / 40;
     object-fit: contain;
     display: block;
     image-rendering: -webkit-optimize-contrast;
@@ -180,12 +240,23 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         Distribuidor Directo Autorizado
       </div>
-      <h2 class="marcas-title">
-        {{ section.settings.title | default: 'Marcas Destacadas' }}
-      </h2>
-      {% if section.settings.subtitle != blank %}
-        <p class="marcas-subtitle">{{ section.settings.subtitle }}</p>
-      {% endif %}
+      <div class="marcas-header-row">
+        <div>
+          <h2 class="marcas-title">
+            <a href="/pages/marcas" class="marcas-title-link" title="Explorar directorio oficial de marcas en Seguridad Avanzada">
+              {{ section.settings.title | default: 'Marcas Destacadas' }}
+              <span class="marcas-title-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </h2>
+          {% if section.settings.subtitle != blank %}
+            <p class="marcas-subtitle">{{ section.settings.subtitle }}</p>
+          {% endif %}
+        </div>
+        <a href="/pages/marcas" class="marcas-view-all-btn" title="Ver catálogo completo de marcas autorizadas">
+          <span>Ver todas las marcas (88)</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -194,144 +265,475 @@
     <!-- FILA 1 (Scroll Hacia la Izquierda) -->
     <div class="marcas-track track-forward">
       {% for i in (1..2) %}
-        <!-- FAAC (HD Oficial) -->
-        <a href="/search?q=FAAC" class="marca-card" title="FAAC">
+        
+        <!-- Truper (HD Oficial) -->
+        <a href="/collections/vendors?q=TRUPER" class="marca-card" title="Distribuidor Autorizado Truper México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar herramientas y equipos Truper en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Truper">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=TRUPER">
           <div class="marca-content">
-            <img src="{{ 'brand-faac.png' | asset_url }}" alt="FAAC" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-truper.png' | asset_url }}" alt="Distribuidor Autorizado Truper México - Precios y Garantía Oficial" title="Truper México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Truper en México. Venta de herramientas manuales, eléctricas y equipos de medición profesional en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Apple (HD Oficial) -->
+        <a href="/collections/vendors?q=Apple" class="marca-card" title="Distribuidor Autorizado Apple México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Apple en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Apple">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Apple">
+          <div class="marca-content">
+            <img src="{{ 'brand-apple.png' | asset_url }}" alt="Distribuidor Autorizado Apple México - Precios y Garantía Oficial" title="Apple México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Apple en México. Venta de tecnología, equipos y soluciones Apple con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- EZVIZ (HD Oficial) -->
+        <a href="/collections/vendors?q=EZVIZ" class="marca-card" title="Distribuidor Autorizado EZVIZ México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos EZVIZ en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="EZVIZ">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=EZVIZ">
+          <div class="marca-content">
+            <img src="{{ 'brand-ezviz.png' | asset_url }}" alt="Distribuidor Autorizado EZVIZ México - Precios y Garantía Oficial" title="EZVIZ México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de EZVIZ en México. Venta de tecnología, equipos y soluciones EZVIZ con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- HP (HD Oficial) -->
+        <a href="/collections/vendors?q=HP" class="marca-card" title="Distribuidor Autorizado HP México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos HP en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="HP">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=HP">
+          <div class="marca-content">
+            <img src="{{ 'brand-hp.png' | asset_url }}" alt="Distribuidor Autorizado HP México - Precios y Garantía Oficial" title="HP México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de HP en México. Venta de tecnología, equipos y soluciones HP con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- HPE (HD Oficial) -->
+        <a href="/collections/vendors?q=HPE" class="marca-card" title="Distribuidor Autorizado Hewlett Packard Enterprise México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Hewlett Packard Enterprise en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Hewlett Packard Enterprise">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=HPE">
+          <div class="marca-content">
+            <img src="{{ 'brand-hpe.png' | asset_url }}" alt="Distribuidor Autorizado Hewlett Packard Enterprise México - Precios y Garantía Oficial" title="Hewlett Packard Enterprise México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Hewlett Packard Enterprise en México. Venta de tecnología, equipos y soluciones Hewlett Packard Enterprise con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Dell (HD Oficial) -->
+        <a href="/collections/vendors?q=Dell" class="marca-card" title="Distribuidor Autorizado Dell Technologies México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Dell Technologies en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Dell Technologies">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Dell">
+          <div class="marca-content">
+            <img src="{{ 'brand-dell.png' | asset_url }}" alt="Distribuidor Autorizado Dell Technologies México - Precios y Garantía Oficial" title="Dell Technologies México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Dell Technologies en México. Venta de tecnología, equipos y soluciones Dell Technologies con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Lenovo (HD Oficial) -->
+        <a href="/collections/vendors?q=Lenovo" class="marca-card" title="Distribuidor Autorizado Lenovo México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Lenovo en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Lenovo">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Lenovo">
+          <div class="marca-content">
+            <img src="{{ 'brand-lenovo.png' | asset_url }}" alt="Distribuidor Autorizado Lenovo México - Precios y Garantía Oficial" title="Lenovo México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Lenovo en México. Venta de tecnología, equipos y soluciones Lenovo con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Acer (HD Oficial) -->
+        <a href="/collections/vendors?q=Acer" class="marca-card" title="Distribuidor Autorizado Acer México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Acer en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Acer">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Acer">
+          <div class="marca-content">
+            <img src="{{ 'brand-acer.png' | asset_url }}" alt="Distribuidor Autorizado Acer México - Precios y Garantía Oficial" title="Acer México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Acer en México. Venta de tecnología, equipos y soluciones Acer con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Acteck (HD Oficial) -->
+        <a href="/collections/vendors?q=Acteck" class="marca-card" title="Distribuidor Autorizado Acteck México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Acteck en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Acteck">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Acteck">
+          <div class="marca-content">
+            <img src="{{ 'brand-acteck.png' | asset_url }}" alt="Distribuidor Autorizado Acteck México - Precios y Garantía Oficial" title="Acteck México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Acteck en México. Venta de tecnología, equipos y soluciones Acteck con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Balam Rush (HD Oficial) -->
+        <a href="/collections/vendors?q=Balam+Rush" class="marca-card" title="Distribuidor Autorizado Balam Rush México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Balam Rush en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Balam Rush">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Balam+Rush">
+          <div class="marca-content">
+            <img src="{{ 'brand-balamrush.png' | asset_url }}" alt="Distribuidor Autorizado Balam Rush México - Precios y Garantía Oficial" title="Balam Rush México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Balam Rush en México. Venta de tecnología, equipos y soluciones Balam Rush con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- ASUS (HD Oficial) -->
+        <a href="/collections/vendors?q=ASUS" class="marca-card" title="Distribuidor Autorizado ASUS México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos ASUS en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="ASUS">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=ASUS">
+          <div class="marca-content">
+            <img src="{{ 'brand-asus.png' | asset_url }}" alt="Distribuidor Autorizado ASUS México - Precios y Garantía Oficial" title="ASUS México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de ASUS en México. Venta de tecnología, equipos y soluciones ASUS con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Lanix (HD Oficial) -->
+        <a href="/collections/vendors?q=Lanix" class="marca-card" title="Distribuidor Autorizado Lanix México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Lanix en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Lanix">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Lanix">
+          <div class="marca-content">
+            <img src="{{ 'brand-lanix.png' | asset_url }}" alt="Distribuidor Autorizado Lanix México - Precios y Garantía Oficial" title="Lanix México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Lanix en México. Venta de tecnología, equipos y soluciones Lanix con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Intel (HD Oficial) -->
+        <a href="/collections/vendors?q=Intel" class="marca-card" title="Distribuidor Autorizado Intel México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Intel en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Intel">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Intel">
+          <div class="marca-content">
+            <img src="{{ 'brand-intel.png' | asset_url }}" alt="Distribuidor Autorizado Intel México - Precios y Garantía Oficial" title="Intel México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Intel en México. Venta de tecnología, equipos y soluciones Intel con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- AMD (HD Oficial) -->
+        <a href="/collections/vendors?q=AMD" class="marca-card" title="Distribuidor Autorizado AMD México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos AMD en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="AMD">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=AMD">
+          <div class="marca-content">
+            <img src="{{ 'brand-amd.png' | asset_url }}" alt="Distribuidor Autorizado AMD México - Precios y Garantía Oficial" title="AMD México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de AMD en México. Venta de tecnología, equipos y soluciones AMD con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Fujitsu (HD Oficial) -->
+        <a href="/collections/vendors?q=Fujitsu" class="marca-card" title="Distribuidor Autorizado Fujitsu México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Fujitsu en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Fujitsu">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Fujitsu">
+          <div class="marca-content">
+            <img src="{{ 'brand-fujitsu.png' | asset_url }}" alt="Distribuidor Autorizado Fujitsu México - Precios y Garantía Oficial" title="Fujitsu México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Fujitsu en México. Venta de tecnología, equipos y soluciones Fujitsu con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Logitech (HD Oficial) -->
+        <a href="/collections/vendors?q=Logitech" class="marca-card" title="Distribuidor Autorizado Logitech México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Logitech en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Logitech">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Logitech">
+          <div class="marca-content">
+            <img src="{{ 'brand-logitech.png' | asset_url }}" alt="Distribuidor Autorizado Logitech México - Precios y Garantía Oficial" title="Logitech México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Logitech en México. Venta de tecnología, equipos y soluciones Logitech con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Kingston (HD Oficial) -->
+        <a href="/collections/vendors?q=Kingston" class="marca-card" title="Distribuidor Autorizado Kingston Technology México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Kingston Technology en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Kingston Technology">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Kingston">
+          <div class="marca-content">
+            <img src="{{ 'brand-kingston.png' | asset_url }}" alt="Distribuidor Autorizado Kingston Technology México - Precios y Garantía Oficial" title="Kingston Technology México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Kingston Technology en México. Venta de tecnología, equipos y soluciones Kingston Technology con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Kensington (HD Oficial) -->
+        <a href="/collections/vendors?q=Kensington" class="marca-card" title="Distribuidor Autorizado Kensington México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Kensington en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Kensington">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Kensington">
+          <div class="marca-content">
+            <img src="{{ 'brand-kensington.png' | asset_url }}" alt="Distribuidor Autorizado Kensington México - Precios y Garantía Oficial" title="Kensington México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Kensington en México. Venta de tecnología, equipos y soluciones Kensington con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Western Digital (HD Oficial) -->
+        <a href="/collections/vendors?q=Western+Digital" class="marca-card" title="Distribuidor Autorizado Western Digital México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Western Digital en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Western Digital">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Western+Digital">
+          <div class="marca-content">
+            <img src="{{ 'brand-wd.png' | asset_url }}" alt="Distribuidor Autorizado Western Digital México - Precios y Garantía Oficial" title="Western Digital México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Western Digital en México. Venta de tecnología, equipos y soluciones Western Digital con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Seagate (HD Oficial) -->
+        <a href="/collections/vendors?q=Seagate" class="marca-card" title="Distribuidor Autorizado Seagate México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Seagate en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Seagate">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Seagate">
+          <div class="marca-content">
+            <img src="{{ 'brand-seagate.png' | asset_url }}" alt="Distribuidor Autorizado Seagate México - Precios y Garantía Oficial" title="Seagate México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Seagate en México. Venta de tecnología, equipos y soluciones Seagate con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- APC (HD Oficial) -->
+        <a href="/collections/vendors?q=APC" class="marca-card" title="Distribuidor Autorizado APC by Schneider Electric México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos APC by Schneider Electric en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="APC by Schneider Electric">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=APC">
+          <div class="marca-content">
+            <img src="{{ 'brand-apc.png' | asset_url }}" alt="Distribuidor Autorizado APC by Schneider Electric México - Precios y Garantía Oficial" title="APC by Schneider Electric México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de APC by Schneider Electric en México. Venta de tecnología, equipos y soluciones APC by Schneider Electric con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Cisco (HD Oficial) -->
+        <a href="/collections/vendors?q=Cisco" class="marca-card" title="Distribuidor Autorizado Cisco México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Cisco en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Cisco">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Cisco">
+          <div class="marca-content">
+            <img src="{{ 'brand-cisco.png' | asset_url }}" alt="Distribuidor Autorizado Cisco México - Precios y Garantía Oficial" title="Cisco México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Cisco en México. Venta de tecnología, equipos y soluciones Cisco con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Poly (HD Oficial) -->
+        <a href="/collections/vendors?q=POLYCOM" class="marca-card" title="Distribuidor Autorizado Poly México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Poly en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Poly">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=POLYCOM">
+          <div class="marca-content">
+            <img src="{{ 'brand-poly.png' | asset_url }}" alt="Distribuidor Autorizado Poly México - Precios y Garantía Oficial" title="Poly México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Poly en México. Venta de tecnología, equipos y soluciones Poly con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Microsoft (HD Oficial) -->
+        <a href="/collections/vendors?q=Microsoft" class="marca-card" title="Distribuidor Autorizado Microsoft México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Microsoft en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Microsoft">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Microsoft">
+          <div class="marca-content">
+            <img src="{{ 'brand-microsoft.png' | asset_url }}" alt="Distribuidor Autorizado Microsoft México - Precios y Garantía Oficial" title="Microsoft México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Microsoft en México. Venta de tecnología, equipos y soluciones Microsoft con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Samsung (HD Oficial) -->
+        <a href="/collections/vendors?q=Samsung" class="marca-card" title="Distribuidor Autorizado Samsung México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Samsung en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Samsung">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Samsung">
+          <div class="marca-content">
+            <img src="{{ 'brand-samsung.png' | asset_url }}" alt="Distribuidor Autorizado Samsung México - Precios y Garantía Oficial" title="Samsung México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Samsung en México. Venta de tecnología, equipos y soluciones Samsung con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Kyocera (HD Oficial) -->
+        <a href="/collections/vendors?q=Kyocera" class="marca-card" title="Distribuidor Autorizado Kyocera México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Kyocera en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Kyocera">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Kyocera">
+          <div class="marca-content">
+            <img src="{{ 'brand-kyocera.png' | asset_url }}" alt="Distribuidor Autorizado Kyocera México - Precios y Garantía Oficial" title="Kyocera México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Kyocera en México. Venta de tecnología, equipos y soluciones Kyocera con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- FAAC (HD Oficial) -->
+        <a href="/collections/vendors?q=FAAC" class="marca-card" title="Distribuidor Autorizado FAAC México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos FAAC en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="FAAC">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=FAAC">
+          <div class="marca-content">
+            <img src="{{ 'brand-faac.png' | asset_url }}" alt="Distribuidor Autorizado FAAC México - Precios y Garantía Oficial" title="FAAC México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de FAAC en México. Venta de tecnología, equipos y soluciones FAAC con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- CyberPower (HD Oficial) -->
-        <a href="/search?q=CyberPower" class="marca-card" title="CyberPower">
+        <a href="/collections/vendors?q=CyberPower" class="marca-card" title="Distribuidor Autorizado CyberPower México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos CyberPower en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="CyberPower">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=CyberPower">
           <div class="marca-content">
-            <img src="{{ 'brand-cyberpower.png' | asset_url }}" alt="CyberPower" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-cyberpower.png' | asset_url }}" alt="Distribuidor Autorizado CyberPower México - Precios y Garantía Oficial" title="CyberPower México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de CyberPower en México. Venta de tecnología, equipos y soluciones CyberPower con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- Growatt (HD Oficial) -->
-        <a href="/search?q=Growatt" class="marca-card" title="Growatt">
+        <a href="/collections/vendors?q=Growatt" class="marca-card" title="Distribuidor Autorizado Growatt México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Growatt en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Growatt">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Growatt">
           <div class="marca-content">
-            <img src="{{ 'brand-growatt.png' | asset_url }}" alt="Growatt" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-growatt.png' | asset_url }}" alt="Distribuidor Autorizado Growatt México - Precios y Garantía Oficial" title="Growatt México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Growatt en México. Venta de tecnología, equipos y soluciones Growatt con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- EcoFlow (HD Oficial) -->
-        <a href="/search?q=EcoFlow" class="marca-card" title="EcoFlow">
+        <a href="/collections/vendors?q=EcoFlow" class="marca-card" title="Distribuidor Autorizado EcoFlow México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos EcoFlow en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="EcoFlow">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=EcoFlow">
           <div class="marca-content">
-            <img src="{{ 'brand-ecoflow.png' | asset_url }}" alt="EcoFlow" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-ecoflow.png' | asset_url }}" alt="Distribuidor Autorizado EcoFlow México - Precios y Garantía Oficial" title="EcoFlow México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de EcoFlow en México. Venta de tecnología, equipos y soluciones EcoFlow con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- Hoymiles (HD Oficial) -->
-        <a href="/search?q=Hoymiles" class="marca-card" title="Hoymiles">
+        <a href="/collections/vendors?q=Hoymiles" class="marca-card" title="Distribuidor Autorizado Hoymiles México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Hoymiles en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Hoymiles">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Hoymiles">
           <div class="marca-content">
-            <img src="{{ 'brand-hoymiles.png' | asset_url }}" alt="Hoymiles" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-hoymiles.png' | asset_url }}" alt="Distribuidor Autorizado Hoymiles México - Precios y Garantía Oficial" title="Hoymiles México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Hoymiles en México. Venta de tecnología, equipos y soluciones Hoymiles con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- Allied Telesis (HD Oficial) -->
-        <a href="/search?q=Allied+Telesis" class="marca-card" title="Allied Telesis">
+        <a href="/collections/vendors?q=Allied+Telesis" class="marca-card" title="Distribuidor Autorizado Allied Telesis México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Allied Telesis en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Allied Telesis">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Allied+Telesis">
           <div class="marca-content">
-            <img src="{{ 'brand-alliedtelesis.png' | asset_url }}" alt="Allied Telesis" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-alliedtelesis.png' | asset_url }}" alt="Distribuidor Autorizado Allied Telesis México - Precios y Garantía Oficial" title="Allied Telesis México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Allied Telesis en México. Venta de tecnología, equipos y soluciones Allied Telesis con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- ALTAI Super WiFi (HD Oficial) -->
-        <a href="/search?q=ALTAI" class="marca-card" title="ALTAI Super WiFi">
+        <a href="/collections/vendors?q=ALTAI" class="marca-card" title="Distribuidor Autorizado ALTAI Super WiFi México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos ALTAI Super WiFi en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="ALTAI Super WiFi">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=ALTAI">
           <div class="marca-content">
-            <img src="{{ 'brand-altai.png' | asset_url }}" alt="ALTAI Super WiFi" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-altai.png' | asset_url }}" alt="Distribuidor Autorizado ALTAI Super WiFi México - Precios y Garantía Oficial" title="ALTAI Super WiFi México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de ALTAI Super WiFi en México. Venta de tecnología, equipos y soluciones ALTAI Super WiFi con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- Cambium Networks (HD Oficial) -->
-        <a href="/search?q=Cambium" class="marca-card" title="Cambium Networks">
+        <a href="/collections/vendors?q=Cambium" class="marca-card" title="Distribuidor Autorizado Cambium Networks México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Cambium Networks en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Cambium Networks">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Cambium">
           <div class="marca-content">
-            <img src="{{ 'brand-cambium.png' | asset_url }}" alt="Cambium Networks" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-cambium.png' | asset_url }}" alt="Distribuidor Autorizado Cambium Networks México - Precios y Garantía Oficial" title="Cambium Networks México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Cambium Networks en México. Venta de tecnología, equipos y soluciones Cambium Networks con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- CAME (HD Oficial) -->
-        <a href="/search?q=CAME" class="marca-card" title="CAME">
+        <a href="/collections/vendors?q=CAME" class="marca-card" title="Distribuidor Autorizado CAME México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos CAME en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="CAME">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=CAME">
           <div class="marca-content">
-            <img src="{{ 'brand-came.png' | asset_url }}" alt="CAME" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-came.png' | asset_url }}" alt="Distribuidor Autorizado CAME México - Precios y Garantía Oficial" title="CAME México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de CAME en México. Venta de tecnología, equipos y soluciones CAME con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- Honeywell (HD Oficial) -->
-        <a href="/search?q=Honeywell" class="marca-card" title="Honeywell">
+        <a href="/collections/vendors?q=Honeywell" class="marca-card" title="Distribuidor Autorizado Honeywell México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Honeywell en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Honeywell">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Honeywell">
           <div class="marca-content">
-            <img src="{{ 'brand-honeywell.png' | asset_url }}" alt="Honeywell" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-honeywell.png' | asset_url }}" alt="Distribuidor Autorizado Honeywell México - Precios y Garantía Oficial" title="Honeywell México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Honeywell en México. Venta de tecnología, equipos y soluciones Honeywell con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- HUAWEI (HD Oficial) -->
-        <a href="/search?q=HUAWEI" class="marca-card" title="HUAWEI">
+        <a href="/collections/vendors?q=HUAWEI" class="marca-card" title="Distribuidor Autorizado HUAWEI México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos HUAWEI en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="HUAWEI">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=HUAWEI">
           <div class="marca-content">
-            <img src="{{ 'brand-huawei.png' | asset_url }}" alt="HUAWEI" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-huawei.png' | asset_url }}" alt="Distribuidor Autorizado HUAWEI México - Precios y Garantía Oficial" title="HUAWEI México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de HUAWEI en México. Venta de tecnología, equipos y soluciones HUAWEI con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- Grandstream (HD Oficial) -->
-        <a href="/search?q=Grandstream" class="marca-card" title="Grandstream">
+        <a href="/collections/vendors?q=Grandstream" class="marca-card" title="Distribuidor Autorizado Grandstream México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Grandstream en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Grandstream">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Grandstream">
           <div class="marca-content">
-            <img src="{{ 'brand-grandstream.png' | asset_url }}" alt="Grandstream" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-grandstream.png' | asset_url }}" alt="Distribuidor Autorizado Grandstream México - Precios y Garantía Oficial" title="Grandstream México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Grandstream en México. Venta de tecnología, equipos y soluciones Grandstream con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- Tenda (HD Oficial) -->
-        <a href="/search?q=Tenda" class="marca-card" title="Tenda">
+        <a href="/collections/vendors?q=Tenda" class="marca-card" title="Distribuidor Autorizado Tenda México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Tenda en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Tenda">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Tenda">
           <div class="marca-content">
-            <img src="{{ 'brand-tenda.png' | asset_url }}" alt="Tenda" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-tenda.png' | asset_url }}" alt="Distribuidor Autorizado Tenda México - Precios y Garantía Oficial" title="Tenda México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Tenda en México. Venta de tecnología, equipos y soluciones Tenda con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- HiLook (HD Oficial) -->
-        <a href="/search?q=HiLook" class="marca-card" title="HiLook">
+        <a href="/collections/vendors?q=HiLook" class="marca-card" title="Distribuidor Autorizado HiLook México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos HiLook en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="HiLook">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=HiLook">
           <div class="marca-content">
-            <img src="{{ 'brand-hilook.png' | asset_url }}" alt="HiLook" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-hilook.png' | asset_url }}" alt="Distribuidor Autorizado HiLook México - Precios y Garantía Oficial" title="HiLook México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de HiLook en México. Venta de tecnología, equipos y soluciones HiLook con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- Fanvil (HD Oficial) -->
-        <a href="/search?q=Fanvil" class="marca-card" title="Fanvil">
+        <a href="/collections/vendors?q=Fanvil" class="marca-card" title="Distribuidor Autorizado Fanvil México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Fanvil en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Fanvil">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Fanvil">
           <div class="marca-content">
-            <img src="{{ 'brand-fanvil.png' | asset_url }}" alt="Fanvil" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-fanvil.png' | asset_url }}" alt="Distribuidor Autorizado Fanvil México - Precios y Garantía Oficial" title="Fanvil México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Fanvil en México. Venta de tecnología, equipos y soluciones Fanvil con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- Tiandy (HD Oficial) -->
-        <a href="/search?q=Tiandy" class="marca-card" title="Tiandy">
+        <a href="/collections/vendors?q=Tiandy" class="marca-card" title="Distribuidor Autorizado Tiandy México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Tiandy en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Tiandy">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Tiandy">
           <div class="marca-content">
-            <img src="{{ 'brand-tiandy.png' | asset_url }}" alt="Tiandy" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-tiandy.png' | asset_url }}" alt="Distribuidor Autorizado Tiandy México - Precios y Garantía Oficial" title="Tiandy México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Tiandy en México. Venta de tecnología, equipos y soluciones Tiandy con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- Belden (HD Oficial) -->
-        <a href="/search?q=Belden" class="marca-card" title="Belden">
+        <a href="/collections/vendors?q=Belden" class="marca-card" title="Distribuidor Autorizado Belden México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Belden en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Belden">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Belden">
           <div class="marca-content">
-            <img src="{{ 'brand-belden.png' | asset_url }}" alt="Belden" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-belden.png' | asset_url }}" alt="Distribuidor Autorizado Belden México - Precios y Garantía Oficial" title="Belden México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Belden en México. Venta de tecnología, equipos y soluciones Belden con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Indiana (HD Oficial) -->
+        <a href="/collections/vendors?q=Indiana" class="marca-card" title="Distribuidor Autorizado Indiana Wire & Cable México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Indiana Wire & Cable en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Indiana Wire & Cable">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Indiana">
+          <div class="marca-content">
+            <img src="{{ 'brand-indiana.png' | asset_url }}" alt="Distribuidor Autorizado Indiana Wire & Cable México - Precios y Garantía Oficial" title="Indiana Wire & Cable México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Indiana Wire & Cable en México. Venta de tecnología, equipos y soluciones Indiana Wire & Cable con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- AJAX (HD Oficial) -->
-        <a href="/search?q=Ajax" class="marca-card" title="AJAX">
+        <a href="/collections/vendors?q=Ajax" class="marca-card" title="Distribuidor Autorizado AJAX México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos AJAX en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="AJAX">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Ajax">
           <div class="marca-content">
-            <img src="{{ 'brand-ajax.png' | asset_url }}" alt="AJAX" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-ajax.png' | asset_url }}" alt="Distribuidor Autorizado AJAX México - Precios y Garantía Oficial" title="AJAX México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de AJAX en México. Venta de tecnología, equipos y soluciones AJAX con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- ZKTeco (HD Oficial) -->
-        <a href="/search?q=ZKTeco" class="marca-card" title="ZKTeco">
+        <a href="/collections/vendors?q=ZKTeco" class="marca-card" title="Distribuidor Autorizado ZKTeco México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos ZKTeco en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="ZKTeco">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=ZKTeco">
           <div class="marca-content">
-            <img src="{{ 'brand-zkteco.png' | asset_url }}" alt="ZKTeco" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-zkteco.png' | asset_url }}" alt="Distribuidor Autorizado ZKTeco México - Precios y Garantía Oficial" title="ZKTeco México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de ZKTeco en México. Venta de tecnología, equipos y soluciones ZKTeco con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- IMOU (HD Oficial) -->
-        <a href="/search?q=Imou" class="marca-card" title="IMOU">
+        <a href="/collections/vendors?q=Imou" class="marca-card" title="Distribuidor Autorizado IMOU México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos IMOU en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="IMOU">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Imou">
           <div class="marca-content">
-            <img src="{{ 'brand-imou.png' | asset_url }}" alt="IMOU" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-imou.png' | asset_url }}" alt="Distribuidor Autorizado IMOU México - Precios y Garantía Oficial" title="IMOU México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de IMOU en México. Venta de tecnología, equipos y soluciones IMOU con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
       {% endfor %}
     </div>
@@ -339,48 +741,282 @@
     <!-- FILA 2 (Scroll Hacia la Derecha) -->
     <div class="marcas-track track-reverse">
       {% for i in (1..2) %}
-        <!-- AUFIT -->
-        <a href="/search?q=AUFIT" class="marca-card" title="AUFIT">
+        <!-- Brother (HD Oficial) -->
+        <a href="/collections/vendors?q=Brother" class="marca-card" title="Distribuidor Autorizado Brother México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Brother en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Brother">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Brother">
           <div class="marca-content">
-            <svg class="marca-logo-svg" viewBox="0 0 140 36">
+            <img src="{{ 'brand-brother.png' | asset_url }}" alt="Distribuidor Autorizado Brother México - Precios y Garantía Oficial" title="Brother México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Brother en México. Venta de tecnología, equipos y soluciones Brother con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Epson (HD Oficial) -->
+        <a href="/collections/vendors?q=Epson" class="marca-card" title="Distribuidor Autorizado Epson México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Epson en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Epson">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Epson">
+          <div class="marca-content">
+            <img src="{{ 'brand-epson.png' | asset_url }}" alt="Distribuidor Autorizado Epson México - Precios y Garantía Oficial" title="Epson México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Epson en México. Venta de tecnología, equipos y soluciones Epson con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Canon (HD Oficial) -->
+        <a href="/collections/vendors?q=Canon" class="marca-card" title="Distribuidor Autorizado Canon México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Canon en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Canon">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Canon">
+          <div class="marca-content">
+            <img src="{{ 'brand-canon.png' | asset_url }}" alt="Distribuidor Autorizado Canon México - Precios y Garantía Oficial" title="Canon México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Canon en México. Venta de tecnología, equipos y soluciones Canon con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- LG (HD Oficial) -->
+        <a href="/collections/vendors?q=LG" class="marca-card" title="Distribuidor Autorizado LG México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos LG en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="LG">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=LG">
+          <div class="marca-content">
+            <img src="{{ 'brand-lg.png' | asset_url }}" alt="Distribuidor Autorizado LG México - Precios y Garantía Oficial" title="LG México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de LG en México. Venta de tecnología, equipos y soluciones LG con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Forza (HD Oficial) -->
+        <a href="/collections/vendors?q=Forza" class="marca-card" title="Distribuidor Autorizado Forza Power Technologies México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Forza Power Technologies en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Forza Power Technologies">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Forza">
+          <div class="marca-content">
+            <img src="{{ 'brand-forza.png' | asset_url }}" alt="Distribuidor Autorizado Forza Power Technologies México - Precios y Garantía Oficial" title="Forza Power Technologies México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Forza Power Technologies en México. Venta de tecnología, equipos y soluciones Forza Power Technologies con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Tripp-Lite (HD Oficial) -->
+        <a href="/collections/vendors?q=Tripp-Lite" class="marca-card" title="Distribuidor Autorizado Tripp-Lite by Eaton México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Tripp-Lite by Eaton en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Tripp-Lite by Eaton">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Tripp-Lite">
+          <div class="marca-content">
+            <img src="{{ 'brand-tripplite.png' | asset_url }}" alt="Distribuidor Autorizado Tripp-Lite by Eaton México - Precios y Garantía Oficial" title="Tripp-Lite by Eaton México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Tripp-Lite by Eaton en México. Venta de tecnología, equipos y soluciones Tripp-Lite by Eaton con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- BenQ (HD Oficial) -->
+        <a href="/collections/vendors?q=BenQ" class="marca-card" title="Distribuidor Autorizado BenQ México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos BenQ en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="BenQ">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=BenQ">
+          <div class="marca-content">
+            <img src="{{ 'brand-benq.png' | asset_url }}" alt="Distribuidor Autorizado BenQ México - Precios y Garantía Oficial" title="BenQ México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de BenQ en México. Venta de tecnología, equipos y soluciones BenQ con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Gigabyte (HD Oficial) -->
+        <a href="/collections/vendors?q=Gigabyte" class="marca-card" title="Distribuidor Autorizado Gigabyte México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Gigabyte en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Gigabyte">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Gigabyte">
+          <div class="marca-content">
+            <img src="{{ 'brand-gigabyte.png' | asset_url }}" alt="Distribuidor Autorizado Gigabyte México - Precios y Garantía Oficial" title="Gigabyte México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Gigabyte en México. Venta de tecnología, equipos y soluciones Gigabyte con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Corsair (HD Oficial) -->
+        <a href="/collections/vendors?q=Corsair" class="marca-card" title="Distribuidor Autorizado Corsair México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Corsair en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Corsair">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Corsair">
+          <div class="marca-content">
+            <img src="{{ 'brand-corsair.png' | asset_url }}" alt="Distribuidor Autorizado Corsair México - Precios y Garantía Oficial" title="Corsair México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Corsair en México. Venta de tecnología, equipos y soluciones Corsair con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Gaming Naceb (HD Oficial) -->
+        <a href="/collections/vendors?q=Naceb+Technology" class="marca-card" title="Distribuidor Autorizado Gaming Naceb México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Gaming Naceb en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Gaming Naceb">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Naceb+Technology">
+          <div class="marca-content">
+            <img src="{{ 'brand-naceb.png' | asset_url }}" alt="Distribuidor Autorizado Gaming Naceb México - Precios y Garantía Oficial" title="Gaming Naceb México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Gaming Naceb en México. Venta de tecnología, equipos y soluciones Gaming Naceb con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Linksys (HD Oficial) -->
+        <a href="/collections/vendors?q=Linksys" class="marca-card" title="Distribuidor Autorizado Linksys México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Linksys en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Linksys">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Linksys">
+          <div class="marca-content">
+            <img src="{{ 'brand-linksys.png' | asset_url }}" alt="Distribuidor Autorizado Linksys México - Precios y Garantía Oficial" title="Linksys México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Linksys en México. Venta de tecnología, equipos y soluciones Linksys con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Manhattan (HD Oficial) -->
+        <a href="/collections/vendors?q=Manhattan" class="marca-card" title="Distribuidor Autorizado Manhattan México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Manhattan en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Manhattan">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Manhattan">
+          <div class="marca-content">
+            <img src="{{ 'brand-manhattan.png' | asset_url }}" alt="Distribuidor Autorizado Manhattan México - Precios y Garantía Oficial" title="Manhattan México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Manhattan en México. Venta de tecnología, equipos y soluciones Manhattan con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- BRobotix (HD Oficial) -->
+        <a href="/collections/vendors?q=BRobotix" class="marca-card" title="Distribuidor Autorizado BRobotix México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos BRobotix en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="BRobotix">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=BRobotix">
+          <div class="marca-content">
+            <img src="{{ 'brand-brobotix.png' | asset_url }}" alt="Distribuidor Autorizado BRobotix México - Precios y Garantía Oficial" title="BRobotix México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de BRobotix en México. Venta de tecnología, equipos y soluciones BRobotix con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Zebra (HD Oficial) -->
+        <a href="/collections/vendors?q=Zebra" class="marca-card" title="Distribuidor Autorizado Zebra Technologies México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Zebra Technologies en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Zebra Technologies">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Zebra">
+          <div class="marca-content">
+            <img src="{{ 'brand-zebra.png' | asset_url }}" alt="Distribuidor Autorizado Zebra Technologies México - Precios y Garantía Oficial" title="Zebra Technologies México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Zebra Technologies en México. Venta de tecnología, equipos y soluciones Zebra Technologies con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Xerox (HD Oficial) -->
+        <a href="/collections/vendors?q=Xerox" class="marca-card" title="Distribuidor Autorizado Xerox México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Xerox en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Xerox">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Xerox">
+          <div class="marca-content">
+            <img src="{{ 'brand-xerox.png' | asset_url }}" alt="Distribuidor Autorizado Xerox México - Precios y Garantía Oficial" title="Xerox México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Xerox en México. Venta de tecnología, equipos y soluciones Xerox con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- ADATA (HD Oficial) -->
+        <a href="/collections/vendors?q=ADATA" class="marca-card" title="Distribuidor Autorizado ADATA México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos ADATA en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="ADATA">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=ADATA">
+          <div class="marca-content">
+            <img src="{{ 'brand-adata.png' | asset_url }}" alt="Distribuidor Autorizado ADATA México - Precios y Garantía Oficial" title="ADATA México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de ADATA en México. Venta de tecnología, equipos y soluciones ADATA con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- CDP (HD Oficial) -->
+        <a href="/collections/vendors?q=CDP" class="marca-card" title="Distribuidor Autorizado Chicago Digital Power (CDP) México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Chicago Digital Power (CDP) en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Chicago Digital Power (CDP)">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=CDP">
+          <div class="marca-content">
+            <img src="{{ 'brand-cdp.png' | asset_url }}" alt="Distribuidor Autorizado Chicago Digital Power (CDP) México - Precios y Garantía Oficial" title="Chicago Digital Power (CDP) México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Chicago Digital Power (CDP) en México. Venta de tecnología, equipos y soluciones Chicago Digital Power (CDP) con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- OvalTech (HD Oficial) -->
+        <a href="/collections/vendors?q=OvalTech" class="marca-card" title="Distribuidor Autorizado OvalTech México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos OvalTech en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="OvalTech">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=OvalTech">
+          <div class="marca-content">
+            <img src="{{ 'brand-ovaltech.png' | asset_url }}" alt="Distribuidor Autorizado OvalTech México - Precios y Garantía Oficial" title="OvalTech México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de OvalTech en México. Venta de tecnología, equipos y soluciones OvalTech con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Smartbitt (HD Oficial) -->
+        <a href="/collections/vendors?q=Smartbitt" class="marca-card" title="Distribuidor Autorizado Smartbitt México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Smartbitt en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Smartbitt">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Smartbitt">
+          <div class="marca-content">
+            <img src="{{ 'brand-smartbitt.png' | asset_url }}" alt="Distribuidor Autorizado Smartbitt México - Precios y Garantía Oficial" title="Smartbitt México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Smartbitt en México. Venta de tecnología, equipos y soluciones Smartbitt con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Vorago (HD Oficial) -->
+        <a href="/collections/vendors?q=Vorago" class="marca-card" title="Distribuidor Autorizado Vorago México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Vorago en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Vorago">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Vorago">
+          <div class="marca-content">
+            <img src="{{ 'brand-vorago.png' | asset_url }}" alt="Distribuidor Autorizado Vorago México - Precios y Garantía Oficial" title="Vorago México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Vorago en México. Venta de tecnología, equipos y soluciones Vorago con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Perfect Choice (HD Oficial) -->
+        <a href="/collections/vendors?q=Perfect+Choice" class="marca-card" title="Distribuidor Autorizado Perfect Choice México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Perfect Choice en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Perfect Choice">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Perfect+Choice">
+          <div class="marca-content">
+            <img src="{{ 'brand-perfectchoice.png' | asset_url }}" alt="Distribuidor Autorizado Perfect Choice México - Precios y Garantía Oficial" title="Perfect Choice México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Perfect Choice en México. Venta de tecnología, equipos y soluciones Perfect Choice con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- Silimex (HD Oficial) -->
+        <a href="/collections/vendors?q=Silimex" class="marca-card" title="Distribuidor Autorizado Silimex México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Silimex en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Silimex">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Silimex">
+          <div class="marca-content">
+            <img src="{{ 'brand-silimex.png' | asset_url }}" alt="Distribuidor Autorizado Silimex México - Precios y Garantía Oficial" title="Silimex México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
+          </div>
+          <span class="visually-hidden">Distribuidor oficial de Silimex en México. Venta de tecnología, equipos y soluciones Silimex con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
+        </a>
+
+        <!-- AUFIT -->
+        <a href="/collections/vendors?q=AUFIT" class="marca-card" title="Distribuidor Autorizado AUFIT México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos AUFIT en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="AUFIT">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=AUFIT">
+          <div class="marca-content">
+            <svg role="img" aria-label="Logo oficial AUFIT México" class="marca-logo-svg" viewBox="0 0 140 36">
               <text x="50%" y="26" text-anchor="middle" font-family="'Arial Black', Impact, sans-serif" font-size="23" font-weight="900" fill="#1e3a8a" letter-spacing="1">AUFIT</text>
             </svg>
           </div>
+          <span class="visually-hidden">Distribuidor oficial de AUFIT en México. Venta de tecnología, equipos y soluciones AUFIT con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- HID Global -->
-        <a href="/search?q=HID" class="marca-card" title="HID">
+        <a href="/collections/vendors?q=HID" class="marca-card" title="Distribuidor Autorizado HID México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos HID en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="HID">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=HID">
           <div class="marca-content">
-            <svg class="marca-logo-svg" viewBox="0 0 140 36">
+            <svg role="img" aria-label="Logo oficial HID México" class="marca-logo-svg" viewBox="0 0 140 36">
               <rect x="32" y="4" width="76" height="28" rx="4" fill="#004b87"/>
               <text x="70" y="25" text-anchor="middle" font-family="'Arial Black', Impact, sans-serif" font-size="19" font-weight="900" fill="#ffffff" letter-spacing="1.5">HID</text>
             </svg>
           </div>
+          <span class="visually-hidden">Distribuidor oficial de HID en México. Venta de tecnología, equipos y soluciones HID con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- HIKVISION (HD Oficial) -->
-        <a href="/search?q=HIKVISION" class="marca-card" title="HIKVISION">
+        <a href="/collections/vendors?q=HIKVISION" class="marca-card" title="Distribuidor Autorizado HIKVISION México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos HIKVISION en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="HIKVISION">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=HIKVISION">
           <div class="marca-content">
-            <img src="{{ 'brand-hikvision.png' | asset_url }}" alt="HIKVISION" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-hikvision.png' | asset_url }}" alt="Distribuidor Autorizado HIKVISION México - Precios y Garantía Oficial" title="HIKVISION México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de HIKVISION en México. Venta de tecnología, equipos y soluciones HIKVISION con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- IDEMIA -->
-        <a href="/search?q=IDEMIA" class="marca-card" title="IDEMIA">
+        <a href="/collections/vendors?q=IDEMIA" class="marca-card" title="Distribuidor Autorizado IDEMIA México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos IDEMIA en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="IDEMIA">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=IDEMIA">
           <div class="marca-content">
-            <svg class="marca-logo-svg" viewBox="0 0 150 36">
+            <svg role="img" aria-label="Logo oficial IDEMIA México" class="marca-logo-svg" viewBox="0 0 150 36">
               <g transform="translate(10, 6)">
                 <path d="M4 4c-3 4-3 12 0 16M9 6c-2 3-2 9 0 12M14 8c-1 2-1 6 0 8M19 8c1 2 1 6 0 8M24 6c2 3 2 9 0 12M29 4c3 4 3 12 0 16" fill="none" stroke="#6b21a8" stroke-width="2" stroke-linecap="round"/>
                 <text x="36" y="18" font-family="'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="900" fill="#6b21a8" letter-spacing="1">IDEMIA</text>
               </g>
             </svg>
           </div>
+          <span class="visually-hidden">Distribuidor oficial de IDEMIA en México. Venta de tecnología, equipos y soluciones IDEMIA con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- KENWOOD -->
-        <a href="/search?q=KENWOOD" class="marca-card" title="KENWOOD">
+        <a href="/collections/vendors?q=KENWOOD" class="marca-card" title="Distribuidor Autorizado KENWOOD México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos KENWOOD en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="KENWOOD">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=KENWOOD">
           <div class="marca-content">
-            <svg class="marca-logo-svg" viewBox="0 0 150 36">
+            <svg role="img" aria-label="Logo oficial KENWOOD México" class="marca-logo-svg" viewBox="0 0 150 36">
               <g transform="translate(12, 6)">
                 <text x="0" y="20" font-family="'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="900" fill="#0f172a" letter-spacing="0.5">KEN</text>
                 <polygon points="46,7 50,14 42,14" fill="#dc2626"/>
@@ -388,119 +1024,1147 @@
               </g>
             </svg>
           </div>
+          <span class="visually-hidden">Distribuidor oficial de KENWOOD en México. Venta de tecnología, equipos y soluciones KENWOOD con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- LUTRON -->
-        <a href="/search?q=Lutron" class="marca-card" title="Lutron">
+        <a href="/collections/vendors?q=Lutron" class="marca-card" title="Distribuidor Autorizado Lutron México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Lutron en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Lutron">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Lutron">
           <div class="marca-content">
-            <svg class="marca-logo-svg" viewBox="0 0 140 36">
+            <svg role="img" aria-label="Logo oficial Lutron México" class="marca-logo-svg" viewBox="0 0 140 36">
               <g transform="translate(15, 6)">
                 <circle cx="10" cy="11" r="9" fill="none" stroke="#0f172a" stroke-width="3"/>
                 <text x="26" y="19" font-family="'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="900" fill="#0f172a" letter-spacing="0.5">LUTRON<tspan fill="#0f172a">.</tspan></text>
               </g>
             </svg>
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Lutron en México. Venta de tecnología, equipos y soluciones Lutron con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- SIMON -->
-        <a href="/search?q=Simon" class="marca-card" title="Simon">
+        <a href="/collections/vendors?q=Simon" class="marca-card" title="Distribuidor Autorizado Simon México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Simon en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Simon">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Simon">
           <div class="marca-content">
-            <svg class="marca-logo-svg" viewBox="0 0 140 36">
+            <svg role="img" aria-label="Logo oficial Simon México" class="marca-logo-svg" viewBox="0 0 140 36">
               <text x="50%" y="26" text-anchor="middle" font-family="'Arial Rounded MT Bold', 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="800" fill="#0284c7" letter-spacing="-0.5">simon</text>
             </svg>
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Simon en México. Venta de tecnología, equipos y soluciones Simon con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- PANDUIT (HD Oficial) -->
-        <a href="/search?q=Panduit" class="marca-card" title="Panduit">
+        <a href="/collections/vendors?q=Panduit" class="marca-card" title="Distribuidor Autorizado Panduit México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Panduit en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Panduit">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Panduit">
           <div class="marca-content">
-            <img src="{{ 'brand-panduit.png' | asset_url }}" alt="Panduit" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-panduit.png' | asset_url }}" alt="Distribuidor Autorizado Panduit México - Precios y Garantía Oficial" title="Panduit México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Panduit en México. Venta de tecnología, equipos y soluciones Panduit con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- Ubiquiti Networks (HD Oficial) -->
-        <a href="/search?q=Ubiquiti" class="marca-card" title="Ubiquiti Networks">
+        <a href="/collections/vendors?q=Ubiquiti" class="marca-card" title="Distribuidor Autorizado Ubiquiti Networks México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Ubiquiti Networks en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Ubiquiti Networks">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Ubiquiti">
           <div class="marca-content">
-            <img src="{{ 'brand-ubiquiti.png' | asset_url }}" alt="Ubiquiti Networks" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-ubiquiti.png' | asset_url }}" alt="Distribuidor Autorizado Ubiquiti Networks México - Precios y Garantía Oficial" title="Ubiquiti Networks México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Ubiquiti Networks en México. Venta de tecnología, equipos y soluciones Ubiquiti Networks con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- PLANET (HD Oficial) -->
-        <a href="/search?q=Planet" class="marca-card" title="Planet">
+        <a href="/collections/vendors?q=Planet" class="marca-card" title="Distribuidor Autorizado Planet México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Planet en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Planet">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Planet">
           <div class="marca-content">
-            <img src="{{ 'brand-planet.png' | asset_url }}" alt="Planet" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-planet.png' | asset_url }}" alt="Distribuidor Autorizado Planet México - Precios y Garantía Oficial" title="Planet México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Planet en México. Venta de tecnología, equipos y soluciones Planet con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- RESIDEO -->
-        <a href="/search?q=Resideo" class="marca-card" title="Resideo">
+        <a href="/collections/vendors?q=Resideo" class="marca-card" title="Distribuidor Autorizado Resideo México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Resideo en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Resideo">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Resideo">
           <div class="marca-content">
-            <svg class="marca-logo-svg" viewBox="0 0 140 36">
+            <svg role="img" aria-label="Logo oficial Resideo México" class="marca-logo-svg" viewBox="0 0 140 36">
               <text x="50%" y="25" text-anchor="middle" font-family="'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="800" fill="#0f172a" letter-spacing="-0.5">resideo</text>
             </svg>
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Resideo en México. Venta de tecnología, equipos y soluciones Resideo con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- Dahua Technology (HD Oficial) -->
-        <a href="/search?q=Dahua" class="marca-card" title="Dahua Technology">
+        <a href="/collections/vendors?q=Dahua" class="marca-card" title="Distribuidor Autorizado Dahua Technology México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Dahua Technology en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Dahua Technology">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Dahua">
           <div class="marca-content">
-            <img src="{{ 'brand-dahua.png' | asset_url }}" alt="Dahua Technology" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-dahua.png' | asset_url }}" alt="Distribuidor Autorizado Dahua Technology México - Precios y Garantía Oficial" title="Dahua Technology México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Dahua Technology en México. Venta de tecnología, equipos y soluciones Dahua Technology con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- TP-Link (HD Oficial) -->
-        <a href="/search?q=TP-Link" class="marca-card" title="TP-Link">
+        <a href="/collections/vendors?q=TP-Link" class="marca-card" title="Distribuidor Autorizado TP-Link México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos TP-Link en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="TP-Link">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=TP-Link">
           <div class="marca-content">
-            <img src="{{ 'brand-tplink.png' | asset_url }}" alt="TP-Link" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-tplink.png' | asset_url }}" alt="Distribuidor Autorizado TP-Link México - Precios y Garantía Oficial" title="TP-Link México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de TP-Link en México. Venta de tecnología, equipos y soluciones TP-Link con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- LinkedPro (HD Oficial) -->
-        <a href="/search?q=Linkedpro" class="marca-card" title="LinkedPro">
+        <a href="/collections/vendors?q=Linkedpro" class="marca-card" title="Distribuidor Autorizado LinkedPro México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos LinkedPro en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="LinkedPro">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Linkedpro">
           <div class="marca-content">
-            <img src="{{ 'brand-linkedpro.png' | asset_url }}" alt="LinkedPro" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-linkedpro.png' | asset_url }}" alt="Distribuidor Autorizado LinkedPro México - Precios y Garantía Oficial" title="LinkedPro México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de LinkedPro en México. Venta de tecnología, equipos y soluciones LinkedPro con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- DuoSmart (HD Oficial) -->
-        <a href="/search?q=DuoSmart" class="marca-card" title="DuoSmart">
+        <a href="/collections/vendors?q=DuoSmart" class="marca-card" title="Distribuidor Autorizado DuoSmart México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos DuoSmart en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="DuoSmart">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=DuoSmart">
           <div class="marca-content">
-            <img src="{{ 'brand-duosmart.png' | asset_url }}" alt="DuoSmart" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-duosmart.png' | asset_url }}" alt="Distribuidor Autorizado DuoSmart México - Precios y Garantía Oficial" title="DuoSmart México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de DuoSmart en México. Venta de tecnología, equipos y soluciones DuoSmart con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- Sonoff (HD Oficial) -->
-        <a href="/search?q=Sonoff" class="marca-card" title="Sonoff">
+        <a href="/collections/vendors?q=Sonoff" class="marca-card" title="Distribuidor Autorizado Sonoff México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Sonoff en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Sonoff">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Sonoff">
           <div class="marca-content">
-            <img src="{{ 'brand-sonoff.png' | asset_url }}" alt="Sonoff" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-sonoff.png' | asset_url }}" alt="Distribuidor Autorizado Sonoff México - Precios y Garantía Oficial" title="Sonoff México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Sonoff en México. Venta de tecnología, equipos y soluciones Sonoff con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- UNV (HD Oficial) -->
-        <a href="/search?q=UNV" class="marca-card" title="UNV (Uniview)">
+        <a href="/collections/vendors?q=UNV" class="marca-card" title="Distribuidor Autorizado UNV (Uniview) México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos UNV (Uniview) en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="UNV (Uniview)">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=UNV">
           <div class="marca-content">
-            <img src="{{ 'brand-unv.png' | asset_url }}" alt="UNV" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-unv.png' | asset_url }}" alt="Distribuidor Autorizado UNV (Uniview) México - Precios y Garantía Oficial" title="UNV (Uniview) México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de UNV (Uniview) en México. Venta de tecnología, equipos y soluciones UNV (Uniview) con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- Axceze (HD Oficial) -->
-        <a href="/search?q=Axceze" class="marca-card" title="Axceze">
+        <a href="/collections/vendors?q=Axceze" class="marca-card" title="Distribuidor Autorizado Axceze México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos Axceze en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="Axceze">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Axceze">
           <div class="marca-content">
-            <img src="{{ 'brand-axceze.png' | asset_url }}" alt="Axceze" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-axceze.png' | asset_url }}" alt="Distribuidor Autorizado Axceze México - Precios y Garantía Oficial" title="Axceze México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de Axceze en México. Venta de tecnología, equipos y soluciones Axceze con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
 
         <!-- YONUSA (HD Oficial) -->
-        <a href="/search?q=Yonusa" class="marca-card" title="YONUSA">
+        <a href="/collections/vendors?q=Yonusa" class="marca-card" title="Distribuidor Autorizado YONUSA México - Catálogo y Garantía Oficial | Seguridad Avanzada" aria-label="Comprar productos YONUSA en México con garantía oficial" itemscope itemtype="https://schema.org/Brand">
+          <meta itemprop="name" content="YONUSA">
+          <meta itemprop="url" content="{{ shop.url }}/collections/vendors?q=Yonusa">
           <div class="marca-content">
-            <img src="{{ 'brand-yonusa.png' | asset_url }}" alt="YONUSA" class="marca-logo-img" loading="lazy">
+            <img src="{{ 'brand-yonusa.png' | asset_url }}" alt="Distribuidor Autorizado YONUSA México - Precios y Garantía Oficial" title="YONUSA México Oficial" itemprop="logo" width="145" height="40" class="marca-logo-img" loading="lazy">
           </div>
+          <span class="visually-hidden">Distribuidor oficial de YONUSA en México. Venta de tecnología, equipos y soluciones YONUSA con garantía de fábrica y facturación fiscal en Seguridad Avanzada.</span>
         </a>
       {% endfor %}
     </div>
 
   </div>
 </section>
+
+
+<!-- SEO ESTRUCTURADO: SCHEMA.ORG ITEMLIST & BRAND GRAPH PARA GOOGLE -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ItemList",
+      "@id": "https://seguridad-avanzada.com/#marcas-distribuidas",
+      "name": "Marcas y Fabricantes Oficiales Distribuidos en México - Seguridad Avanzada",
+      "description": "Catálogo oficial de marcas líderes en cómputo, laptops, servidores, videovigilancia CCTV, redes, cableado y energía disponibles en Seguridad Avanzada México.",
+      "numberOfItems": 87,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Brand",
+            "name": "Apple",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Apple",
+            "description": "Distribuidor oficial de Apple en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Brand",
+            "name": "EZVIZ",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=EZVIZ",
+            "description": "Distribuidor oficial de EZVIZ en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Brand",
+            "name": "HP",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=HP",
+            "description": "Distribuidor oficial de HP en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "Brand",
+            "name": "Hewlett Packard Enterprise",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=HPE",
+            "description": "Distribuidor oficial de Hewlett Packard Enterprise en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "Brand",
+            "name": "Dell Technologies",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Dell",
+            "description": "Distribuidor oficial de Dell Technologies en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "Brand",
+            "name": "Lenovo",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Lenovo",
+            "description": "Distribuidor oficial de Lenovo en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "Brand",
+            "name": "Acer",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Acer",
+            "description": "Distribuidor oficial de Acer en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "Brand",
+            "name": "Acteck",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Acteck",
+            "description": "Distribuidor oficial de Acteck en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "Brand",
+            "name": "Balam Rush",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Balam+Rush",
+            "description": "Distribuidor oficial de Balam Rush en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "Brand",
+            "name": "ASUS",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=ASUS",
+            "description": "Distribuidor oficial de ASUS en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "Brand",
+            "name": "Lanix",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Lanix",
+            "description": "Distribuidor oficial de Lanix en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "Brand",
+            "name": "Intel",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Intel",
+            "description": "Distribuidor oficial de Intel en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "Brand",
+            "name": "AMD",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=AMD",
+            "description": "Distribuidor oficial de AMD en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "Brand",
+            "name": "Fujitsu",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Fujitsu",
+            "description": "Distribuidor oficial de Fujitsu en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "Brand",
+            "name": "Logitech",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Logitech",
+            "description": "Distribuidor oficial de Logitech en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@type": "Brand",
+            "name": "Kingston Technology",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Kingston",
+            "description": "Distribuidor oficial de Kingston Technology en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@type": "Brand",
+            "name": "Kensington",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Kensington",
+            "description": "Distribuidor oficial de Kensington en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "item": {
+            "@type": "Brand",
+            "name": "Western Digital",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Western+Digital",
+            "description": "Distribuidor oficial de Western Digital en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "item": {
+            "@type": "Brand",
+            "name": "Seagate",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Seagate",
+            "description": "Distribuidor oficial de Seagate en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "item": {
+            "@type": "Brand",
+            "name": "APC by Schneider Electric",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=APC",
+            "description": "Distribuidor oficial de APC by Schneider Electric en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 21,
+          "item": {
+            "@type": "Brand",
+            "name": "Cisco",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Cisco",
+            "description": "Distribuidor oficial de Cisco en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 22,
+          "item": {
+            "@type": "Brand",
+            "name": "Poly",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=POLYCOM",
+            "description": "Distribuidor oficial de Poly en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 23,
+          "item": {
+            "@type": "Brand",
+            "name": "Microsoft",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Microsoft",
+            "description": "Distribuidor oficial de Microsoft en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 24,
+          "item": {
+            "@type": "Brand",
+            "name": "Samsung",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Samsung",
+            "description": "Distribuidor oficial de Samsung en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 25,
+          "item": {
+            "@type": "Brand",
+            "name": "Kyocera",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Kyocera",
+            "description": "Distribuidor oficial de Kyocera en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 26,
+          "item": {
+            "@type": "Brand",
+            "name": "FAAC",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=FAAC",
+            "description": "Distribuidor oficial de FAAC en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 27,
+          "item": {
+            "@type": "Brand",
+            "name": "CyberPower",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=CyberPower",
+            "description": "Distribuidor oficial de CyberPower en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 28,
+          "item": {
+            "@type": "Brand",
+            "name": "Growatt",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Growatt",
+            "description": "Distribuidor oficial de Growatt en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 29,
+          "item": {
+            "@type": "Brand",
+            "name": "EcoFlow",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=EcoFlow",
+            "description": "Distribuidor oficial de EcoFlow en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 30,
+          "item": {
+            "@type": "Brand",
+            "name": "Hoymiles",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Hoymiles",
+            "description": "Distribuidor oficial de Hoymiles en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 31,
+          "item": {
+            "@type": "Brand",
+            "name": "Allied Telesis",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Allied+Telesis",
+            "description": "Distribuidor oficial de Allied Telesis en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 32,
+          "item": {
+            "@type": "Brand",
+            "name": "ALTAI Super WiFi",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=ALTAI",
+            "description": "Distribuidor oficial de ALTAI Super WiFi en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 33,
+          "item": {
+            "@type": "Brand",
+            "name": "Cambium Networks",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Cambium",
+            "description": "Distribuidor oficial de Cambium Networks en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 34,
+          "item": {
+            "@type": "Brand",
+            "name": "CAME",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=CAME",
+            "description": "Distribuidor oficial de CAME en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 35,
+          "item": {
+            "@type": "Brand",
+            "name": "Honeywell",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Honeywell",
+            "description": "Distribuidor oficial de Honeywell en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 36,
+          "item": {
+            "@type": "Brand",
+            "name": "HUAWEI",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=HUAWEI",
+            "description": "Distribuidor oficial de HUAWEI en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 37,
+          "item": {
+            "@type": "Brand",
+            "name": "Grandstream",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Grandstream",
+            "description": "Distribuidor oficial de Grandstream en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 38,
+          "item": {
+            "@type": "Brand",
+            "name": "Tenda",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Tenda",
+            "description": "Distribuidor oficial de Tenda en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 39,
+          "item": {
+            "@type": "Brand",
+            "name": "HiLook",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=HiLook",
+            "description": "Distribuidor oficial de HiLook en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 40,
+          "item": {
+            "@type": "Brand",
+            "name": "Fanvil",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Fanvil",
+            "description": "Distribuidor oficial de Fanvil en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 41,
+          "item": {
+            "@type": "Brand",
+            "name": "Tiandy",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Tiandy",
+            "description": "Distribuidor oficial de Tiandy en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 42,
+          "item": {
+            "@type": "Brand",
+            "name": "Belden",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Belden",
+            "description": "Distribuidor oficial de Belden en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 43,
+          "item": {
+            "@type": "Brand",
+            "name": "Indiana Wire & Cable",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Indiana",
+            "description": "Distribuidor oficial de Indiana Wire & Cable en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 44,
+          "item": {
+            "@type": "Brand",
+            "name": "AJAX",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Ajax",
+            "description": "Distribuidor oficial de AJAX en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 45,
+          "item": {
+            "@type": "Brand",
+            "name": "ZKTeco",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=ZKTeco",
+            "description": "Distribuidor oficial de ZKTeco en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 46,
+          "item": {
+            "@type": "Brand",
+            "name": "IMOU",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Imou",
+            "description": "Distribuidor oficial de IMOU en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 47,
+          "item": {
+            "@type": "Brand",
+            "name": "Brother",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Brother",
+            "description": "Distribuidor oficial de Brother en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 48,
+          "item": {
+            "@type": "Brand",
+            "name": "Epson",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Epson",
+            "description": "Distribuidor oficial de Epson en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 49,
+          "item": {
+            "@type": "Brand",
+            "name": "Canon",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Canon",
+            "description": "Distribuidor oficial de Canon en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 50,
+          "item": {
+            "@type": "Brand",
+            "name": "LG",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=LG",
+            "description": "Distribuidor oficial de LG en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 51,
+          "item": {
+            "@type": "Brand",
+            "name": "Forza Power Technologies",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Forza",
+            "description": "Distribuidor oficial de Forza Power Technologies en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 52,
+          "item": {
+            "@type": "Brand",
+            "name": "Tripp-Lite by Eaton",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Tripp-Lite",
+            "description": "Distribuidor oficial de Tripp-Lite by Eaton en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 53,
+          "item": {
+            "@type": "Brand",
+            "name": "BenQ",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=BenQ",
+            "description": "Distribuidor oficial de BenQ en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 54,
+          "item": {
+            "@type": "Brand",
+            "name": "Gigabyte",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Gigabyte",
+            "description": "Distribuidor oficial de Gigabyte en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 55,
+          "item": {
+            "@type": "Brand",
+            "name": "Corsair",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Corsair",
+            "description": "Distribuidor oficial de Corsair en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 56,
+          "item": {
+            "@type": "Brand",
+            "name": "Gaming Naceb",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Naceb+Technology",
+            "description": "Distribuidor oficial de Gaming Naceb en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 57,
+          "item": {
+            "@type": "Brand",
+            "name": "Linksys",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Linksys",
+            "description": "Distribuidor oficial de Linksys en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 58,
+          "item": {
+            "@type": "Brand",
+            "name": "Manhattan",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Manhattan",
+            "description": "Distribuidor oficial de Manhattan en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 59,
+          "item": {
+            "@type": "Brand",
+            "name": "BRobotix",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=BRobotix",
+            "description": "Distribuidor oficial de BRobotix en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 60,
+          "item": {
+            "@type": "Brand",
+            "name": "Zebra Technologies",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Zebra",
+            "description": "Distribuidor oficial de Zebra Technologies en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 61,
+          "item": {
+            "@type": "Brand",
+            "name": "Xerox",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Xerox",
+            "description": "Distribuidor oficial de Xerox en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 62,
+          "item": {
+            "@type": "Brand",
+            "name": "ADATA",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=ADATA",
+            "description": "Distribuidor oficial de ADATA en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 63,
+          "item": {
+            "@type": "Brand",
+            "name": "Chicago Digital Power (CDP)",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=CDP",
+            "description": "Distribuidor oficial de Chicago Digital Power (CDP) en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 64,
+          "item": {
+            "@type": "Brand",
+            "name": "OvalTech",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=OvalTech",
+            "description": "Distribuidor oficial de OvalTech en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 65,
+          "item": {
+            "@type": "Brand",
+            "name": "Smartbitt",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Smartbitt",
+            "description": "Distribuidor oficial de Smartbitt en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 66,
+          "item": {
+            "@type": "Brand",
+            "name": "Vorago",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Vorago",
+            "description": "Distribuidor oficial de Vorago en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 67,
+          "item": {
+            "@type": "Brand",
+            "name": "Perfect Choice",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Perfect+Choice",
+            "description": "Distribuidor oficial de Perfect Choice en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 68,
+          "item": {
+            "@type": "Brand",
+            "name": "Silimex",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Silimex",
+            "description": "Distribuidor oficial de Silimex en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 69,
+          "item": {
+            "@type": "Brand",
+            "name": "AUFIT",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=AUFIT",
+            "description": "Distribuidor oficial de AUFIT en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 70,
+          "item": {
+            "@type": "Brand",
+            "name": "HID",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=HID",
+            "description": "Distribuidor oficial de HID en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 71,
+          "item": {
+            "@type": "Brand",
+            "name": "HIKVISION",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=HIKVISION",
+            "description": "Distribuidor oficial de HIKVISION en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 72,
+          "item": {
+            "@type": "Brand",
+            "name": "IDEMIA",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=IDEMIA",
+            "description": "Distribuidor oficial de IDEMIA en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 73,
+          "item": {
+            "@type": "Brand",
+            "name": "KENWOOD",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=KENWOOD",
+            "description": "Distribuidor oficial de KENWOOD en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 74,
+          "item": {
+            "@type": "Brand",
+            "name": "Lutron",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Lutron",
+            "description": "Distribuidor oficial de Lutron en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 75,
+          "item": {
+            "@type": "Brand",
+            "name": "Simon",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Simon",
+            "description": "Distribuidor oficial de Simon en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 76,
+          "item": {
+            "@type": "Brand",
+            "name": "Panduit",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Panduit",
+            "description": "Distribuidor oficial de Panduit en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 77,
+          "item": {
+            "@type": "Brand",
+            "name": "Ubiquiti Networks",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Ubiquiti",
+            "description": "Distribuidor oficial de Ubiquiti Networks en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 78,
+          "item": {
+            "@type": "Brand",
+            "name": "Planet",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Planet",
+            "description": "Distribuidor oficial de Planet en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 79,
+          "item": {
+            "@type": "Brand",
+            "name": "Resideo",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Resideo",
+            "description": "Distribuidor oficial de Resideo en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 80,
+          "item": {
+            "@type": "Brand",
+            "name": "Dahua Technology",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Dahua",
+            "description": "Distribuidor oficial de Dahua Technology en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 81,
+          "item": {
+            "@type": "Brand",
+            "name": "TP-Link",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=TP-Link",
+            "description": "Distribuidor oficial de TP-Link en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 82,
+          "item": {
+            "@type": "Brand",
+            "name": "LinkedPro",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Linkedpro",
+            "description": "Distribuidor oficial de LinkedPro en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 83,
+          "item": {
+            "@type": "Brand",
+            "name": "DuoSmart",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=DuoSmart",
+            "description": "Distribuidor oficial de DuoSmart en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 84,
+          "item": {
+            "@type": "Brand",
+            "name": "Sonoff",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Sonoff",
+            "description": "Distribuidor oficial de Sonoff en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 85,
+          "item": {
+            "@type": "Brand",
+            "name": "UNV (Uniview)",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=UNV",
+            "description": "Distribuidor oficial de UNV (Uniview) en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 86,
+          "item": {
+            "@type": "Brand",
+            "name": "Axceze",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Axceze",
+            "description": "Distribuidor oficial de Axceze en México con garantía directa y facturación fiscal."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 87,
+          "item": {
+            "@type": "Brand",
+            "name": "YONUSA",
+            "url": "https://seguridad-avanzada.com/collections/vendors?q=Yonusa",
+            "description": "Distribuidor oficial de YONUSA en México con garantía directa y facturación fiscal."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://seguridad-avanzada.com/#organization",
+      "name": "Seguridad Avanzada",
+      "url": "https://seguridad-avanzada.com",
+      "description": "Distribuidor autorizado en México de cómputo, seguridad electrónica, videovigilancia, redes y respaldo de energía.",
+      "knowsAbout": [
+        "Apple México",
+        "EZVIZ México",
+        "HP México",
+        "Hewlett Packard Enterprise México",
+        "Dell Technologies México",
+        "Lenovo México",
+        "Acer México",
+        "Acteck México",
+        "Balam Rush México",
+        "ASUS México",
+        "Lanix México",
+        "Intel México",
+        "AMD México",
+        "Fujitsu México",
+        "Logitech México",
+        "Kingston Technology México",
+        "Kensington México",
+        "Western Digital México",
+        "Seagate México",
+        "APC by Schneider Electric México",
+        "Cisco México",
+        "Poly México",
+        "Microsoft México",
+        "Samsung México",
+        "Kyocera México",
+        "FAAC México",
+        "CyberPower México",
+        "Growatt México",
+        "EcoFlow México",
+        "Hoymiles México",
+        "Allied Telesis México",
+        "ALTAI Super WiFi México",
+        "Cambium Networks México",
+        "CAME México",
+        "Honeywell México",
+        "HUAWEI México",
+        "Grandstream México",
+        "Tenda México",
+        "HiLook México",
+        "Fanvil México",
+        "Tiandy México",
+        "Belden México",
+        "Indiana Wire & Cable México",
+        "AJAX México",
+        "ZKTeco México",
+        "IMOU México",
+        "Brother México",
+        "Epson México",
+        "Canon México",
+        "LG México",
+        "Forza Power Technologies México",
+        "Tripp-Lite by Eaton México",
+        "BenQ México",
+        "Gigabyte México",
+        "Corsair México",
+        "Gaming Naceb México",
+        "Linksys México",
+        "Manhattan México",
+        "BRobotix México",
+        "Zebra Technologies México",
+        "Xerox México",
+        "ADATA México",
+        "Chicago Digital Power (CDP) México",
+        "OvalTech México",
+        "Smartbitt México",
+        "Vorago México",
+        "Perfect Choice México",
+        "Silimex México",
+        "AUFIT México",
+        "HID México",
+        "HIKVISION México",
+        "IDEMIA México",
+        "KENWOOD México",
+        "Lutron México",
+        "Simon México",
+        "Panduit México",
+        "Ubiquiti Networks México",
+        "Planet México",
+        "Resideo México",
+        "Dahua Technology México",
+        "TP-Link México",
+        "LinkedPro México",
+        "DuoSmart México",
+        "Sonoff México",
+        "UNV (Uniview) México",
+        "Axceze México",
+        "YONUSA México"
+      ]
+    }
+  ]
+}
+</script>
 
 {% schema %}
 {

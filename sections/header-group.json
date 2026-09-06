@@ -20,18 +20,10 @@
             "text": "proyectos@seguridad-avanzada.com",
             "link": "mailto:mailto_proyectos@seguridad-avanzada.com"
           }
-        },
-        "announcement-bar-0": {
-          "type": "announcement",
-          "settings": {
-            "text": "Welcome to our store",
-            "link": ""
-          }
         }
       },
       "block_order": [
-        "announcement_bGEVkH",
-        "announcement-bar-0"
+        "announcement_bGEVkH"
       ],
       "settings": {
         "auto_rotate": false,

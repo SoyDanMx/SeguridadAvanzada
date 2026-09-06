@@ -1,0 +1,23 @@
+# Shopify CLI Ignore File
+*.bak
+*.tmp
+*.temp
+*.backup
+.DS_Store
+
+# Non-theme root directories and project scripts
+data/*
+ecommerce-sync/*
+legacy-nextjs/*
+kapso-workflows/*
+klaviyo-kapso-bridge/*
+scripts/*
+logs/*
+scratch/*
+tecnosinergia_sync/*
+TODO.md
+*.js
+*.ts
+*.csv
+*.jsonl
+

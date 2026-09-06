@@ -74,7 +74,9 @@
 
   .ws-sa-logo-img {
     height: 64px;
+    width: auto;
     max-width: 280px;
+    aspect-ratio: 164 / 64;
     object-fit: contain;
     filter: brightness(0) invert(1); /* Asegura logo en blanco nítido */
   }
@@ -143,7 +145,9 @@
 
   .ws-nuo-logo-img {
     height: 52px;
+    width: auto;
     max-width: 240px;
+    aspect-ratio: 107 / 52;
     object-fit: contain;
     display: block;
   }
@@ -192,7 +196,9 @@
 
   .ws-tulbox-logo-img {
     height: 46px;
+    width: auto;
     max-width: 210px;
+    aspect-ratio: 175 / 46;
     object-fit: contain;
     display: block;
   }
@@ -646,8 +652,10 @@
           <a href="/" class="ws-sa-logo-wrap" aria-label="Seguridad Avanzada">
             {%- if settings.logo != blank -%}
               <img
-                src="{{ settings.logo | image_url: width: 400 }}"
+                src="{{ settings.logo | image_url: width: 330 }}"
                 alt="{{ shop.name }}"
+                width="164"
+                height="64"
                 class="ws-sa-logo-img"
                 loading="lazy"
               >
@@ -672,8 +680,10 @@
           <p class="ws-nuo-label">Seguridad Avanzada es una empresa operada por:</p>
           <a href="https://www.nuo-networks.com/" target="_blank" class="ws-nuo-logo-link" title="Nuo Networks, Inc.">
             <img
-              src="{{ 'nuo-networks-logo-white.png' | asset_url }}"
+              src="{{ 'nuo-networks-logo-white.png' | asset_img_url: '220x' }}"
               alt="Nuo Networks, Inc."
+              width="107"
+              height="52"
               class="ws-nuo-logo-img"
               loading="lazy"
             >
@@ -686,8 +696,10 @@
             <span class="ws-tulbox-badge">⚡ Instalaciones Certificadas</span>
             <a href="https://tulbox.pro/" target="_blank" class="ws-tulbox-logo-link" title="Tulbox Servicios Técnicos">
               <img
-                src="{{ 'tulbox-logo-dark.png' | asset_url }}"
+                src="{{ 'tulbox-logo-dark.png' | asset_img_url: '350x' }}"
                 alt="Tulbox Servicios Técnicos"
+                width="175"
+                height="46"
                 class="ws-tulbox-logo-img"
                 loading="lazy"
               >

@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-marcas-directorio",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

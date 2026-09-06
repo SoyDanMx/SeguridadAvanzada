@@ -1,11 +1,12 @@
 <!doctype html>
 <html class="js" lang="{{ request.locale.iso_code }}">
   <head>
-    {%- render 'layouthub_header' -%}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#0f172a">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.shopify.com">
     <link rel="canonical" href="{{ canonical_url }}">
 
     <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}">
@@ -17,20 +18,30 @@
     <link rel="icon" type="image/png" href="{{ 'favicon-192x192.png' | asset_url }}" sizes="192x192">
     <link rel="apple-touch-icon" href="{{ 'favicon-180x180.png' | asset_url }}" sizes="180x180">
 
-    {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
-      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- if template.name == 'index' -%}
+      <link rel="preload" as="image" href="//seguridad-avanzada.com/cdn/shop/files/syscom_p2_730x380_enero21_curvas_1.jpg?v=1788075057&width=750" imagesrcset="//seguridad-avanzada.com/cdn/shop/files/syscom_p2_730x380_enero21_curvas_1.jpg?v=1788075057&width=375 375w, //seguridad-avanzada.com/cdn/shop/files/syscom_p2_730x380_enero21_curvas_1.jpg?v=1788075057&width=550 550w, //seguridad-avanzada.com/cdn/shop/files/syscom_p2_730x380_enero21_curvas_1.jpg?v=1788075057&width=750 750w, //seguridad-avanzada.com/cdn/shop/files/syscom_p2_730x380_enero21_curvas_1.jpg?v=1788075057&width=1100 1100w" imagesizes="100vw" fetchpriority="high">
+    {%- endif -%}
+
+    {%- assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold' -%}
+    {%- unless settings.type_body_font.system? -%}
+      <link rel="preload" as="font" href="{{ body_font_bold | font_url }}" type="font/woff2" crossorigin>
+      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
 
     <title>
-      {{ page_title | strip_newlines | strip }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- if request.path == '/pages/marcas' or request.path == '/marcas' -%}
+        Directorio Oficial de Marcas y Fabricantes Autorizados &ndash; {{ shop.name }}
+      {%- else -%}
+        {{ page_title | strip_newlines | strip }}
+        {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+        {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+        {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- endif -%}
     </title>
 
-    {%- assign seo_description = page_description | default: shop.description | default: 'Soluciones en videovigilancia CCTV, control de acceso, redes IT, alarmas y equipo eléctrico en México. Envíos a todo el país.' -%}
+    {%- assign seo_description = page_description | default: shop.description | default: 'Soluciones en cómputo, videovigilancia CCTV, control de acceso, redes y energía en México. Distribuidor oficial de marcas líderes. Envíos y facturación.' -%}
     {%- if seo_description.size < 50 or seo_description.size > 160 -%}
-      {%- assign seo_description = 'Soluciones en videovigilancia CCTV, control de acceso, redes IT, alarmas y equipo eléctrico en México. Envíos a todo el país.' -%}
+      {%- assign seo_description = 'Soluciones en cómputo, videovigilancia CCTV, control de acceso, redes y energía en México. Distribuidor oficial de marcas líderes. Envíos y facturación.' -%}
     {%- endif -%}
     <meta name="description" content="{{ seo_description | escape }}">
 
@@ -57,16 +68,87 @@
 
     {% style %}
       {{ settings.type_body_font | font_face: font_display: 'swap' }}
-      {{ body_font_bold | font_face: font_display: 'swap' }}
+      {{ body_font_bold | font_face: font_display: 'optional' }}
       {{ body_font_italic | font_face: font_display: 'swap' }}
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
 
-      /* Core Web Vitals CLS Fixes */
-      .header-wrapper { min-height: 64px; contain: layout; }
+      /* Critical Header Layout & Zero-CLS Geometry */
+      .header-wrapper {
+        display: block;
+        position: relative;
+        background-color: rgb(var(--color-background));
+        min-height: 64px;
+        contain: layout;
+      }
+      .header {
+        display: grid;
+        grid-template-areas: 'left-icons heading icons';
+        grid-template-columns: 1fr 2fr 1fr;
+        align-items: center;
+        min-height: 64px;
+      }
+      .header__heading, .header__heading-link {
+        grid-area: heading;
+        margin: 0;
+      }
+      .header__icons {
+        grid-area: icons;
+        display: flex;
+        grid-column: 3;
+        justify-self: end;
+      }
+      .header__heading-logo {
+        aspect-ratio: 250 / 97;
+        width: 100%;
+        height: auto;
+      }
+      .header__heading-logo-wrapper {
+        aspect-ratio: 250 / 97;
+        width: 100%;
+        max-width: 250px;
+        display: inline-block;
+      }
+      @media screen and (min-width: 990px) {
+        .header-wrapper, .header {
+          min-height: 180px;
+        }
+        .header--top-left {
+          grid-template-areas:
+            'heading search icons'
+            'navigation navigation navigation';
+          grid-template-columns: auto 1fr auto;
+          column-gap: 2rem;
+        }
+        .header--top-left > .header__search {
+          grid-area: search;
+        }
+        .header__navigation-row {
+          grid-area: navigation;
+        }
+        header-drawer {
+          display: none !important;
+        }
+      }
+      @media screen and (max-width: 989px) {
+        .header-wrapper, .header {
+          min-height: 64px;
+        }
+      }
       img, svg, video { max-width: 100%; height: auto; }
       .card__media img, .media img { content-visibility: auto; }
       body { font-size-adjust: from-font; }
+
+      /* Pre-reserve Hero Slideshow geometry to completely eliminate mobile 0.326 CLS */
+      slideshow-component { contain: layout; display: flex; flex-direction: column; }
+      @media screen and (max-width: 749px) {
+        .slideshow.banner--adapt_image,
+        .slideshow.banner--adapt_image .slideshow__slide,
+        .banner--mobile-bottom .slideshow__media {
+          min-height: calc(100vw * 380 / 730);
+          aspect-ratio: 730 / 380;
+        }
+      }
 
       {% for scheme in settings.color_schemes -%}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
@@ -280,15 +362,8 @@
       {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
 
-    {%- unless settings.type_body_font.system? -%}
-      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
-    {%- endunless -%}
-    {%- unless settings.type_header_font.system? -%}
-      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
-    {%- endunless -%}
-
     {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
-      {{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload: true }}
+      <link rel="stylesheet" href="{{ 'component-localization-form.css' | asset_url }}" media="print" onload="this.media='all'">
       <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
@@ -320,7 +395,40 @@
     {% sections 'header-group' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
-      {{ content_for_layout }}</main>
+      {%- if template.name == '404' or request.path contains 'marcas' -%}
+        <div id="marcas-dynamic-container" style="display: none;">
+          {% section 'page-marcas-directorio' %}
+        </div>
+      {%- endif -%}
+      <div id="standard-layout-content">
+        {{ content_for_layout }}
+      </div>
+    </main>
+
+    {%- if template.name == '404' or request.path contains 'marcas' -%}
+    <script>
+      (function() {
+        try {
+          var p = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+          if (p === '/blogs/noticias' || p === '/noticias') {
+            window.location.replace('/blogs/news');
+            return;
+          }
+          if (p === '/pages/marcas' || p === '/marcas') {
+            var m = document.getElementById('marcas-dynamic-container');
+            var s = document.getElementById('standard-layout-content');
+            if (m && s) {
+              m.style.display = 'block';
+              s.style.display = 'none';
+              document.title = 'Directorio Oficial de Marcas y Fabricantes Autorizados – {{ shop.name }}';
+            }
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      })();
+    </script>
+    {%- endif -%}
 
     {% sections 'footer-group' %}
 
@@ -411,16 +519,12 @@
       }
       @keyframes pulse-glow {
         0% {
-          box-shadow: 0 0 0 0 rgba(82, 177, 150, 0.7);
           transform: scale(1);
-        }
-        50% {
-          box-shadow: 0 0 0 15px rgba(82, 177, 150, 0);
-          transform: scale(1.03);
+          opacity: 0.8;
         }
         100% {
-          box-shadow: 0 0 0 0 rgba(82, 177, 150, 0);
-          transform: scale(1);
+          transform: scale(1.12, 1.3);
+          opacity: 0;
         }
       }
 
@@ -434,7 +538,17 @@
         border-radius: 50px;
         color: white;
         box-shadow: 0 10px 25px -5px rgba(82, 177, 150, 0.5);
-        animation: pulse-glow 2s infinite ease-in-out;
+      }
+
+      .whatsapp-button-pill::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 50px;
+        background: inherit;
+        z-index: -1;
+        animation: pulse-glow 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        pointer-events: none;
       }
       
       .whatsapp-icon {
@@ -486,6 +600,5 @@
         <div class="whatsapp-notification-dot"></div>
       </div>
     </a>
-    {%- render 'layouthub_footer' -%} 
   </body>
 </html>

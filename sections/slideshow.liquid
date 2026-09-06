@@ -4,13 +4,23 @@
 
 {%- if section.settings.slide_height == 'adapt_image' and section.blocks.first.settings.image != blank -%}
   {%- style -%}
+    #Slider-{{ section.id }} {
+      contain: layout;
+    }
+    #Slider-{{ section.id }} .slideshow__slide {
+      min-height: calc(100vw / {{ section.blocks.first.settings.image.aspect_ratio }});
+    }
     @media screen and (max-width: 749px) {
       #Slider-{{ section.id }}::before,
       #Slider-{{ section.id }} .media::before,
-      #Slider-{{ section.id }}:not(.banner--mobile-bottom) .banner__content::before {
+      #Slider-{{ section.id }} .banner__content::before {
         padding-bottom: {{ 1 | divided_by: section.blocks.first.settings.image.aspect_ratio | times: 100 }}%;
         content: '';
         display: block;
+      }
+      #Slider-{{ section.id }} .slideshow__media {
+        min-height: calc(100vw / {{ section.blocks.first.settings.image.aspect_ratio }});
+        aspect-ratio: {{ section.blocks.first.settings.image.aspect_ratio }};
       }
     }
 
@@ -20,6 +30,9 @@
         padding-bottom: {{ 1 | divided_by: section.blocks.first.settings.image.aspect_ratio | times: 100 }}%;
         content: '';
         display: block;
+      }
+      #Slider-{{ section.id }} .slideshow__slide {
+        min-height: auto;
       }
     }
   {%- endstyle -%}
@@ -129,24 +142,24 @@
                 assign widths = '450, 660, 900, 1320, 1800, 2136, 2400, 3600, 7680'
               else
                 assign sizes = '100vw'
-                assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+                assign widths = '375, 550, 750, 1100, 1500'
               endif
               assign fetch_priority = 'auto'
-              if section.index == 1
+              if section.index <= 2 or forloop.first
                 assign fetch_priority = 'high'
               endif
             -%}
             {%- if forloop.first %}
               {{
                 block.settings.image
-                | image_url: width: 3840
-                | image_tag: height: height, sizes: sizes, widths: widths, fetchpriority: fetch_priority
+                | image_url: width: 1500
+                | image_tag: loading: 'eager', decoding: 'async', height: height, sizes: sizes, widths: widths, fetchpriority: 'high'
               }}
             {%- else -%}
               {{
                 block.settings.image
-                | image_url: width: 3840
-                | image_tag: loading: 'lazy', height: height, sizes: sizes, widths: widths
+                | image_url: width: 1500
+                | image_tag: loading: 'lazy', decoding: 'async', height: height, sizes: sizes, widths: widths
               }}
             {%- endif -%}
           {%- else -%}
