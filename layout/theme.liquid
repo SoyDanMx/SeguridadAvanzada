@@ -37,6 +37,8 @@
         Directorio Oficial de Marcas y Fabricantes Autorizados &ndash; {{ shop.name }}
       {%- elsif request.path contains 'envio' or request.path contains 'entrega' -%}
         Políticas de Entrega y Envíos &ndash; {{ shop.name }}
+      {%- elsif request.path contains 'sucursal' or request.path contains 'bodega' -%}
+        Sucursales y Bodegas de Recolección &ndash; {{ shop.name }}
       {%- else -%}
         {{ page_title | strip_newlines | strip }}
         {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -411,12 +413,17 @@
           {% section 'politica-envio' %}
         </div>
       {%- endif -%}
+      {%- if template.name == '404' or request.path contains 'sucursal' or request.path contains 'bodega' -%}
+        <div id="sucursales-dynamic-container" style="display: none;">
+          {% section 'page-sucursales' %}
+        </div>
+      {%- endif -%}
       <div id="standard-layout-content">
         {{ content_for_layout }}
       </div>
     </main>
 
-    {%- if template.name == '404' or request.path contains 'marcas' or request.path contains 'envio' or request.path contains 'entrega' -%}
+    {%- if template.name == '404' or request.path contains 'marcas' or request.path contains 'envio' or request.path contains 'entrega' or request.path contains 'sucursal' or request.path contains 'bodega' -%}
     <script>
       (function() {
         try {
@@ -441,6 +448,15 @@
               e.style.display = 'block';
               s.style.display = 'none';
               document.title = 'Políticas de Entrega y Envíos – {{ shop.name }}';
+            }
+          }
+          if (p === '/pages/sucursales' || p === '/sucursales' || p === '/pages/bodegas' || p === '/bodegas') {
+            var b = document.getElementById('sucursales-dynamic-container');
+            var s = document.getElementById('standard-layout-content');
+            if (b && s) {
+              b.style.display = 'block';
+              s.style.display = 'none';
+              document.title = 'Sucursales y Bodegas de Recolección – {{ shop.name }}';
             }
           }
         } catch (e) {

@@ -1,0 +1,584 @@
+{% comment %}
+  PÁGINA DE SUCURSALES Y BODEGAS DE RECOLECCIÓN PERSONAL
+  Red nacional de centros de distribución de Seguridad Avanzada y Nuo Networks.
+{% endcomment %}
+
+<style>
+  .ws-branches-wrapper {
+    max-width: 1040px;
+    margin: 3.5rem auto 4.5rem;
+    padding: 0 1.5rem;
+    font-family: 'Roboto', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    color: #1e293b;
+  }
+
+  .ws-branches-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .ws-branches-icon-box {
+    width: 60px;
+    height: 60px;
+    background: #e0f2fe;
+    color: #0284c7;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
+  }
+
+  .ws-branches-icon-box svg {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+  }
+
+  .ws-branches-title {
+    font-size: 2.35rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+    margin: 0;
+    line-height: 1.15;
+  }
+
+  .ws-branches-subtitle {
+    font-size: 1.05rem;
+    color: #64748b;
+    margin-top: 0.35rem;
+    font-weight: 500;
+  }
+
+  .ws-branches-notice-card {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+    border: 1px solid #a7f3d0;
+    border-radius: 12px;
+    padding: 1.35rem 1.6rem;
+    margin-bottom: 2.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.06);
+  }
+
+  .ws-branches-notice-icon {
+    background: #10b981;
+    color: #ffffff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .ws-branches-notice-text {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: #065f46;
+  }
+
+  .ws-branches-notice-text strong {
+    color: #047857;
+    font-weight: 700;
+  }
+
+  .ws-branches-search-bar {
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .ws-branches-search-input {
+    width: 100%;
+    padding: 0.85rem 1.25rem 0.85rem 2.85rem;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    font-size: 1rem;
+    color: #0f172a;
+    background: #ffffff;
+    outline: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+
+  .ws-branches-search-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  }
+
+  .ws-branches-search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    pointer-events: none;
+  }
+
+  /* Cuadrícula de 2 Columnas Estilo App / Referencia */
+  .ws-branches-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .ws-branches-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .ws-branch-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  }
+
+  .ws-branch-card:hover {
+    border-color: #10b981;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.12);
+    background: #fafafa;
+  }
+
+  .ws-branch-left {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .ws-branch-pin {
+    width: 22px;
+    height: 22px;
+    color: #10b981;
+    flex-shrink: 0;
+    fill: currentColor;
+  }
+
+  .ws-branch-name {
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+  }
+
+  .ws-branch-badge {
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    transition: all 0.2s ease;
+  }
+
+  .ws-branch-card:hover .ws-branch-badge {
+    background: #dcfce7;
+    color: #15803d;
+  }
+
+  /* Pie de Asistencia */
+  .ws-branches-footer-box {
+    margin-top: 3rem;
+    background: #070e1c;
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .ws-branches-footer-box {
+      flex-direction: row;
+      text-align: left;
+      justify-content: space-between;
+    }
+  }
+
+  .ws-branches-footer-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    margin: 0 0 0.35rem 0;
+    color: #ffffff;
+  }
+
+  .ws-branches-footer-desc {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    margin: 0;
+    max-width: 580px;
+    line-height: 1.5;
+  }
+
+  .ws-branches-footer-btns {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .ws-branches-cta-wa {
+    background: #22c55e;
+    color: #ffffff;
+    padding: 0.75rem 1.35rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s ease;
+  }
+
+  .ws-branches-cta-wa:hover {
+    background: #16a34a;
+  }
+
+  .ws-branches-cta-sec {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.2s ease;
+  }
+
+  .ws-branches-cta-sec:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+</style>
+
+<div class="ws-branches-wrapper">
+
+  <!-- Encabezado con Icono Azul Oficial -->
+  <div class="ws-branches-header">
+    <div class="ws-branches-icon-box">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+    </div>
+    <div>
+      <h1 class="ws-branches-title">Sucursales y Bodegas</h1>
+      <div class="ws-branches-subtitle">Red Nacional de Centros de Distribución con Recolección Personal (Pick-Up)</div>
+    </div>
+  </div>
+
+  <!-- Tarjeta Informativa de Recolección Personal -->
+  <div class="ws-branches-notice-card">
+    <div class="ws-branches-notice-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="ws-branches-notice-text">
+      <strong>📦 Modalidad de Recolección Personal (Pick-Up):</strong><br>
+      Contamos con <strong>25 bodegas y centros de distribución</strong> estratégicos en todo México para retiro inmediato de mercancía. Para asegurar existencias y agilizar tu entrega, te recomendamos <strong>generar tu cotización o pedido previamente</strong>. Tu asesor asignado te compartirá el folio de recolección y la dirección exacta de la bodega en tu localidad.
+    </div>
+  </div>
+
+  <!-- Buscador Rápido de Ciudad / Bodega -->
+  <div class="ws-branches-search-bar">
+    <svg class="ws-branches-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="branchSearchInput" class="ws-branches-search-input" placeholder="Buscar por ciudad o estado (ej. Guadalajara, Monterrey, CDMX, Puebla...)" autocomplete="off">
+  </div>
+
+  <!-- Cuadrícula de 25 Sucursales con Pines Verdes (Estilo Exacto de la Referencia) -->
+  <div class="ws-branches-grid" id="branchesGrid">
+
+    <!-- 1. Aguascalientes -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Aguascalientes" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="aguascalientes">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Aguascalientes</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 2. Cancún -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Cancun" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="cancun cancún quintana roo">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Cancún</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 3. Cd. Juárez -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Cd%20Juarez" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="cd juarez ciudad juárez chihuahua">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Cd. Juarez</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 4. Matriz Chihuahua -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20Matriz%20Chihuahua" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="matriz chihuahua centro">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Matriz Chihuahua</span>
+      </div>
+      <span class="ws-branch-badge">Almacén Central</span>
+    </a>
+
+    <!-- 5. Chihuahua Norte -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20Chihuahua%20Norte" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="chihuahua norte">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Chihuahua Norte</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 6. Culiacán -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Culiacan" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="culiacan culiacán sinaloa">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Culiacan</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 7. Guadalajara -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Guadalajara" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="guadalajara jalisco zapopan gdl">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Guadalajara</span>
+      </div>
+      <span class="ws-branch-badge">CEDIS Regional</span>
+    </a>
+
+    <!-- 8. Hermosillo -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Hermosillo" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="hermosillo sonora">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Hermosillo</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 9. La Paz BCS -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20La%20Paz%20BCS" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="la paz bcs baja california sur">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">La Paz BCS</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 10. León -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Leon" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="leon león guanajuato bajio">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Leon</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 11. Mérida -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Merida" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="merida mérida yucatan yucatán península">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Mérida</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 12. México Norte -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20Mexico%20Norte%20CDMX" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="mexico norte cdmx ciudad de mexico azcapotzalco vallejo">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">México Norte</span>
+      </div>
+      <span class="ws-branch-badge">CEDIS Central</span>
+    </a>
+
+    <!-- 13. México Sureste -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20Mexico%20Sureste%20CDMX" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="mexico sureste cdmx iztapalapa coyoacan tlalpan">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">México Sureste</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 14. Monterrey -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Monterrey" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="monterrey nuevo leon san pedro mty apodaca">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Monterrey</span>
+      </div>
+      <span class="ws-branch-badge">CEDIS Norte</span>
+    </a>
+
+    <!-- 15. Monterrey Centro -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20Monterrey%20Centro" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="monterrey centro nuevo leon mty">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Monterrey Centro</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 16. Oaxaca -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Oaxaca" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="oaxaca juarez valles centrales">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Oaxaca</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 17. Puebla -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Puebla" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="puebla de zaragoza angelopolis tlaxcala">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Puebla</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 18. Querétaro -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Queretaro" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="queretaro querétaro el marques corregidora qro">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Queretaro</span>
+      </div>
+      <span class="ws-branch-badge">CEDIS Bajío</span>
+    </a>
+
+    <!-- 19. San Luis Potosí -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20San%20Luis%20Potosi" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="san luis potosi slp potosí">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">San Luis Potosi</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 20. Tepotzotlán -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Tepotzotlan" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="tepotzotlan tepotzotlán estado de mexico edomex cuautitlan">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Tepotzotlan</span>
+      </div>
+      <span class="ws-branch-badge">CEDIS Mega Almacén</span>
+    </a>
+
+    <!-- 21. Tijuana -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Tijuana" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="tijuana baja california frontera">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Tijuana</span>
+      </div>
+      <span class="ws-branch-badge">Frontera / Recolección</span>
+    </a>
+
+    <!-- 22. Toluca -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Toluca" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="toluca metepec lerma estado de mexico">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Toluca</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 23. Torreón -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Torreon" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="torreon torreón coahuila comarca lagunera gomez palacio">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Torreon</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 24. Veracruz -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Veracruz" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="veracruz boca del rio puerto xalapa">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Veracruz</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+    <!-- 25. Villahermosa -->
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20recolecci%C3%B3n%20en%20bodega%20de%20Villahermosa" target="_blank" rel="noopener noreferrer" class="ws-branch-card" data-city="villahermosa tabasco sur">
+      <div class="ws-branch-left">
+        <svg class="ws-branch-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span class="ws-branch-name">Villahermosa</span>
+      </div>
+      <span class="ws-branch-badge">Recolección</span>
+    </a>
+
+  </div>
+
+  <!-- Caja de Acción y Soporte -->
+  <div class="ws-branches-footer-box">
+    <div>
+      <div class="ws-branches-footer-title">¿Deseas recolectar en alguna de nuestras bodegas?</div>
+      <p class="ws-branches-footer-desc">
+        Comunícate con nuestro equipo B2B por WhatsApp indicando el SKU o modelo de tu interés y la ciudad donde deseas recoger. Validaremos existencias al instante y prepararemos tu folio de entrega.
+      </p>
+    </div>
+    <div class="ws-branches-footer-btns">
+      <a href="https://wa.me/525636741156?text=Hola,%20deseo%20consultar%20disponibilidad%20para%20recolecci%C3%B3n%20en%20sucursal" target="_blank" class="ws-branches-cta-wa">
+        <span>💬 Contactar por WhatsApp</span>
+      </a>
+      <a href="/pages/politica-de-entrega-y-envio" class="ws-branches-cta-sec">
+        <span>📦 Políticas de Envío</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var searchInput = document.getElementById('branchSearchInput');
+    var cards = document.querySelectorAll('.ws-branch-card');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        var term = e.target.value.toLowerCase().trim();
+        cards.forEach(function(card) {
+          var cityData = card.getAttribute('data-city') || '';
+          var cityName = card.querySelector('.ws-branch-name') ? card.querySelector('.ws-branch-name').innerText.toLowerCase() : '';
+          if (!term || cityData.includes(term) || cityName.includes(term)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Sucursales y Bodegas",
+  "settings": []
+}
+{% endschema %}
