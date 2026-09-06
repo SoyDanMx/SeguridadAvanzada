@@ -227,6 +227,42 @@
     fill: currentColor;
   }
 
+  /* Botón Destacado ¿Qué es Cotizador Pro? */
+  .ws-cotizador-btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 1.12rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: 8px;
+    text-decoration: none !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    line-height: 1.35;
+    margin: 0.25rem 0;
+  }
+
+  .ws-cotizador-btn-link:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.55);
+    transform: translateY(-2px);
+    color: #ffffff !important;
+    border-color: #38bdf8;
+    text-decoration: none !important;
+  }
+
+  .ws-cotizador-btn-link svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    flex-shrink: 0;
+    color: #38bdf8;
+  }
+
   /* Columna 1 Resumen de Identidad & Afiliaciones */
   .ws-brand-summary {
     margin-top: 1.75rem;
@@ -768,7 +804,12 @@
               <li><a href="/pages/contacto" class="ws-solid-link">Canje de licencias</a></li>
               <li><a href="/pages/marcas" class="ws-solid-link">Marcas Oficiales (88)</a></li>
               <li><a href="/pages/contacto" class="ws-solid-link">¿Quiénes somos?</a></li>
-              <li><a href="https://seguridad-avanzada-iodc.vercel.app/cotizador-rapido" target="_blank" class="ws-solid-link">¿Qué es Cotizador Pro?</a></li>
+              <li>
+                <a href="https://seguridad-avanzada-iodc.vercel.app/cotizador-rapido" target="_blank" rel="noopener noreferrer" class="ws-cotizador-btn-link">
+                  <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+                  <span>¿Qué es Cotizador Pro?</span>
+                </a>
+              </li>
               <li><a href="/pages/contacto" class="ws-solid-link">¿Quieres ser distribuidor?</a></li>
               <li><a href="/pages/contacto" class="ws-solid-link">Preguntas Frecuentes</a></li>
             </ul>
