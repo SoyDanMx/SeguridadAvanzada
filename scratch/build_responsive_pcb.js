@@ -1997,8 +1997,8 @@ const newLiquidContent = `{% comment %}
           <label class="pcb-assembly-check-label">
             <input type="checkbox" id="pcbAssemblyCheck" checked onchange="pcbApp.toggleAssembly(this.checked)">
             <div>
-              <span class="pcb-assembly-title">🛠️ Ensamble Profesional y Pruebas (+$499 MXN)</span>
-              <span class="pcb-assembly-desc">Montaje antiestático certificado, cable management, actualización de BIOS y prueba de estrés térmico de 2h.</span>
+              <span class="pcb-assembly-title">🛠️ Ensamble Profesional y Pruebas (+$999 MXN)</span>
+              <span class="pcb-assembly-desc">Montaje antiestático certificado, cable management, actualización de BIOS y prueba de estrés térmico de 2h (+ $999 MXN).</span>
             </div>
           </label>
         </div>
@@ -2011,11 +2011,11 @@ const newLiquidContent = `{% comment %}
           </div>
           <div class="pcb-total-row" id="pcbAssemblyCostRow">
             <span>Servicio de Ensamble y Pruebas:</span>
-            <strong id="pcbAssemblyCostText">$499.00</strong>
+            <strong id="pcbAssemblyCostText">$999.00</strong>
           </div>
           <div class="pcb-grand-total-row">
             <span class="pcb-grand-total-label">Total a Pagar:</span>
-            <span class="pcb-grand-total-val" id="pcbGrandTotalText">$499.00</span>
+            <span class="pcb-grand-total-val" id="pcbGrandTotalText">$0.00</span>
           </div>
           <div class="pcb-vat-hint">Precios en MXN • Incluye 16% de IVA y Factura CFDI 4.0</div>
         </div>
@@ -2040,7 +2040,7 @@ const newLiquidContent = `{% comment %}
     <div class="pcb-sticky-left">
       <div class="pcb-sticky-total-row">
         <span class="pcb-sticky-total-label">Total:</span>
-        <span class="pcb-sticky-total-amount" id="pcbStickyTotalAmount">$499</span>
+        <span class="pcb-sticky-total-amount" id="pcbStickyTotalAmount">$0</span>
       </div>
       <button type="button" class="pcb-sticky-pieces-link" onclick="pcbApp.scrollToSummary()">
         <span id="pcbStickyPiecesText">0 de 6 piezas</span> • Ver desglose ▾
@@ -2752,6 +2752,7 @@ ${catalogJson}
         const totalEl = document.getElementById('pcbGrandTotalText');
         const stickyTotalEl = document.getElementById('pcbStickyTotalAmount');
         const alertEl = document.getElementById('pcbCompatAlert');
+        const assemblyCostEl = document.getElementById('pcbAssemblyCostText');
 
         const keys = Object.keys(this.selected);
         let totalSingle = 0;
@@ -2761,6 +2762,21 @@ ${catalogJson}
         this.updateWattMeter();
         this.renderVisualSlots();
 
+        if (keys.length === 0) {
+          if (countEl) countEl.textContent = '0 piezas';
+          if (subtotalEl) subtotalEl.textContent = '$0.00';
+          if (assemblyCostEl) assemblyCostEl.textContent = this.includeAssembly ? '$999.00' : '$0.00';
+          if (totalEl) totalEl.textContent = '$0.00';
+          if (stickyTotalEl) stickyTotalEl.textContent = '$0';
+          if (alertEl) {
+            alertEl.innerHTML = '<span>💡 Comienza seleccionando el procesador para validar compatibilidad.</span>';
+            alertEl.style.background = '#f8fafc';
+            alertEl.style.borderColor = '#e2e8f0';
+            alertEl.style.color = '#475569';
+          }
+          return;
+        }
+
         keys.forEach(k => {
           const item = this.selected[k];
           const qty = item.qty || 1;
@@ -2768,16 +2784,19 @@ ${catalogJson}
           totalSingle += item.price * qty;
         });
 
-        const assemblyCost = this.includeAssembly ? 499 : 0;
+        const assemblyCost = this.includeAssembly ? (999 * this.systemQty) : 0;
         const assemblyRow = document.getElementById('pcbAssemblyCostRow');
         if (assemblyRow) {
           assemblyRow.style.display = this.includeAssembly ? 'flex' : 'none';
         }
+        if (assemblyCostEl) {
+          assemblyCostEl.textContent = '$' + assemblyCost.toLocaleString('es-MX') + '.00';
+        }
 
-        const grandTotal = totalSingle + assemblyCost;
+        const grandTotal = (totalSingle * this.systemQty) + assemblyCost;
 
         if (countEl) countEl.textContent = totalCount + (totalCount === 1 ? ' pieza' : ' piezas');
-        if (subtotalEl) subtotalEl.textContent = '$' + totalSingle.toLocaleString('es-MX') + '.00';
+        if (subtotalEl) subtotalEl.textContent = '$' + (totalSingle * this.systemQty).toLocaleString('es-MX') + '.00';
         if (totalEl) totalEl.textContent = '$' + grandTotal.toLocaleString('es-MX') + '.00';
         if (stickyTotalEl) stickyTotalEl.textContent = '$' + grandTotal.toLocaleString('es-MX');
 
@@ -3008,7 +3027,7 @@ ${catalogJson}
         if (this.includeAssembly) {
           // Servicio de Ensamble Profesional y Pruebas
           itemsToAdd.push({
-            id: 52774577897796,
+            id: 52774689276036,
             quantity: this.systemQty,
             properties: {
               '_Servicio': 'Ensamble Profesional y Pruebas Térmicas',
@@ -3062,12 +3081,12 @@ ${catalogJson}
           msg += '• ' + catName + ': ' + item.title + (qty > 1 ? ' (' + qty + ' pzas)' : '') + ' - $' + lineTotal.toLocaleString('es-MX') + ' MXN\\n';
         });
 
-        const assemblyCost = this.includeAssembly ? 499 : 0;
+        const assemblyCost = this.includeAssembly ? (999 * this.systemQty) : 0;
         if (this.includeAssembly) {
-          msg += '• Servicio de Ensamble y Pruebas Térmicas: $499.00 MXN\\n';
+          msg += '• Servicio de Ensamble y Pruebas Térmicas: $' + assemblyCost.toLocaleString('es-MX') + '.00 MXN\\n';
         }
 
-        const grandTotal = totalSingle + assemblyCost;
+        const grandTotal = (totalSingle * this.systemQty) + assemblyCost;
 
         msg += '\\nTotal Estimado: $' + grandTotal.toLocaleString('es-MX') + ' MXN (IVA incluido 16% CFDI 4.0)';
         msg += '\\n\\n¿Me podrían confirmar disponibilidad y tiempo de entrega por favor?';
