@@ -44,16 +44,16 @@ export default function SucursalesPage() {
     <div className="max-w-5xl mx-auto px-4 py-12 text-slate-800">
       {/* Encabezado */}
       <div className="flex items-center gap-4 mb-8">
-        <div className="w-14 h-14 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center shadow-sm">
-          <svg className="w-8 h-8 fill-current" viewBox="0 0 24 24">
+        <div className="w-16 h-16 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center shadow-sm flex-shrink-0">
+          <svg className="w-9 h-9 fill-current" viewBox="0 0 24 24">
             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
           </svg>
         </div>
         <div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
             Sucursales y Bodegas
           </h1>
-          <p className="text-slate-500 font-medium text-base mt-1">
+          <p className="text-slate-500 font-medium text-lg sm:text-xl mt-1">
             Red Nacional de Centros de Distribución con Recolección Personal (Pick-Up)
           </p>
         </div>
@@ -62,47 +62,47 @@ export default function SucursalesPage() {
       {/* Tarjeta Corporativo México (Pagos en Sitio y Recolección) */}
       <div className="bg-slate-900 border border-blue-500/40 rounded-2xl p-6 sm:p-8 text-white mb-8 shadow-xl relative overflow-hidden">
         <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-          <span className="bg-blue-500/20 border border-blue-400/40 text-blue-200 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+          <span className="bg-blue-500/20 border border-blue-400/40 text-blue-200 text-sm font-extrabold px-3.5 py-1.5 rounded-full uppercase tracking-wider">
             🏢 OFICINA CORPORATIVA MÉXICO • SEDE CENTRAL
           </span>
-          <span className="bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+          <span className="bg-emerald-500 text-white text-sm font-bold px-3.5 py-1.5 rounded-full">
             Pagos y Recolección en Sitio
           </span>
         </div>
 
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           <div className="space-y-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">Corporativo México</h2>
-            <div className="flex items-center gap-2 text-slate-200 text-base">
-              <svg className="w-5 h-5 text-sky-400 flex-shrink-0 fill-current" viewBox="0 0 24 24">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Corporativo México</h2>
+            <div className="flex items-center gap-2 text-slate-200 text-lg sm:text-xl">
+              <svg className="w-6 h-6 text-sky-400 flex-shrink-0 fill-current" viewBox="0 0 24 24">
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
               </svg>
               <span><strong>Av. Clavería 237</strong>, Claveria, Azcapotzalco, 02080 Ciudad de México, CDMX</span>
             </div>
 
-            <div className="bg-white/5 border border-white/10 rounded-xl p-4 space-y-2 text-sm text-slate-300">
-              <div className="flex items-start gap-2">
-                <span>💳</span>
+            <div className="bg-white/5 border border-white/10 rounded-xl p-5 space-y-3 text-base text-slate-200">
+              <div className="flex items-start gap-2.5">
+                <span className="text-lg">💳</span>
                 <span><strong>Caja de Pagos en Sitio:</strong> Aceptamos efectivo, tarjetas de débito/crédito y transferencias directas SPEI.</span>
               </div>
-              <div className="flex items-start gap-2">
-                <span>📦</span>
+              <div className="flex items-start gap-2.5">
+                <span className="text-lg">📦</span>
                 <span><strong>Recolección Inmediata (Pick-Up):</strong> Entrega en mostrador de mercancía con folio de pedido o cotización.</span>
               </div>
-              <div className="flex items-start gap-2">
-                <span>🛡️</span>
+              <div className="flex items-start gap-2.5">
+                <span className="text-lg">🛡️</span>
                 <span><strong>Atención e Ingeniería:</strong> Asesoría especializada en proyectos de seguridad, videovigilancia, redes y energía.</span>
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-2 pt-1">
-              <a href="tel:5567283971" className="bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-semibold px-3 py-2 rounded-lg transition-colors inline-flex items-center gap-1.5">
+            <div className="flex flex-wrap gap-2.5 pt-1">
+              <a href="tel:5567283971" className="bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm font-semibold px-3.5 py-2 rounded-lg transition-colors inline-flex items-center gap-1.5">
                 📞 Oficina: <strong>55 6728 3971</strong>
               </a>
-              <a href="https://wa.me/525636741156?text=Deseo%20informacion%20de%20sistemas%20de%20seguridad" target="_blank" rel="noopener noreferrer" className="bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 text-xs font-semibold px-3 py-2 rounded-lg transition-colors inline-flex items-center gap-1.5">
+              <a href="https://wa.me/525636741156?text=Deseo%20informacion%20de%20sistemas%20de%20seguridad" target="_blank" rel="noopener noreferrer" className="bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 text-sm font-semibold px-3.5 py-2 rounded-lg transition-colors inline-flex items-center gap-1.5">
                 💬 WhatsApp MX: <strong>56 3674 1156</strong>
               </a>
-              <a href="mailto:proyectos@seguridad-avanzada.com" className="bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-semibold px-3 py-2 rounded-lg transition-colors inline-flex items-center gap-1.5">
+              <a href="mailto:proyectos@seguridad-avanzada.com" className="bg-white/10 hover:bg-white/20 border border-white/20 text-white text-sm font-semibold px-3.5 py-2 rounded-lg transition-colors inline-flex items-center gap-1.5">
                 ✉️ proyectos@seguridad-avanzada.com
               </a>
             </div>
@@ -113,24 +113,24 @@ export default function SucursalesPage() {
               href="https://wa.me/525636741156?text=Hola,%20deseo%20visitar%20el%20Corporativo%20de%20Claver%C3%ADa%20para%20pagar%20y%20recolectar"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-6 py-3.5 rounded-xl shadow-lg transition-all inline-flex items-center gap-2"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-base px-7 py-4 rounded-xl shadow-lg transition-all inline-flex items-center gap-2"
             >
               <span>Agendar Pago y Recolección</span>
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
             </a>
           </div>
         </div>
       </div>
 
       {/* Tarjeta de Recolección Personal */}
-      <div className="bg-emerald-50/80 border border-emerald-200 rounded-xl p-5 mb-8 flex items-start gap-4 shadow-sm">
-        <div className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center flex-shrink-0 mt-0.5">
+      <div className="bg-emerald-50/80 border border-emerald-200 rounded-xl p-6 mb-8 flex items-start gap-4 shadow-sm">
+        <div className="w-9 h-9 rounded-full bg-emerald-500 text-white flex items-center justify-center flex-shrink-0 mt-0.5">
           <svg className="w-5 h-5 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
             <polyline points="20 6 9 17 4 12" />
           </svg>
         </div>
-        <div className="text-sm text-emerald-900 leading-relaxed">
-          <strong className="text-emerald-950 font-bold block text-base mb-1">
+        <div className="text-base text-emerald-900 leading-relaxed">
+          <strong className="text-emerald-950 font-bold block text-lg mb-1">
             📦 Modalidad de Recolección Personal (Pick-Up):
           </strong>
           Contamos con <strong>25 bodegas y centros de distribución</strong> estratégicos en todo México para retiro inmediato de mercancía. Para asegurar existencias y agilizar tu entrega, te recomendamos <strong>generar tu cotización o pedido previamente</strong>. Tu asesor asignado te compartirá el folio de recolección y la dirección exacta de la bodega en tu localidad.
@@ -140,7 +140,7 @@ export default function SucursalesPage() {
       {/* Buscador */}
       <div className="relative mb-8">
         <svg
-          className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none"
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-slate-400 pointer-events-none"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -154,12 +154,12 @@ export default function SucursalesPage() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Buscar por ciudad o estado (ej. Guadalajara, Monterrey, CDMX, Puebla...)"
-          className="w-full pl-12 pr-4 py-3.5 bg-white border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent shadow-sm text-base"
+          className="w-full pl-13 pr-4 py-4 bg-white border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent shadow-sm text-lg"
         />
       </div>
 
       {/* Grid de 25 Sucursales */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {filteredBranches.map((b) => (
           <a
             key={b.name}
@@ -168,18 +168,18 @@ export default function SucursalesPage() {
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white border border-slate-200 hover:border-emerald-500 rounded-xl p-4 flex items-center justify-between transition-all hover:-translate-y-0.5 hover:shadow-md group"
+            className="bg-white border border-slate-200 hover:border-emerald-500 rounded-xl p-4.5 flex items-center justify-between transition-all hover:-translate-y-0.5 hover:shadow-md group"
           >
             <div className="flex items-center gap-3">
               <svg
-                className="w-5 h-5 text-emerald-500 flex-shrink-0 fill-current"
+                className="w-6 h-6 text-emerald-500 flex-shrink-0 fill-current"
                 viewBox="0 0 24 24"
               >
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
               </svg>
-              <span className="font-bold text-slate-900 text-base">{b.name}</span>
+              <span className="font-bold text-slate-900 text-lg">{b.name}</span>
             </div>
-            <span className="bg-slate-100 group-hover:bg-emerald-100 text-slate-600 group-hover:text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider transition-colors">
+            <span className="bg-slate-100 group-hover:bg-emerald-100 text-slate-600 group-hover:text-emerald-800 text-sm font-bold px-3 py-1 rounded-full uppercase tracking-wider transition-colors">
               {b.tag}
             </span>
           </a>
@@ -187,12 +187,12 @@ export default function SucursalesPage() {
       </div>
 
       {/* Pie de Asistencia */}
-      <div className="mt-12 bg-slate-900 text-white rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+      <div className="mt-12 bg-slate-900 text-white rounded-2xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
         <div>
-          <h3 className="text-xl font-extrabold mb-1">
+          <h3 className="text-2xl font-extrabold mb-1.5">
             ¿Deseas recolectar en alguna de nuestras bodegas?
           </h3>
-          <p className="text-slate-300 text-sm max-w-xl">
+          <p className="text-slate-300 text-base max-w-xl leading-relaxed">
             Comunícate con nuestro equipo B2B por WhatsApp indicando el SKU o modelo de tu interés y la ciudad donde deseas recoger. Validaremos existencias al instante y prepararemos tu folio de entrega.
           </p>
         </div>
@@ -201,13 +201,13 @@ export default function SucursalesPage() {
             href="https://wa.me/525636741156?text=Hola,%20deseo%20consultar%20disponibilidad%20para%20recolecci%C3%B3n%20en%20sucursal"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm px-5 py-3 rounded-lg transition-colors inline-flex items-center gap-2"
+            className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-base px-6 py-3.5 rounded-lg transition-colors inline-flex items-center gap-2"
           >
             💬 Contactar por WhatsApp
           </a>
           <Link
             href="/politica-de-entrega-y-envio"
-            className="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-sm px-4 py-3 rounded-lg transition-colors"
+            className="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-base px-5 py-3.5 rounded-lg transition-colors"
           >
             📦 Políticas de Envío
           </Link>

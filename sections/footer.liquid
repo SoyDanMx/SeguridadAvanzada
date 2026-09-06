@@ -4,9 +4,7 @@
   Tipografía geométrica sólida Roboto / Inter en alto contraste, barra superior de redes y métodos de pago,
   columnas organizadas con enlaces sólidos, modales corporativos (Nuo Networks USA y Tulbox Pro), y sellos oficiales de confianza.
 {% endcomment %}
-
-<style>
-  /* Base del Footer con Tipografía Sólida */
+  /* Base del Footer con Tipografía Sólida y Letra Más Grande */
   .ws-footer-root {
     background-color: #13253e;
     color: #fbf9f9;
@@ -17,12 +15,12 @@
     border-top: 1px solid rgba(255, 255, 255, 0.12);
     position: relative;
     z-index: 10;
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: 1.12rem;
+    line-height: 1.55;
   }
 
   .ws-footer-container {
-    max-width: 1380px;
+    max-width: 1420px;
     margin: 0 auto;
     padding: 0 1.5rem;
   }
@@ -34,7 +32,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    padding: 1.75rem 0;
+    padding: 2rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     align-items: center;
     justify-content: space-between;
@@ -51,16 +49,16 @@
   .ws-topbar-socials {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.85rem;
     flex-wrap: wrap;
     justify-content: center;
   }
 
   .ws-topbar-social-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 6px;
-    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    border: 1.5px solid rgba(255, 255, 255, 0.65);
     background: transparent;
     display: inline-flex;
     align-items: center;
@@ -84,8 +82,8 @@
   }
 
   .ws-topbar-social-btn svg {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     fill: currentColor;
   }
 
@@ -93,7 +91,7 @@
   .ws-topbar-payments {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1.4rem;
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -105,7 +103,7 @@
     opacity: 0.95;
     font-weight: 800;
     letter-spacing: 0.03em;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     line-height: 1;
     transition: opacity 0.2s ease;
   }
@@ -115,7 +113,7 @@
   }
 
   .ws-pay-mono svg {
-    height: 22px;
+    height: 26px;
     width: auto;
     fill: #ffffff;
   }
@@ -124,7 +122,7 @@
      CUERPO PRINCIPAL: 4 COLUMNAS DE ALTA DENSIDAD
      ========================================================= */
   .ws-footer-main {
-    padding: 3rem 0 2.5rem;
+    padding: 3.5rem 0 3rem;
   }
 
   .ws-footer-grid {
@@ -143,34 +141,34 @@
   @media (min-width: 1024px) {
     .ws-footer-grid {
       grid-template-columns: 1.5fr 1.15fr 1.15fr 1.1fr;
-      gap: 2.5rem;
+      gap: 2.75rem;
     }
   }
 
-  /* Encabezados Sólidos */
+  /* Encabezados Sólidos Grandes */
   .ws-col-heading {
     color: #ffffff;
-    font-size: 1.35rem;
-    font-weight: 700;
-    margin: 0 0 1.25rem 0;
-    letter-spacing: -0.01em;
+    font-size: 1.55rem;
+    font-weight: 800;
+    margin: 0 0 1.35rem 0;
+    letter-spacing: -0.015em;
     line-height: 1.2;
   }
 
-  /* Enlaces de Texto Sólido */
+  /* Enlaces de Texto Sólido Grande */
   .ws-solid-link-list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.9rem;
   }
 
   .ws-solid-link {
     color: #fbf9f9;
-    font-weight: 500;
-    font-size: 1.05rem;
+    font-weight: 600;
+    font-size: 1.18rem;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -194,17 +192,17 @@
   @media (max-width: 500px) {
     .ws-info-subcols {
       grid-template-columns: 1fr;
-      gap: 0.8rem;
+      gap: 0.9rem;
     }
   }
 
   .ws-utility-item {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     color: #fbf9f9;
-    font-weight: 500;
-    font-size: 1.05rem;
+    font-weight: 600;
+    font-size: 1.18rem;
     text-decoration: none;
     transition: color 0.15s ease;
     line-height: 1.45;
@@ -222,51 +220,51 @@
   }
 
   .ws-utility-icon svg {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     fill: currentColor;
   }
 
   /* Columna 1 Resumen de Identidad & Afiliaciones */
   .ws-brand-summary {
-    margin-top: 1.5rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
   }
 
   .ws-brand-desc {
     color: #e2e8f0;
-    font-size: 0.95rem;
-    line-height: 1.55;
-    margin: 0 0 1rem 0;
+    font-size: 1.08rem;
+    line-height: 1.6;
+    margin: 0 0 1.25rem 0;
     font-weight: 400;
   }
 
   .ws-brand-desc strong {
     color: #ffffff;
-    font-weight: 700;
+    font-weight: 800;
   }
 
   .ws-corp-affiliation-title {
-    font-size: 0.76rem;
-    font-weight: 700;
+    font-size: 0.88rem;
+    font-weight: 800;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #94a3b8;
-    margin-bottom: 0.65rem;
+    margin-bottom: 0.75rem;
   }
 
   .ws-corp-chips {
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
+    gap: 0.75rem;
   }
 
   .ws-corp-chip-btn {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 8px;
-    padding: 0.6rem 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
     color: #fbf9f9;
     display: flex;
     align-items: center;
@@ -286,41 +284,41 @@
   .ws-corp-chip-left {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.85rem;
   }
 
   .ws-corp-chip-logo {
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     object-fit: contain;
-    border-radius: 6px;
+    border-radius: 8px;
     background: #020617;
-    padding: 2px;
+    padding: 3px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     flex-shrink: 0;
   }
 
   .ws-corp-chip-logo.ws-tulbox-logo {
     background: #ffffff;
-    padding: 3px;
+    padding: 4px;
   }
 
   .ws-corp-chip-text {
     display: flex;
     flex-direction: column;
     text-align: left;
-    line-height: 1.25;
+    line-height: 1.3;
   }
 
   .ws-corp-chip-name {
-    font-size: 0.95rem;
-    font-weight: 700;
+    font-size: 1.12rem;
+    font-weight: 800;
     color: #ffffff;
   }
 
   .ws-corp-chip-desc {
-    font-size: 0.78rem;
-    font-weight: 500;
+    font-size: 0.92rem;
+    font-weight: 600;
     color: #cbd5e1;
   }
 
@@ -335,13 +333,13 @@
     transform: translateX(3px);
   }
 
-  /* Columna 3: Tarjeta Cotizador Rápido Pro (Estilo Registrate a Club Zegucom) */
+  /* Columna 3: Tarjeta Cotizador Rápido Pro */
   .ws-club-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 1.25rem;
+    gap: 1.35rem;
   }
 
   .ws-shield-logo-wrap {
@@ -351,7 +349,7 @@
   }
 
   .ws-shield-logo {
-    width: 140px;
+    width: 155px;
     height: auto;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
   }
@@ -360,11 +358,11 @@
     display: inline-block;
     background: #1976d2;
     color: #ffffff;
-    font-weight: 700;
-    font-size: 0.95rem;
+    font-weight: 800;
+    font-size: 1.1rem;
     letter-spacing: 0.04em;
-    padding: 0.65rem 2rem;
-    border-radius: 4px;
+    padding: 0.8rem 2.25rem;
+    border-radius: 6px;
     text-decoration: none;
     transition: background-color 0.2s ease, transform 0.2s ease;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
@@ -374,21 +372,22 @@
   .ws-club-btn-solid:hover {
     background: #1565c0;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.5);
+    box-shadow: 0 4px 14px rgba(25, 118, 210, 0.5);
   }
 
   .ws-club-subtext {
     color: #cbd5e1;
-    font-size: 0.9rem;
-    line-height: 1.45;
+    font-size: 1.05rem;
+    line-height: 1.5;
     margin: 0;
+    font-weight: 500;
   }
 
-  /* Columna 4: Certificaciones y Confianza (Google + Digicert + Sello Internet MX) */
+  /* Columna 4: Certificaciones y Confianza */
   .ws-trust-box {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.35rem;
   }
 
   .ws-google-rating-wrap {
@@ -405,12 +404,12 @@
   .ws-google-header-line {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.5rem;
   }
 
   .ws-google-score-num {
-    font-size: 1.35rem;
-    font-weight: 700;
+    font-size: 1.6rem;
+    font-weight: 800;
     color: #ffffff;
     line-height: 1;
   }
@@ -422,20 +421,21 @@
   }
 
   .ws-google-stars-row svg {
-    width: 17px;
-    height: 17px;
+    width: 20px;
+    height: 20px;
     fill: currentColor;
   }
 
   .ws-google-caption {
     color: #cbd5e1;
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     text-decoration: underline;
-    margin-top: 0.25rem;
+    margin-top: 0.35rem;
     display: block;
+    font-weight: 600;
   }
 
-  /* Badges de Certificación Estilo Zegucom */
+  /* Badges de Certificación */
   .ws-badges-column {
     display: flex;
     flex-direction: column;
@@ -445,42 +445,42 @@
   .ws-digicert-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     background: #ffffff;
     color: #1e293b;
-    padding: 0.45rem 0.85rem;
+    padding: 0.55rem 1rem;
     border-radius: 20px;
-    font-weight: 700;
-    font-size: 0.82rem;
+    font-weight: 800;
+    font-size: 0.95rem;
     letter-spacing: 0.02em;
     width: fit-content;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
 
   .ws-digicert-badge svg {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
   }
-
 
   .ws-extra-guarantees {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
-    margin-top: 0.25rem;
-    font-size: 0.85rem;
+    gap: 0.6rem;
+    margin-top: 0.35rem;
+    font-size: 1.02rem;
     color: #e2e8f0;
+    font-weight: 500;
   }
 
   .ws-extra-item {
     display: flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.6rem;
   }
 
   .ws-extra-item svg {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
     color: #38bdf8;
     flex-shrink: 0;
   }
@@ -490,7 +490,7 @@
      ========================================================= */
   .ws-subfooter-legal {
     border-top: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 1.5rem 0 2rem;
+    padding: 2rem 0 2.5rem;
     text-align: center;
   }
 
@@ -499,14 +499,14 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 0.35rem 0.75rem;
-    margin-bottom: 0.85rem;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1.1rem;
   }
 
   .ws-legal-pill-link {
     color: #fbf9f9;
-    font-size: 0.95rem;
-    font-weight: 500;
+    font-size: 1.15rem;
+    font-weight: 600;
     text-decoration: none;
     transition: color 0.15s ease;
   }
@@ -517,34 +517,36 @@
   }
 
   .ws-legal-separator {
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 1.15rem;
     user-select: none;
   }
 
   .ws-cookies-notice-text {
     color: #cbd5e1;
-    font-size: 0.78rem;
-    line-height: 1.5;
+    font-size: 1.08rem;
+    line-height: 1.6;
     max-width: 1100px;
-    margin: 0 auto 0.75rem;
+    margin: 0 auto 1rem;
+    font-weight: 400;
   }
 
   .ws-cookies-notice-text a {
     color: #ffffff;
     text-decoration: underline;
+    font-weight: 600;
   }
 
   .ws-copyright-text {
     color: #94a3b8;
-    font-size: 0.88rem;
-    line-height: 1.6;
+    font-size: 1.12rem;
+    line-height: 1.65;
     margin: 0;
   }
 
   .ws-copyright-text strong {
     color: #ffffff;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   /* =========================================================
@@ -926,18 +928,18 @@
       <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
         <img src="{{ 'nuo-networks-logo.png' | asset_url }}" alt="Logo Nuo Networks Inc" style="width: 76px; height: 76px; border-radius: 14px; object-fit: contain; background: #020617; padding: 4px; box-shadow: 0 8px 24px rgba(6, 182, 212, 0.25); border: 1px solid rgba(255, 255, 255, 0.15);">
       </div>
-      <h2 style="font-size: 1.65rem; font-weight: 800; margin: 0 0 0.25rem 0; color: #ffffff;">Nuo Networks, Inc.</h2>
-      <p style="color: #38bdf8; font-size: 0.95rem; font-weight: 700; text-transform: uppercase; margin: 0; letter-spacing: 0.05em;">Est. Delaware, United States &bull; C-Corporation</p>
+      <h2 style="font-size: 1.85rem; font-weight: 800; margin: 0 0 0.35rem 0; color: #ffffff;">Nuo Networks, Inc.</h2>
+      <p style="color: #38bdf8; font-size: 1.05rem; font-weight: 700; text-transform: uppercase; margin: 0; letter-spacing: 0.05em;">Est. Delaware, United States &bull; C-Corporation</p>
     </div>
     
-    <div style="font-size: 1rem; line-height: 1.65; color: #fbf9f9; margin-bottom: 1.75rem; font-weight: 400;">
+    <div style="font-size: 1.18rem; line-height: 1.7; color: #fbf9f9; margin-bottom: 1.75rem; font-weight: 400;">
       Si te encuentras en <strong>Estados Unidos</strong> y deseas adquirir equipamiento de seguridad y telecomunicaciones, operamos mediante nuestra C-Corp registrada en Delaware, brindándote facturas comerciales válidas en EE.UU. y logística local sin aduanas.
     </div>
 
     <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-      <a href="https://www.nuo-networks.com/" target="_blank" style="background: #1976d2; color: #ffffff; text-decoration: none; padding: 0.85rem 1.25rem; border-radius: 6px; font-weight: 700; flex: 1; text-align: center;">Visitar Nuo Networks</a>
-      <a href="https://wa.me/14243553283?text=Hello%20Nuo%20Networks,%20I'm%20interested%20in%20US%20B2B%20equipment%20purchases" target="_blank" style="background: #25D366; color: #ffffff; text-decoration: none; padding: 0.85rem 1.25rem; border-radius: 6px; font-weight: 700; flex: 1; text-align: center;">WhatsApp USA</a>
-      <button class="usa-modal-btn-secondary" id="closeUsaModalBtnSec" style="background: rgba(255,255,255,0.08); border: none; color: #ffffff; padding: 0.85rem 1.25rem; border-radius: 6px; cursor: pointer; font-weight: 600;">Cerrar</button>
+      <a href="https://www.nuo-networks.com/" target="_blank" style="background: #1976d2; color: #ffffff; text-decoration: none; padding: 0.9rem 1.35rem; border-radius: 6px; font-weight: 700; font-size: 1.1rem; flex: 1; text-align: center;">Visitar Nuo Networks</a>
+      <a href="https://wa.me/14243553283?text=Hello%20Nuo%20Networks,%20I'm%20interested%20in%20US%20B2B%20equipment%20purchases" target="_blank" style="background: #25D366; color: #ffffff; text-decoration: none; padding: 0.9rem 1.35rem; border-radius: 6px; font-weight: 700; font-size: 1.1rem; flex: 1; text-align: center;">WhatsApp USA</a>
+      <button class="usa-modal-btn-secondary" id="closeUsaModalBtnSec" style="background: rgba(255,255,255,0.08); border: none; color: #ffffff; padding: 0.9rem 1.35rem; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1.1rem;">Cerrar</button>
     </div>
   </div>
 </div>
@@ -949,15 +951,15 @@
       <div style="display: flex; justify-content: center; margin-bottom: 0.85rem;">
         <img src="{{ 'tulbox-logo.png' | asset_url }}" alt="Logo Tulbox Servicios Técnicos" style="width: 76px; height: 76px; border-radius: 14px; object-fit: contain; background: #ffffff; padding: 8px; box-shadow: 0 8px 24px rgba(123, 44, 191, 0.2); border: 1px solid rgba(123, 44, 191, 0.2);">
       </div>
-      <span style="background: #f3e8ff; color: #7c3aed; font-size: 0.85rem; font-weight: 800; padding: 0.35rem 0.85rem; border-radius: 20px; display: inline-block; margin-bottom: 0.5rem;">Plataforma Oficial de Instaladores</span>
-      <h3 style="font-size: 1.45rem; font-weight: 800; color: #0f172a; margin: 0.25rem 0 0.5rem 0;">Tulbox Servicios Técnicos ⚡</h3>
-      <p style="font-size: 1rem; color: #475569; line-height: 1.65; margin: 0; font-weight: 500;">
+      <span style="background: #f3e8ff; color: #7c3aed; font-size: 0.95rem; font-weight: 800; padding: 0.4rem 0.95rem; border-radius: 20px; display: inline-block; margin-bottom: 0.6rem;">Plataforma Oficial de Instaladores</span>
+      <h3 style="font-size: 1.65rem; font-weight: 800; color: #0f172a; margin: 0.25rem 0 0.5rem 0;">Tulbox Servicios Técnicos ⚡</h3>
+      <p style="font-size: 1.18rem; color: #334155; line-height: 1.7; margin: 0; font-weight: 500;">
         En <strong>Seguridad Avanzada</strong>, ejecutamos instalaciones y soporte en sitio con <strong>Tulbox Servicios Técnicos</strong> para garantizar un trabajo profesional y garantizado.
       </p>
     </div>
     <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-      <a href="https://tulbox.pro/" target="_blank" rel="noopener noreferrer" style="background: #7c3aed; color: #ffffff; text-decoration: none; padding: 0.85rem 1.25rem; border-radius: 6px; font-weight: 700; flex: 1; text-align: center;">Conoce Tulbox Pro</a>
-      <button id="closeTulboxModalBtnSec" style="background: #f1f5f9; border: none; color: #475569; padding: 0.85rem 1.25rem; border-radius: 6px; cursor: pointer; font-weight: 600;">Cerrar</button>
+      <a href="https://tulbox.pro/" target="_blank" rel="noopener noreferrer" style="background: #7c3aed; color: #ffffff; text-decoration: none; padding: 0.9rem 1.35rem; border-radius: 6px; font-weight: 700; font-size: 1.1rem; flex: 1; text-align: center;">Conoce Tulbox Pro</a>
+      <button id="closeTulboxModalBtnSec" style="background: #f1f5f9; border: none; color: #475569; padding: 0.9rem 1.35rem; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1.1rem;">Cerrar</button>
     </div>
   </div>
 </div>
