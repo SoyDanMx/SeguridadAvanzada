@@ -1258,6 +1258,54 @@
         this.updateSummary();
       },
 
+      handleSearch: function(catKey, query) {
+        this.searchFilters[catKey] = query;
+        this.renderGridOnly(catKey);
+      },
+
+      renderGridOnly: function(catKey) {
+        const gridEl = document.getElementById('pcbProductsGrid_' + catKey);
+        if (!gridEl) return;
+        const availableItems = this.getAvailableProducts(catKey);
+        if (availableItems.length === 0) {
+          gridEl.innerHTML = `
+            <div style="grid-column: 1 / -1; padding: 2.5rem 1rem; text-align: center; color: #64748b;">
+              🔍 No se encontraron piezas que coincidan con <strong>"${this.searchFilters[catKey] || ''}"</strong>. Prueba con otra característica, modelo o marca.
+            </div>
+          `;
+          return;
+        }
+
+        let html = '';
+        availableItems.forEach(item => {
+          html += `
+            <div class="pcb-product-option-card">
+              <div class="pcb-opt-top">
+                <img src="${item.img}" alt="${item.title}" class="pcb-opt-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=pcbApp.fallbackImg;">
+                <div class="pcb-opt-info">
+                  <h4 class="pcb-opt-title">${item.title}</h4>
+                  <div class="pcb-opt-tags">
+                    ${item.socket ? '<span class="pcb-opt-tag">' + item.socket + '</span>' : ''}
+                    ${item.ramType ? '<span class="pcb-opt-tag">' + item.ramType + '</span>' : ''}
+                    ${item.capacity ? '<span class="pcb-opt-tag">' + item.capacity + '</span>' : ''}
+                    ${item.watts ? '<span class="pcb-opt-tag">' + item.watts + '</span>' : ''}
+                    ${item.hz ? '<span class="pcb-opt-tag">' + item.hz + '</span>' : ''}
+                    ${item.coolerType ? '<span class="pcb-opt-tag">' + item.coolerType + '</span>' : ''}
+                  </div>
+                </div>
+              </div>
+              <div class="pcb-opt-bottom">
+                <span class="pcb-opt-price">$${item.price.toLocaleString('es-MX')}</span>
+                <button type="button" class="pcb-opt-select-btn" onclick='pcbApp.selectItem("${catKey}", ${JSON.stringify(item)})'>
+                  + Seleccionar
+                </button>
+              </div>
+            </div>
+          `;
+        });
+        gridEl.innerHTML = html;
+      },
+
       getAvailableProducts: function(catKey) {
         let items = CATALOG[catKey] || [];
         const selectedCpu = this.selected['cpu'];
@@ -1273,10 +1321,27 @@
           items = items.filter(r => r.ramType === selectedMobo.ramType);
         }
 
-        // Búsqueda de texto
+        // Búsqueda inteligente por todas las características y especificaciones técnicas
         const query = (this.searchFilters[catKey] || '').toLowerCase().trim();
         if (query) {
-          items = items.filter(x => x.title.toLowerCase().includes(query) || (x.vendor || '').toLowerCase().includes(query));
+          const terms = query.split(/\s+/).filter(Boolean);
+          items = items.filter(x => {
+            const haystack = [
+              x.title || '',
+              x.vendor || '',
+              x.sku || '',
+              x.socket || '',
+              x.ramType || '',
+              x.capacity || '',
+              x.watts || '',
+              x.coolerType || '',
+              x.hz || '',
+              x.brand || '',
+              x.isGamer ? 'gamer gaming rgb' : ''
+            ].join(' ').toLowerCase();
+
+            return terms.every(t => haystack.includes(t));
+          });
         }
 
         return items;
@@ -1373,12 +1438,12 @@
                 ` : ''}
 
                 <div class="pcb-picker-controls">
-                  <input type="text" class="pcb-search-input" placeholder="Buscar ${step.name.toLowerCase()}..." 
+                  <input type="text" class="pcb-search-input" id="pcbSearch_${step.key}" placeholder="Buscar por modelo, marca o características (ej. 24, 144Hz, DDR5, NVMe, 750W)..." 
                     value="${this.searchFilters[step.key] || ''}" 
-                    oninput="pcbApp.searchFilters['${step.key}'] = this.value; pcbApp.renderAccordion();">
+                    oninput="pcbApp.handleSearch('${step.key}', this.value)">
                 </div>
 
-                <div class="pcb-products-grid">
+                <div class="pcb-products-grid" id="pcbProductsGrid_${step.key}">
             `;
 
             if (availableItems.length === 0) {
