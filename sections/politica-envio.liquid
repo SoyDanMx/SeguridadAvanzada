@@ -1,0 +1,357 @@
+{% comment %}
+  POLÍTICA OFICIAL DE ENTREGA Y ENVÍOS - SEGURIDAD AVANZADA
+  Documento normativo de cobertura nacional e internacional, tiempos de procesamiento,
+  operadores logísticos, seguro de mercancía y protocolos de recepción.
+{% endcomment %}
+
+<style>
+  .legal-page-wrapper {
+    max-width: 920px;
+    margin: 3.5rem auto;
+    padding: 0 1.5rem;
+    font-family: 'Roboto', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.7;
+  }
+
+  .legal-breadcrumb {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .legal-breadcrumb a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .legal-breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .legal-section {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2.75rem 2.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04), 0 10px 15px -3px rgba(0,0,0,0.03);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 2.5rem;
+  }
+
+  .legal-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .legal-main-title {
+    font-size: 2.5rem;
+    color: #0f172a;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .legal-subtitle {
+    font-size: 1.05rem;
+    color: #64748b;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .legal-heading-section {
+    font-size: 1.45rem;
+    color: #0f172a;
+    font-weight: 700;
+    margin-top: 2.25rem;
+    margin-bottom: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    line-height: 1.3;
+  }
+
+  .legal-heading-num {
+    background: #2563eb;
+    color: #ffffff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .legal-text-p {
+    font-size: 1.02rem;
+    color: #334155;
+    margin-bottom: 1.15rem;
+  }
+
+  .legal-text-bullet {
+    font-size: 1rem;
+    color: #334155;
+    margin-left: 1.5rem;
+    margin-bottom: 0.65rem;
+    display: list-item;
+    list-style-type: disc;
+    line-height: 1.6;
+  }
+
+  .legal-highlight-box {
+    background-color: #f8fafc;
+    border-left: 4px solid #2563eb;
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+    font-size: 0.98rem;
+    color: #1e293b;
+    line-height: 1.6;
+  }
+
+  .legal-highlight-box strong {
+    color: #0f172a;
+  }
+
+  .legal-grid-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  @media (min-width: 640px) {
+    .legal-grid-cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .legal-feature-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+
+  .legal-feature-card h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .legal-feature-card p {
+    font-size: 0.92rem;
+    color: #475569;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .legal-contact-footer {
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .legal-contact-footer {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .legal-btn-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #2563eb;
+    color: #ffffff;
+    padding: 0.75rem 1.35rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: background 0.2s ease;
+  }
+
+  .legal-btn-action:hover {
+    background: #1d4ed8;
+  }
+
+  .legal-btn-action.btn-wa {
+    background: #22c55e;
+  }
+
+  .legal-btn-action.btn-wa:hover {
+    background: #16a34a;
+  }
+</style>
+
+<div class="legal-page-wrapper">
+
+  <div class="legal-breadcrumb">
+    <a href="/">Inicio</a> &rsaquo; <span>Políticas de Entrega y Envíos</span>
+  </div>
+
+  <div class="legal-section">
+    
+    <div class="legal-badge-pill">
+      📦 Términos y Logística Oficial
+    </div>
+
+    <h1 class="legal-main-title">Políticas de Entrega y Envíos</h1>
+    <div class="legal-subtitle">
+      Vigente a partir de 2024 &bull; Última actualización: Septiembre 2026 &bull; <strong>Seguridad Avanzada</strong>
+    </div>
+
+    <p class="legal-text-p">
+      En <strong>Seguridad Avanzada</strong> (operada en territorio nacional por <strong>Nuo Integraciones y Servicios</strong> y a nivel corporativo transfronterizo por <strong>Nuo Networks, Inc.</strong> Delaware US C-Corp), estamos comprometidos con garantizar que su equipamiento tecnológico, sistemas de videovigilancia CCTV, control de acceso, redes y energía lleguen a su destino con total integridad, rapidez y trazabilidad en todo México y Estados Unidos.
+    </p>
+
+    <!-- 1. Cobertura -->
+    <h2 class="legal-heading-section">
+      <span class="legal-heading-num">1</span> Cobertura Geográfica de Envíos
+    </h2>
+    <p class="legal-text-p">
+      Realizamos envíos a toda la República Mexicana cubriendo los 32 estados y sus municipios mediante alianzas con las principales empresas de mensajería y carga del país.
+    </p>
+    <div class="legal-text-bullet"><strong>Envíos Nacionales (México):</strong> Cobertura integral en zonas metropolitanas, ciudades intermedias y poblaciones con cobertura regular de paquetería.</div>
+    <div class="legal-text-bullet"><strong>Zonas Extendidas:</strong> En poblados o zonas rurales con frecuencia de entrega programada, el tiempo de tránsito puede extenderse según el calendario de la transportadora.</div>
+    <div class="legal-text-bullet"><strong>Operaciones en Estados Unidos (B2B):</strong> Para proyectos empresariales e integración en EE.UU., operamos mediante Nuo Networks, Inc. con logística y facturación local estadounidense sin trámites aduanales para el cliente final.</div>
+
+    <!-- 2. Tiempos de Procesamiento -->
+    <h2 class="legal-heading-section">
+      <span class="legal-heading-num">2</span> Tiempos de Procesamiento y Preparación
+    </h2>
+    <p class="legal-text-p">
+      Todos los pedidos pasan por un estricto control de calidad, verificación de números de serie (MAC Address/Serial Number para garantías) y embalaje de seguridad:
+    </p>
+    <div class="legal-highlight-box">
+      <strong>⏰ Horario de corte para envíos:</strong><br>
+      Los pedidos con pago acreditado antes de las <strong>14:00 horas (Tiempo del Centro de México / CDMX)</strong> de lunes a viernes se procesan y empaquetan el mismo día hábil. Pagos validados después de este horario o durante fines de semana y días festivos se programan para el siguiente día hábil inmediato.
+    </div>
+
+    <!-- 3. Modalidades y Tiempos de Entrega -->
+    <h2 class="legal-heading-section">
+      <span class="legal-heading-num">3</span> Tiempos Estimados de Tránsito
+    </h2>
+    <p class="legal-text-p">Los plazos de entrega comienzan a contar a partir de la emisión del número de guía oficial:</p>
+
+    <div class="legal-grid-cards">
+      <div class="legal-feature-card">
+        <h4>🚚 Envío Estándar Terrestre</h4>
+        <p><strong>2 a 5 días hábiles</strong> en zonas metropolitanas (CDMX, Guadalajara, Monterrey, Puebla, Querétaro, Mérida, etc.).</p>
+      </div>
+      <div class="legal-feature-card">
+        <h4>⚡ Envío Exprés Prioritario</h4>
+        <p><strong>24 a 48 horas hábiles</strong> en ciudades principales (sujeto a disponibilidad de peso, dimensiones y código postal).</p>
+      </div>
+      <div class="legal-feature-card">
+        <h4>📦 Carga Consolidada y Tarimas</h4>
+        <p><strong>3 a 7 días hábiles</strong> para pedidos de alto volumen (racks, bobinas de cable, gabinetes o postes) vía transportes especializados.</p>
+      </div>
+      <div class="legal-feature-card">
+        <h4>🏢 Recolección en CEDIS (Pick-Up)</h4>
+        <p><strong>Mismo día o 24 hrs</strong> previa cita y confirmación de preparación en nuestro centro de distribución de Av. Clavería 237, Azcapotzalco, CDMX.</p>
+      </div>
+    </div>
+
+    <!-- 4. Empresas de Paquetería Aliadas -->
+    <h2 class="legal-heading-section">
+      <span class="legal-heading-num">4</span> Operadores Logísticos y Rastreo
+    </h2>
+    <p class="legal-text-p">
+      Trabajamos con los operadores logísticos de mayor prestigio y fiabilidad en México:
+    </p>
+    <div class="legal-text-bullet"><strong>FedEx Express</strong> y <strong>DHL Express</strong> para paquetes de alta prioridad y paquetería express.</div>
+    <div class="legal-text-bullet"><strong>Estafeta</strong> y <strong>Paquetexpress</strong> para cobertura nacional estándar y zonas intermedias.</div>
+    <div class="legal-text-bullet"><strong>Castores</strong> y <strong>Tres Guerras</strong> para equipo pesado, cableado y carga consolidada LTL.</div>
+    <p class="legal-text-p" style="margin-top: 1rem;">
+      Una vez recolectado el paquete, el cliente recibirá por correo electrónico el <strong>número de guía y enlace directo de rastreo</strong> para consultar la ubicación de su pedido en tiempo real.
+    </p>
+
+    <!-- 5. Costos de Envío -->
+    <h2 class="legal-heading-section">
+      <span class="legal-heading-num">5</span> Tarifas y Promociones de Envío
+    </h2>
+    <p class="legal-text-p">
+      El costo de envío se calcula de forma transparente al momento de tramitar el pedido en línea considerando el peso real, el peso volumétrico y el código postal de entrega.
+    </p>
+    <div class="legal-text-bullet">En promociones aplicables de <strong>Envío Gratis</strong> (señaladas expresamente en la tienda en línea para ciertos montos o categorías), el costo de flete terrestre corre por cuenta de Seguridad Avanzada.</div>
+    <div class="legal-text-bullet">Las tarifas para reexpedición o cambio de domicilio una vez que la mercancía está en tránsito corren por cuenta del comprador según la tarifa del transportista.</div>
+
+    <!-- 6. Seguro de Carga y Protocolo de Recepción -->
+    <h2 class="legal-heading-section">
+      <span class="legal-heading-num">6</span> Seguro de Transporte y Protocolo de Recepción
+    </h2>
+    <p class="legal-text-p">
+      Todos los envíos despachados por Seguridad Avanzada viajan <strong>asegurados contra robo, siniestro o extravío</strong> durante su trayecto. Para validar cualquier reclamación ante la aseguradora de la transportadora, es indispensable cumplir el siguiente protocolo:
+    </p>
+    
+    <div class="legal-highlight-box">
+      <strong>⚠️ PROTOCOLO OBLIGATORIO AL RECIBIR EL PAQUETE:</strong><br>
+      1. <strong>Inspección exterior visual:</strong> Antes de firmar de recibido al repartidor, revise que la caja no presente roturas, cintas desprendidas, perforaciones o humedad.<br>
+      2. <strong>Si la caja está dañada o abierta:</strong> Anote de puño y letra en la hoja o terminal del repartidor: <em>"Paquete recibido con caja golpeada / cinta alterada"</em>, o rechace el paquete.<br>
+      3. <strong>Registro fotográfico:</strong> Tome fotografías claras del empaque antes de abrirlo y conserve todos los envoltorios originales.<br>
+      4. <strong>Plazo de reporte:</strong> Cualquier faltante o daño físico atribuible al transporte debe ser notificado por escrito dentro de las <strong>primeras 48 horas naturales</strong> de haberlo recibido a <a href="mailto:proyectos@seguridad-avanzada.com">proyectos@seguridad-avanzada.com</a> o al WhatsApp <a href="https://wa.me/525636741156">+52 56 3674 1156</a>.
+    </div>
+
+    <!-- 7. Intentos de Entrega y Ocurre -->
+    <h2 class="legal-heading-section">
+      <span class="legal-heading-num">7</span> Intentos de Entrega y Devoluciones a Origen
+    </h2>
+    <p class="legal-text-p">
+      Las paqueterías realizan de 2 a 3 intentos de visita en el domicilio señalado. En caso de no localizar a nadie facultado para recibir, el paquete se traslada a la sucursal ocurre más cercana de la paquetería por un lapso de 3 a 5 días hábiles antes de retornar a nuestro almacén central. Los costos de reenvío por falta de recolección en sucursal corren a cargo del cliente.
+    </p>
+
+    <!-- Pie de Contacto -->
+    <div class="legal-contact-footer">
+      <div>
+        <strong style="color: #0f172a; display: block; font-size: 1.1rem; margin-bottom: 0.25rem;">¿Dudas sobre el estatus de tu envío?</strong>
+        <span style="color: #64748b; font-size: 0.95rem;">Contáctanos con tu número de pedido o cotización para seguimiento inmediato.</span>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <a href="https://wa.me/525636741156?text=Hola,%20deseo%20rastrear%20mi%20pedido%20de%20Seguridad%20Avanzada" target="_blank" class="legal-btn-action btn-wa">
+          <span>💬 WhatsApp Soporte</span>
+        </a>
+        <a href="/pages/contacto" class="legal-btn-action">
+          <span>✉️ Contactar Ventas</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Política de Envíos",
+  "settings": []
+}
+{% endschema %}

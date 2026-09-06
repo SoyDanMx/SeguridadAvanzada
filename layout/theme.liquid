@@ -35,6 +35,8 @@
     <title>
       {%- if request.path == '/pages/marcas' or request.path == '/marcas' -%}
         Directorio Oficial de Marcas y Fabricantes Autorizados &ndash; {{ shop.name }}
+      {%- elsif request.path contains 'envio' or request.path contains 'entrega' -%}
+        Políticas de Entrega y Envíos &ndash; {{ shop.name }}
       {%- else -%}
         {{ page_title | strip_newlines | strip }}
         {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -404,12 +406,17 @@
           {% section 'page-marcas-directorio' %}
         </div>
       {%- endif -%}
+      {%- if template.name == '404' or request.path contains 'envio' or request.path contains 'entrega' -%}
+        <div id="envios-dynamic-container" style="display: none;">
+          {% section 'politica-envio' %}
+        </div>
+      {%- endif -%}
       <div id="standard-layout-content">
         {{ content_for_layout }}
       </div>
     </main>
 
-    {%- if template.name == '404' or request.path contains 'marcas' -%}
+    {%- if template.name == '404' or request.path contains 'marcas' or request.path contains 'envio' or request.path contains 'entrega' -%}
     <script>
       (function() {
         try {
@@ -425,6 +432,15 @@
               m.style.display = 'block';
               s.style.display = 'none';
               document.title = 'Directorio Oficial de Marcas y Fabricantes Autorizados – {{ shop.name }}';
+            }
+          }
+          if (p === '/pages/politica-de-entrega-y-envio' || p === '/pages/politicas-de-envio' || p === '/pages/politica-de-envio' || p === '/politicas-de-envio' || p === '/envios') {
+            var e = document.getElementById('envios-dynamic-container');
+            var s = document.getElementById('standard-layout-content');
+            if (e && s) {
+              e.style.display = 'block';
+              s.style.display = 'none';
+              document.title = 'Políticas de Entrega y Envíos – {{ shop.name }}';
             }
           }
         } catch (e) {

@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "politica-envio",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
