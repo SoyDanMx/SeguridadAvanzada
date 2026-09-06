@@ -454,6 +454,10 @@
         try {
           var p = window.location.pathname.toLowerCase().replace(/\/+$/, '');
           // Redirecciones inteligentes de categorías populares y colecciones
+          if (p === '/collections/gamers' || p === '/collections/gamer' || p === '/gamers' || p === '/gaming') {
+            window.location.replace('/collections/gaming');
+            return;
+          }
           if (p === '/collections/cctv' || p === '/collections/camara' || p === '/collections/camaras' || p === '/collections/vigilancia' || p === '/cctv' || p === '/vigilancia') {
             window.location.replace('/collections/videovigilancia');
             return;
