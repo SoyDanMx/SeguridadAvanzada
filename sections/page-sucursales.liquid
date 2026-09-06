@@ -272,6 +272,198 @@
   .ws-branches-cta-sec:hover {
     background: rgba(255, 255, 255, 0.18);
   }
+
+  /* Tarjeta Corporativo México */
+  .ws-hq-card {
+    background: linear-gradient(135deg, #0b1528 0%, #13253e 100%);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 16px;
+    padding: 2rem 2.25rem;
+    color: #ffffff;
+    margin-bottom: 2.25rem;
+    box-shadow: 0 10px 25px -5px rgba(11, 21, 40, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ws-hq-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .ws-hq-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .ws-hq-badge {
+    background: rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.5);
+    color: #93c5fd;
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .ws-hq-status-tag {
+    background: #10b981;
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    letter-spacing: 0.03em;
+  }
+
+  .ws-hq-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 860px) {
+    .ws-hq-body {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .ws-hq-name {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.015em;
+  }
+
+  .ws-hq-address-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #f1f5f9;
+    font-size: 1.05rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .ws-hq-pin {
+    width: 22px;
+    height: 22px;
+    fill: #38bdf8;
+    flex-shrink: 0;
+  }
+
+  .ws-hq-capabilities {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .ws-hq-cap-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 0.95rem;
+    color: #e2e8f0;
+    line-height: 1.5;
+  }
+
+  .ws-hq-cap-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .ws-hq-cap-item strong {
+    color: #ffffff;
+  }
+
+  .ws-hq-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+
+  .ws-hq-contact-pill {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #f8fafc;
+    padding: 0.5rem 0.85rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    transition: all 0.2s ease;
+  }
+
+  .ws-hq-contact-pill:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: #38bdf8;
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  .ws-hq-contact-pill svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  .ws-hq-contact-pill.ws-hq-pill-green {
+    background: rgba(34, 197, 94, 0.15);
+    border-color: rgba(34, 197, 94, 0.4);
+    color: #4ade80;
+  }
+
+  .ws-hq-contact-pill.ws-hq-pill-green:hover {
+    background: #22c55e;
+    color: #ffffff;
+  }
+
+  .ws-hq-side-action {
+    flex-shrink: 0;
+  }
+
+  .ws-hq-main-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #2563eb;
+    color: #ffffff;
+    padding: 0.9rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 0.98rem;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    transition: all 0.2s ease;
+    text-align: center;
+  }
+
+  .ws-hq-main-btn:hover {
+    background: #1d4ed8;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+    transform: translateY(-2px);
+  }
 </style>
 
 <div class="ws-branches-wrapper">
@@ -284,6 +476,66 @@
     <div>
       <h1 class="ws-branches-title">Sucursales y Bodegas</h1>
       <div class="ws-branches-subtitle">Red Nacional de Centros de Distribución con Recolección Personal (Pick-Up)</div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       OFICINA CORPORATIVA MÉXICO - PAGOS EN SITIO Y RECOLECCIÓN
+       ========================================================= -->
+  <div class="ws-hq-card">
+    <div class="ws-hq-header">
+      <div class="ws-hq-badge">🏢 OFICINA CORPORATIVA MÉXICO &bull; SEDE CENTRAL</div>
+      <span class="ws-hq-status-tag">Pagos y Recolección en Sitio</span>
+    </div>
+
+    <div class="ws-hq-body">
+      <div class="ws-hq-details">
+        <h2 class="ws-hq-name">Corporativo México</h2>
+        <div class="ws-hq-address-row">
+          <svg class="ws-hq-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          <span class="ws-hq-address-text">
+            <strong>Av. Clavería 237</strong>, Claveria, Azcapotzalco, 02080 Ciudad de México, CDMX
+          </span>
+        </div>
+
+        <div class="ws-hq-capabilities">
+          <div class="ws-hq-cap-item">
+            <span class="ws-hq-cap-icon">💳</span>
+            <span><strong>Caja de Pagos en Sitio:</strong> Aceptamos pagos en efectivo, tarjetas de débito/crédito y transferencias bancarias directas.</span>
+          </div>
+          <div class="ws-hq-cap-item">
+            <span class="ws-hq-cap-icon">📦</span>
+            <span><strong>Recolección Inmediata (Pick-Up):</strong> Retiro directo de mercancía en mostrador con tu folio de pedido o cotización.</span>
+          </div>
+          <div class="ws-hq-cap-item">
+            <span class="ws-hq-cap-icon">🛡️</span>
+            <span><strong>Atención e Ingeniería:</strong> Asesoría especializada en proyectos de seguridad, videovigilancia, redes y energía.</span>
+          </div>
+        </div>
+
+        <!-- Contactos Directos -->
+        <div class="ws-hq-contacts">
+          <a href="tel:5567283971" class="ws-hq-contact-pill">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            <span>Oficina: <strong>55 6728 3971</strong></span>
+          </a>
+          <a href="https://wa.me/525636741156?text=Deseo%20informacion%20de%20sistemas%20de%20seguridad" target="_blank" rel="noopener noreferrer" class="ws-hq-contact-pill ws-hq-pill-green">
+            <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.07-1.745-.392-1.393-.579-2.27-1.996-2.339-2.088-.069-.093-.56-0.745-.56-1.42 0-.675.352-1.008.477-1.144.125-.136.272-.17.363-.17.091 0 .182 0 .261.006.085.006.198-.033.31.236.114.272.39 0.952.424 1.022.034.07.057.151.011.241-.046.09-.068.147-.136.226-.068.079-.143.176-.205.237-.068.068-.139.141-.06.277.079.136.35 0.578.75 0.934.516.459.95.602 1.086.67.136.068.215.057.295-.034.079-.09.34-.396.43-.532.09-.136.182-.113.307-.068.125.045.795.375.932.443.136.068.227.102.261.159.034.057.034.329-.11.734z"/></svg>
+            <span>WhatsApp MX: <strong>56 3674 1156</strong></span>
+          </a>
+          <a href="mailto:proyectos@seguridad-avanzada.com" class="ws-hq-contact-pill">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <span>proyectos@seguridad-avanzada.com</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="ws-hq-side-action">
+        <a href="https://wa.me/525636741156?text=Hola,%20deseo%20visitar%20el%20Corporativo%20de%20Claver%C3%ADa%20para%20pagar%20y%20recolectar" target="_blank" rel="noopener noreferrer" class="ws-hq-main-btn">
+          <span>Agendar Pago y Recolección</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 

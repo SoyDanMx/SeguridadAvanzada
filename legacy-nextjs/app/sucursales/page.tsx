@@ -59,6 +59,69 @@ export default function SucursalesPage() {
         </div>
       </div>
 
+      {/* Tarjeta Corporativo México (Pagos en Sitio y Recolección) */}
+      <div className="bg-slate-900 border border-blue-500/40 rounded-2xl p-6 sm:p-8 text-white mb-8 shadow-xl relative overflow-hidden">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <span className="bg-blue-500/20 border border-blue-400/40 text-blue-200 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+            🏢 OFICINA CORPORATIVA MÉXICO • SEDE CENTRAL
+          </span>
+          <span className="bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+            Pagos y Recolección en Sitio
+          </span>
+        </div>
+
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+          <div className="space-y-4">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">Corporativo México</h2>
+            <div className="flex items-center gap-2 text-slate-200 text-base">
+              <svg className="w-5 h-5 text-sky-400 flex-shrink-0 fill-current" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+              </svg>
+              <span><strong>Av. Clavería 237</strong>, Claveria, Azcapotzalco, 02080 Ciudad de México, CDMX</span>
+            </div>
+
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4 space-y-2 text-sm text-slate-300">
+              <div className="flex items-start gap-2">
+                <span>💳</span>
+                <span><strong>Caja de Pagos en Sitio:</strong> Aceptamos efectivo, tarjetas de débito/crédito y transferencias directas SPEI.</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <span>📦</span>
+                <span><strong>Recolección Inmediata (Pick-Up):</strong> Entrega en mostrador de mercancía con folio de pedido o cotización.</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <span>🛡️</span>
+                <span><strong>Atención e Ingeniería:</strong> Asesoría especializada en proyectos de seguridad, videovigilancia, redes y energía.</span>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-2 pt-1">
+              <a href="tel:5567283971" className="bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-semibold px-3 py-2 rounded-lg transition-colors inline-flex items-center gap-1.5">
+                📞 Oficina: <strong>55 6728 3971</strong>
+              </a>
+              <a href="https://wa.me/525636741156?text=Deseo%20informacion%20de%20sistemas%20de%20seguridad" target="_blank" rel="noopener noreferrer" className="bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 text-xs font-semibold px-3 py-2 rounded-lg transition-colors inline-flex items-center gap-1.5">
+                💬 WhatsApp MX: <strong>56 3674 1156</strong>
+              </a>
+              <a href="mailto:proyectos@seguridad-avanzada.com" className="bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-semibold px-3 py-2 rounded-lg transition-colors inline-flex items-center gap-1.5">
+                ✉️ proyectos@seguridad-avanzada.com
+              </a>
+            </div>
+          </div>
+
+          <div className="flex-shrink-0">
+            <a
+              href="https://wa.me/525636741156?text=Hola,%20deseo%20visitar%20el%20Corporativo%20de%20Claver%C3%ADa%20para%20pagar%20y%20recolectar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-6 py-3.5 rounded-xl shadow-lg transition-all inline-flex items-center gap-2"
+            >
+              <span>Agendar Pago y Recolección</span>
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
       {/* Tarjeta de Recolección Personal */}
       <div className="bg-emerald-50/80 border border-emerald-200 rounded-xl p-5 mb-8 flex items-start gap-4 shadow-sm">
         <div className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center flex-shrink-0 mt-0.5">
