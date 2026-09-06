@@ -1,0 +1,123 @@
+[
+  {
+    "id": "sillas-gaming-balam-rush-power-rush-v2",
+    "title": "Sillas Gaming Balam Rush POWER RUSH V2",
+    "vendor": "Balam Rush",
+    "price": 1774,
+    "img": "https://static.ctonline.mx/imagenes/GABBLR430/GABBLR430_full.jpg",
+    "sku": "BR-944489",
+    "category": "Silla Gamer",
+    "inStock": true,
+    "variantId": 52774726172804
+  },
+  {
+    "id": "silla-gaming-naceb-gaming-na-0928",
+    "title": "Silla Gaming Naceb Gaming NA-0928",
+    "vendor": "Naceb Gaming",
+    "price": 3384,
+    "img": "https://static.ctonline.mx/imagenes/ACCNCB810/ACCNCB810_full.jpg",
+    "sku": "NA-0928",
+    "category": "Silla Gamer",
+    "inStock": true,
+    "variantId": 52774726303876
+  },
+  {
+    "id": "silla-gaming-necnon-nsg-rgb-1-luces-rgb",
+    "title": "Silla Gaming NECNON NSG-RGB-1 Luces RGB",
+    "vendor": "NECNON",
+    "price": 2632,
+    "img": "https://static.ctonline.mx/imagenes/SILNEC040/SILNEC040_full.jpg",
+    "sku": "NBSGR122RG",
+    "category": "Silla Gamer",
+    "inStock": true,
+    "variantId": 52774726336644
+  },
+  {
+    "id": "silla-balam-rush-br-934534-nova-series",
+    "title": "Silla Balam Rush BR-934534 Nova Series",
+    "vendor": "Balam Rush",
+    "price": 1774,
+    "img": "https://static.ctonline.mx/imagenes/SILBLR160/SILBLR160_full.jpg",
+    "sku": "BR-934534",
+    "category": "Silla Gamer",
+    "inStock": true,
+    "variantId": 52774726369412
+  },
+  {
+    "id": "silla-gaming-naceb-technology-na-2772",
+    "title": "Silla Gaming Naceb Technology NA-2772",
+    "vendor": "Naceb Technology",
+    "price": 2237,
+    "img": "https://static.ctonline.mx/imagenes/SILNCB040/SILNCB040_full.jpg",
+    "sku": "NA-2772",
+    "category": "Silla Gamer",
+    "inStock": false,
+    "variantId": 52774726402180
+  },
+  {
+    "id": "silla-de-oficina-ergonomica-acteck-flux-core-ec303",
+    "title": "Silla de Oficina Ergonómica ACTECK FLUX CORE EC303",
+    "vendor": "ACTECK",
+    "price": 1360,
+    "img": "https://static.ctonline.mx/imagenes/SILACT200/SILACT200_full.jpg",
+    "sku": "AC-944175",
+    "category": "Silla Ejecutiva",
+    "inStock": true,
+    "variantId": 52774726467716
+  },
+  {
+    "id": "silla-ejecutiva-ergonomica-naceb-negro-na-0930n",
+    "title": "Silla Ejecutiva Ergonómica Naceb Negro NA-0930N",
+    "vendor": "Naceb Technology",
+    "price": 3218,
+    "img": "https://static.ctonline.mx/imagenes/SILNCB020/SILNCB020_full.jpg",
+    "sku": "NA-0930N",
+    "category": "Silla Ejecutiva",
+    "inStock": true,
+    "variantId": 52774726500484
+  },
+  {
+    "id": "silla-ejecutiva-ergonomica-naceb-cafe-na-0930c",
+    "title": "Silla Ejecutiva Ergonómica Naceb Café NA-0930C",
+    "vendor": "Naceb Technology",
+    "price": 3218,
+    "img": "https://static.ctonline.mx/imagenes/SILNCB030/SILNCB030_full.jpg",
+    "sku": "NA-0930C",
+    "category": "Silla Ejecutiva",
+    "inStock": true,
+    "variantId": 52774727188612
+  },
+  {
+    "id": "escritorio-ergonomico-doble-acteck-ed727",
+    "title": "Escritorio Ergonómico Doble ACTECK ED727",
+    "vendor": "ACTECK",
+    "price": 4971,
+    "img": "https://static.ctonline.mx/imagenes/ESCACT040/ESCACT040_full.jpg",
+    "sku": "AC-937276",
+    "category": "Escritorio",
+    "inStock": true,
+    "variantId": 52774727221380
+  },
+  {
+    "id": "escritorio-gaming-balam-rush-mrx4000",
+    "title": "Escritorio Gaming Balam Rush MRX4000",
+    "vendor": "Balam Rush",
+    "price": 1700,
+    "img": "https://static.ctonline.mx/imagenes/ESCBLR030/ESCBLR030_full.jpg",
+    "sku": "BR-941426",
+    "category": "Escritorio",
+    "inStock": true,
+    "variantId": 52774727254148
+  },
+  {
+    "id": "escritorio-gaming-pro-balam-rush-mrx8000",
+    "title": "Escritorio Gaming Pro Balam Rush MRX8000",
+    "vendor": "Balam Rush",
+    "price": 3179,
+    "img": "https://static.ctonline.mx/imagenes/ESCBLR040/ESCBLR040_full.jpg",
+    "sku": "BR-941372",
+    "category": "Escritorio",
+    "inStock": false,
+    "variantId": 52774727286916
+  }
+]

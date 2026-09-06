@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-// 1. Read existing liquid to extract catalog data safely
+// 1. Read existing liquid to extract base catalog data
 const existingContent = fs.readFileSync('sections/page-configurador-pc.liquid', 'utf8');
 const catalogMatch = existingContent.match(/<script id="pcb-catalog-data" type="application\/json">([\s\S]*?)<\/script>/);
 
@@ -9,14 +9,60 @@ if (!catalogMatch) {
   process.exit(1);
 }
 
-const catalogJson = catalogMatch[1].trim();
+const catalog = JSON.parse(catalogMatch[1].trim());
+
+// 2. Load created furniture & peripherals
+const createdFurniture = JSON.parse(fs.readFileSync('scratch/shopify_created_furniture.json', 'utf8'));
+const createdPeripherals = JSON.parse(fs.readFileSync('scratch/shopify_created_peripherals.json', 'utf8'));
+
+catalog.furniture = createdFurniture.map(item => ({
+  id: item.id,
+  title: item.title,
+  vendor: item.vendor,
+  price: item.price,
+  img: item.img,
+  sku: item.sku,
+  socket: '',
+  brand: item.vendor,
+  ramType: '',
+  capacity: '',
+  watts: '',
+  coolerType: '',
+  hz: '',
+  category: item.category,
+  isGamer: item.category.toLowerCase().includes('gamer'),
+  variantId: String(item.variantId),
+  inStock: item.inStock !== false
+}));
+
+catalog.peripherals = createdPeripherals.map(item => ({
+  id: item.id,
+  title: item.title,
+  vendor: item.vendor,
+  price: item.price,
+  img: item.img,
+  sku: item.sku,
+  socket: '',
+  brand: item.vendor,
+  ramType: '',
+  capacity: '',
+  watts: '',
+  coolerType: '',
+  hz: '',
+  category: item.category,
+  isGamer: item.category.toLowerCase().includes('gamer'),
+  variantId: String(item.variantId),
+  inStock: item.inStock !== false
+}));
+
+const catalogJson = JSON.stringify(catalog);
 
 const newLiquidContent = `{% comment %}
   CONFIGURADOR DE PC EMPRESARIAL Y GAMER - SEGURIDAD AVANZADA
   Diseño y UX/UI de vanguardia (World-Class PC Builder Experience)
   Tipografía moderna (Outfit & Plus Jakarta Sans), micro-interacciones,
-  progreso dinámico del ensamble, watímetro de consumo, modal de plantillas
-  y cotización en 1 clic.
+  progreso dinámico del ensamble, watímetro de consumo, modal de plantillas,
+  periféricos (Teclado y Mouse) y mobiliario (Sillas y Escritorios).
 {% endcomment %}
 
 <style>
@@ -88,7 +134,6 @@ const newLiquidContent = `{% comment %}
     border: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  /* Textura de malla cibernética sutil */
   .pcb-hero::before {
     content: '';
     position: absolute;
@@ -177,7 +222,6 @@ const newLiquidContent = `{% comment %}
     z-index: 2;
   }
 
-  /* 3 Tarjetas de Beneficios & Confianza en el Hero */
   .pcb-hero-features-bar {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -232,7 +276,6 @@ const newLiquidContent = `{% comment %}
     line-height: 1.35;
   }
 
-  /* Disparador de Plantillas y Accesos Rápidos */
   .pcb-hero-presets {
     display: flex;
     align-items: center;
@@ -511,6 +554,8 @@ const newLiquidContent = `{% comment %}
   .pcb-icon-gpu { background: linear-gradient(135deg, #10b981 0%, #047857 100%); }
   .pcb-icon-cooler { background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%); }
   .pcb-icon-monitor { background: linear-gradient(135deg, #ec4899 0%, #be185d 100%); }
+  .pcb-icon-peripherals { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); }
+  .pcb-icon-furniture { background: linear-gradient(135deg, #8b5cf6 0%, #4f46e5 100%); }
 
   .pcb-step-title-wrap {
     display: flex;
@@ -823,11 +868,40 @@ const newLiquidContent = `{% comment %}
     color: #0f172a;
   }
 
+  /* SUB-FILTROS POR TIPO DE PRODUCTO (SILLAS, ESCRITORIOS, TECLADOS, MOUSES) */
+  .pcb-subcat-pills {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .pcb-subcat-pill {
+    background: #ffffff;
+    border: 1.5px solid var(--pcb-border);
+    color: #475569;
+    padding: 0.45rem 1rem;
+    border-radius: 9999px;
+    font-family: var(--pcb-font-display);
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .pcb-subcat-pill:hover, .pcb-subcat-pill.active {
+    background: #1d4ed8;
+    color: #ffffff;
+    border-color: #1d4ed8;
+    box-shadow: 0 4px 12px rgba(29, 78, 216, 0.25);
+  }
+
   /* CONTROLES DE FILTRADO Y BÚSQUEDA */
   .pcb-picker-controls {
     display: flex;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     flex-wrap: wrap;
     align-items: center;
   }
@@ -937,8 +1011,8 @@ const newLiquidContent = `{% comment %}
   }
 
   .pcb-opt-img-wrap {
-    width: 72px;
-    height: 72px;
+    width: 76px;
+    height: 76px;
     border-radius: 10px;
     background: #f8fafc;
     border: 1px solid #e2e8f0;
@@ -2213,7 +2287,9 @@ ${catalogJson}
       { key: 'psu', name: 'Fuente de Poder (PSU)', icon: '🔋', iconClass: 'pcb-icon-psu', placeholder: 'Paso 6 • Seleccionar fuente de poder' },
       { key: 'gpu', name: 'Tarjeta de Video (GPU)', icon: '🎮', iconClass: 'pcb-icon-gpu', placeholder: 'Opcional • Seleccionar tarjeta gráfica' },
       { key: 'cooler', name: 'Enfriamiento y Disipador', icon: '❄️', iconClass: 'pcb-icon-cooler', placeholder: 'Opcional • Seleccionar disipador de calor' },
-      { key: 'monitor', name: 'Monitor y Pantalla', icon: '🖥️', iconClass: 'pcb-icon-monitor', placeholder: 'Opcional • Seleccionar monitor o pantalla' }
+      { key: 'monitor', name: 'Monitor y Pantalla', icon: '🖥️', iconClass: 'pcb-icon-monitor', placeholder: 'Opcional • Seleccionar monitor o pantalla' },
+      { key: 'peripherals', name: 'Teclado y Mouse (Periféricos)', icon: '⌨️', iconClass: 'pcb-icon-peripherals', placeholder: 'Opcional • Seleccionar kit de teclado y mouse' },
+      { key: 'furniture', name: 'Sillas, Escritorios & Ergonomía', icon: '💺', iconClass: 'pcb-icon-furniture', placeholder: 'Opcional • Seleccionar silla gamer, ejecutiva o escritorio' }
     ];
 
     const ESSENTIAL_KEYS = ['cpu', 'mobo', 'ram', 'ssd', 'case', 'psu'];
@@ -2225,6 +2301,7 @@ ${catalogJson}
       activeStep: 'cpu',
       editingStep: null,
       searchFilters: {},
+      subFilters: {},
       onlyInStockFilter: {},
       fallbackImg: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='4' width='16' height='16' rx='2'/%3E%3Cpath d='M9 9h6v6H9z'/%3E%3Cpath d='M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3'/%3E%3C/svg%3E",
 
@@ -2252,6 +2329,22 @@ ${catalogJson}
             btnAll.classList.add('active');
             btnStock.classList.remove('active');
           }
+        }
+      },
+
+      setSubFilter: function(catKey, filterVal) {
+        this.subFilters[catKey] = filterVal;
+        this.renderGridOnly(catKey);
+        const container = document.getElementById('pcbSubFilterWrap_' + catKey);
+        if (container) {
+          const pills = container.querySelectorAll('.pcb-subcat-pill');
+          pills.forEach(p => {
+            if (p.getAttribute('data-filter') === filterVal) {
+              p.classList.add('active');
+            } else {
+              p.classList.remove('active');
+            }
+          });
         }
       },
 
@@ -2314,6 +2407,8 @@ ${catalogJson}
           this.activeStep = 'case';
         } else if (catKey === 'case') {
           this.activeStep = 'psu';
+        } else if (catKey === 'psu') {
+          this.activeStep = 'gpu';
         }
 
         this.renderAccordion();
@@ -2370,12 +2465,14 @@ ${catalogJson}
                   </div>
                   <h4 class="pcb-opt-title">\${item.title}</h4>
                   <div class="pcb-opt-tags">
+                    \${item.category ? '<span class="pcb-opt-tag" style="background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe;">' + item.category + '</span>' : ''}
                     \${item.socket ? '<span class="pcb-opt-tag">' + item.socket + '</span>' : ''}
                     \${item.ramType ? '<span class="pcb-opt-tag">' + item.ramType + '</span>' : ''}
                     \${item.capacity ? '<span class="pcb-opt-tag">' + item.capacity + '</span>' : ''}
                     \${item.watts ? '<span class="pcb-opt-tag">' + item.watts + '</span>' : ''}
                     \${item.hz ? '<span class="pcb-opt-tag">' + item.hz + '</span>' : ''}
                     \${item.coolerType ? '<span class="pcb-opt-tag">' + item.coolerType + '</span>' : ''}
+                    \${item.vendor ? '<span class="pcb-opt-tag">' + item.vendor + '</span>' : ''}
                   </div>
                 </div>
               </div>
@@ -2422,6 +2519,16 @@ ${catalogJson}
           items = items.filter(x => x.inStock !== false);
         }
 
+        // Filtro por subcategoría si aplica
+        const sub = (this.subFilters[catKey] || '').toLowerCase();
+        if (sub) {
+          items = items.filter(x => {
+            const cat = (x.category || '').toLowerCase();
+            const tit = (x.title || '').toLowerCase();
+            return cat.includes(sub) || tit.includes(sub);
+          });
+        }
+
         const query = (this.searchFilters[catKey] || '').toLowerCase().trim();
         if (query) {
           const terms = query.split(/\\s+/).filter(Boolean);
@@ -2437,6 +2544,7 @@ ${catalogJson}
               x.coolerType || '',
               x.hz || '',
               x.brand || '',
+              x.category || '',
               x.isGamer ? 'gamer gaming rgb' : ''
             ].join(' ').toLowerCase();
 
@@ -2498,6 +2606,7 @@ ${catalogJson}
                       <span class="pcb-opt-stock-badge \${selectedItem.inStock !== false ? 'in-stock' : 'on-order'}">
                         \${selectedItem.inStock !== false ? '🟢 Entrega Inmediata (24-48h)' : '🟡 Sobre Pedido (3 a 5 días)'}
                       </span>
+                      \${selectedItem.category ? '<span class="pcb-opt-tag" style="background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe; margin-left: 0.35rem;">' + selectedItem.category + '</span>' : ''}
                     </div>
                     <div class="pcb-selected-meta">
                       <span>Marca: <strong>\${selectedItem.vendor}</strong></span>
@@ -2508,7 +2617,7 @@ ${catalogJson}
                   </div>
                 </div>
                 <div class="pcb-selected-card-right">
-                  <div class="pcb-qty-picker-row" title="Modificar cantidad de piezas de este componente">
+                  <div class="pcb-qty-picker-row" title="Modificar cantidad de piezas">
                     <span class="pcb-qty-label">Cantidad:</span>
                     <div class="pcb-component-stepper">
                       <button type="button" class="pcb-comp-step-btn" onclick="pcbApp.setItemQty('\${step.key}', -1)" title="Disminuir cantidad">−</button>
@@ -2542,10 +2651,28 @@ ${catalogJson}
                   </div>
                 \` : ''}
 
+                \${step.key === 'peripherals' ? \`
+                  <div class="pcb-subcat-pills" id="pcbSubFilterWrap_peripherals">
+                    <button type="button" class="pcb-subcat-pill \${!this.subFilters['peripherals'] ? 'active' : ''}" data-filter="" onclick="pcbApp.setSubFilter('peripherals', '')">🔘 Todos los Periféricos (12)</button>
+                    <button type="button" class="pcb-subcat-pill \${this.subFilters['peripherals'] === 'kit' ? 'active' : ''}" data-filter="kit" onclick="pcbApp.setSubFilter('peripherals', 'kit')">📦 Kits Teclado + Mouse</button>
+                    <button type="button" class="pcb-subcat-pill \${this.subFilters['peripherals'] === 'teclado' ? 'active' : ''}" data-filter="teclado" onclick="pcbApp.setSubFilter('peripherals', 'teclado')">⌨️ Teclados Individuales</button>
+                    <button type="button" class="pcb-subcat-pill \${this.subFilters['peripherals'] === 'mouse' ? 'active' : ''}" data-filter="mouse" onclick="pcbApp.setSubFilter('peripherals', 'mouse')">🖱️ Mouses Ópticos & Ergonómicos</button>
+                  </div>
+                \` : ''}
+
+                \${step.key === 'furniture' ? \`
+                  <div class="pcb-subcat-pills" id="pcbSubFilterWrap_furniture">
+                    <button type="button" class="pcb-subcat-pill \${!this.subFilters['furniture'] ? 'active' : ''}" data-filter="" onclick="pcbApp.setSubFilter('furniture', '')">🔘 Todo el Mobiliario (11)</button>
+                    <button type="button" class="pcb-subcat-pill \${this.subFilters['furniture'] === 'silla gamer' ? 'active' : ''}" data-filter="silla gamer" onclick="pcbApp.setSubFilter('furniture', 'silla gamer')">🎮 Sillas Gamer Ergonómicas</button>
+                    <button type="button" class="pcb-subcat-pill \${this.subFilters['furniture'] === 'silla ejecutiva' ? 'active' : ''}" data-filter="silla ejecutiva" onclick="pcbApp.setSubFilter('furniture', 'silla ejecutiva')">💼 Sillas Ejecutivas de Oficina</button>
+                    <button type="button" class="pcb-subcat-pill \${this.subFilters['furniture'] === 'escritorio' ? 'active' : ''}" data-filter="escritorio" onclick="pcbApp.setSubFilter('furniture', 'escritorio')">🖥️ Escritorios Gaming & Pro</button>
+                  </div>
+                \` : ''}
+
                 <div class="pcb-picker-controls">
                   <div class="pcb-search-wrap">
                     <span class="pcb-search-icon">🔍</span>
-                    <input type="text" class="pcb-search-input" id="pcbSearch_\${step.key}" placeholder="Buscar por modelo, marca o características (ej. Core i5, DDR5, NVMe, 750W)..." 
+                    <input type="text" class="pcb-search-input" id="pcbSearch_\${step.key}" placeholder="Buscar por modelo, marca o características..." 
                       value="\${this.searchFilters[step.key] || ''}" 
                       oninput="pcbApp.handleSearch('\${step.key}', this.value)">
                   </div>
@@ -2585,12 +2712,14 @@ ${catalogJson}
                         </div>
                         <h4 class="pcb-opt-title">\${item.title}</h4>
                         <div class="pcb-opt-tags">
+                          \${item.category ? '<span class="pcb-opt-tag" style="background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe;">' + item.category + '</span>' : ''}
                           \${item.socket ? '<span class="pcb-opt-tag">' + item.socket + '</span>' : ''}
                           \${item.ramType ? '<span class="pcb-opt-tag">' + item.ramType + '</span>' : ''}
                           \${item.capacity ? '<span class="pcb-opt-tag">' + item.capacity + '</span>' : ''}
                           \${item.watts ? '<span class="pcb-opt-tag">' + item.watts + '</span>' : ''}
                           \${item.hz ? '<span class="pcb-opt-tag">' + item.hz + '</span>' : ''}
                           \${item.coolerType ? '<span class="pcb-opt-tag">' + item.coolerType + '</span>' : ''}
+                          \${item.vendor ? '<span class="pcb-opt-tag">' + item.vendor + '</span>' : ''}
                         </div>
                       </div>
                     </div>
@@ -2805,7 +2934,8 @@ ${catalogJson}
             'Tarjeta Madre ASUS PRIME B550M-K (Socket AM4)',
             'Memoria RAM 16GB ADATA Premier DDR4',
             'SSD ADATA SU630 480GB Ultrarrápido',
-            'Gabinete compacto ACTECK GI240 con Fuente 500W incluida'
+            'Gabinete compacto ACTECK GI240 con Fuente 500W incluida',
+            'Kit de Teclado y Mouse Inalámbrico ACTECK MK470 incluido'
           ],
           components: {
             cpu: 'amd-ryzen-5-5600ge-cpuamd3020',
@@ -2813,7 +2943,8 @@ ${catalogJson}
             ram: 'adata-ad4s320016g22-sgn-memdat5890',
             ssd: 'adata-asu630ss-480gq-r-ddudat1300',
             case: 'acteck-gi240-a-gc240-gabact140',
-            psu: 'acteck-ft500ew-gabact520'
+            psu: 'acteck-ft500ew-gabact520',
+            peripherals: 'kit-teclado-y-mouse-inalambrico-acteck-mk470'
           }
         },
         {
@@ -2831,7 +2962,8 @@ ${catalogJson}
             'Memoria RAM 16GB Kingston FURY Beast DDR4',
             'SSD ADATA LEGEND 860 1TB M.2 NVMe (Escritura continua)',
             'Tarjeta de Video MSI GeForce GT 1030 2GB (Doble monitor HDMI)',
-            'Gabinete con flujo de aire ACTECK GC470 + Fuente 600W'
+            'Gabinete con flujo de aire ACTECK GC470 + Fuente 600W',
+            'Kit Teclado y Mouse Alámbrico ACER EAK030 incluido'
           ],
           components: {
             cpu: 'procesador-intel-core-i3-12100-lga1700',
@@ -2840,7 +2972,8 @@ ${catalogJson}
             ssd: 'adata-legend-860-ddudat2190',
             gpu: 'tarjeta-de-video-msi-geforce-gt-1030-2gb',
             case: 'acteck-gc470-gabact330',
-            psu: 'acteck-ft600ew-gabact510'
+            psu: 'acteck-ft600ew-gabact510',
+            peripherals: 'kit-teclado-y-mouse-alambrico-acer-eak030'
           }
         },
         {
@@ -2858,7 +2991,8 @@ ${catalogJson}
             'Memoria RAM 16GB ADATA Hunter DDR4',
             'SSD ADATA LEGEND 860 1TB M.2 NVMe',
             'Gabinete silencioso ACTECK GM450 + Fuente 600W',
-            'Monitor ACTECK SP270 27" Full HD incluido'
+            'Monitor ACTECK SP270 27" Full HD incluido',
+            'Kit Inalámbrico Silencioso ACTECK CREATOR MK440 incluido'
           ],
           components: {
             cpu: 'procesador-intel-core-i5-12400f-lga1700',
@@ -2867,7 +3001,8 @@ ${catalogJson}
             ssd: 'adata-legend-860-ddudat2190',
             case: 'acteck-gm450-gabact260',
             psu: 'acteck-es-05004e-gabact360',
-            monitor: 'acteck-sp270-monact030'
+            monitor: 'acteck-sp270-monact030',
+            peripherals: 'kit-inalambrico-silencioso-acteck-creator-mk440'
           }
         },
         {
@@ -2886,7 +3021,8 @@ ${catalogJson}
             'SSD ADATA LEGEND 900 1TB Gen4 NVMe (Hasta 7000 MB/s)',
             'GPU GIGABYTE RTX 5060 EAGLE OC 8GB',
             'Disipador Balam Rush EX50',
-            'Gabinete ACTECK KIOTO GC460 RGB Cristal Templado + Fuente 650W'
+            'Gabinete ACTECK KIOTO GC460 RGB Cristal Templado + Fuente 650W',
+            'Teclado Gamer Alámbrico LED ACTECK TA477G incluido'
           ],
           components: {
             cpu: 'amd-7600x-cpuamd2420',
@@ -2896,7 +3032,8 @@ ${catalogJson}
             gpu: 'gigabyte-gv-n506teagle-oc-8gd-tvigig3510',
             cooler: 'balam-rush-ex50-venblr130',
             case: 'acteck-kioto-gc460-rgb-essential-gabact170',
-            psu: 'balam-rush-gr650b-gabblr500'
+            psu: 'balam-rush-gr650b-gabblr500',
+            peripherals: 'teclado-gamer-alambrico-led-acteck-ta477g'
           }
         },
         {
@@ -2915,7 +3052,8 @@ ${catalogJson}
             'SSD ADATA LEGEND 900 2TB Gen4 (7400 MB/s)',
             'GPU ASUS PRIME RX 9070 XT 16GB GDDR6',
             'Disipador Balam Rush EX70K',
-            'Gabinete ACTECK ONEX GS455 + Fuente Balam Rush 750W 80+ Gold'
+            'Gabinete ACTECK ONEX GS455 + Fuente Balam Rush 750W 80+ Gold',
+            'Silla Ejecutiva Ergonómica Naceb Negro incluida'
           ],
           components: {
             cpu: 'procesador-intel-core-i7-14700k-lga1700',
@@ -2926,7 +3064,8 @@ ${catalogJson}
             gpu: 'tarjeta-de-video-asus-prime-rx-9070-xt-16gb',
             cooler: 'balam-rush-ex70k-venblr190',
             case: 'acteck-onex-gs455-gabact610',
-            psu: 'balam-rush-gr750g-gabblr480'
+            psu: 'balam-rush-gr750g-gabblr480',
+            furniture: 'silla-ejecutiva-ergonomica-naceb-negro-na-0930n'
           }
         },
         {
@@ -2945,7 +3084,8 @@ ${catalogJson}
             'SSD ADATA LEGEND 900 2TB NVMe Gen4',
             'GPU ASUS PRIME RX 9070 XT 16GB (o RTX 5060 Ti)',
             'Disipador Balam Rush EX90KW',
-            'Gabinete Gamer ACTECK GM767 + Fuente Balam Rush 850W Gold'
+            'Gabinete Gamer ACTECK GM767 + Fuente Balam Rush 850W Gold',
+            'Silla Gaming Balam Rush POWER RUSH V2 incluida'
           ],
           components: {
             cpu: 'procesador-intel-core-i9-14900k-lga1700',
@@ -2956,7 +3096,8 @@ ${catalogJson}
             gpu: 'tarjeta-de-video-asus-prime-rx-9070-xt-16gb',
             cooler: 'balam-rush-ex90kw-venblr240',
             case: 'acteck-gm767-gabact600',
-            psu: 'balam-rush-gr850g-gabblr470'
+            psu: 'balam-rush-gr850g-gabblr470',
+            furniture: 'sillas-gaming-balam-rush-power-rush-v2'
           }
         }
       ],
@@ -3256,4 +3397,4 @@ ${catalogJson}
 `;
 
 fs.writeFileSync('sections/page-configurador-pc.liquid', newLiquidContent, 'utf8');
-console.log('Successfully updated sections/page-configurador-pc.liquid with enhanced UI/UX!');
+console.log('Successfully updated sections/page-configurador-pc.liquid with furniture and peripherals!');

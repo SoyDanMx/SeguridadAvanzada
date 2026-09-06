@@ -1,0 +1,134 @@
+[
+  {
+    "id": "kit-teclado-y-mouse-inalambrico-acteck-mk470",
+    "title": "Kit Teclado y Mouse Inalámbrico ACTECK MK470",
+    "vendor": "ACTECK",
+    "price": 555,
+    "img": "https://static.ctonline.mx/imagenes/KITACT1100/KITACT1100_full.jpg",
+    "sku": "AC-935197",
+    "category": "Kit Inalámbrico",
+    "inStock": true,
+    "variantId": 52774727319684
+  },
+  {
+    "id": "kit-inalambrico-silencioso-acteck-creator-mk440",
+    "title": "Kit Inalámbrico Silencioso ACTECK CREATOR MK440",
+    "vendor": "ACTECK",
+    "price": 236,
+    "img": "https://static.ctonline.mx/imagenes/KITACT1050/KITACT1050_full.jpg",
+    "sku": "AC-931755",
+    "category": "Kit Inalámbrico",
+    "inStock": true,
+    "variantId": 52774727385220
+  },
+  {
+    "id": "kit-teclado-y-mouse-acer-ekw111-inalambrico",
+    "title": "Kit Teclado y Mouse ACER EKW111 Inalámbrico",
+    "vendor": "ACER",
+    "price": 383,
+    "img": "https://static.ctonline.mx/imagenes/KITACC020/KITACC020_full.jpg",
+    "sku": "EKW111",
+    "category": "Kit Inalámbrico",
+    "inStock": true,
+    "variantId": 52774727417988
+  },
+  {
+    "id": "kit-teclado-y-mouse-alambrico-acer-eak030",
+    "title": "Kit Teclado y Mouse Alámbrico ACER EAK030",
+    "vendor": "ACER",
+    "price": 263,
+    "img": "https://static.ctonline.mx/imagenes/KITACC010/KITACC010_full.jpg",
+    "sku": "EAK030",
+    "category": "Kit Alámbrico",
+    "inStock": true,
+    "variantId": 52774727450756
+  },
+  {
+    "id": "kit-teclado-y-mouse-estandar-acteck-ac-928984",
+    "title": "Kit Teclado y Mouse Estándar ACTECK AC-928984",
+    "vendor": "ACTECK",
+    "price": 170,
+    "img": "https://static.ctonline.mx/imagenes/KITACT630/KITACT630_full.jpg",
+    "sku": "AC-928984",
+    "category": "Kit Alámbrico",
+    "inStock": true,
+    "variantId": 52774727483524
+  },
+  {
+    "id": "teclado-gamer-alambrico-led-acteck-ta477g",
+    "title": "Teclado Gamer Alámbrico LED ACTECK TA477G",
+    "vendor": "ACTECK",
+    "price": 237,
+    "img": "https://static.ctonline.mx/imagenes/TECACT180/TECACT180_full.jpg",
+    "sku": "AC-936743",
+    "category": "Teclado Gamer",
+    "inStock": true,
+    "variantId": 52774727516292
+  },
+  {
+    "id": "teclado-clasico-alambrico-usb-acteck-te-200",
+    "title": "Teclado Clásico Alámbrico USB ACTECK TE-200",
+    "vendor": "ACTECK",
+    "price": 102,
+    "img": "https://static.ctonline.mx/imagenes/TECACT010/TECACT010_full.jpg",
+    "sku": "AC-928946",
+    "category": "Teclado Oficina",
+    "inStock": true,
+    "variantId": 52774727614596
+  },
+  {
+    "id": "teclado-inalambrico-compacto-acteck-ac-913973",
+    "title": "Teclado Inalámbrico Compacto ACTECK AC-913973",
+    "vendor": "ACTECK",
+    "price": 147,
+    "img": "https://static.ctonline.mx/imagenes/TECACT080/TECACT080_full.jpg",
+    "sku": "AC-913973",
+    "category": "Teclado Oficina",
+    "inStock": false,
+    "variantId": 52774727647364
+  },
+  {
+    "id": "mouse-optico-inalambrico-acer-emw211",
+    "title": "Mouse Óptico Inalámbrico ACER EMW211",
+    "vendor": "ACER",
+    "price": 263,
+    "img": "https://static.ctonline.mx/imagenes/MOUACC010/MOUACC010_full.jpg",
+    "sku": "EMW211",
+    "category": "Mouse Inalámbrico",
+    "inStock": true,
+    "variantId": 52774727680132
+  },
+  {
+    "id": "mouse-ergonomico-inalambrico-acer-emr213-bk",
+    "title": "Mouse Ergonómico Inalámbrico ACER EMR213-BK",
+    "vendor": "ACER",
+    "price": 354,
+    "img": "https://static.ctonline.mx/imagenes/MOUACC020/MOUACC020_full.jpg",
+    "sku": "EMR213",
+    "category": "Mouse Ergonómico",
+    "inStock": true,
+    "variantId": 52774727712900
+  },
+  {
+    "id": "mouse-optico-usb-acteck-mi240",
+    "title": "Mouse Óptico USB ACTECK MI240",
+    "vendor": "ACTECK",
+    "price": 88,
+    "img": "https://static.ctonline.mx/imagenes/MOUACT280/MOUACT280_full.jpg",
+    "sku": "AC-928885",
+    "category": "Mouse Oficina",
+    "inStock": true,
+    "variantId": 52774727745668
+  },
+  {
+    "id": "mouse-optico-alambrico-acteck-entry",
+    "title": "Mouse Óptico Alámbrico ACTECK ENTRY",
+    "vendor": "ACTECK",
+    "price": 49,
+    "img": "https://static.ctonline.mx/imagenes/MOUACT030/MOUACT030_full.jpg",
+    "sku": "AC-928830",
+    "category": "Mouse Oficina",
+    "inStock": true,
+    "variantId": 52774727778436
+  }
+]
