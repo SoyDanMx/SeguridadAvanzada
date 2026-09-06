@@ -2716,19 +2716,23 @@ ${catalogJson}
                           \${item.socket ? '<span class="pcb-opt-tag">' + item.socket + '</span>' : ''}
                           \${item.ramType ? '<span class="pcb-opt-tag">' + item.ramType + '</span>' : ''}
                           \${item.capacity ? '<span class="pcb-opt-tag">' + item.capacity + '</span>' : ''}
-                          \${item.watts ? '<span class="pcb-opt-tag">' + item.watts + '</span>' : ''}
-                          \${item.hz ? '<span class="pcb-opt-tag">' + item.hz + '</span>' : ''}
-                          \${item.coolerType ? '<span class="pcb-opt-tag">' + item.coolerType + '</span>' : ''}
-                          \${item.vendor ? '<span class="pcb-opt-tag">' + item.vendor + '</span>' : ''}
+                          ${item.category ? '<span class="pcb-opt-tag" style="background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe;">' + item.category + '</span>' : ''}
+                          ${item.socket ? '<span class="pcb-opt-tag">' + item.socket + '</span>' : ''}
+                          ${item.ramType ? '<span class="pcb-opt-tag">' + item.ramType + '</span>' : ''}
+                          ${item.capacity ? '<span class="pcb-opt-tag">' + item.capacity + '</span>' : ''}
+                          ${item.watts ? '<span class="pcb-opt-tag">' + item.watts + '</span>' : ''}
+                          ${item.hz ? '<span class="pcb-opt-tag">' + item.hz + '</span>' : ''}
+                          ${item.coolerType ? '<span class="pcb-opt-tag">' + item.coolerType + '</span>' : ''}
+                          ${item.vendor ? '<span class="pcb-opt-tag">' + item.vendor + '</span>' : ''}
                         </div>
                       </div>
                     </div>
                     <div class="pcb-opt-bottom">
                       <div class="pcb-opt-price-wrap">
-                        <span class="pcb-opt-price">$\${item.price.toLocaleString('es-MX')}</span>
+                        <span class="pcb-opt-price">$${item.price.toLocaleString('es-MX')}</span>
                         <span class="pcb-opt-vat">IVA incluido</span>
                       </div>
-                      <button type="button" class="pcb-opt-select-btn" onclick='pcbApp.selectItem("\${catKey}", \${JSON.stringify(item)})'>
+                      <button type="button" class="pcb-opt-select-btn" onclick='pcbApp.selectItem("${step.key}", ${JSON.stringify(item)})'>
                         + Seleccionar
                       </button>
                     </div>
