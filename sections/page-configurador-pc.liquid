@@ -1005,6 +1005,7 @@
       systemQty: 1,
       activeStep: 'cpu',
       searchFilters: {},
+      fallbackImg: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='4' width='16' height='16' rx='2'/%3E%3Cpath d='M9 9h6v6H9z'/%3E%3Cpath d='M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3'/%3E%3C/svg%3E",
 
       init: function() {
         this.renderAccordion();
@@ -1138,7 +1139,7 @@
             html += `
               <div class="pcb-selected-card">
                 <div class="pcb-selected-card-left">
-                  <img src="${selectedItem.img}" alt="${selectedItem.title}" class="pcb-selected-img" loading="lazy">
+                  <img src="${selectedItem.img}" alt="${selectedItem.title}" class="pcb-selected-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=pcbApp.fallbackImg;">
                   <div>
                     <h4 class="pcb-selected-title">${selectedItem.title}</h4>
                     <div class="pcb-selected-meta">
@@ -1182,7 +1183,7 @@
                 html += `
                   <div class="pcb-product-option-card">
                     <div class="pcb-opt-top">
-                      <img src="${item.img}" alt="${item.title}" class="pcb-opt-img" loading="lazy">
+                      <img src="${item.img}" alt="${item.title}" class="pcb-opt-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=pcbApp.fallbackImg;">
                       <div class="pcb-opt-info">
                         <h4 class="pcb-opt-title">${item.title}</h4>
                         <div class="pcb-opt-tags">
@@ -1251,7 +1252,7 @@
 
           summaryHtml += `
             <div class="pcb-summary-item">
-              <img src="${item.img}" alt="${item.title}" class="pcb-summary-item-img">
+              <img src="${item.img}" alt="${item.title}" class="pcb-summary-item-img" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=pcbApp.fallbackImg;">
               <div class="pcb-summary-item-info">
                 <div class="pcb-summary-item-name" title="${item.title}">${item.title}</div>
                 <div class="pcb-summary-item-meta">${item.qty} pza &bull; ${item.vendor}</div>
