@@ -403,35 +403,42 @@
     {% sections 'header-group' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
-      {%- if request.path contains 'marcas' -%}
+      {%- if template.name == '404' or request.path contains 'marcas' -%}
         <div id="marcas-dynamic-container" style="display: none;">
           {% section 'page-marcas-directorio' %}
         </div>
-      {%- elsif request.path contains 'envio' or request.path contains 'entrega' -%}
+      {%- endif -%}
+      {%- if template.name == '404' or request.path contains 'envio' or request.path contains 'entrega' -%}
         <div id="envios-dynamic-container" style="display: none;">
           {% section 'politica-envio' %}
         </div>
-      {%- elsif request.path contains 'sucursal' or request.path contains 'bodega' -%}
+      {%- endif -%}
+      {%- if template.name == '404' or request.path contains 'sucursal' or request.path contains 'bodega' -%}
         <div id="sucursales-dynamic-container" style="display: none;">
           {% section 'page-sucursales' %}
         </div>
-      {%- elsif request.path contains 'bolsa' or request.path contains 'trabajo' or request.path contains 'vacantes' -%}
+      {%- endif -%}
+      {%- if template.name == '404' or request.path contains 'bolsa' or request.path contains 'trabajo' or request.path contains 'vacantes' -%}
         <div id="bolsa-dynamic-container" style="display: none;">
           {% section 'page-bolsa-trabajo' %}
         </div>
-      {%- elsif request.path contains 'factura' or request.path contains 'cfdi' -%}
+      {%- endif -%}
+      {%- if template.name == '404' or request.path contains 'factura' or request.path contains 'cfdi' -%}
         <div id="facturacion-dynamic-container" style="display: none;">
           {% section 'page-facturacion' %}
         </div>
-      {%- elsif request.path contains 'pago' or request.path contains 'formas-de-pago' -%}
+      {%- endif -%}
+      {%- if template.name == '404' or request.path contains 'pago' or request.path contains 'formas-de-pago' -%}
         <div id="pagos-dynamic-container" style="display: none;">
           {% section 'page-formas-pago' %}
         </div>
-      {%- elsif request.path contains 'distribuidor' or request.path contains 'mayorista' -%}
+      {%- endif -%}
+      {%- if template.name == '404' or request.path contains 'distribuidor' or request.path contains 'mayorista' -%}
         <div id="distribuidores-dynamic-container" style="display: none;">
           {% section 'page-distribuidores' %}
         </div>
-      {%- elsif request.path contains 'preguntas' or request.path contains 'faq' -%}
+      {%- endif -%}
+      {%- if template.name == '404' or request.path contains 'preguntas' or request.path contains 'faq' -%}
         <div id="faq-dynamic-container" style="display: none;">
           {% section 'page-faq' %}
         </div>
@@ -441,7 +448,7 @@
       </div>
     </main>
 
-    {%- if request.path contains 'marcas' or request.path contains 'envio' or request.path contains 'entrega' or request.path contains 'sucursal' or request.path contains 'bodega' or request.path contains 'bolsa' or request.path contains 'trabajo' or request.path contains 'factura' or request.path contains 'pago' or request.path contains 'distribuidor' or request.path contains 'preguntas' or request.path contains 'faq' -%}
+    {%- if template.name == '404' or request.path contains 'marcas' or request.path contains 'envio' or request.path contains 'entrega' or request.path contains 'sucursal' or request.path contains 'bodega' or request.path contains 'bolsa' or request.path contains 'trabajo' or request.path contains 'factura' or request.path contains 'pago' or request.path contains 'distribuidor' or request.path contains 'preguntas' or request.path contains 'faq' -%}
     <script>
       (function() {
         try {
