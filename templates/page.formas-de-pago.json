@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-formas-pago",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

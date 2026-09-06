@@ -1,0 +1,367 @@
+{% comment %}
+  PÁGINA ¿QUIERES SER DISTRIBUIDOR? - SEGURIDAD AVANZADA
+  Programa oficial de distribuidores mayoristas, integradores y canal de seguridad electrónica.
+{% endcomment %}
+
+<style>
+  .ws-dist-wrapper {
+    max-width: 980px;
+    margin: 3.5rem auto 5rem;
+    padding: 0 1.5rem;
+    font-family: 'Roboto', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.75;
+  }
+
+  .ws-dist-breadcrumb {
+    font-size: 1.05rem;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .ws-dist-breadcrumb a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .ws-dist-breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .ws-dist-hero {
+    background: linear-gradient(135deg, #0b1528 0%, #1e3a8a 100%);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    color: #ffffff;
+    margin-bottom: 2.75rem;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.25);
+  }
+
+  .ws-dist-badge {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.2);
+    border: 1px solid rgba(56, 189, 248, 0.45);
+    color: #7dd3fc;
+    font-size: 0.95rem;
+    font-weight: 800;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .ws-dist-title {
+    font-size: 2.85rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .ws-dist-subtitle {
+    font-size: 1.25rem;
+    color: #cbd5e1;
+    margin: 0;
+    max-width: 780px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .ws-dist-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 2.75rem 2.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04), 0 10px 15px -3px rgba(0,0,0,0.03);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 2.5rem;
+  }
+
+  .ws-dist-heading {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 1.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .ws-dist-text {
+    font-size: 1.22rem;
+    color: #334155;
+    margin-bottom: 1.5rem;
+    line-height: 1.75;
+  }
+
+  /* Beneficios del Distribuidor */
+  .ws-perks-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+
+  @media (min-width: 640px) {
+    .ws-perks-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .ws-perk-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.6rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .ws-perk-icon {
+    font-size: 1.75rem;
+    flex-shrink: 0;
+  }
+
+  .ws-perk-title {
+    font-size: 1.22rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.35rem 0;
+  }
+
+  .ws-perk-desc {
+    font-size: 1.1rem;
+    color: #475569;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* Requisitos para ser Distribuidor */
+  .ws-req-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .ws-req-item {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.18rem;
+    color: #166534;
+  }
+
+  .ws-req-item strong {
+    color: #14532d;
+  }
+
+  .ws-req-check {
+    width: 28px;
+    height: 28px;
+    background: #22c55e;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  /* Pie de Asistencia */
+  .ws-contact-box {
+    background: #070e1c;
+    border-radius: 16px;
+    padding: 2.75rem 2.25rem;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .ws-contact-box {
+      flex-direction: row;
+      text-align: left;
+      justify-content: space-between;
+    }
+  }
+
+  .ws-contact-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+    color: #ffffff;
+  }
+
+  .ws-contact-desc {
+    font-size: 1.18rem;
+    color: #cbd5e1;
+    margin: 0;
+    max-width: 580px;
+    line-height: 1.6;
+  }
+
+  .ws-contact-btns {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .ws-btn-wa {
+    background: #22c55e;
+    color: #ffffff;
+    padding: 0.85rem 1.45rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.15rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s ease;
+  }
+
+  .ws-btn-wa:hover {
+    background: #16a34a;
+  }
+
+  .ws-btn-sec {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 0.85rem 1.35rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.15rem;
+    transition: background 0.2s ease;
+  }
+
+  .ws-btn-sec:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+</style>
+
+<div class="ws-dist-wrapper">
+  
+  <div class="ws-dist-breadcrumb">
+    <a href="/">Inicio</a> &rsaquo; <span>¿Quieres ser distribuidor?</span>
+  </div>
+
+  <div class="ws-dist-hero">
+    <span class="ws-dist-badge">🤝 Programa de Canales e Integradores B2B</span>
+    <h1 class="ws-dist-title">¿Quieres ser Distribuidor de Seguridad Avanzada?</h1>
+    <p class="ws-dist-subtitle">
+      Accede a las mejores condiciones comerciales, inventario garantizado en 25 bodegas nacionales y respaldo directo de las marcas más importantes de seguridad electrónica del mundo.
+    </p>
+  </div>
+
+  <div class="ws-dist-card">
+    <h2 class="ws-dist-heading">Ventajas Exclusivas para Integradores y Mayoristas</h2>
+    <p class="ws-dist-text">
+      En <strong>Seguridad Avanzada</strong> y <strong>Nuo Networks</strong> impulsamos el crecimiento de instaladores, empresas de tecnología y contratistas de seguridad con herramientas diseñadas para maximizar tus márgenes y cerrar proyectos:
+    </p>
+
+    <div class="ws-perks-grid">
+      <div class="ws-perk-box">
+        <span class="ws-perk-icon">🏷️</span>
+        <div>
+          <h3 class="ws-perk-title">Precios Mayoristas Preferenciales</h3>
+          <p class="ws-perk-desc">Descuentos escalonados por volumen sobre precio de lista para que ganes más en cada proyecto.</p>
+        </div>
+      </div>
+
+      <div class="ws-perk-box">
+        <span class="ws-perk-icon">⚡</span>
+        <div>
+          <h3 class="ws-perk-title">Cotizador Rápido Pro B2B</h3>
+          <p class="ws-perk-desc">Genera cotizaciones PDF membretadas con tu logotipo y precios al instante en nuestra plataforma.</p>
+        </div>
+      </div>
+
+      <div class="ws-perk-box">
+        <span class="ws-perk-icon">🏬</span>
+        <div>
+          <h3 class="ws-perk-title">Recolección en 25 Bodegas</h3>
+          <p class="ws-perk-desc">Retira material el mismo día en cualquiera de nuestros 25 centros de distribución en México.</p>
+        </div>
+      </div>
+
+      <div class="ws-perk-box">
+        <span class="ws-perk-icon">🛠️</span>
+        <div>
+          <h3 class="ws-perk-title">Soporte Técnico Especializado</h3>
+          <p class="ws-perk-desc">Ingeniería preventa para dimensionar enlaces inalámbricos, CCTV IP, control de acceso y cableado estructurado.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Requisitos -->
+  <div class="ws-dist-card">
+    <h2 class="ws-dist-heading">Requisitos para Darse de Alta</h2>
+    <p class="ws-dist-text">
+      El proceso de alta de canal es rápido y totalmente en línea. Solo requerimos la siguiente documentación:
+    </p>
+
+    <div class="ws-req-list">
+      <div class="ws-req-item">
+        <div class="ws-req-check">✓</div>
+        <div><strong>Constancia de Situación Fiscal (CSF) actualizada:</strong> Con actividad económica relacionada al ramo tecnológico, seguridad, telecomunicaciones, eléctrico o construcción.</div>
+      </div>
+
+      <div class="ws-req-item">
+        <div class="ws-req-check">✓</div>
+        <div><strong>Identificación oficial vigente:</strong> INE o Pasaporte del representante legal o titular.</div>
+      </div>
+
+      <div class="ws-req-item">
+        <div class="ws-req-check">✓</div>
+        <div><strong>Comprobante de domicilio fiscal:</strong> No mayor a 3 meses de antigüedad.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de Contacto -->
+  <div class="ws-contact-box">
+    <div>
+      <h3 class="ws-contact-title">¿Listo para comenzar a distribuir?</h3>
+      <p class="ws-contact-desc">
+        Contacta a nuestro Gerente de Canales de Distribución por WhatsApp o correo para activar tu cuenta mayorista en menos de 2 horas.
+      </p>
+    </div>
+    <div class="ws-contact-btns">
+      <a href="https://wa.me/525636741156?text=Hola,%20deseo%20darme%20de%20alta%20como%20distribuidor%20mayorista" target="_blank" class="ws-btn-wa">
+        💬 Alta vía WhatsApp
+      </a>
+      <a href="mailto:proyectos@seguridad-avanzada.com?subject=Alta%20de%20Distribuidor%20Mayorista" class="ws-btn-sec">
+        ✉️ Solicitar Alta por Correo
+      </a>
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Quieres ser distribuidor",
+  "settings": []
+}
+{% endschema %}

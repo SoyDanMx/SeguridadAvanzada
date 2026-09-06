@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-bolsa-trabajo",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

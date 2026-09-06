@@ -1,0 +1,379 @@
+{% comment %}
+  PÁGINA DE PREGUNTAS FRECUENTES (FAQ) - SEGURIDAD AVANZADA
+  Respuestas detalladas a las consultas más comunes de clientes, integradores y empresas.
+{% endcomment %}
+
+<style>
+  .ws-faq-wrapper {
+    max-width: 980px;
+    margin: 3.5rem auto 5rem;
+    padding: 0 1.5rem;
+    font-family: 'Roboto', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.75;
+  }
+
+  .ws-faq-breadcrumb {
+    font-size: 1.05rem;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .ws-faq-breadcrumb a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .ws-faq-breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .ws-faq-hero {
+    background: linear-gradient(135deg, #0b1528 0%, #1e3a8a 100%);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    color: #ffffff;
+    margin-bottom: 2.75rem;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.25);
+  }
+
+  .ws-faq-badge {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.2);
+    border: 1px solid rgba(56, 189, 248, 0.45);
+    color: #7dd3fc;
+    font-size: 0.95rem;
+    font-weight: 800;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .ws-faq-title {
+    font-size: 2.85rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .ws-faq-subtitle {
+    font-size: 1.25rem;
+    color: #cbd5e1;
+    margin: 0;
+    max-width: 780px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .ws-faq-category {
+    margin-bottom: 3rem;
+  }
+
+  .ws-faq-cat-title {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 1.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e2e8f0;
+  }
+
+  /* Acordeón de Preguntas */
+  .ws-faq-item {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+
+  .ws-faq-item:hover {
+    border-color: #2563eb;
+  }
+
+  .ws-faq-summary {
+    padding: 1.35rem 1.75rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    user-select: none;
+  }
+
+  .ws-faq-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .ws-faq-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .ws-faq-item[open] .ws-faq-icon {
+    transform: rotate(45deg);
+    background: #eff6ff;
+  }
+
+  .ws-faq-content {
+    padding: 0 1.75rem 1.5rem;
+    font-size: 1.18rem;
+    color: #334155;
+    line-height: 1.75;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 1.25rem;
+  }
+
+  .ws-faq-content p {
+    margin: 0 0 0.85rem 0;
+  }
+
+  .ws-faq-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ws-faq-content strong {
+    color: #0f172a;
+  }
+
+  /* Pie de Asistencia */
+  .ws-contact-box {
+    background: #070e1c;
+    border-radius: 16px;
+    padding: 2.75rem 2.25rem;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    text-align: center;
+    margin-top: 3.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .ws-contact-box {
+      flex-direction: row;
+      text-align: left;
+      justify-content: space-between;
+    }
+  }
+
+  .ws-contact-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+    color: #ffffff;
+  }
+
+  .ws-contact-desc {
+    font-size: 1.18rem;
+    color: #cbd5e1;
+    margin: 0;
+    max-width: 580px;
+    line-height: 1.6;
+  }
+
+  .ws-contact-btns {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .ws-btn-wa {
+    background: #22c55e;
+    color: #ffffff;
+    padding: 0.85rem 1.45rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.15rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s ease;
+  }
+
+  .ws-btn-wa:hover {
+    background: #16a34a;
+  }
+
+  .ws-btn-sec {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 0.85rem 1.35rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.15rem;
+    transition: background 0.2s ease;
+  }
+
+  .ws-btn-sec:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+</style>
+
+<div class="ws-faq-wrapper">
+  
+  <div class="ws-faq-breadcrumb">
+    <a href="/">Inicio</a> &rsaquo; <span>Preguntas Frecuentes</span>
+  </div>
+
+  <div class="ws-faq-hero">
+    <span class="ws-faq-badge">❓ Centro de Respuestas &bull; FAQ</span>
+    <h1 class="ws-faq-title">Preguntas Frecuentes</h1>
+    <p class="ws-faq-subtitle">
+      Encuentra respuestas rápidas y detalladas sobre envíos, garantías, facturación, recolección en bodegas y operaciones internacionales con Nuo Networks.
+    </p>
+  </div>
+
+  <!-- Categoría 1: Envíos y Entregas -->
+  <div class="ws-faq-category">
+    <h2 class="ws-faq-cat-title">🚚 Envíos y Recolección en Bodegas</h2>
+    
+    <details class="ws-faq-item" open>
+      <summary class="ws-faq-summary">
+        <span>¿Cuáles son los tiempos de entrega a todo México?</span>
+        <span class="ws-faq-icon">+</span>
+      </summary>
+      <div class="ws-faq-content">
+        <p>Los envíos terrestres estándar tardan de <strong>2 a 5 días hábiles</strong> en zonas metropolitanas (CDMX, Guadalajara, Monterrey, Puebla, Querétaro, etc.). Para pedidos exprés, la entrega se realiza en <strong>24 a 48 horas hábiles</strong>. Los pedidos pagados antes de las 14:00 horas se despachan el mismo día hábil.</p>
+      </div>
+    </details>
+
+    <details class="ws-faq-item">
+      <summary class="ws-faq-summary">
+        <span>¿Puedo recoger mi mercancía personalmente en sus bodegas?</span>
+        <span class="ws-faq-icon">+</span>
+      </summary>
+      <div class="ws-faq-content">
+        <p><strong>Sí, totalmente.</strong> Contamos con <strong>25 bodegas y centros de distribución</strong> en las principales ciudades de México (Guadalajara, Monterrey, Puebla, Mérida, Tijuana, etc.) y nuestro Corporativo México en <strong>Av. Clavería 237, Azcapotzalco, CDMX</strong>. Te recomendamos generar tu cotización o pedido previamente con tu asesor para asegurar existencias antes de acudir.</p>
+      </div>
+    </details>
+
+    <details class="ws-faq-item">
+      <summary class="ws-faq-summary">
+        <span>¿Con qué paqueterías trabajan y cómo rastreo mi envío?</span>
+        <span class="ws-faq-icon">+</span>
+      </summary>
+      <div class="ws-faq-content">
+        <p>Trabajamos con <strong>FedEx, DHL, Estafeta, Paquetexpress, Castores y Tres Guerras</strong>. En cuanto el paquete es recolectado, enviamos automáticamente el número de guía y el enlace de rastreo a tu correo electrónico registrado.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- Categoría 2: Facturación y Formas de Pago -->
+  <div class="ws-faq-category">
+    <h2 class="ws-faq-cat-title">💳 Facturación y Métodos de Pago</h2>
+    
+    <details class="ws-faq-item">
+      <summary class="ws-faq-summary">
+        <span>¿Emiten factura fiscal mexicana (CFDI 4.0)?</span>
+        <span class="ws-faq-icon">+</span>
+      </summary>
+      <div class="ws-faq-content">
+        <p><strong>Sí, todos nuestros precios ya incluyen IVA (16%).</strong> Emitimos facturas CFDI versión 4.0 con validez ante el SAT. Solo envíanos tu Constancia de Situación Fiscal (CSF) actualizada y el Uso de CFDI al momento de tu compra o dentro del mismo mes calendario.</p>
+      </div>
+    </details>
+
+    <details class="ws-faq-item">
+      <summary class="ws-faq-summary">
+        <span>¿Puedo pagar en efectivo o en mostrador?</span>
+        <span class="ws-faq-icon">+</span>
+      </summary>
+      <div class="ws-faq-content">
+        <p>Sí, aceptamos pagos en efectivo mediante <strong>OXXO Pay</strong> en toda la república y pagos directos en nuestra caja de mostrador en <strong>Corporativo México (Av. Clavería 237, Azcapotzalco, CDMX)</strong> donde puedes pagar en efectivo o con tarjetas bancarias.</p>
+      </div>
+    </details>
+
+    <details class="ws-faq-item">
+      <summary class="ws-faq-summary">
+        <span>¿Puedo obtener una factura comercial en Estados Unidos (USD)?</span>
+        <span class="ws-faq-icon">+</span>
+      </summary>
+      <div class="ws-faq-content">
+        <p>Sí. A través de <strong>Nuo Networks, Inc.</strong> (Delaware US C-Corporation), emitimos facturas comerciales en dólares sin retenciones mexicanas y aceptamos pagos vía Wire Transfer / ACH doméstico en EE.UU.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- Categoría 3: Garantías y Soporte Técnico -->
+  <div class="ws-faq-category">
+    <h2 class="ws-faq-cat-title">🛡️ Garantías y Soporte Técnico</h2>
+    
+    <details class="ws-faq-item">
+      <summary class="ws-faq-summary">
+        <span>¿Qué garantía tienen los equipos?</span>
+        <span class="ws-faq-icon">+</span>
+      </summary>
+      <div class="ws-faq-content">
+        <p>Todos nuestros productos son 100% nuevos, originales y cuentan con <strong>garantía de fábrica de 1 a 5 años</strong> (dependiendo de la marca y tipo de producto) contra defectos de fabricación. Gestionamos el trámite de RMA directamente con los centros de servicio autorizados.</p>
+      </div>
+    </details>
+
+    <details class="ws-faq-item">
+      <summary class="ws-faq-summary">
+        <span>¿Ofrecen servicio de instalación y soporte en sitio?</span>
+        <span class="ws-faq-icon">+</span>
+      </summary>
+      <div class="ws-faq-content">
+        <p>Sí. Coordinamos servicios de instalación, cableado estructurado, configuración y mantenimiento en sitio a través de <strong>Tulbox Servicios Técnicos</strong>, nuestra red oficial de técnicos e instaladores certificados en todo México.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- Pie de Contacto -->
+  <div class="ws-contact-box">
+    <div>
+      <h3 class="ws-contact-title">¿Tienes alguna pregunta no listada?</h3>
+      <p class="ws-contact-desc">
+        Nuestro equipo de ingeniería y atención a clientes está disponible de lunes a viernes de 9:00 a 18:00 hrs para resolver cualquier duda técnica o comercial.
+      </p>
+    </div>
+    <div class="ws-contact-btns">
+      <a href="https://wa.me/525636741156?text=Hola,%20tengo%20una%20pregunta%20sobre%20Seguridad%20Avanzada" target="_blank" class="ws-btn-wa">
+        💬 Preguntar por WhatsApp
+      </a>
+      <a href="mailto:proyectos@seguridad-avanzada.com" class="ws-btn-sec">
+        ✉️ Enviar Correo
+      </a>
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Preguntas Frecuentes",
+  "settings": []
+}
+{% endschema %}

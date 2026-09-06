@@ -418,12 +418,37 @@
           {% section 'page-sucursales' %}
         </div>
       {%- endif -%}
+      {%- if template.name == '404' or request.path contains 'bolsa' or request.path contains 'trabajo' or request.path contains 'vacantes' -%}
+        <div id="bolsa-dynamic-container" style="display: none;">
+          {% section 'page-bolsa-trabajo' %}
+        </div>
+      {%- endif -%}
+      {%- if template.name == '404' or request.path contains 'factura' or request.path contains 'cfdi' -%}
+        <div id="facturacion-dynamic-container" style="display: none;">
+          {% section 'page-facturacion' %}
+        </div>
+      {%- endif -%}
+      {%- if template.name == '404' or request.path contains 'pago' or request.path contains 'formas-de-pago' -%}
+        <div id="pagos-dynamic-container" style="display: none;">
+          {% section 'page-formas-pago' %}
+        </div>
+      {%- endif -%}
+      {%- if template.name == '404' or request.path contains 'distribuidor' or request.path contains 'mayorista' -%}
+        <div id="distribuidores-dynamic-container" style="display: none;">
+          {% section 'page-distribuidores' %}
+        </div>
+      {%- endif -%}
+      {%- if template.name == '404' or request.path contains 'preguntas' or request.path contains 'faq' -%}
+        <div id="faq-dynamic-container" style="display: none;">
+          {% section 'page-faq' %}
+        </div>
+      {%- endif -%}
       <div id="standard-layout-content">
         {{ content_for_layout }}
       </div>
     </main>
 
-    {%- if template.name == '404' or request.path contains 'marcas' or request.path contains 'envio' or request.path contains 'entrega' or request.path contains 'sucursal' or request.path contains 'bodega' -%}
+    {%- if template.name == '404' or request.path contains 'marcas' or request.path contains 'envio' or request.path contains 'entrega' or request.path contains 'sucursal' or request.path contains 'bodega' or request.path contains 'bolsa' or request.path contains 'trabajo' or request.path contains 'factura' or request.path contains 'pago' or request.path contains 'distribuidor' or request.path contains 'preguntas' or request.path contains 'faq' -%}
     <script>
       (function() {
         try {
@@ -457,6 +482,51 @@
               b.style.display = 'block';
               s.style.display = 'none';
               document.title = 'Sucursales y Bodegas de Recolección – {{ shop.name }}';
+            }
+          }
+          if (p === '/pages/bolsa-de-trabajo' || p === '/bolsa-de-trabajo' || p === '/bolsa-trabajo' || p === '/vacantes') {
+            var bt = document.getElementById('bolsa-dynamic-container');
+            var s = document.getElementById('standard-layout-content');
+            if (bt && s) {
+              bt.style.display = 'block';
+              s.style.display = 'none';
+              document.title = 'Bolsa de Trabajo y Vacantes B2B – {{ shop.name }}';
+            }
+          }
+          if (p === '/pages/facturacion-en-linea' || p === '/facturacion-en-linea' || p === '/facturacion' || p === '/facturas') {
+            var f = document.getElementById('facturacion-dynamic-container');
+            var s = document.getElementById('standard-layout-content');
+            if (f && s) {
+              f.style.display = 'block';
+              s.style.display = 'none';
+              document.title = 'Facturación en Línea CFDI 4.0 – {{ shop.name }}';
+            }
+          }
+          if (p === '/pages/formas-de-pago' || p === '/formas-de-pago' || p === '/formas-pago' || p === '/metodos-de-pago') {
+            var fp = document.getElementById('pagos-dynamic-container');
+            var s = document.getElementById('standard-layout-content');
+            if (fp && s) {
+              fp.style.display = 'block';
+              s.style.display = 'none';
+              document.title = 'Formas de Pago Aceptadas – {{ shop.name }}';
+            }
+          }
+          if (p === '/pages/quieres-ser-distribuidor' || p === '/quieres-ser-distribuidor' || p === '/pages/distribuidores' || p === '/distribuidores') {
+            var d = document.getElementById('distribuidores-dynamic-container');
+            var s = document.getElementById('standard-layout-content');
+            if (d && s) {
+              d.style.display = 'block';
+              s.style.display = 'none';
+              document.title = '¿Quieres ser Distribuidor? – {{ shop.name }}';
+            }
+          }
+          if (p === '/pages/preguntas-frecuentes' || p === '/preguntas-frecuentes' || p === '/faq' || p === '/ayuda') {
+            var faq = document.getElementById('faq-dynamic-container');
+            var s = document.getElementById('standard-layout-content');
+            if (faq && s) {
+              faq.style.display = 'block';
+              s.style.display = 'none';
+              document.title = 'Preguntas Frecuentes (FAQ) – {{ shop.name }}';
             }
           }
         } catch (e) {

@@ -1,0 +1,387 @@
+{% comment %}
+  PÁGINA DE FACTURACIÓN EN LÍNEA - SEGURIDAD AVANZADA & NUO NETWORKS
+  Emisión de CFDI 4.0 en México y Facturas Comerciales B2B en Estados Unidos.
+{% endcomment %}
+
+<style>
+  .ws-invoice-wrapper {
+    max-width: 980px;
+    margin: 3.5rem auto 5rem;
+    padding: 0 1.5rem;
+    font-family: 'Roboto', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.75;
+  }
+
+  .ws-invoice-breadcrumb {
+    font-size: 1.05rem;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .ws-invoice-breadcrumb a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .ws-invoice-breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .ws-invoice-hero {
+    background: linear-gradient(135deg, #0b1528 0%, #1e3a8a 100%);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    color: #ffffff;
+    margin-bottom: 2.75rem;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.25);
+  }
+
+  .ws-invoice-badge {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.2);
+    border: 1px solid rgba(56, 189, 248, 0.45);
+    color: #7dd3fc;
+    font-size: 0.95rem;
+    font-weight: 800;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .ws-invoice-title {
+    font-size: 2.85rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .ws-invoice-subtitle {
+    font-size: 1.25rem;
+    color: #cbd5e1;
+    margin: 0;
+    max-width: 780px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .ws-invoice-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 2.75rem 2.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04), 0 10px 15px -3px rgba(0,0,0,0.03);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 2.5rem;
+  }
+
+  .ws-invoice-heading {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 1.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .ws-invoice-text {
+    font-size: 1.22rem;
+    color: #334155;
+    margin-bottom: 1.5rem;
+    line-height: 1.75;
+  }
+
+  /* Pasos de Facturación */
+  .ws-steps-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .ws-steps-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  .ws-step-item {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: relative;
+  }
+
+  .ws-step-num {
+    background: #2563eb;
+    color: #ffffff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+
+  .ws-step-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .ws-step-desc {
+    font-size: 1.12rem;
+    color: #475569;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Cajas de Aviso Destacadas */
+  .ws-alert-box {
+    background: #eff6ff;
+    border-left: 4px solid #2563eb;
+    padding: 1.5rem 1.75rem;
+    border-radius: 0 10px 10px 0;
+    margin: 1.75rem 0;
+    font-size: 1.18rem;
+    color: #1e3a8a;
+    line-height: 1.7;
+  }
+
+  .ws-alert-box strong {
+    color: #1e40af;
+  }
+
+  .ws-alert-box.alert-amber {
+    background: #fffbeb;
+    border-color: #f59e0b;
+    color: #92400e;
+  }
+
+  .ws-alert-box.alert-amber strong {
+    color: #78350f;
+  }
+
+  /* Facturación USA */
+  .ws-usa-card {
+    background: linear-gradient(135deg, #070e1c 0%, #172554 100%);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    border-radius: 14px;
+    padding: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 2.5rem;
+  }
+
+  .ws-usa-badge {
+    background: rgba(56, 189, 248, 0.2);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    font-size: 0.95rem;
+    font-weight: 800;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
+
+  .ws-usa-title {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .ws-usa-text {
+    font-size: 1.18rem;
+    color: #cbd5e1;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+
+  /* Pie de Asistencia */
+  .ws-contact-box {
+    background: #070e1c;
+    border-radius: 16px;
+    padding: 2.5rem;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .ws-contact-box {
+      flex-direction: row;
+      text-align: left;
+      justify-content: space-between;
+    }
+  }
+
+  .ws-contact-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+    color: #ffffff;
+  }
+
+  .ws-contact-desc {
+    font-size: 1.18rem;
+    color: #cbd5e1;
+    margin: 0;
+    max-width: 580px;
+    line-height: 1.6;
+  }
+
+  .ws-contact-btns {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .ws-btn-wa {
+    background: #22c55e;
+    color: #ffffff;
+    padding: 0.85rem 1.45rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.15rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s ease;
+  }
+
+  .ws-btn-wa:hover {
+    background: #16a34a;
+  }
+
+  .ws-btn-sec {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 0.85rem 1.35rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.15rem;
+    transition: background 0.2s ease;
+  }
+
+  .ws-btn-sec:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+</style>
+
+<div class="ws-invoice-wrapper">
+  
+  <div class="ws-invoice-breadcrumb">
+    <a href="/">Inicio</a> &rsaquo; <span>Facturación en Línea</span>
+  </div>
+
+  <div class="ws-invoice-hero">
+    <span class="ws-invoice-badge">📑 Emisión Fiscal Oficial &bull; CFDI 4.0</span>
+    <h1 class="ws-invoice-title">Facturación en Línea</h1>
+    <p class="ws-invoice-subtitle">
+      Generamos tus Comprobantes Fiscales Digitales por Internet (CFDI versión 4.0) con validez ante el SAT y Facturas Comerciales B2B internacionales en dólares (USD).
+    </p>
+  </div>
+
+  <div class="ws-invoice-card">
+    <h2 class="ws-invoice-heading">¿Cómo solicitar tu factura en 3 sencillos pasos?</h2>
+    <p class="ws-invoice-text">
+      Todos los precios en Seguridad Avanzada incluyen IVA (16%) en moneda nacional (MXN). Para emitir tu factura electrónica, sigue este proceso:
+    </p>
+
+    <div class="ws-steps-grid">
+      <div class="ws-step-item">
+        <div class="ws-step-num">1</div>
+        <h3 class="ws-step-title">Realiza tu Compra</h3>
+        <p class="ws-step-desc">Conserva tu número de pedido de la tienda en línea o folio de cotización formal.</p>
+      </div>
+
+      <div class="ws-step-item">
+        <div class="ws-step-num">2</div>
+        <h3 class="ws-step-title">Envía tus Datos Fiscales</h3>
+        <p class="ws-step-desc">Comparte tu Constancia de Situación Fiscal (CSF) actualizada, Uso de CFDI y forma de pago.</p>
+      </div>
+
+      <div class="ws-step-item">
+        <div class="ws-step-num">3</div>
+        <h3 class="ws-step-title">Recibe tus Archivos</h3>
+        <p class="ws-step-desc">Te enviamos tus archivos <strong>PDF y XML</strong> timbrados directamente a tu correo electrónico en 24-48 hrs.</p>
+      </div>
+    </div>
+
+    <div class="ws-alert-box">
+      <strong>📋 Datos obligatorios conforme al SAT (CFDI 4.0):</strong><br>
+      &bull; RFC (Registro Federal de Contribuyentes).<br>
+      &bull; Nombre completo o Razón Social (tal cual aparece en la Cédula Fiscal, sin régimen de capital).<br>
+      &bull; Código Postal del domicilio fiscal registrado.<br>
+      &bull; Régimen Fiscal en el que tributas.<br>
+      &bull; Uso de CFDI (ej. G01 Adquisición de mercancías, G03 Gastos en general, etc.).
+    </div>
+
+    <div class="ws-alert-box alert-amber">
+      <strong>⚠️ Plazo fiscal importante:</strong><br>
+      Las solicitudes de facturación deben realizarse dentro del <strong>mismo mes calendario</strong> en que se efectuó el pago. Por disposiciones fiscales del SAT, no es posible emitir facturas con fecha de meses anteriores una vez cerrado el periodo mensual.
+    </div>
+  </div>
+
+  <!-- Facturación Comercial Internacional (EE.UU.) -->
+  <div class="ws-usa-card">
+    <span class="ws-usa-badge">🇺🇸 Estados Unidos &bull; Operación B2B</span>
+    <h2 class="ws-usa-title">¿Requieres Factura Comercial en EE.UU. (USD)?</h2>
+    <p class="ws-usa-text">
+      Si representas a una empresa en Estados Unidos o estás adquiriendo equipamiento para un proyecto transfronterizo, facturamos directamente a través de <strong>Nuo Networks, Inc.</strong> (Delaware US C-Corporation), proporcionándote facturas comerciales válidas para deducibilidad corporativa en EE.UU. y pago vía Wire Transfer / ACH sin retenciones internacionales.
+    </p>
+    <a href="https://wa.me/14243553283?text=Hello%20Nuo%20Networks,%20I'm%20interested%20in%20US%20B2B%20invoicing%20and%20purchases" target="_blank" class="ws-btn-wa" style="display: inline-flex;">
+      💬 Contactar a Nuo Networks USA
+    </a>
+  </div>
+
+  <!-- Pie de Contacto -->
+  <div class="ws-contact-box">
+    <div>
+      <h3 class="ws-contact-title">¿Deseas facturar tu compra ahora mismo?</h3>
+      <p class="ws-contact-desc">
+        Envíanos tu comprobante de pago o número de orden junto con tu constancia fiscal por WhatsApp o correo para emisión inmediata.
+      </p>
+    </div>
+    <div class="ws-contact-btns">
+      <a href="https://wa.me/525636741156?text=Hola,%20deseo%20solicitar%20la%20factura%20de%20mi%20compra" target="_blank" class="ws-btn-wa">
+        💬 Solicitar por WhatsApp
+      </a>
+      <a href="mailto:proyectos@seguridad-avanzada.com?subject=Solicitud%20de%20Facturaci%C3%B3n%20CFDI" class="ws-btn-sec">
+        ✉️ facturacion@seguridad-avanzada.com
+      </a>
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Facturación en Línea",
+  "settings": []
+}
+{% endschema %}

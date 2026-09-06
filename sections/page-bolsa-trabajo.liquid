@@ -1,0 +1,446 @@
+{% comment %}
+  PÁGINA DE BOLSA DE TRABAJO - SEGURIDAD AVANZADA
+  Oportunidades laborales en ventas B2B, ingeniería, soporte técnico y logística nacional.
+{% endcomment %}
+
+<style>
+  .ws-careers-wrapper {
+    max-width: 980px;
+    margin: 3.5rem auto 5rem;
+    padding: 0 1.5rem;
+    font-family: 'Roboto', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.75;
+  }
+
+  .ws-careers-breadcrumb {
+    font-size: 1.05rem;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .ws-careers-breadcrumb a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .ws-careers-breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .ws-careers-hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    color: #ffffff;
+    margin-bottom: 2.75rem;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ws-careers-badge {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.2);
+    border: 1px solid rgba(56, 189, 248, 0.45);
+    color: #7dd3fc;
+    font-size: 0.95rem;
+    font-weight: 800;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .ws-careers-title {
+    font-size: 2.85rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .ws-careers-subtitle {
+    font-size: 1.25rem;
+    color: #cbd5e1;
+    margin: 0;
+    max-width: 780px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .ws-careers-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 2.75rem 2.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04), 0 10px 15px -3px rgba(0,0,0,0.03);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 2.5rem;
+  }
+
+  .ws-careers-heading {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 1.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .ws-careers-text {
+    font-size: 1.22rem;
+    color: #334155;
+    margin-bottom: 1.5rem;
+    line-height: 1.75;
+  }
+
+  /* Cuadrícula de Beneficios */
+  .ws-perks-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+
+  @media (min-width: 640px) {
+    .ws-perks-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .ws-perk-item {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .ws-perk-icon {
+    font-size: 1.75rem;
+    flex-shrink: 0;
+  }
+
+  .ws-perk-title {
+    font-size: 1.22rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.25rem 0;
+  }
+
+  .ws-perk-desc {
+    font-size: 1.1rem;
+    color: #475569;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* Lista de Vacantes Abiertas */
+  .ws-jobs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+
+  .ws-job-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: all 0.2s ease;
+  }
+
+  @media (min-width: 768px) {
+    .ws-job-card {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .ws-job-card:hover {
+    border-color: #2563eb;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .ws-job-role {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 0.35rem 0;
+  }
+
+  .ws-job-meta {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .ws-job-pill {
+    background: #e2e8f0;
+    color: #334155;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+  }
+
+  .ws-job-pill.pill-blue {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+
+  .ws-job-pill.pill-green {
+    background: #dcfce7;
+    color: #15803d;
+  }
+
+  .ws-job-apply-btn {
+    background: #2563eb;
+    color: #ffffff;
+    padding: 0.85rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.12rem;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background 0.2s ease;
+  }
+
+  .ws-job-apply-btn:hover {
+    background: #1d4ed8;
+  }
+
+  /* Caja de Postulación Espontánea */
+  .ws-spontaneous-box {
+    background: linear-gradient(135deg, #070e1c 0%, #0f172a 100%);
+    border-radius: 16px;
+    padding: 2.75rem 2.25rem;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .ws-spontaneous-box {
+      flex-direction: row;
+      text-align: left;
+      justify-content: space-between;
+    }
+  }
+
+  .ws-spontaneous-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+    color: #ffffff;
+  }
+
+  .ws-spontaneous-desc {
+    font-size: 1.18rem;
+    color: #cbd5e1;
+    margin: 0;
+    max-width: 580px;
+    line-height: 1.6;
+  }
+
+  .ws-spontaneous-btns {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .ws-btn-wa {
+    background: #22c55e;
+    color: #ffffff;
+    padding: 0.85rem 1.45rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.15rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s ease;
+  }
+
+  .ws-btn-wa:hover {
+    background: #16a34a;
+  }
+
+  .ws-btn-mail {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 0.85rem 1.35rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.15rem;
+    transition: background 0.2s ease;
+  }
+
+  .ws-btn-mail:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+</style>
+
+<div class="ws-careers-wrapper">
+  
+  <div class="ws-careers-breadcrumb">
+    <a href="/">Inicio</a> &rsaquo; <span>Bolsa de Trabajo</span>
+  </div>
+
+  <div class="ws-careers-hero">
+    <span class="ws-careers-badge">🚀 Crece con Nosotros &bull; Talento B2B</span>
+    <h1 class="ws-careers-title">Únete al Equipo de Seguridad Avanzada</h1>
+    <p class="ws-careers-subtitle">
+      Forma parte de una compañía líder en mayoreo e integración de tecnología, sistemas de seguridad electrónica, telecomunicaciones y energía en México y Estados Unidos (Nuo Networks, Inc.).
+    </p>
+  </div>
+
+  <div class="ws-careers-card">
+    <h2 class="ws-careers-heading">¿Por qué trabajar en Seguridad Avanzada?</h2>
+    <p class="ws-careers-text">
+      Nos caracterizamos por un ambiente de alto dinamismo profesional, capacitación continua y acceso directo a las certificaciones de los principales fabricantes del mundo (Hikvision, Dahua, Ubiquiti, Honeywell, Western Digital, Cisco y más).
+    </p>
+
+    <div class="ws-perks-grid">
+      <div class="ws-perk-item">
+        <span class="ws-perk-icon">📈</span>
+        <div>
+          <h3 class="ws-perk-title">Crecimiento y Carrera</h3>
+          <p class="ws-perk-desc">Planes de desarrollo para integradores, asesores comerciales B2B y directores de proyecto.</p>
+        </div>
+      </div>
+
+      <div class="ws-perk-item">
+        <span class="ws-perk-icon">🎓</span>
+        <div>
+          <h3 class="ws-perk-title">Capacitación y Certificaciones</h3>
+          <p class="ws-perk-desc">Cursos técnicos oficiales patrocinados y entrenamiento en ingeniería de preventa.</p>
+        </div>
+      </div>
+
+      <div class="ws-perk-item">
+        <span class="ws-perk-icon">💼</span>
+        <div>
+          <h3 class="ws-perk-title">Compensación Competitiva</h3>
+          <p class="ws-perk-desc">Sueldos base competitivos, esquemas de comisiones agresivos sin tope y prestaciones de ley.</p>
+        </div>
+      </div>
+
+      <div class="ws-perk-item">
+        <span class="ws-perk-icon">🌐</span>
+        <div>
+          <h3 class="ws-perk-title">Presencia Binacional</h3>
+          <p class="ws-perk-desc">Operación coordinada con 25 bodegas en México y Nuo Networks Inc. en Delaware, EE.UU.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vacantes Abiertas -->
+  <div class="ws-careers-card">
+    <h2 class="ws-careers-heading">Vacantes Abiertas Actualmente</h2>
+    <p class="ws-careers-text">
+      Buscamos profesionales apasionados por la tecnología, el servicio al cliente y las soluciones integrales:
+    </p>
+
+    <div class="ws-jobs-list">
+      <!-- Vacante 1 -->
+      <div class="ws-job-card">
+        <div>
+          <h3 class="ws-job-role">Ejecutivo de Ventas B2B / Cuentas Clave</h3>
+          <div class="ws-job-meta">
+            <span class="ws-job-pill pill-blue">Comercial &bull; Mayoreo</span>
+            <span class="ws-job-pill">CDMX / Híbrido</span>
+            <span class="ws-job-pill pill-green">Tiempo Completo</span>
+          </div>
+        </div>
+        <a href="https://wa.me/525636741156?text=Hola,%20deseo%20postularme%20a%20la%20vacante%20de%20Ejecutivo%20de%20Ventas%20B2B" target="_blank" class="ws-job-apply-btn">
+          Postularme
+        </a>
+      </div>
+
+      <!-- Vacante 2 -->
+      <div class="ws-job-card">
+        <div>
+          <h3 class="ws-job-role">Ingeniero de Preventa y Soporte CCTV / Redes</h3>
+          <div class="ws-job-meta">
+            <span class="ws-job-pill pill-blue">Ingeniería &bull; Soporte</span>
+            <span class="ws-job-pill">Corporativo Clavería, CDMX</span>
+            <span class="ws-job-pill pill-green">Tiempo Completo</span>
+          </div>
+        </div>
+        <a href="https://wa.me/525636741156?text=Hola,%20deseo%20postularme%20a%20la%20vacante%20de%20Ingeniero%20de%20Preventa" target="_blank" class="ws-job-apply-btn">
+          Postularme
+        </a>
+      </div>
+
+      <!-- Vacante 3 -->
+      <div class="ws-job-card">
+        <div>
+          <h3 class="ws-job-role">Especialista en Logística y Almacén CEDIS</h3>
+          <div class="ws-job-meta">
+            <span class="ws-job-pill pill-blue">Operaciones &bull; Almacén</span>
+            <span class="ws-job-pill">Zona Metropolitana CDMX</span>
+            <span class="ws-job-pill pill-green">Tiempo Completo</span>
+          </div>
+        </div>
+        <a href="https://wa.me/525636741156?text=Hola,%20deseo%20postularme%20a%20la%20vacante%20de%20Especialista%20en%20Log%C3%ADstica" target="_blank" class="ws-job-apply-btn">
+          Postularme
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Postulación Espontánea -->
+  <div class="ws-spontaneous-box">
+    <div>
+      <h3 class="ws-spontaneous-title">¿No encuentras una vacante para tu perfil?</h3>
+      <p class="ws-spontaneous-desc">
+        Envíanos tu Curriculum Vitae actualizado indicando tu área de especialidad. Constantemente abrimos posiciones en compras, marketing digital, administración y soporte en sitio.
+      </p>
+    </div>
+    <div class="ws-spontaneous-btns">
+      <a href="https://wa.me/525636741156?text=Hola,%20deseo%20enviar%20mi%20CV%20para%20bolsa%20de%20trabajo%20de%20Seguridad%20Avanzada" target="_blank" class="ws-btn-wa">
+        💬 Enviar CV por WhatsApp
+      </a>
+      <a href="mailto:proyectos@seguridad-avanzada.com?subject=Postulaci%C3%B3n%20Laboral%20-%20Seguridad%20Avanzada" class="ws-btn-mail">
+        ✉️ Enviar por Correo
+      </a>
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Bolsa de Trabajo",
+  "settings": []
+}
+{% endschema %}

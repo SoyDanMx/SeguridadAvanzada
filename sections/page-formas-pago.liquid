@@ -1,0 +1,383 @@
+{% comment %}
+  PÁGINA DE FORMAS DE PAGO - SEGURIDAD AVANZADA
+  Métodos de pago transparentes: SPEI, tarjetas, OXXO Pay, pagos en sitio y USD internacional.
+{% endcomment %}
+
+<style>
+  .ws-payments-wrapper {
+    max-width: 980px;
+    margin: 3.5rem auto 5rem;
+    padding: 0 1.5rem;
+    font-family: 'Roboto', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.75;
+  }
+
+  .ws-payments-breadcrumb {
+    font-size: 1.05rem;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .ws-payments-breadcrumb a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .ws-payments-breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .ws-payments-hero {
+    background: linear-gradient(135deg, #0b1528 0%, #1e3a8a 100%);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    color: #ffffff;
+    margin-bottom: 2.75rem;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.25);
+  }
+
+  .ws-payments-badge {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.2);
+    border: 1px solid rgba(56, 189, 248, 0.45);
+    color: #7dd3fc;
+    font-size: 0.95rem;
+    font-weight: 800;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .ws-payments-title {
+    font-size: 2.85rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .ws-payments-subtitle {
+    font-size: 1.25rem;
+    color: #cbd5e1;
+    margin: 0;
+    max-width: 780px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  /* Cuadrícula de Métodos de Pago */
+  .ws-methods-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .ws-methods-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .ws-method-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 2.25rem 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: all 0.2s ease;
+  }
+
+  .ws-method-card:hover {
+    border-color: #2563eb;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .ws-method-header {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .ws-method-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #eff6ff;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .ws-method-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .ws-method-text {
+    font-size: 1.15rem;
+    color: #334155;
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  .ws-method-features {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .ws-method-features li {
+    font-size: 1.08rem;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .ws-method-features li::before {
+    content: "✓";
+    color: #10b981;
+    font-weight: 800;
+  }
+
+  /* Tarjeta Corporativo México (Pagos en Sitio) */
+  .ws-hq-pay-card {
+    background: linear-gradient(135deg, #070e1c 0%, #172554 100%);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    border-radius: 16px;
+    padding: 2.75rem 2.5rem;
+    color: #ffffff;
+    margin-bottom: 2.75rem;
+  }
+
+  .ws-hq-pay-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .ws-hq-pay-text {
+    font-size: 1.22rem;
+    color: #cbd5e1;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+
+  /* Pie de Asistencia */
+  .ws-contact-box {
+    background: #070e1c;
+    border-radius: 16px;
+    padding: 2.5rem;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .ws-contact-box {
+      flex-direction: row;
+      text-align: left;
+      justify-content: space-between;
+    }
+  }
+
+  .ws-contact-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+    color: #ffffff;
+  }
+
+  .ws-contact-desc {
+    font-size: 1.18rem;
+    color: #cbd5e1;
+    margin: 0;
+    max-width: 580px;
+    line-height: 1.6;
+  }
+
+  .ws-contact-btns {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .ws-btn-wa {
+    background: #22c55e;
+    color: #ffffff;
+    padding: 0.85rem 1.45rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.15rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s ease;
+  }
+
+  .ws-btn-wa:hover {
+    background: #16a34a;
+  }
+
+  .ws-btn-sec {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 0.85rem 1.35rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.15rem;
+    transition: background 0.2s ease;
+  }
+
+  .ws-btn-sec:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+</style>
+
+<div class="ws-payments-wrapper">
+  
+  <div class="ws-payments-breadcrumb">
+    <a href="/">Inicio</a> &rsaquo; <span>Formas de Pago</span>
+  </div>
+
+  <div class="ws-payments-hero">
+    <span class="ws-payments-badge">🔒 Pagos Seguros y Cifrados &bull; 100% Garantizados</span>
+    <h1 class="ws-payments-title">Formas de Pago</h1>
+    <p class="ws-payments-subtitle">
+      Ofrecemos diversas alternativas de pago seguras, transparentes y convenientes para compras individuales y adquisiciones empresariales B2B.
+    </p>
+  </div>
+
+  <div class="ws-methods-grid">
+    <!-- Método 1: SPEI -->
+    <div class="ws-method-card">
+      <div class="ws-method-header">
+        <div class="ws-method-icon-box">⚡</div>
+        <h2 class="ws-method-title">Transferencia SPEI</h2>
+      </div>
+      <p class="ws-method-text">
+        Transferencias interbancarias directas sin comisiones adicionales a nuestras cuentas corporativas en <strong>Citibanamex</strong> y <strong>BBVA</strong>.
+      </p>
+      <ul class="ws-method-features">
+        <li>Acreditación inmediata (minutos)</li>
+        <li>Ideal para pedidos de mayoreo y proyectos</li>
+        <li>Emisión directa de factura CFDI 4.0</li>
+      </ul>
+    </div>
+
+    <!-- Método 2: Tarjetas -->
+    <div class="ws-method-card">
+      <div class="ws-method-header">
+        <div class="ws-method-icon-box">💳</div>
+        <h2 class="ws-method-title">Tarjetas de Crédito y Débito</h2>
+      </div>
+      <p class="ws-method-text">
+        Aceptamos <strong>Visa, Mastercard y American Express</strong> procesadas mediante pasarelas con cifrado de nivel bancario SSL/TLS de 256 bits.
+      </p>
+      <ul class="ws-method-features">
+        <li>Validación instantánea en línea</li>
+        <li>Promociones a meses sin intereses aplicables</li>
+        <li>Protección contra fraudes 3D Secure</li>
+      </ul>
+    </div>
+
+    <!-- Método 3: OXXO Pay -->
+    <div class="ws-method-card">
+      <div class="ws-method-header">
+        <div class="ws-method-icon-box">🏪</div>
+        <h2 class="ws-method-title">OXXO Pay (Efectivo)</h2>
+      </div>
+      <p class="ws-method-text">
+        Paga en efectivo en cualquiera de las más de 20,000 tiendas OXXO en México generando un código de barras de 14 dígitos.
+      </p>
+      <ul class="ws-method-features">
+        <li>Notificación automática de pago</li>
+        <li>Sin necesidad de tarjeta bancaria</li>
+        <li>Plazo de pago de 24 horas</li>
+      </ul>
+    </div>
+
+    <!-- Método 4: Pagos Internacionales en USD -->
+    <div class="ws-method-card">
+      <div class="ws-method-header">
+        <div class="ws-method-icon-box">🌐</div>
+        <h2 class="ws-method-title">Wire Transfer / ACH (USD)</h2>
+      </div>
+      <p class="ws-method-text">
+        Para compras transfronterizas desde Estados Unidos mediante <strong>Nuo Networks, Inc.</strong> Delaware US C-Corp.
+      </p>
+      <ul class="ws-method-features">
+        <li>Transferencias ACH y Wire domésticas en EE.UU.</li>
+        <li>Facturas comerciales en dólares sin retención</li>
+        <li>Soporte y logística local estadounidense</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Pagos en Sitio Corporativo México -->
+  <div class="ws-hq-pay-card">
+    <h2 class="ws-hq-pay-title">🏢 Pago Directo en Sitio: Corporativo México</h2>
+    <p class="ws-hq-pay-text">
+      Puedes acudir directamente a nuestra sede central en <strong>Av. Clavería 237, Col. Claveria, Azcapotzalco, 02080 CDMX</strong> para pagar y recolectar tu pedido personalmente. Contamos con caja de cobro en sitio donde aceptamos efectivo, terminales bancarias y SPEI en mostrador.
+    </p>
+    <a href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20mi%20visita%20para%20pagar%20en%20Corporativo%20Claver%C3%ADa" target="_blank" class="ws-btn-wa" style="display: inline-flex;">
+      💬 Agendar Visita en Corporativo
+    </a>
+  </div>
+
+  <!-- Pie de Contacto -->
+  <div class="ws-contact-box">
+    <div>
+      <h3 class="ws-contact-title">¿Tienes dudas sobre las formas de pago?</h3>
+      <p class="ws-contact-desc">
+        Comunícate con un asesor de ventas para solicitar cuentas bancarias oficiales CLABE o coordinar pagos combinados para proyectos.
+      </p>
+    </div>
+    <div class="ws-contact-btns">
+      <a href="https://wa.me/525636741156?text=Hola,%20deseo%20informaci%C3%B3n%20sobre%20cuentas%20bancarias%20para%20pago" target="_blank" class="ws-btn-wa">
+        💬 WhatsApp de Cobranza
+      </a>
+      <a href="mailto:proyectos@seguridad-avanzada.com" class="ws-btn-sec">
+        ✉️ Contactar Finanzas
+      </a>
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Formas de Pago",
+  "settings": []
+}
+{% endschema %}
