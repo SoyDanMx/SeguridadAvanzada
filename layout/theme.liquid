@@ -453,6 +453,43 @@
       (function() {
         try {
           var p = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+          // Redirecciones inteligentes de categorías populares y colecciones
+          if (p === '/collections/cctv' || p === '/collections/camara' || p === '/collections/camaras' || p === '/collections/vigilancia' || p === '/cctv' || p === '/vigilancia') {
+            window.location.replace('/collections/videovigilancia');
+            return;
+          }
+          if (p === '/collections/redes' || p === '/collections/switches' || p === '/collections/routers' || p === '/redes') {
+            window.location.replace('/collections/redes-e-it');
+            return;
+          }
+          if (p === '/collections/acceso' || p === '/collections/control-acceso' || p === '/control-de-acceso') {
+            window.location.replace('/collections/control-de-acceso');
+            return;
+          }
+          if (p === '/collections/computo' || p === '/collections/computadoras' || p === '/computo') {
+            window.location.replace('/collections/computo-y-hardware');
+            return;
+          }
+          if (p === '/collections/discos' || p === '/collections/discos-duros' || p === '/collections/almacenamiento') {
+            window.location.replace('/collections/almacenamiento-y-ssds');
+            return;
+          }
+          if (p === '/collections/energia' || p === '/collections/ups' || p === '/collections/no-breaks') {
+            window.location.replace('/collections/energia-herramientas');
+            return;
+          }
+          if (p === '/collections/cable' || p === '/collections/cables' || p === '/collections/cableado') {
+            window.location.replace('/collections/cableado-estructurado');
+            return;
+          }
+          if (p === '/collections/alarmas' || p === '/collections/intrusion' || p === '/collections/automatizacion') {
+            window.location.replace('/collections/automatizacion-e-intrusion');
+            return;
+          }
+          if (p === '/collections/audio' || p === '/collections/video') {
+            window.location.replace('/collections/audio-y-video-profesional');
+            return;
+          }
           if (p === '/blogs/noticias' || p === '/noticias') {
             window.location.replace('/blogs/news');
             return;
