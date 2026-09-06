@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-configurador-pc",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

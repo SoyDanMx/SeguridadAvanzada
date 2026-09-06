@@ -443,12 +443,17 @@
           {% section 'page-faq' %}
         </div>
       {%- endif -%}
+      {%- if template.name == '404' or request.path contains 'configurador' -%}
+        <div id="configurador-dynamic-container" style="display: none;">
+          {% section 'page-configurador-pc' %}
+        </div>
+      {%- endif -%}
       <div id="standard-layout-content">
         {{ content_for_layout }}
       </div>
     </main>
 
-    {%- if template.name == '404' or request.path contains 'marcas' or request.path contains 'envio' or request.path contains 'entrega' or request.path contains 'sucursal' or request.path contains 'bodega' or request.path contains 'bolsa' or request.path contains 'trabajo' or request.path contains 'factura' or request.path contains 'pago' or request.path contains 'distribuidor' or request.path contains 'preguntas' or request.path contains 'faq' -%}
+    {%- if template.name == '404' or request.path contains 'marcas' or request.path contains 'envio' or request.path contains 'entrega' or request.path contains 'sucursal' or request.path contains 'bodega' or request.path contains 'bolsa' or request.path contains 'trabajo' or request.path contains 'factura' or request.path contains 'pago' or request.path contains 'distribuidor' or request.path contains 'preguntas' or request.path contains 'faq' or request.path contains 'configurador' -%}
     <script>
       (function() {
         try {
@@ -568,6 +573,15 @@
               faq.style.display = 'block';
               s.style.display = 'none';
               document.title = 'Preguntas Frecuentes (FAQ) – {{ shop.name }}';
+            }
+          }
+          if (p === '/configurador-empresarial-de-pc' || p === '/configurador-de-pc' || p === '/configurador-pc' || p === '/configurador' || p === '/pages/configurador-de-pc' || p === '/pages/configurador-empresarial-de-pc' || p === '/pages/configurador-pc') {
+            var c = document.getElementById('configurador-dynamic-container');
+            var s = document.getElementById('standard-layout-content');
+            if (c && s) {
+              c.style.display = 'block';
+              s.style.display = 'none';
+              document.title = 'Configurador de PC Empresarial y Gamer – {{ shop.name }}';
             }
           }
         } catch (e) {

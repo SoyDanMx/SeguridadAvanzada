@@ -1,0 +1,707 @@
+{
+  "cpu": [
+    {
+      "handle": "amd-5700x-cpuamd2500",
+      "title": "Procesador AMD 5700X",
+      "vendor": "AMD",
+      "price": 743,
+      "img": "3317.72",
+      "type": "Ensamble",
+      "subtype": "Microprocesadores",
+      "socket": "AM4",
+      "brand": "AMD"
+    },
+    {
+      "handle": "amd-5500-cpuamd2520",
+      "title": "Procesador AMD 5500",
+      "vendor": "AMD",
+      "price": 510,
+      "img": "1906.79",
+      "type": "Ensamble",
+      "subtype": "Microprocesadores",
+      "socket": "LGA1700",
+      "brand": "AMD"
+    },
+    {
+      "handle": "amd-100-100001084wof-cpuamd2830",
+      "title": "Microprocesadores AMD 100-100001084WOF",
+      "vendor": "AMD",
+      "price": 229,
+      "img": "7172.00",
+      "type": "Ensamble",
+      "subtype": "Microprocesadores",
+      "socket": "LGA1700",
+      "brand": "AMD"
+    },
+    {
+      "handle": "intel-99atjr-venint060",
+      "title": "Microprocesadores INTEL 99ATJR",
+      "vendor": "INTEL",
+      "price": 434,
+      "img": "160.60",
+      "type": "Ensamble",
+      "subtype": "Microprocesadores",
+      "socket": "LGA1700",
+      "brand": "Intel"
+    },
+    {
+      "handle": "intel-cm8071505093011-cpuint5070",
+      "title": "Procesador INTEL CM8071505093011",
+      "vendor": "INTEL",
+      "price": 161,
+      "img": "2500.50",
+      "type": "Ensamble",
+      "subtype": "Microprocesadores",
+      "socket": "LGA1700",
+      "brand": "Intel"
+    }
+  ],
+  "mobo": [
+    {
+      "handle": "asus-b550m-plus-mbdass4890",
+      "title": "Motherboard Gaming ASUS B550M-PLUS",
+      "vendor": "ASUS",
+      "price": 197,
+      "img": "2045.68",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "AM4",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "asus-prime-b550m-a-ac-mbdass5490",
+      "title": "Motherboard  ASUS PRIME B550M-A AC",
+      "vendor": "ASUS",
+      "price": 128,
+      "img": "1172.84",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "AM4",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "asus-prime-a520m-k-mbdass5820",
+      "title": "Motherboard ASUS PRIME A520M-K",
+      "vendor": "ASUS",
+      "price": 304,
+      "img": "651.54",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "AM4",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "asus-prime-h610m-k-mbdass6240",
+      "title": "Motherboards Gaming ASUS PRIME H610M-K",
+      "vendor": "ASUS",
+      "price": 582,
+      "img": "1065.66",
+      "type": "Accesorios Gaming",
+      "subtype": "Motherboards Gaming",
+      "socket": "LGA1700",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "ecs-adln-i-n100-mbdecs2280",
+      "title": "Motherboards ECS ADLN-I N100",
+      "vendor": "ECS",
+      "price": 313,
+      "img": "1112.29",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "LGA1700",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "gigabyte-mb-gigabyte-h610m-k-ddr4-mbdgig5040",
+      "title": "Motherboard GIGABYTE MB GIGABYTE H610M K DDR4",
+      "vendor": "GIGABYTE",
+      "price": 105,
+      "img": "928.30",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "LGA1700",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "gigabyte-mb-gigabyte-b760m-d3hp-mbdgig5180",
+      "title": "Motherboards GIGABYTE MB GIGABYTE B760M D3HP",
+      "vendor": "GIGABYTE",
+      "price": 143,
+      "img": "1499.45",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "LGA1700",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "gigabyte-b650m-aorus-elite-ax-mbdgig5320",
+      "title": "Motherboards GIGABYTE B650M AORUS ELITE AX",
+      "vendor": "GIGABYTE",
+      "price": 271,
+      "img": "2581.22",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "AM5",
+      "ramType": "DDR5"
+    },
+    {
+      "handle": "gigabyte-b650-eagle-ax-mbdgig5110",
+      "title": "Motherboard GIGABYTE  B650 EAGLE AX",
+      "vendor": "GIGABYTE",
+      "price": 304,
+      "img": "2258.17",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "AM5",
+      "ramType": "DDR5"
+    },
+    {
+      "handle": "gigabyte-h610m-k-v2-mbdgig5440",
+      "title": "Motherboards GIGABYTE H610M K V2",
+      "vendor": "GIGABYTE",
+      "price": 306,
+      "img": "928.30",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "LGA1700",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "gigabyte-b760m-d3hp-wifi6-mbdgig5470",
+      "title": "Motherboards GIGABYTE B760M D3HP WIFI6",
+      "vendor": "GIGABYTE",
+      "price": 105,
+      "img": "1645.12",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "LGA1700",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "gigabyte-b850m-gaming-x-wf6e-mbdgig5600",
+      "title": "Motherboards GIGABYTE B850M GAMING X WF6E",
+      "vendor": "GIGABYTE",
+      "price": 162,
+      "img": "2474.22",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "AM5",
+      "ramType": "DDR5"
+    },
+    {
+      "handle": "gigabyte-b840m-eagle-wifi6-mbdgig5570",
+      "title": "Motherboards GIGABYTE B840M EAGLE WIFI6",
+      "vendor": "GIGABYTE",
+      "price": 153,
+      "img": "1651.23",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "LGA1700",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "gigabyte-b760m-ds3h-wf6e-gen5-mbdgig5640",
+      "title": "Motherboard GIGABYTE B760M DS3H WF6E GEN5",
+      "vendor": "GIGABYTE",
+      "price": 160,
+      "img": "1946.64",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "LGA1700",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "gigabyte-b840-gaming-x-wf6e-mbdgig5660",
+      "title": "Motherboard GIGABYTE B840 GAMING X WF6E",
+      "vendor": "GIGABYTE",
+      "price": 124,
+      "img": "2329.56",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "LGA1700",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "gigabyte-b840-eagle-wf6e-mbdgig5670",
+      "title": "Motherboard GIGABYTE B840 EAGLE WF6E",
+      "vendor": "GIGABYTE",
+      "price": 119,
+      "img": "2195.59",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "LGA1700",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "gigabyte-a620m-h-mbdgig5730",
+      "title": "Motherboard GIGABYTE A620M H",
+      "vendor": "GIGABYTE",
+      "price": 301,
+      "img": "1120.10",
+      "type": "Ensamble",
+      "subtype": "Motherboards",
+      "socket": "AM5",
+      "ramType": "DDR5"
+    }
+  ],
+  "ram": [
+    {
+      "handle": "adata-ad4s320016g22-sgn-memdat5890",
+      "title": "Memoria RAM ADATA AD4S320016G22-SGN",
+      "vendor": "ADATA",
+      "price": 205,
+      "img": "1786.05",
+      "type": "Ensamble",
+      "subtype": "Memorias RAM",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "kingston-technology-kcp432ss8-8-memkgn2350",
+      "title": "Memoria RAM Kingston Technology KCP432SS8/8",
+      "vendor": "Kingston Technology",
+      "price": 428,
+      "img": "1773.33",
+      "type": "Ensamble",
+      "subtype": "Memorias RAM",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "kingston-technology-fury-beast-memkgn3750",
+      "title": "Memoria  Kingston Technology FURY Beast",
+      "vendor": "Kingston Technology",
+      "price": 142,
+      "img": "3493.92",
+      "type": "Ensamble",
+      "subtype": "Memorias RAM",
+      "ramType": "DDR4"
+    },
+    {
+      "handle": "kingston-technology-kcp432ns8-8-memkgn3510",
+      "title": "Memoria RAM Kingston Technology KCP432NS8/8",
+      "vendor": "Kingston Technology",
+      "price": 478,
+      "img": "1773.33",
+      "type": "Ensamble",
+      "subtype": "Memorias RAM",
+      "ramType": "DDR4"
+    }
+  ],
+  "ssd": [
+    {
+      "handle": "adata-asu630ss-480gq-r-ddudat1300",
+      "title": "SSD ADATA ASU630SS-480GQ-R",
+      "vendor": "ADATA",
+      "price": 659,
+      "img": "1046.33",
+      "type": "Almacenamiento",
+      "subtype": "SSD"
+    },
+    {
+      "handle": "adata-legend-860-ddudat2210",
+      "title": "SSD ADATA LEGEND 860",
+      "vendor": "ADATA",
+      "price": 269,
+      "img": "1477.58",
+      "type": "Almacenamiento",
+      "subtype": "SSD"
+    },
+    {
+      "handle": "kingston-technology-a400-ddukgt1360",
+      "title": "SSD Kingston Technology A400",
+      "vendor": "Kingston Technology",
+      "price": 1686,
+      "img": "2120.64",
+      "type": "Almacenamiento",
+      "subtype": "SSD"
+    },
+    {
+      "handle": "sandisk-sdssda3n-1t00-g26-dduwsd2720",
+      "title": "SSD SANDISK SDSSDA3N-1T00-G26",
+      "vendor": "SANDISK",
+      "price": 856,
+      "img": "2588.35",
+      "type": "Almacenamiento",
+      "subtype": "SSD"
+    },
+    {
+      "handle": "sandisk-wds100t5g0a-dduwsd2780",
+      "title": "SSD SANDISK WDS100T5G0A",
+      "vendor": "SANDISK",
+      "price": 175,
+      "img": "2396.72",
+      "type": "Almacenamiento",
+      "subtype": "SSD"
+    },
+    {
+      "handle": "sandisk-wds100t5b0e-dduwsd3180",
+      "title": "SSD SANDISK WDS100T5B0E",
+      "vendor": "SANDISK",
+      "price": 258,
+      "img": "2422.32",
+      "type": "Almacenamiento",
+      "subtype": "SSD"
+    },
+    {
+      "handle": "stylos-stmssd1b-ddusty010",
+      "title": "SSD Stylos STMSSD1B",
+      "vendor": "Stylos",
+      "price": 378,
+      "img": "345.78",
+      "type": "Almacenamiento",
+      "subtype": "SSD"
+    }
+  ],
+  "case": [
+    {
+      "handle": "acteck-gi240-a-gc240-gabact140",
+      "title": "Gabinete  ACTECK GI240 A GC240",
+      "vendor": "ACTECK",
+      "price": 314,
+      "img": "466.67",
+      "type": "Ensamble",
+      "subtype": "Gabinetes para Computadoras"
+    },
+    {
+      "handle": "acteck-kioto-gc220-essential-gabact160",
+      "title": "Gabinete  ACTECK KIOTO GC220 ESSENTIAL",
+      "vendor": "ACTECK",
+      "price": 252,
+      "img": "438.94",
+      "type": "Ensamble",
+      "subtype": "Gabinetes para Computadoras"
+    },
+    {
+      "handle": "acteck-gi215-gabact320",
+      "title": "Gabinete ACTECK GI215",
+      "vendor": "ACTECK",
+      "price": 290,
+      "img": "438.89",
+      "type": "Accesorios Gaming",
+      "subtype": "Gabinetes Gaming"
+    },
+    {
+      "handle": "adata-ex500-accdat1480",
+      "title": "Gabinete Externo ADATA EX500",
+      "vendor": "ADATA",
+      "price": 310,
+      "img": "146.18",
+      "type": "Almacenamiento Portatil",
+      "subtype": "Discos Duros Externos"
+    },
+    {
+      "handle": "enson-ens-pcb1010-accmva850",
+      "title": "Caja Plástica 100X100X50 Sello de Goma IP55 ENSON ENS-PCB1010",
+      "vendor": "ENSON",
+      "price": 659,
+      "img": "36.12",
+      "type": "Red Pasiva",
+      "subtype": "Gabinetes para Montaje"
+    }
+  ],
+  "psu": [
+    {
+      "handle": "acteck-ac-938143-gabact340",
+      "title": "Fuente de poder ACTECK AC-938143",
+      "vendor": "ACTECK",
+      "price": 489,
+      "img": "196.69",
+      "type": "Ensamble",
+      "subtype": "Fuentes de Poder"
+    },
+    {
+      "handle": "acteck-es-05003e-gabact370",
+      "title": "Fuente de poder ACTECK ES-05003E",
+      "vendor": "ACTECK",
+      "price": 221,
+      "img": "351.80",
+      "type": "Ensamble",
+      "subtype": "Fuentes de Poder"
+    },
+    {
+      "handle": "acteck-es-05001e-gabact380",
+      "title": "Fuente de poder ACTECK ES-05001E",
+      "vendor": "ACTECK",
+      "price": 286,
+      "img": "231.93",
+      "type": "Ensamble",
+      "subtype": "Fuentes de Poder"
+    },
+    {
+      "handle": "balam-rush-650pr-gabblr530",
+      "title": "Fuente de poder Balam Rush 650PR",
+      "vendor": "Balam Rush",
+      "price": 359,
+      "img": "528.03",
+      "type": "Ensamble",
+      "subtype": "Fuentes de Poder"
+    },
+    {
+      "handle": "brobotix-764762-cabrbt2520",
+      "title": "Cable CCTV Divisor de Fuente de Poder  BROBOTIX 764762",
+      "vendor": "BROBOTIX",
+      "price": 577,
+      "img": "19.16",
+      "type": "Cables",
+      "subtype": "Cables de Red"
+    },
+    {
+      "handle": "dahua-technology-dh-pfm325d-1210us-accdah2910",
+      "title": "Fuente de poder Dahua Technology  DH-PFM325D-1210US",
+      "vendor": "Dahua Technology",
+      "price": 229,
+      "img": "38.50",
+      "type": "Video Vigilancia",
+      "subtype": "Fuentes de Poder para Video Vigilancia"
+    },
+    {
+      "handle": "evotec-ev-600-gabevo520",
+      "title": "Fuentes de Poder EVOTEC Ev-600",
+      "vendor": "EVOTEC",
+      "price": 218,
+      "img": "272.91",
+      "type": "Ensamble",
+      "subtype": "Fuentes de Poder"
+    },
+    {
+      "handle": "provision-isr-pr-12v1a-a-accpvs220",
+      "title": "Fuente de Poder PROVISION-ISR PR-12V1A-A",
+      "vendor": "PROVISION-ISR",
+      "price": 1197,
+      "img": "56.13",
+      "type": "Video Vigilancia",
+      "subtype": "Fuentes de poder para videovigilancia"
+    },
+    {
+      "handle": "provision-isr-pr-c14-accpvs240",
+      "title": "Divisor de Fuente de Poder PROVISION-ISR PR-C14",
+      "vendor": "PROVISION-ISR",
+      "price": 2536,
+      "img": "20.35",
+      "type": "Video Vigilancia",
+      "subtype": "Accesorios para Videovigilancia"
+    },
+    {
+      "handle": "provision-isr-pr-12v3a-accpvs360",
+      "title": "Fuente de Poder PROVISION-ISR PR-12V3A",
+      "vendor": "PROVISION-ISR",
+      "price": 1513,
+      "img": "144.48",
+      "type": "Video Vigilancia",
+      "subtype": "Fuentes de poder para videovigilancia"
+    },
+    {
+      "handle": "provision-isr-pr-12v5a-accpvs460",
+      "title": "Fuente de Poder PROVISION-ISR PR-12V5A",
+      "vendor": "PROVISION-ISR",
+      "price": 1500,
+      "img": "197.73",
+      "type": "Video Vigilancia",
+      "subtype": "Fuentes de poder para videovigilancia"
+    },
+    {
+      "handle": "stylos-stfpatx1b-gabsty430",
+      "title": "Fuentes de Poder Stylos STFPATX1B",
+      "vendor": "Stylos",
+      "price": 204,
+      "img": "217.57",
+      "type": "Ensamble",
+      "subtype": "Fuentes de Poder"
+    }
+  ],
+  "gpu": [
+    {
+      "handle": "asus-90yv0m17-m0aa00-tviass3910",
+      "title": "Tarjeta de video ASUS 90YV0M17-M0AA00",
+      "vendor": "ASUS",
+      "price": 1,
+      "img": "10066.79",
+      "type": "Tarjetas",
+      "subtype": "Tarjetas de Video"
+    },
+    {
+      "handle": "asus-dual-rx9060xt-16g-tviass3930",
+      "title": "Tarjeta de Video ASUS DUAL-RX9060XT-16G",
+      "vendor": "ASUS",
+      "price": 13,
+      "img": "7451.82",
+      "type": "Tarjetas",
+      "subtype": "Tarjetas de Video"
+    },
+    {
+      "handle": "gigabyte-gv-n506teagle-oc-8gd-tvigig3510",
+      "title": "Tarjeta de video GIGABYTE GV-N506TEAGLE OC-8GD",
+      "vendor": "GIGABYTE",
+      "price": 4,
+      "img": "7137.24",
+      "type": "Tarjetas",
+      "subtype": "Tarjetas de Video"
+    },
+    {
+      "handle": "gigabyte-gv-r9060xtgaming-oc-16gd-tvigig3470",
+      "title": "Tarjeta de video GIGABYTE GV-R9060XTGAMING OC-16GD",
+      "vendor": "GIGABYTE",
+      "price": 6,
+      "img": "7720.77",
+      "type": "Tarjetas",
+      "subtype": "Tarjetas de Video"
+    },
+    {
+      "handle": "pny-rtx5070-tvipny2040",
+      "title": "Tarjeta de Video PNY RTX5070",
+      "vendor": "PNY",
+      "price": 24,
+      "img": "18164.20",
+      "type": "Tarjetas",
+      "subtype": "Tarjetas de Video"
+    }
+  ],
+  "cooler": [
+    {
+      "handle": "cooler-master-mfx-b2dw-253p2-r2-venclr670",
+      "title": "Enfriamiento y Ventilación COOLER MASTER MFX-B2DW-253P2-R2",
+      "vendor": "COOLER MASTER",
+      "price": 336,
+      "img": "481.45",
+      "type": "Ensamble",
+      "subtype": "Enfriamiento y Ventilación"
+    },
+    {
+      "handle": "manhattan-700955-venitl280",
+      "title": "Ventilador MANHATTAN 700955",
+      "vendor": "MANHATTAN",
+      "price": 244,
+      "img": "60.20",
+      "type": "Ensamble",
+      "subtype": "Enfriamiento y Ventilación"
+    },
+    {
+      "handle": "naceb-gaming-na-0922-venncb020",
+      "title": "Ventilador Naceb Gaming NA-0922",
+      "vendor": "Naceb Gaming",
+      "price": 125,
+      "img": "87.78",
+      "type": "Ensamble",
+      "subtype": "Enfriamiento y Ventilación"
+    },
+    {
+      "handle": "naceb-technology-na-0962-venncb180",
+      "title": "Kit de ventiladores Naceb Technology NA-0962",
+      "vendor": "Naceb Technology",
+      "price": 141,
+      "img": "488.89",
+      "type": "Ensamble",
+      "subtype": "Enfriamiento y Ventilación"
+    },
+    {
+      "handle": "silimex-silitek-slxlmp090",
+      "title": "Grasa Disipadora SILIMEX SILITEK",
+      "vendor": "SILIMEX",
+      "price": 120,
+      "img": "73.75",
+      "type": "Accesorios para Electronica",
+      "subtype": "Limpieza"
+    }
+  ],
+  "monitor": [
+    {
+      "handle": "acer-ek221q-hbi-monacr1740",
+      "title": "Monitores ACER EK221Q Hbi",
+      "vendor": "ACER",
+      "price": 3329,
+      "img": "1041.49",
+      "type": "Ensamble",
+      "subtype": "Monitores"
+    },
+    {
+      "handle": "acteck-captive-lite-cl215-monact110",
+      "title": "Monitores ACTECK CAPTIVE LITE CL215",
+      "vendor": "ACTECK",
+      "price": 855,
+      "img": "842.11",
+      "type": "Ensamble",
+      "subtype": "Monitores"
+    },
+    {
+      "handle": "aoc-22b35hm23-monaoc1000",
+      "title": "Monitor AOC 22B35HM23",
+      "vendor": "AOC",
+      "price": 1085,
+      "img": "982.95",
+      "type": "Ensamble",
+      "subtype": "Monitores"
+    },
+    {
+      "handle": "aoc-27b35h3-monaoc1020",
+      "title": "Monitor AOC 27B35H3",
+      "vendor": "AOC",
+      "price": 801,
+      "img": "1500.00",
+      "type": "Ensamble",
+      "subtype": "Monitores"
+    },
+    {
+      "handle": "benq-gw2490e-monbnq1690",
+      "title": "Monitores BENQ GW2490E",
+      "vendor": "BENQ",
+      "price": 978,
+      "img": "1513.68",
+      "type": "Ensamble",
+      "subtype": "Monitores"
+    },
+    {
+      "handle": "dell-se2426h-mondll8360",
+      "title": "Monitor DELL SE2426H",
+      "vendor": "DELL",
+      "price": 1007,
+      "img": "1520.83",
+      "type": "Ensamble",
+      "subtype": "Monitores"
+    },
+    {
+      "handle": "gigabyte-gs24f14-mongig320",
+      "title": "Monitor GIGABYTE GS24F14",
+      "vendor": "GIGABYTE",
+      "price": 893,
+      "img": "1214.04",
+      "type": "Computadoras Gaming",
+      "subtype": "Monitores Gaming"
+    },
+    {
+      "handle": "lg-27u411b-b-monlge3700",
+      "title": "Monitores LG 27U411B-B",
+      "vendor": "LG",
+      "price": 1016,
+      "img": "2052.63",
+      "type": "Ensamble",
+      "subtype": "Monitores"
+    },
+    {
+      "handle": "lg-24u411b-b-monlge3710",
+      "title": "Monitores LG 24U411B-B",
+      "vendor": "LG",
+      "price": 1438,
+      "img": "1570.00",
+      "type": "Ensamble",
+      "subtype": "Monitores"
+    },
+    {
+      "handle": "samsung-ls27d360galxzx-monsmg2040",
+      "title": "Monitores SAMSUNG LS27D360GALXZX",
+      "vendor": "SAMSUNG",
+      "price": 1681,
+      "img": "2247.37",
+      "type": "Ensamble",
+      "subtype": "Monitores"
+    },
+    {
+      "handle": "samsung-ls24d300galxzx-monsmg2090",
+      "title": "Monitores SAMSUNG LS24D300GALXZX",
+      "vendor": "SAMSUNG",
+      "price": 1081,
+      "img": "1425.26",
+      "type": "Ensamble",
+      "subtype": "Monitores"
+    }
+  ]
+}
