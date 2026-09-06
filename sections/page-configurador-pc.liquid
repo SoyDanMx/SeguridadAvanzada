@@ -356,18 +356,115 @@
     font-size: 0.85rem;
   }
 
+  .pcb-header-edit-btn {
+    background: #f1f5f9;
+    color: #2563eb;
+    border: 1px solid #cbd5e1;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .pcb-header-edit-btn:hover {
+    background: #eff6ff;
+    border-color: #93c5fd;
+    color: #1d4ed8;
+  }
+
   .pcb-selected-card-right {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
     flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .pcb-qty-picker-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #f8fafc;
+    padding: 0.35rem 0.65rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .pcb-qty-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #475569;
+  }
+
+  .pcb-component-stepper {
+    display: inline-flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .pcb-comp-step-btn {
+    width: 32px;
+    height: 32px;
+    background: #f8fafc;
+    border: none;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #1e293b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+
+  .pcb-comp-step-btn:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+
+  .pcb-comp-qty-input {
+    width: 44px;
+    height: 32px;
+    border: none;
+    border-left: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #0f172a;
+    -moz-appearance: textfield;
+  }
+
+  .pcb-comp-qty-input::-webkit-outer-spin-button,
+  .pcb-comp-qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .pcb-selected-price-box {
+    text-align: right;
   }
 
   .pcb-selected-price {
     font-size: 1.45rem;
     font-weight: 800;
     color: #1e3a8a;
-    text-align: right;
+    line-height: 1.1;
+  }
+
+  .pcb-selected-unit-price {
+    font-size: 0.82rem;
+    color: #64748b;
+    font-weight: 500;
+    margin-top: 0.2rem;
   }
 
   .pcb-selected-actions {
@@ -381,9 +478,18 @@
     border: 1px solid #bfdbfe;
     padding: 0.5rem 1rem;
     border-radius: 6px;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.95rem;
     cursor: pointer;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .pcb-btn-change:hover {
+    background: #dbeafe;
+    border-color: #93c5fd;
   }
 
   .pcb-btn-remove {
@@ -392,9 +498,50 @@
     border: 1px solid #fecaca;
     padding: 0.5rem 1rem;
     border-radius: 6px;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.95rem;
     cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .pcb-btn-remove:hover {
+    background: #fee2e2;
+  }
+
+  .pcb-editing-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #eff6ff;
+    border: 1px solid #93c5fd;
+    border-radius: 8px;
+    padding: 0.85rem 1.15rem;
+    margin-bottom: 1.25rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .pcb-editing-text {
+    font-size: 0.95rem;
+    color: #1e40af;
+  }
+
+  .pcb-editing-cancel-btn {
+    background: #ffffff;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    padding: 0.45rem 0.95rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .pcb-editing-cancel-btn:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+    border-color: #94a3b8;
   }
 
   /* Filtros y catálogo de selección */
@@ -1004,6 +1151,7 @@
       selected: {},
       systemQty: 1,
       activeStep: 'cpu',
+      editingStep: null,
       searchFilters: {},
       fallbackImg: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='4' width='16' height='16' rx='2'/%3E%3Cpath d='M9 9h6v6H9z'/%3E%3Cpath d='M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3'/%3E%3C/svg%3E",
 
@@ -1011,6 +1159,33 @@
         this.renderAccordion();
         this.updateSummary();
         this.calcDeliveryDate();
+      },
+
+      editStep: function(catKey) {
+        this.editingStep = catKey;
+        this.activeStep = catKey;
+        this.renderAccordion();
+      },
+
+      cancelEdit: function() {
+        this.editingStep = null;
+        this.renderAccordion();
+      },
+
+      setItemQty: function(catKey, delta) {
+        if (!this.selected[catKey]) return;
+        const cur = this.selected[catKey].qty || 1;
+        this.selected[catKey].qty = Math.max(1, Math.min(8, cur + delta));
+        this.renderAccordion();
+        this.updateSummary();
+      },
+
+      setItemQtyDirect: function(catKey, value) {
+        if (!this.selected[catKey]) return;
+        const parsed = parseInt(value, 10);
+        this.selected[catKey].qty = isNaN(parsed) ? 1 : Math.max(1, Math.min(8, parsed));
+        this.renderAccordion();
+        this.updateSummary();
       },
 
       calcDeliveryDate: function() {
@@ -1038,7 +1213,9 @@
       },
 
       selectItem: function(catKey, item) {
-        this.selected[catKey] = { ...item, qty: 1 };
+        const prevQty = this.selected[catKey] ? this.selected[catKey].qty : 1;
+        this.selected[catKey] = { ...item, qty: prevQty || 1 };
+        this.editingStep = null;
         
         // Si se cambia el procesador, verificar si la tarjeta madre actual es compatible
         if (catKey === 'cpu') {
@@ -1068,6 +1245,7 @@
 
       removeItem: function(catKey) {
         delete this.selected[catKey];
+        if (this.editingStep === catKey) this.editingStep = null;
         this.renderAccordion();
         this.updateSummary();
       },
@@ -1075,6 +1253,7 @@
       resetConfig: function() {
         this.selected = {};
         this.activeStep = 'cpu';
+        this.editingStep = null;
         this.renderAccordion();
         this.updateSummary();
       },
@@ -1113,6 +1292,7 @@
           const isSelected = !!this.selected[step.key];
           const selectedItem = this.selected[step.key];
           const isActive = this.activeStep === step.key;
+          const isEditing = this.editingStep === step.key;
 
           html += `
             <li class="pcb-step-item ${isActive ? 'active' : ''}">
@@ -1125,17 +1305,24 @@
                       ${isSelected ? '<span class="pcb-badge-compat">✓ Seleccionado</span>' : ''}
                     </span>
                     <span class="pcb-step-status ${isSelected ? 'selected' : ''}">
-                      ${isSelected ? selectedItem.title + ' — $' + selectedItem.price.toLocaleString('es-MX') + ' MXN' : step.placeholder}
+                      ${isSelected ? selectedItem.title + ((selectedItem.qty || 1) > 1 ? ' (' + selectedItem.qty + ' pzas)' : '') + ' — $' + (selectedItem.price * (selectedItem.qty || 1)).toLocaleString('es-MX') + ' MXN' : step.placeholder}
                     </span>
                   </div>
                 </div>
-                <svg class="pcb-step-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  ${isSelected ? `
+                    <button type="button" class="pcb-header-edit-btn" onclick="event.stopPropagation(); pcbApp.editStep('${step.key}')" title="Editar este componente">
+                      ✏️ Editar
+                    </button>
+                  ` : ''}
+                  <svg class="pcb-step-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                </div>
               </div>
 
               <div class="pcb-step-body">
           `;
 
-          if (isSelected) {
+          if (isSelected && !isEditing) {
             html += `
               <div class="pcb-selected-card">
                 <div class="pcb-selected-card-left">
@@ -1151,9 +1338,22 @@
                   </div>
                 </div>
                 <div class="pcb-selected-card-right">
-                  <div class="pcb-selected-price">$${(selectedItem.price * selectedItem.qty).toLocaleString('es-MX')} MXN</div>
+                  <div class="pcb-qty-picker-row" title="Modificar cantidad de piezas de este componente">
+                    <span class="pcb-qty-label">Cantidad:</span>
+                    <div class="pcb-component-stepper">
+                      <button type="button" class="pcb-comp-step-btn" onclick="pcbApp.setItemQty('${step.key}', -1)" title="Disminuir cantidad">−</button>
+                      <input type="number" min="1" max="8" value="${selectedItem.qty || 1}" class="pcb-comp-qty-input" onchange="pcbApp.setItemQtyDirect('${step.key}', this.value)">
+                      <button type="button" class="pcb-comp-step-btn" onclick="pcbApp.setItemQty('${step.key}', 1)" title="Aumentar cantidad">+</button>
+                    </div>
+                  </div>
+
+                  <div class="pcb-selected-price-box">
+                    <div class="pcb-selected-price">$${(selectedItem.price * (selectedItem.qty || 1)).toLocaleString('es-MX')} MXN</div>
+                    ${(selectedItem.qty || 1) > 1 ? '<div class="pcb-selected-unit-price">($' + selectedItem.price.toLocaleString('es-MX') + ' c/u)</div>' : ''}
+                  </div>
+
                   <div class="pcb-selected-actions">
-                    <button type="button" class="pcb-btn-change" onclick="pcbApp.activeStep = '${step.key}'; pcbApp.renderAccordion();">Cambiar</button>
+                    <button type="button" class="pcb-btn-change" onclick="pcbApp.editStep('${step.key}')">✏️ Editar</button>
                     <button type="button" class="pcb-btn-remove" onclick="pcbApp.removeItem('${step.key}')">Quitar</button>
                   </div>
                 </div>
@@ -1163,6 +1363,15 @@
             const availableItems = this.getAvailableProducts(step.key);
             html += `
               <div class="pcb-picker-wrap">
+                ${isEditing ? `
+                  <div class="pcb-editing-banner">
+                    <div class="pcb-editing-text">
+                      ✏️ <strong>Modo Edición:</strong> Elige otra opción para reemplazar <strong>${selectedItem.title}</strong> (${selectedItem.qty || 1} pza${(selectedItem.qty || 1) > 1 ? 's' : ''}).
+                    </div>
+                    <button type="button" class="pcb-editing-cancel-btn" onclick="pcbApp.cancelEdit()">✕ Conservar pieza actual</button>
+                  </div>
+                ` : ''}
+
                 <div class="pcb-picker-controls">
                   <input type="text" class="pcb-search-input" placeholder="Buscar ${step.name.toLowerCase()}..." 
                     value="${this.searchFilters[step.key] || ''}" 
@@ -1245,17 +1454,21 @@
         }
 
         let summaryHtml = '';
+        let totalPiecesCount = 0;
+
         keys.forEach(k => {
           const item = this.selected[k];
-          const linePrice = item.price * item.qty;
+          const qty = item.qty || 1;
+          const linePrice = item.price * qty;
           totalSingle += linePrice;
+          totalPiecesCount += qty;
 
           summaryHtml += `
             <div class="pcb-summary-item">
               <img src="${item.img}" alt="${item.title}" class="pcb-summary-item-img" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=pcbApp.fallbackImg;">
               <div class="pcb-summary-item-info">
                 <div class="pcb-summary-item-name" title="${item.title}">${item.title}</div>
-                <div class="pcb-summary-item-meta">${item.qty} pza &bull; ${item.vendor}</div>
+                <div class="pcb-summary-item-meta">${qty} pza${qty > 1 ? 's' : ''} &bull; ${item.vendor}</div>
               </div>
               <div class="pcb-summary-item-price">$${linePrice.toLocaleString('es-MX')}</div>
             </div>
@@ -1265,7 +1478,7 @@
         const grandTotal = totalSingle * this.systemQty;
 
         listEl.innerHTML = summaryHtml;
-        countEl.textContent = keys.length + ' piezas';
+        countEl.textContent = totalPiecesCount + ' pieza' + (totalPiecesCount !== 1 ? 's' : '');
         subtotalEl.textContent = '$' + (totalSingle * this.systemQty).toLocaleString('es-MX') + ' MXN';
         totalEl.textContent = '$' + grandTotal.toLocaleString('es-MX') + ' MXN';
         stickyTotalEl.textContent = '$' + grandTotal.toLocaleString('es-MX') + ' MXN';
