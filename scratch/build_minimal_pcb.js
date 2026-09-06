@@ -1,4 +1,63 @@
-{% comment %}
+const fs = require('fs');
+
+// 1. Read existing liquid to extract base catalog data
+const existingContent = fs.readFileSync('sections/page-configurador-pc.liquid', 'utf8');
+const catalogMatch = existingContent.match(/<script id="pcb-catalog-data" type="application\/json">([\s\S]*?)<\/script>/);
+
+if (!catalogMatch) {
+  console.error('Error: Could not find pcb-catalog-data in existing liquid file.');
+  process.exit(1);
+}
+
+const catalog = JSON.parse(catalogMatch[1].trim());
+
+// 2. Load created furniture & peripherals
+const createdFurniture = JSON.parse(fs.readFileSync('scratch/shopify_created_furniture.json', 'utf8'));
+const createdPeripherals = JSON.parse(fs.readFileSync('scratch/shopify_created_peripherals.json', 'utf8'));
+
+catalog.furniture = createdFurniture.map(item => ({
+  id: item.id,
+  title: item.title,
+  vendor: item.vendor,
+  price: item.price,
+  img: item.img,
+  sku: item.sku,
+  socket: '',
+  brand: item.vendor,
+  ramType: '',
+  capacity: '',
+  watts: '',
+  coolerType: '',
+  hz: '',
+  category: item.category,
+  isGamer: item.category.toLowerCase().includes('gamer'),
+  variantId: String(item.variantId),
+  inStock: item.inStock !== false
+}));
+
+catalog.peripherals = createdPeripherals.map(item => ({
+  id: item.id,
+  title: item.title,
+  vendor: item.vendor,
+  price: item.price,
+  img: item.img,
+  sku: item.sku,
+  socket: '',
+  brand: item.vendor,
+  ramType: '',
+  capacity: '',
+  watts: '',
+  coolerType: '',
+  hz: '',
+  category: item.category,
+  isGamer: item.category.toLowerCase().includes('gamer'),
+  variantId: String(item.variantId),
+  inStock: item.inStock !== false
+}));
+
+const catalogJson = JSON.stringify(catalog);
+
+const newLiquidContent = `{% comment %}
   CONFIGURADOR DE PC - SEGURIDAD AVANZADA
   Diseño Minimalista, Sobrio y de Cero Fricción
   Tipografía refinada (Outfit & Plus Jakarta Sans), paleta monocromática elegante,
@@ -1832,7 +1891,7 @@
 </div>
 
 <script id="pcb-catalog-data" type="application/json">
-{"cpu":[{"id":"procesador-intel-core-i9-14900k-lga1700","title":"Procesador Intel Core i9-14900K (14a Gen)","vendor":"Intel","price":12319,"img":"https://static.ctonline.mx/imagenes/CPUINT4450/CPUINT4450_full.jpg","sku":"CPUINT4450","socket":"LGA1700","brand":"Intel","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":true,"variantId":"52774710214788","inStock":false},{"id":"procesador-intel-core-i7-14700k-lga1700","title":"Procesador Intel Core i7-14700K (14a Gen)","vendor":"Intel","price":9539,"img":"https://static.ctonline.mx/imagenes/CPUINT4430/CPUINT4430_full.jpg","sku":"CPUINT4430","socket":"LGA1700","brand":"Intel","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":true,"variantId":"52774710182020","inStock":true},{"id":"procesador-intel-core-i9-12900k-lga1700","title":"Procesador Intel Core i9-12900K","vendor":"Intel","price":9456,"img":"https://static.ctonline.mx/imagenes/CPUINT4010/CPUINT4010_full.jpg","sku":"CPUINT4010","socket":"LGA1700","brand":"Intel","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":true,"variantId":"52774710149252","inStock":false},{"id":"procesador-intel-core-i7-12700kf-lga1700","title":"Procesador Intel Core i7-12700KF","vendor":"Intel","price":7565,"img":"https://static.ctonline.mx/imagenes/CPUINT4000/CPUINT4000_full.jpg","sku":"CPUINT4000","socket":"LGA1700","brand":"Intel","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":true,"variantId":"52774710116484","inStock":true},{"id":"procesador-intel-core-i5-12400f-lga1700","title":"Procesador Intel Core i5-12400F","vendor":"Intel","price":4049,"img":"https://static.ctonline.mx/imagenes/CPUINT4080/CPUINT4080_full.jpg","sku":"CPUINT4080","socket":"LGA1700","brand":"Intel","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52774710018180","inStock":true},{"id":"procesador-intel-core-i3-12100-lga1700","title":"Procesador Intel Core i3-12100","vendor":"Intel","price":3307,"img":"https://static.ctonline.mx/imagenes/CPUINT4170/CPUINT4170_full.jpg","sku":"CPUINT4170","socket":"LGA1700","brand":"Intel","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52774710083716","inStock":true},{"id":"amd-ryzen-7-5700g-cpuamd2290","title":"Procesador  AMD RYZEN 7 5700G","vendor":"AMD","price":4109,"img":"https://static.ctonline.mx/imagenes/CPUAMD2290/CPUAMD2290_full.jpg","sku":"100-100000263BOX","socket":"AM4","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981030020","inStock":true},{"id":"amd-7600x-cpuamd2420","title":"Procesador AMD 7600X","vendor":"AMD","price":4622,"img":"https://static.ctonline.mx/imagenes/CPUAMD2420/CPUAMD2420_full.jpg","sku":"100-100000593WOF","socket":"AM5","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981062788","inStock":true},{"id":"amd-100-100000651wof-cpuamd2460","title":"Procesador AMD 100-100000651WOF","vendor":"AMD","price":7233,"img":"https://static.ctonline.mx/imagenes/CPUAMD2460/CPUAMD2460_1_full.jpg","sku":"100-100000651WOF","socket":"AM4","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981095556","inStock":false},{"id":"amd-7900-cpuamd2480","title":"Procesador AMD 7900","vendor":"AMD","price":6919,"img":"https://static.ctonline.mx/imagenes/CPUAMD2480/CPUAMD2480_full.jpg","sku":"100-100000590WOF","socket":"AM5","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981128324","inStock":true},{"id":"amd-5700x-cpuamd2500","title":"Procesador AMD 5700X","vendor":"AMD","price":4513,"img":"https://static.ctonline.mx/imagenes/CPUAMD2500/CPUAMD2500_full.jpg","sku":"100-100000926WOF","socket":"AM4","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981161092","inStock":true},{"id":"amd-5500-cpuamd2520","title":"Procesador AMD 5500","vendor":"AMD","price":2594,"img":"https://static.ctonline.mx/imagenes/CPUAMD2520/CPUAMD2520_full.jpg","sku":"100-100000457BOX","socket":"AM4","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981193860","inStock":true},{"id":"amd-8700g-cpuamd2580","title":"Procesador AMD 8700G","vendor":"AMD","price":6775,"img":"https://static.ctonline.mx/imagenes/CPUAMD2580/CPUAMD2580_full.jpg","sku":"100-100001236BOX","socket":"AM5","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981226628","inStock":false},{"id":"amd-100-100000910wof-cpuamd2640","title":"Procesadores AMD 100-100000910WOF","vendor":"AMD","price":8403,"img":"https://static.ctonline.mx/imagenes/CPUAMD2640/CPUAMD2640_full.jpg","sku":"100-100000910WOF","socket":"AM4","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981259396","inStock":true},{"id":"amd-9-5900xt-cpuamd2710","title":"Procesador AMD 9 5900XT","vendor":"AMD","price":7905,"img":"https://static.ctonline.mx/imagenes/CPUAMD2710/CPUAMD2710_full.jpg","sku":"100-100001581WOF","socket":"AM4","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981292164","inStock":true},{"id":"amd-7-9700x-cpuamd2740","title":"Procesador AMD 7 9700X","vendor":"AMD","price":7166,"img":"https://static.ctonline.mx/imagenes/CPUAMD2740/CPUAMD2740_full.jpg","sku":"100-100001404WOF","socket":"AM5","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981324932","inStock":true},{"id":"amd-9-9900x-cpuamd2750","title":"Procesador AMD 9 9900X","vendor":"AMD","price":8529,"img":"https://static.ctonline.mx/imagenes/CPUAMD2750/CPUAMD2750_full.jpg","sku":"100-100000662WOF","socket":"AM5","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981357700","inStock":false},{"id":"amd-9-9950x-cpuamd2760","title":"Procesador AMD 9 9950X","vendor":"AMD","price":11954,"img":"https://static.ctonline.mx/imagenes/CPUAMD2760/CPUAMD2760_full.jpg","sku":"100-100001277WOF","socket":"AM5","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981390468","inStock":true},{"id":"amd-amd-ryzen-5-8400f-cpuamd2800","title":"Microprocesadores AMD AMD RYZEN 5 8400F","vendor":"AMD","price":3052,"img":"https://static.ctonline.mx/imagenes/CPUAMD2800/CPUAMD2800_1_full.jpg","sku":"100-100001591BOX","socket":"AM4","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981423236","inStock":true},{"id":"amd-amd-ryzen-7-8700f-cpuamd2810","title":"Microprocesadores AMD AMD RYZEN 7 8700F","vendor":"AMD","price":4773,"img":"https://static.ctonline.mx/imagenes/CPUAMD2810/CPUAMD2810_full.jpg","sku":"100-100001590BOX","socket":"AM5","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981456004","inStock":true},{"id":"amd-100-100001084wof-cpuamd2830","title":"Microprocesadores AMD 100-100001084WOF","vendor":"AMD","price":9754,"img":"https://static.ctonline.mx/imagenes/CPUAMD2830/CPUAMD2830_full.jpg","sku":"100-100001084WOF","socket":"AM4","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981488772","inStock":false},{"id":"amd-100-100001368wof-cpuamd2850","title":"Microprocesadores AMD 100-100001368WOF","vendor":"AMD","price":12236,"img":"https://static.ctonline.mx/imagenes/CPUAMD2850/CPUAMD2850_5_full.jpg","sku":"100-100001368WOF","socket":"AM4","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981521540","inStock":true},{"id":"amd-100-100000719wof-cpuamd2860","title":"Microprocesadores AMD 100-100000719WOF","vendor":"AMD","price":14295,"img":"https://static.ctonline.mx/imagenes/CPUAMD2860/CPUAMD2860_full.jpg","sku":"100-100000719WOF","socket":"AM4","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981554308","inStock":true},{"id":"amd-100-100001236sbx-cpuamd2900","title":"Microprocesadores AMD 100-100001236SBX","vendor":"AMD","price":6535,"img":"https://static.ctonline.mx/imagenes/CPUAMD2900/CPUAMD2900_full.jpg","sku":"100-100001236SBX","socket":"AM4","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981587076","inStock":true},{"id":"amd-9-9950x3d2-cpuamd2940","title":"Microprocesadores AMD 9-9950X3D2","vendor":"AMD","price":19173,"img":"https://static.ctonline.mx/imagenes/CPUAMD2940/CPUAMD2940_full.jpg","sku":"100-100001978WO","socket":"AM5","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981619844","inStock":false},{"id":"amd-ryzen-5-5600ge-cpuamd3020","title":"Procesador AMD RYZEN 5 5600GE","vendor":"AMD","price":5606,"img":"https://static.ctonline.mx/imagenes/CPUAMD3020/CPUAMD3020_full.jpg","sku":"100-100000261BOX","socket":"AM4","brand":"AMD","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766981652612","inStock":true}],"mobo":[{"id":"asus-b550m-plus-mbdass4890","title":"Motherboard Gaming ASUS B550M-PLUS","vendor":"ASUS","price":2783,"img":"https://static.ctonline.mx/imagenes/MBDASS4890/MBDASS4890_full.jpg","sku":"B550M-PLUS","socket":"AM4","brand":"","ramType":"DDR4","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766987681924","inStock":false},{"id":"asus-prime-b550m-k-mbdass4950","title":"Motherboard  ASUS PRIME B550M-K","vendor":"ASUS","price":1559,"img":"https://static.ctonline.mx/imagenes/MBDASS4950/MBDASS4950_full.jpg","sku":"90MB14V0-M0AAY0","socket":"AM4","brand":"","ramType":"DDR4","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766987747460","inStock":true},{"id":"asus-prime-b550m-a-ac-mbdass5490","title":"Motherboard  ASUS PRIME B550M-A AC","vendor":"ASUS","price":1596,"img":"https://static.ctonline.mx/imagenes/MBDASS5490/MBDASS5490_full.jpg","sku":"90MB15K0-M0EAY0","socket":"AM4","brand":"","ramType":"DDR4","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766987812996","inStock":true},{"id":"asus-tuf-gaming-a520m-plus-wifi-mbdass5480","title":"Motherboard  ASUS TUF GAMING A520M-PLUS WIFI","vendor":"ASUS","price":1551,"img":"https://static.ctonline.mx/imagenes/MBDASS5480/MBDASS5480_full.jpg","sku":"90MB14Y0-M0EAY0","socket":"AM4","brand":"","ramType":"DDR4","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766987911300","inStock":true},{"id":"asus-prime-a520m-k-mbdass5820","title":"Motherboard ASUS PRIME A520M-K","vendor":"ASUS","price":887,"img":"https://static.ctonline.mx/imagenes/MBDASS5820/MBDASS5820_full.jpg","sku":"A520M-K","socket":"AM4","brand":"","ramType":"DDR4","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766987944068","inStock":false},{"id":"asus-prime-b840m-a-mbdass6220","title":"Motherboards ASUS PRIME B840M-A","vendor":"ASUS","price":2896,"img":"https://static.ctonline.mx/imagenes/MBDASS6220/MBDASS6220_full.jpg","sku":"PRIME B840M-A","socket":"LGA1851","brand":"","ramType":"DDR5","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766988009604","inStock":true},{"id":"asus-mb-asus-tuf-gaming-b850-plus-wifi-mbdass6110","title":"Motherboards ASUS MB ASUS TUF GAMING B850-PLUS WIFI","vendor":"ASUS","price":4601,"img":"https://static.ctonline.mx/imagenes/MBDASS6110/MBDASS6110_full.jpg","sku":"TUF GAMING B850-PLUS WIFI","socket":"AM5","brand":"","ramType":"DDR5","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766988140676","inStock":true},{"id":"asus-prime-h610m-k-mbdass6240","title":"Motherboards Gaming ASUS PRIME H610M-K","vendor":"ASUS","price":1450,"img":"https://static.ctonline.mx/imagenes/MBDASS6240/MBDASS6240_full.jpg","sku":"PRIME H610M-K","socket":"LGA1700","brand":"","ramType":"DDR4","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766988238980","inStock":true},{"id":"ecs-h610h7-m2-mbdecs2220","title":"Tarjeta Madre  ECS H610H7-M2","vendor":"ECS","price":1071,"img":"https://static.ctonline.mx/imagenes/MBDECS2220/MBDECS2220_full.jpg","sku":"H610H7-M2","socket":"LGA1700","brand":"","ramType":"DDR4","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767109185668","inStock":false},{"id":"ecs-a520am4-m3d-mbdecs2200","title":"Motherboard ECS A520AM4-M3D","vendor":"ECS","price":894,"img":"https://static.ctonline.mx/imagenes/MBDECS2200/MBDECS2200_full.jpg","sku":"89-206-MZ2113","socket":"AM4","brand":"","ramType":"DDR4","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767109251204","inStock":true},{"id":"ecs-adln-i-n100-mbdecs2280","title":"Motherboards ECS ADLN-I N100","vendor":"ECS","price":1513,"img":"https://static.ctonline.mx/imagenes/MBDECS2280/MBDECS2280_full.jpg","sku":"89-206-QB5109","socket":"LGA1700","brand":"","ramType":"DDR4","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767109382276","inStock":true},{"id":"ecs-motherboard-ecs-z890h8-a2-mbdecs2300","title":"Motherboards ECS MOTHERBOARD ECS Z890H8-A2","vendor":"ECS","price":2315,"img":"https://static.ctonline.mx/imagenes/MBDECS2300/MBDECS2300_full.jpg","sku":"Z890H8-A2","socket":"LGA1851","brand":"","ramType":"DDR5","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767109447812","inStock":true},{"id":"ecs-h810h8-m2-mbdecs2310","title":"Motherboards ECS H810H8-M2","vendor":"ECS","price":1641,"img":"https://static.ctonline.mx/imagenes/MBDECS2310/MBDECS2310_full.jpg","sku":"89-206-QH1106","socket":"LGA1700","brand":"","ramType":"DDR4","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767109644420","inStock":false},{"id":"gigabyte-a520m-k-mbdgig4840","title":"Motherboard GIGABYTE A520M K","vendor":"GIGABYTE","price":850,"img":"https://static.ctonline.mx/imagenes/MBDGIG4840/MBDGIG4840_full.jpg","sku":"A520M K V2","socket":"AM4","brand":"","ramType":"DDR4","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767132057732","inStock":true},{"id":"gigabyte-mb-gigabyte-h610m-k-ddr4-mbdgig5040","title":"Motherboard GIGABYTE MB GIGABYTE H610M K DDR4","vendor":"GIGABYTE","price":1263,"img":"https://static.ctonline.mx/imagenes/MBDGIG5040/MBDGIG5040_full.jpg","sku":"H610M K DDR4","socket":"LGA1700","brand":"","ramType":"DDR4","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767132123268","inStock":true},{"id":"gigabyte-mb-gigabyte-b760m-d3hp-mbdgig5180","title":"Motherboards GIGABYTE MB GIGABYTE B760M D3HP","vendor":"GIGABYTE","price":2040,"img":"https://static.ctonline.mx/imagenes/MBDGIG5180/MBDGIG5180_4_full.jpg","sku":"B760M D3HP","socket":"LGA1700","brand":"","ramType":"DDR4","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767132188804","inStock":true},{"id":"gigabyte-b650m-d3hp-mbdgig5140","title":"Motherboards GIGABYTE B650M D3HP","vendor":"GIGABYTE","price":2216,"img":"https://static.ctonline.mx/imagenes/MBDGIG5140/MBDGIG5140_full.jpg","sku":"B650M D3HP","socket":"AM5","brand":"","ramType":"DDR5","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767132647556","inStock":false},{"id":"gigabyte-x870-a-elite-wf7-ice-mbdgig5340","title":"Motherboards GIGABYTE X870 A ELITE WF7 ICE","vendor":"GIGABYTE","price":5273,"img":"https://static.ctonline.mx/imagenes/MBDGIG5340/MBDGIG5340_full.jpg","sku":"X870 A ELITE WF7 ICE","socket":"AM5","brand":"","ramType":"DDR5","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767132745860","inStock":true},{"id":"gigabyte-b650m-aorus-elite-ax-mbdgig5320","title":"Motherboards GIGABYTE B650M AORUS ELITE AX","vendor":"GIGABYTE","price":3511,"img":"https://static.ctonline.mx/imagenes/MBDGIG5320/MBDGIG5320_full.jpg","sku":"B650M AORUS ELITE AX","socket":"AM5","brand":"","ramType":"DDR5","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767132811396","inStock":true},{"id":"gigabyte-b650m-a-elite-ax-ice-mbdgig5310","title":"Motherboards GIGABYTE B650M A ELITE AX ICE","vendor":"GIGABYTE","price":3498,"img":"https://static.ctonline.mx/imagenes/MBDGIG5310/MBDGIG5310_full.jpg","sku":"B650M A ELITE AX ICE","socket":"AM5","brand":"","ramType":"DDR5","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767132876932","inStock":true},{"id":"gigabyte-b650-a-elite-ax-ice-mbdgig5010","title":"Motherboards GIGABYTE B650 A  ELITE AX  ICE","vendor":"GIGABYTE","price":3666,"img":"https://static.ctonline.mx/imagenes/MBDGIG5010/MBDGIG5010_full.jpg","sku":"B650 A  ELITE AX  ICE","socket":"AM5","brand":"","ramType":"DDR5","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767132942468","inStock":false},{"id":"gigabyte-b650-eagle-ax-mbdgig5110","title":"Motherboard GIGABYTE  B650 EAGLE AX","vendor":"GIGABYTE","price":3072,"img":"https://static.ctonline.mx/imagenes/MBDGIG5110/MBDGIG5110_full.jpg","sku":"B650 EAGLE AX","socket":"AM5","brand":"","ramType":"DDR5","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767133040772","inStock":true}],"ram":[{"id":"adata-premier-memdat5970","title":"Memoria ADATA PREMIER","vendor":"ADATA","price":1222,"img":"https://static.ctonline.mx/imagenes/MEMDAT5970/MEMDAT5970_full.jpg","sku":"AD4S26668G19-SGN","socket":"","brand":"","ramType":"DDR4","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766977589380","inStock":false},{"id":"adata-ad4s320016g22-sgn-memdat5890","title":"Memoria RAM ADATA AD4S320016G22-SGN","vendor":"ADATA","price":2430,"img":"https://static.ctonline.mx/imagenes/MEMDAT5890/MEMDAT5890_full.jpg","sku":"AD4S320016G22-SGN","socket":"","brand":"","ramType":"DDR4","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766977654916","inStock":true},{"id":"adata-ad4u266616g19-sgn-memdat6090","title":"Memoria Ram ADATA AD4U266616G19-SGN","vendor":"ADATA","price":3190,"img":"https://static.ctonline.mx/imagenes/MEMDAT6090/MEMDAT6090_full.jpg","sku":"AD4U266616G19-SGN","socket":"","brand":"","ramType":"DDR4","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766977687684","inStock":true},{"id":"adata-ad4u320032g22-sgn-memdat6130","title":"Memoria ADATA AD4U320032G22-SGN","vendor":"ADATA","price":6993,"img":"https://static.ctonline.mx/imagenes/MEMDAT6130/MEMDAT6130_full.jpg","sku":"AD4U320032G22-SGN","socket":"","brand":"","ramType":"DDR4","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766977917060","inStock":true},{"id":"adata-ad5s480016g-s-memdat6470","title":"Memoria RAM ADATA AD5S480016G-S","vendor":"ADATA","price":4589,"img":"https://static.ctonline.mx/imagenes/MEMDAT6470/MEMDAT6470_full.jpg","sku":"AD5S480016G-S","socket":"","brand":"","ramType":"DDR4","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766978408580","inStock":false},{"id":"adata-ad5s560016g-s-memdat6780","title":"Memoria RAM ADATA AD5S560016G-S","vendor":"ADATA","price":4368,"img":"https://static.ctonline.mx/imagenes/MEMDAT6780/MEMDAT6780_full.jpg","sku":"AD5S560016G-S","socket":"","brand":"","ramType":"DDR4","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766978965636","inStock":true},{"id":"adata-gammix-d35-memdat6870","title":"MEMORIAS RAM ADATA GAMMIX D35","vendor":"ADATA","price":2888,"img":"https://static.ctonline.mx/imagenes/MEMDAT6870/MEMDAT6870_full.jpg","sku":"AX4U320016G16A-SWHD35","socket":"","brand":"","ramType":"DDR4","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766979063940","inStock":true},{"id":"adata-hunter-memdat7220","title":"Memorias RAM ADATA HUNTER","vendor":"ADATA","price":2540,"img":"https://static.ctonline.mx/imagenes/MEMDAT7220/MEMDAT7220_1_full.jpg","sku":"AX4S320016G22-SBHN","socket":"","brand":"","ramType":"DDR4","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766979358852","inStock":true},{"id":"adata-hunter-ddr5-memdat7410","title":"Memorias RAM ADATA HUNTER DDR5","vendor":"ADATA","price":2393,"img":"https://static.ctonline.mx/imagenes/MEMDAT7410/MEMDAT7410_4_full.jpg","sku":"AX5S5600C468G-SBHT","socket":"","brand":"","ramType":"DDR5","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766980276356","inStock":false},{"id":"adata-hunter-ddr5-memdat7420","title":"Memorias RAM ADATA HUNTER DDR5","vendor":"ADATA","price":4589,"img":"https://static.ctonline.mx/imagenes/MEMDAT7420/MEMDAT7420_full.jpg","sku":"AX5S5600C4616G-SBHT","socket":"","brand":"","ramType":"DDR5","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766980309124","inStock":true},{"id":"hewlett-packard-enterprise-hpe-32gb-4800-memhpe590","title":"Memoria Hewlett Packard Enterprise HPE 32GB 4800","vendor":"Hewlett Packard Enterprise","price":55255,"img":"https://static.ctonline.mx/imagenes/MEMHPE590/MEMHPE590_full.jpg","sku":"P64339-B21","socket":"","brand":"","ramType":"DDR4","capacity":"32GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767139922052","inStock":true},{"id":"kingston-technology-kcp432ss8-8-memkgn2350","title":"Memoria RAM Kingston Technology KCP432SS8/8","vendor":"Kingston Technology","price":2412,"img":"https://static.ctonline.mx/imagenes/MEMKGN2350/MEMKGN2350_1_full.jpg","sku":"KCP432SS8/8","socket":"","brand":"","ramType":"DDR4","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767171477636","inStock":true},{"id":"kingston-technology-valueram-memkgn2690","title":"Memoria RAM  Kingston Technology VALUERAM","vendor":"Kingston Technology","price":1544,"img":"https://static.ctonline.mx/imagenes/MEMKGN2690/MEMKGN2690_2_full.jpg","sku":"KVR16N11/8WP","socket":"","brand":"","ramType":"DDR4","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767171543172","inStock":false},{"id":"kingston-technology-fury-beast-memkgn2870","title":"MEMORIA RAM Kingston Technology FURY Beast","vendor":"Kingston Technology","price":2055,"img":"https://static.ctonline.mx/imagenes/MEMKGN2870/MEMKGN2870_full.jpg","sku":"KF432C16BB/8","socket":"","brand":"","ramType":"DDR4","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767171608708","inStock":true},{"id":"kingston-technology-fury-impact-memkgn3150","title":"Memoria RAM Kingston Technology FURY IMPACT","vendor":"Kingston Technology","price":4736,"img":"https://static.ctonline.mx/imagenes/MEMKGN3150/MEMKGN3150_2_full.jpg","sku":"KF432S20IB/16","socket":"","brand":"","ramType":"DDR4","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767171674244","inStock":true},{"id":"kingston-technology-fury-beast-memkgn3250","title":"Memoria RAM Kingston Technology FURY Beast","vendor":"Kingston Technology","price":5030,"img":"https://static.ctonline.mx/imagenes/MEMKGN3250/MEMKGN3250_full.jpg","sku":"KF432C16BB/32","socket":"","brand":"","ramType":"DDR4","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767171739780","inStock":true}],"ssd":[{"id":"adata-asx8200pnp-512gt-c-ddudat1020","title":"SSD ADATA ASX8200PNP-512GT-C","vendor":"ADATA","price":1895,"img":"https://static.ctonline.mx/imagenes/DDUDAT1020/DDUDAT1020_full.jpg","sku":"ASX8200PNP-512GT-C","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766976278660","inStock":false},{"id":"adata-asu630ss-240gq-r-ddudat1290","title":"SSD ADATA ASU630SS-240GQ-R","vendor":"ADATA","price":824,"img":"https://static.ctonline.mx/imagenes/DDUDAT1290/DDUDAT1290_full.jpg","sku":"ASU630SS-240GQ-R","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766977097860","inStock":true},{"id":"adata-asu630ss-480gq-r-ddudat1300","title":"SSD ADATA ASU630SS-480GQ-R","vendor":"ADATA","price":1424,"img":"https://static.ctonline.mx/imagenes/DDUDAT1300/DDUDAT1300_5_full.jpg","sku":"ASU630SS-480GQ-R","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766977163396","inStock":true},{"id":"adata-asu630ss-960gq-r-ddudat1310","title":"SSD ADATA ASU630SS-960GQ-R","vendor":"ADATA","price":2459,"img":"https://static.ctonline.mx/imagenes/DDUDAT1310/DDUDAT1310_5_full.jpg","sku":"ASU630SS-960GQ-R","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766977196164","inStock":true},{"id":"adata-gammix-s60-dduxpg090","title":"Unidad de estado solido ADATA GAMMIX S60","vendor":"ADATA","price":3826,"img":"https://static.ctonline.mx/imagenes/DDUXPG090/DDUXPG090_2_full.jpg","sku":"AGAMMIXS60-1T-CS","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766978867332","inStock":false},{"id":"adata-gammix-s60-dduxpg100","title":"Unidad de estado solido ADATA \t GAMMIX S60","vendor":"ADATA","price":7086,"img":"https://static.ctonline.mx/imagenes/DDUXPG100/DDUXPG100_full.jpg","sku":"AGAMMIXS60-2T-CS","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766978900100","inStock":true},{"id":"adata-sd620-ddudat1930","title":"SSD ADATA SD620","vendor":"ADATA","price":2968,"img":"https://static.ctonline.mx/imagenes/DDUDAT1930/DDUDAT1930_full.jpg","sku":"SD620-1TCBL","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766978932868","inStock":true},{"id":"adata-se880-ddudat2020","title":"SSD ADATA SE880","vendor":"ADATA","price":12200,"img":"https://static.ctonline.mx/imagenes/DDUDAT2020/DDUDAT2020_full.jpg","sku":"AELI-SE880-4TCGY","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766979227780","inStock":true},{"id":"adata-legend-900-ddudat2100","title":"SSD ADATA LEGEND 900","vendor":"ADATA","price":7131,"img":"https://static.ctonline.mx/imagenes/DDUDAT2100/DDUDAT2100_1_full.jpg","sku":"SLEG-900-2TCS","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766979260548","inStock":false},{"id":"adata-legend-900-ddudat2090","title":"SSD ADATA LEGEND 900","vendor":"ADATA","price":3875,"img":"https://static.ctonline.mx/imagenes/DDUDAT2090/DDUDAT2090_full.jpg","sku":"SLEG-900-1TCS","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766979293316","inStock":true},{"id":"adata-legend-900-ddudat2080","title":"SSD ADATA LEGEND 900","vendor":"ADATA","price":2196,"img":"https://static.ctonline.mx/imagenes/DDUDAT2080/DDUDAT2080_full.jpg","sku":"SLEG-900-512GCS","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766979326084","inStock":true},{"id":"adata-legend-860-ddudat2190","title":"SSD ADATA LEGEND 860","vendor":"ADATA","price":3244,"img":"https://static.ctonline.mx/imagenes/DDUDAT2190/DDUDAT2190_full.jpg","sku":"SLEG-860-1000GCS","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766979391620","inStock":true},{"id":"adata-legend-860-ddudat2200","title":"SSD ADATA LEGEND 860","vendor":"ADATA","price":6375,"img":"https://static.ctonline.mx/imagenes/DDUDAT2200/DDUDAT2200_full.jpg","sku":"SLEG-860-2000GCS","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766979424388","inStock":false},{"id":"adata-legend-860-ddudat2210","title":"SSD ADATA LEGEND 860","vendor":"ADATA","price":2010,"img":"https://static.ctonline.mx/imagenes/DDUDAT2210/DDUDAT2210_full.jpg","sku":"SLEG-860-500GCS","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766979457156","inStock":true},{"id":"adata-sc750-ddudat2130","title":"SSD ADATA SC750","vendor":"ADATA","price":3126,"img":"https://static.ctonline.mx/imagenes/DDUDAT2130/DDUDAT2130_full.jpg","sku":"SC750-1000G-CCBK","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766979489924","inStock":true},{"id":"adata-high-enduranc-memdat7050","title":"SSD ADATA HIGH ENDURANC","vendor":"ADATA","price":2724,"img":"https://static.ctonline.mx/imagenes/MEMDAT7050/MEMDAT7050_full.jpg","sku":"AUSDX512GUI3V30SHA2-RA1","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766979784836","inStock":true},{"id":"adata-sd620-ddudat2140","title":"SSD ADATA SD620","vendor":"ADATA","price":1734,"img":"https://static.ctonline.mx/imagenes/DDUDAT2140/DDUDAT2140_full.jpg","sku":"SD620-512GCBK","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766979850372","inStock":false},{"id":"adata-sc740-ddudat2240","title":"SSD ADATA SC740","vendor":"ADATA","price":3202,"img":"https://static.ctonline.mx/imagenes/DDUDAT2240/DDUDAT2240_full.jpg","sku":"SC740-1000G-CBU","socket":"","brand":"","ramType":"","capacity":"1TB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766980046980","inStock":true}],"case":[{"id":"acteck-bern-gabgen125","title":"Gabinete ACTECK BERN","vendor":"ACTECK","price":1095,"img":"https://ctonline.mx/img/productos/thumbs/sinimagen_110x100.jpg","sku":"GAPC-301","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766950523012","inStock":false},{"id":"acteck-atom-gabact010","title":"Gabinete ACTECK Atom","vendor":"ACTECK","price":826,"img":"https://static.ctonline.mx/imagenes/GABACT010/GABACT010_7_full.jpg","sku":"AC-929042","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766950654084","inStock":true},{"id":"acteck-gi240-a-gc240-gabact140","title":"Gabinete  ACTECK GI240 A GC240","vendor":"ACTECK","price":635,"img":"https://static.ctonline.mx/imagenes/GABACT140/GABACT140_7_full.jpg","sku":"AC-932547","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766958420100","inStock":true},{"id":"acteck-kioto-gc220-essential-gabact160","title":"Gabinete  ACTECK KIOTO GC220 ESSENTIAL","vendor":"ACTECK","price":597,"img":"https://static.ctonline.mx/imagenes/GABACT160/GABACT160_5_full.jpg","sku":"AC-933063","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766960451716","inStock":true},{"id":"acteck-kioto-gc460-rgb-essential-gabact170","title":"Gabinete  ACTECK KIOTO GC460 RGB ESSENTIAL","vendor":"ACTECK","price":741,"img":"https://static.ctonline.mx/imagenes/GABACT170/GABACT170_5_full.jpg","sku":"AC-933070","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":true,"variantId":"52766960517252","inStock":false},{"id":"acteck-gi215-gabact320","title":"Gabinete ACTECK GI215","vendor":"ACTECK","price":597,"img":"https://static.ctonline.mx/imagenes/GABACT320/GABACT320_full.jpg","sku":"AC-935777","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766962253956","inStock":true},{"id":"acteck-gm450-gabact260","title":"Gabinete ACTECK GM450","vendor":"ACTECK","price":891,"img":"https://static.ctonline.mx/imagenes/GABACT260/GABACT260_full.jpg","sku":"AC-935722","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766962319492","inStock":true},{"id":"acteck-gi440-gabact280","title":"Gabinete ACTECK GI440","vendor":"ACTECK","price":726,"img":"https://static.ctonline.mx/imagenes/GABACT280/GABACT280_full.jpg","sku":"AC-935753","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766962385028","inStock":true},{"id":"acteck-gc470-gabact330","title":"Gabinete  ACTECK GC470","vendor":"ACTECK","price":801,"img":"https://static.ctonline.mx/imagenes/GABACT330/GABACT330_full.jpg","sku":"AC-935838","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766962548868","inStock":false},{"id":"acteck-hc660-accact4790","title":"Enclosure ACTECK HC660","vendor":"ACTECK","price":413,"img":"https://static.ctonline.mx/imagenes/ACCACT4790/ACCACT4790_full.jpg","sku":"AC-936453","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766964744324","inStock":true},{"id":"acteck-gi215f-gabact580","title":"Gabinetes para computadoras  ACTECK GI215F","vendor":"ACTECK","price":597,"img":"https://static.ctonline.mx/imagenes/GABACT580/GABACT580_full.jpg","sku":"AC-940047","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766966055044","inStock":true},{"id":"acteck-gi656-gabact500","title":"Gabinetes para computadoras ACTECK GI656","vendor":"ACTECK","price":901,"img":"https://static.ctonline.mx/imagenes/GABACT500/GABACT500_full.jpg","sku":"AC-939270","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766967562372","inStock":true},{"id":"acteck-gc220f-gabact560","title":"Gabinetes para computadoras ACTECK GC220F","vendor":"ACTECK","price":529,"img":"https://static.ctonline.mx/imagenes/GABACT560/GABACT560_5_full.jpg","sku":"AC-939539","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766967627908","inStock":false},{"id":"acteck-gc220f-gabact550","title":"Gabinetes para computadoras ACTECK GC220F","vendor":"ACTECK","price":529,"img":"https://static.ctonline.mx/imagenes/GABACT550/GABACT550_full.jpg","sku":"AC-939546","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766967693444","inStock":true},{"id":"acteck-gc220-gabact540","title":"Gabinetes para computadoras ACTECK GC220","vendor":"ACTECK","price":597,"img":"https://static.ctonline.mx/imagenes/GABACT540/GABACT540_full.jpg","sku":"AC-939522","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766967726212","inStock":true},{"id":"acteck-gc470-gabact530","title":"Gabinetes para computadoras ACTECK GC470","vendor":"ACTECK","price":801,"img":"https://static.ctonline.mx/imagenes/GABACT530/GABACT530_full.jpg","sku":"AC-939515","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766967791748","inStock":true},{"id":"acteck-gm767-gabact600","title":"Gabinetes Gaming ACTECK GM767","vendor":"ACTECK","price":795,"img":"https://static.ctonline.mx/imagenes/GABACT600/GABACT600_full.jpg","sku":"AC-941716","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":true,"variantId":"52766968283268","inStock":false},{"id":"acteck-onex-gs455-gabact610","title":"Gabinetes para Computadoras ACTECK ONEX GS455","vendor":"ACTECK","price":983,"img":"https://static.ctonline.mx/imagenes/GABACT610/GABACT610_full.jpg","sku":"AC-943079","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766969430148","inStock":true}],"psu":[{"id":"acteck-ac-938143-gabact340","title":"Fuente de poder ACTECK AC-938143","vendor":"ACTECK","price":268,"img":"https://static.ctonline.mx/imagenes/GABACT340/GABACT340_full.jpg","sku":"AC-938143","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766963630212","inStock":false},{"id":"acteck-es-05004e-gabact360","title":"Fuente de poder ACTECK ES-05004E","vendor":"ACTECK","price":623,"img":"https://static.ctonline.mx/imagenes/GABACT360/GABACT360_full.jpg","sku":"ES-05004E","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766963695748","inStock":true},{"id":"acteck-es-05003e-gabact370","title":"Fuente de poder ACTECK ES-05003E","vendor":"ACTECK","price":479,"img":"https://static.ctonline.mx/imagenes/GABACT370/GABACT370_full.jpg","sku":"ES-05003E","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766963761284","inStock":true},{"id":"acteck-es-05001e-gabact380","title":"Fuente de poder ACTECK ES-05001E","vendor":"ACTECK","price":316,"img":"https://static.ctonline.mx/imagenes/GABACT380/GABACT380_full.jpg","sku":"ES-05001E","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766963859588","inStock":true},{"id":"acteck-es-05002e-gabact390","title":"Fuente de poder ACTECK ES-05002E","vendor":"ACTECK","price":353,"img":"https://static.ctonline.mx/imagenes/GABACT390/GABACT390_full.jpg","sku":"ES-05002E","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766963925124","inStock":false},{"id":"acteck-ft500ew-gabact520","title":"Fuentes de Poder ACTECK  FT500EW","vendor":"ACTECK","price":316,"img":"https://static.ctonline.mx/imagenes/GABACT520/GABACT520_full.jpg","sku":"ES-05001EW","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766967464068","inStock":true},{"id":"acteck-ft600ew-gabact510","title":"Fuentes de Poder ACTECK FT600EW","vendor":"ACTECK","price":479,"img":"https://static.ctonline.mx/imagenes/GABACT510/GABACT510_full.jpg","sku":"ES-05003EW","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766967529604","inStock":true},{"id":"balam-rush-gr850g-gabblr470","title":"Fuente de poder Balam Rush GR850G","vendor":"Balam Rush","price":1677,"img":"https://static.ctonline.mx/imagenes/GABBLR470/GABBLR470_full.jpg","sku":"BR-937658","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766991351940","inStock":true},{"id":"balam-rush-gr750g-gabblr480","title":"Fuente de poder  Balam Rush GR750G","vendor":"Balam Rush","price":1486,"img":"https://static.ctonline.mx/imagenes/GABBLR480/GABBLR480_full.jpg","sku":"BR-937665","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766991417476","inStock":false},{"id":"balam-rush-gr750b-gabblr490","title":"Fuente de poder Balam Rush GR750B","vendor":"Balam Rush","price":1150,"img":"https://static.ctonline.mx/imagenes/GABBLR490/GABBLR490_full.jpg","sku":"BR-937672","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766991483012","inStock":true},{"id":"balam-rush-gr650b-gabblr500","title":"Fuente de poder Balam Rush GR650B","vendor":"Balam Rush","price":1016,"img":"https://static.ctonline.mx/imagenes/GABBLR500/GABBLR500_full.jpg","sku":"BR-937689","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766991548548","inStock":true},{"id":"balam-rush-gr550b-gabblr510","title":"Fuente de poder  Balam Rush GR550B","vendor":"Balam Rush","price":862,"img":"https://static.ctonline.mx/imagenes/GABBLR510/GABBLR510_full.jpg","sku":"BR-937696","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766991614084","inStock":true},{"id":"balam-rush-gr500b-gabblr520","title":"Fuente de poder Balam Rush GR500B","vendor":"Balam Rush","price":815,"img":"https://static.ctonline.mx/imagenes/GABBLR520/GABBLR520_full.jpg","sku":"BR-937702","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766991679620","inStock":false},{"id":"balam-rush-650pr-gabblr530","title":"Fuente de poder Balam Rush 650PR","vendor":"Balam Rush","price":719,"img":"https://static.ctonline.mx/imagenes/GABBLR530/GABBLR530_full.jpg","sku":"BR-937719","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766991745156","inStock":true},{"id":"balam-rush-550pr-gabblr540","title":"Fuente de poder Balam Rush 550PR","vendor":"Balam Rush","price":652,"img":"https://static.ctonline.mx/imagenes/GABBLR540/GABBLR540_full.jpg","sku":"BR-937726","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766991843460","inStock":true},{"id":"balam-rush-1250mr-gabblr550","title":"Fuente de poder Balam Rush 1250MR","vendor":"Balam Rush","price":2780,"img":"https://static.ctonline.mx/imagenes/GABBLR550/GABBLR550_full.jpg","sku":"BR-937610","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766991908996","inStock":true},{"id":"balam-rush-1050mr-gabblr570","title":"Fuente de poder Balam Rush 1050MR","vendor":"Balam Rush","price":2540,"img":"https://static.ctonline.mx/imagenes/GABBLR570/GABBLR570_full.jpg","sku":"BR-937634","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766991941764","inStock":false},{"id":"balam-rush-1000zr-gabblr800","title":"Fuentes de Poder Balam Rush 1000ZR","vendor":"Balam Rush","price":2396,"img":"https://static.ctonline.mx/imagenes/GABBLR800/GABBLR800_full.jpg","sku":"BR-940306","socket":"","brand":"","ramType":"","capacity":"","watts":"600W","coolerType":"","hz":"","isGamer":false,"variantId":"52766992531588","inStock":true}],"gpu":[{"id":"asus-90yv0m17-m0aa00-tviass3910","title":"Tarjeta de video ASUS 90YV0M17-M0AA00","vendor":"ASUS","price":13691,"img":"https://static.ctonline.mx/imagenes/TVIASS3910/TVIASS3910_full.jpg","sku":"DUAL-RTX5070-O12G","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766988337284","inStock":false},{"id":"asus-dual-rx9060xt-16g-tviass3930","title":"Tarjeta de Video ASUS DUAL-RX9060XT-16G","vendor":"ASUS","price":10135,"img":"https://static.ctonline.mx/imagenes/TVIASS3930/TVIASS3930_full.jpg","sku":"90YV0LG2-M0AA00","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52766988402820","inStock":true},{"id":"gigabyte-gv-n506teagle-oc-8gd-tvigig3510","title":"Tarjeta de video GIGABYTE GV-N506TEAGLE OC-8GD","vendor":"GIGABYTE","price":9707,"img":"https://static.ctonline.mx/imagenes/TVIGIG3510/TVIGIG3510_full.jpg","sku":"GV-N506TEAGLE OC-8GD","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767135072388","inStock":true},{"id":"gigabyte-gv-r9060xtgaming-oc-16gd-tvigig3470","title":"Tarjeta de video GIGABYTE GV-R9060XTGAMING OC-16GD","vendor":"GIGABYTE","price":10501,"img":"https://static.ctonline.mx/imagenes/TVIGIG3470/TVIGIG3470_full.jpg","sku":"GV-R9060XTGAMING OC-16GD","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767135236228","inStock":true},{"id":"pny-rtx5070-tvipny2040","title":"Tarjeta de Video PNY RTX5070","vendor":"PNY","price":24704,"img":"https://static.ctonline.mx/imagenes/TVIPNY2040/TVIPNY2040_full.jpg","sku":"VCG507012TFXPB1","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52767394168964","inStock":false},{"id":"tarjeta-de-video-asus-prime-rx-9070-xt-16gb","title":"Tarjeta de Video ASUS PRIME RX 9070 XT 16GB","vendor":"ASUS","price":17747,"img":"https://static.ctonline.mx/imagenes/TVIASS3850/TVIASS3850_full.jpg","sku":"TVIASS3850","socket":"","brand":"ASUS","ramType":"","capacity":"16GB","watts":"","coolerType":"","hz":"","isGamer":true,"variantId":"52774710247556","inStock":true},{"id":"tarjeta-de-video-gigabyte-rtx-5060-ti-windforce-8gb","title":"Tarjeta de Video GIGABYTE RTX 5060 Ti Windforce 8GB","vendor":"GIGABYTE","price":11027,"img":"https://static.ctonline.mx/imagenes/TVIGIG3570/TVIGIG3570_full.jpg","sku":"TVIGIG3570","socket":"","brand":"GIGABYTE","ramType":"","capacity":"8GB","watts":"","coolerType":"","hz":"","isGamer":true,"variantId":"52774710280324","inStock":false},{"id":"tarjeta-de-video-msi-geforce-gt-1030-2gb","title":"Tarjeta de Video MSI GeForce GT 1030 2GB","vendor":"MSI","price":2799,"img":"https://static.ctonline.mx/imagenes/TVIMSI1300/TVIMSI1300_full.jpg","sku":"TVIMSI1300","socket":"","brand":"MSI","ramType":"","capacity":"2GB","watts":"","coolerType":"","hz":"","isGamer":false,"variantId":"52774710313092","inStock":true}],"cooler":[{"id":"balam-rush-ex50-venblr130","title":"Ventilador Balam Rush EX50","vendor":"Balam Rush","price":119,"img":"https://static.ctonline.mx/imagenes/VENBLR130/VENBLR130_full.jpg","sku":"BR-938068","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"Aire","hz":"","isGamer":false,"variantId":"52766990303364","inStock":false},{"id":"balam-rush-ex50w-venblr140","title":"Ventilador Balam Rush EX50W","vendor":"Balam Rush","price":119,"img":"https://static.ctonline.mx/imagenes/VENBLR140/VENBLR140_full.jpg","sku":"BR-938075","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"Aire","hz":"","isGamer":false,"variantId":"52766990368900","inStock":true},{"id":"balam-rush-ex50k-venblr150","title":"Ventiladores Balam Rush EX50K","vendor":"Balam Rush","price":343,"img":"https://static.ctonline.mx/imagenes/VENBLR150/VENBLR150_full.jpg","sku":"BR-937986","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"Aire","hz":"","isGamer":false,"variantId":"52766990434436","inStock":true},{"id":"balam-rush-ex50kw-venblr160","title":"Ventiladores Balam Rush EX50KW","vendor":"Balam Rush","price":439,"img":"https://static.ctonline.mx/imagenes/VENBLR160/VENBLR160_full.jpg","sku":"BR-937993","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"Aire","hz":"","isGamer":false,"variantId":"52766990499972","inStock":true},{"id":"balam-rush-ex70k-venblr190","title":"Ventiladores Balam Rush EX70K","vendor":"Balam Rush","price":387,"img":"https://static.ctonline.mx/imagenes/VENBLR190/VENBLR190_full.jpg","sku":"BR-937962","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"Aire","hz":"","isGamer":false,"variantId":"52766990565508","inStock":false},{"id":"balam-rush-ex90w-venblr220","title":"Ventilador Balam Rush EX90W","vendor":"Balam Rush","price":104,"img":"https://static.ctonline.mx/imagenes/VENBLR220/VENBLR220_full.jpg","sku":"BR-938037","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"Aire","hz":"","isGamer":false,"variantId":"52766990631044","inStock":true},{"id":"balam-rush-ex90k-venblr230","title":"Ventiladores Balam Rush EX90K","vendor":"Balam Rush","price":413,"img":"https://static.ctonline.mx/imagenes/VENBLR230/VENBLR230_full.jpg","sku":"BR-937948","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"Aire","hz":"","isGamer":false,"variantId":"52766990696580","inStock":true},{"id":"balam-rush-ex90kw-venblr240","title":"Ventiladores Balam Rush EX90KW","vendor":"Balam Rush","price":413,"img":"https://static.ctonline.mx/imagenes/VENBLR240/VENBLR240_full.jpg","sku":"BR-937955","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"Aire","hz":"","isGamer":false,"variantId":"52766990762116","inStock":true},{"id":"balam-rush-exb85r-venblr390","title":"Enfriamiento y Ventilación Balam Rush EXB85R","vendor":"Balam Rush","price":370,"img":"https://static.ctonline.mx/imagenes/VENBLR390/VENBLR390_full.jpg","sku":"BR-942140","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"Aire","hz":"","isGamer":false,"variantId":"52766994006148","inStock":false},{"id":"balam-rush-exb85r-venblr400","title":"Enfriamiento y Ventilación Balam Rush EXB85R","vendor":"Balam Rush","price":370,"img":"https://static.ctonline.mx/imagenes/VENBLR400/VENBLR400_1_full.jpg","sku":"BR-942157","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"Aire","hz":"","isGamer":false,"variantId":"52766994071684","inStock":true},{"id":"balam-rush-exg77-venblr410","title":"Enfriamiento y Ventilación Balam Rush EXG77","vendor":"Balam Rush","price":141,"img":"https://static.ctonline.mx/imagenes/VENBLR410/VENBLR410_full.jpg","sku":"BR-942164","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"Aire","hz":"","isGamer":false,"variantId":"52766994137220","inStock":true},{"id":"balam-rush-exg77-venblr420","title":"Enfriamiento y Ventilación Balam Rush EXG77","vendor":"Balam Rush","price":141,"img":"https://static.ctonline.mx/imagenes/VENBLR420/VENBLR420_full.jpg","sku":"BR-942171","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"Aire","hz":"","isGamer":false,"variantId":"52766994235524","inStock":true},{"id":"balam-rush-exg99-venblr430","title":"Enfriamiento y Ventilación Balam Rush EXG99","vendor":"Balam Rush","price":178,"img":"https://static.ctonline.mx/imagenes/VENBLR430/VENBLR430_11_full.jpg","sku":"BR-942188","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"Aire","hz":"","isGamer":false,"variantId":"52766994301060","inStock":false},{"id":"balam-rush-exl95-venblr340","title":"Enfriamiento y Ventilación Balam Rush EXL95","vendor":"Balam Rush","price":518,"img":"https://static.ctonline.mx/imagenes/VENBLR340/VENBLR340_full.jpg","sku":"BR-942096","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"Aire","hz":"","isGamer":false,"variantId":"52766994366596","inStock":true}],"monitor":[{"id":"acer-ek221q-hbi-monacr1740","title":"Monitores ACER EK221Q Hbi","vendor":"ACER","price":1417,"img":"https://static.ctonline.mx/imagenes/MONACR1740/MONACR1740_full.jpg","sku":"UM.WE1AA.H01","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"75Hz","isGamer":false,"variantId":"52766949146756","inStock":false},{"id":"acer-sa242y-h1bi-monacr1780","title":"Monitores ACER SA242Y H1bi","vendor":"ACER","price":1792,"img":"https://static.ctonline.mx/imagenes/MONACR1780/MONACR1780_full.jpg","sku":"UM.QS2AA.103","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"75Hz","isGamer":false,"variantId":"52766949507204","inStock":true},{"id":"acer-xz320q-x2bmiiphx-monacr1830","title":"Monitores ACER XZ320Q X2bmiiphx","vendor":"ACER","price":4733,"img":"https://static.ctonline.mx/imagenes/MONACR1830/MONACR1830_full.jpg","sku":"UM.JX0AA.201","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"75Hz","isGamer":false,"variantId":"52766949572740","inStock":true},{"id":"acer-ek241y-p0bi-monacr1880","title":"Monitores ACER EK241Y P0bi","vendor":"ACER","price":2014,"img":"https://static.ctonline.mx/imagenes/MONACR1880/MONACR1880_full.jpg","sku":"UM.QE1AA.009","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"75Hz","isGamer":false,"variantId":"52766949638276","inStock":true},{"id":"acer-ek127-monacr1870","title":"Monitores ACER EK127","vendor":"ACER","price":2289,"img":"https://static.ctonline.mx/imagenes/MONACR1870/MONACR1870_5_full.jpg","sku":"UM.HE1AA.005","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"75Hz","isGamer":false,"variantId":"52766949834884","inStock":false},{"id":"acteck-captive-vivid-sp240-monact010","title":"Monitor  ACTECK Captive Vivid SP240","vendor":"ACTECK","price":1690,"img":"https://static.ctonline.mx/imagenes/MONACT010/MONACT010_7_full.jpg","sku":"AC-933841","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"75Hz","isGamer":false,"variantId":"52766960582788","inStock":true},{"id":"acteck-captive-vivid-sp215-monact020","title":"Monitor  ACTECK Captive Vivid SP215","vendor":"ACTECK","price":1389,"img":"https://static.ctonline.mx/imagenes/MONACT020/MONACT020_6_full.jpg","sku":"AC-933858","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"75Hz","isGamer":false,"variantId":"52766960648324","inStock":true},{"id":"acteck-zone-sm490-accact4460","title":"Soporte ACTECK ZONE SM490","vendor":"ACTECK","price":686,"img":"https://static.ctonline.mx/imagenes/ACCACT4460/ACCACT4460_full.jpg","sku":"AC-934602","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"75Hz","isGamer":false,"variantId":"52766962057348","inStock":true},{"id":"acteck-zone-sm450-accact4470","title":"Soporte ACTECK ZONE SM450","vendor":"ACTECK","price":501,"img":"https://static.ctonline.mx/imagenes/ACCACT4470/ACCACT4470_full.jpg","sku":"AC-934596","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"75Hz","isGamer":false,"variantId":"52766962122884","inStock":false},{"id":"acteck-sp270-monact040","title":"Monitor ACTECK SP270","vendor":"ACTECK","price":2062,"img":"https://static.ctonline.mx/imagenes/MONACT040/MONACT040_7_full.jpg","sku":"AC-935845","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"75Hz","isGamer":false,"variantId":"52766962909316","inStock":true},{"id":"acteck-ac-939409-monact050","title":"Monitor ACTECK AC-939409","vendor":"ACTECK","price":774,"img":"https://static.ctonline.mx/imagenes/MONACT050/MONACT050_full.jpg","sku":"AC-939409","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"75Hz","isGamer":false,"variantId":"52766965530756","inStock":true},{"id":"acteck-advanced-series-accact5040","title":"Soportes para Monitores ACTECK ADVANCED SERIES","vendor":"ACTECK","price":1319,"img":"https://static.ctonline.mx/imagenes/ACCACT5040/ACCACT5040_full.jpg","sku":"AC-939669","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"75Hz","isGamer":false,"variantId":"52766965760132","inStock":true},{"id":"acteck-sm425-accact5060","title":"Soportes para Monitores ACTECK SM425","vendor":"ACTECK","price":756,"img":"https://static.ctonline.mx/imagenes/ACCACT5060/ACCACT5060_full.jpg","sku":"AC-939683","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"75Hz","isGamer":false,"variantId":"52766967398532","inStock":false},{"id":"acteck-captive-vivid-sp245-monact100","title":"Monitores ACTECK CAPTIVE VIVID SP245","vendor":"ACTECK","price":1575,"img":"https://static.ctonline.mx/imagenes/MONACT100/MONACT100_full.jpg","sku":"AC-943178","socket":"","brand":"","ramType":"","capacity":"","watts":"","coolerType":"","hz":"75Hz","isGamer":false,"variantId":"52766969561220","inStock":true}],"furniture":[{"id":"sillas-gaming-balam-rush-power-rush-v2","title":"Sillas Gaming Balam Rush POWER RUSH V2","vendor":"Balam Rush","price":1774,"img":"https://static.ctonline.mx/imagenes/GABBLR430/GABBLR430_full.jpg","sku":"BR-944489","socket":"","brand":"Balam Rush","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Silla Gamer","isGamer":true,"variantId":"52774726172804","inStock":true},{"id":"silla-gaming-naceb-gaming-na-0928","title":"Silla Gaming Naceb Gaming NA-0928","vendor":"Naceb Gaming","price":3384,"img":"https://static.ctonline.mx/imagenes/ACCNCB810/ACCNCB810_full.jpg","sku":"NA-0928","socket":"","brand":"Naceb Gaming","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Silla Gamer","isGamer":true,"variantId":"52774726303876","inStock":true},{"id":"silla-gaming-necnon-nsg-rgb-1-luces-rgb","title":"Silla Gaming NECNON NSG-RGB-1 Luces RGB","vendor":"NECNON","price":2632,"img":"https://static.ctonline.mx/imagenes/SILNEC040/SILNEC040_full.jpg","sku":"NBSGR122RG","socket":"","brand":"NECNON","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Silla Gamer","isGamer":true,"variantId":"52774726336644","inStock":true},{"id":"silla-balam-rush-br-934534-nova-series","title":"Silla Balam Rush BR-934534 Nova Series","vendor":"Balam Rush","price":1774,"img":"https://static.ctonline.mx/imagenes/SILBLR160/SILBLR160_full.jpg","sku":"BR-934534","socket":"","brand":"Balam Rush","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Silla Gamer","isGamer":true,"variantId":"52774726369412","inStock":true},{"id":"silla-gaming-naceb-technology-na-2772","title":"Silla Gaming Naceb Technology NA-2772","vendor":"Naceb Technology","price":2237,"img":"https://static.ctonline.mx/imagenes/SILNCB040/SILNCB040_full.jpg","sku":"NA-2772","socket":"","brand":"Naceb Technology","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Silla Gamer","isGamer":true,"variantId":"52774726402180","inStock":false},{"id":"silla-de-oficina-ergonomica-acteck-flux-core-ec303","title":"Silla de Oficina Ergonómica ACTECK FLUX CORE EC303","vendor":"ACTECK","price":1360,"img":"https://static.ctonline.mx/imagenes/SILACT200/SILACT200_full.jpg","sku":"AC-944175","socket":"","brand":"ACTECK","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Silla Ejecutiva","isGamer":false,"variantId":"52774726467716","inStock":true},{"id":"silla-ejecutiva-ergonomica-naceb-negro-na-0930n","title":"Silla Ejecutiva Ergonómica Naceb Negro NA-0930N","vendor":"Naceb Technology","price":3218,"img":"https://static.ctonline.mx/imagenes/SILNCB020/SILNCB020_full.jpg","sku":"NA-0930N","socket":"","brand":"Naceb Technology","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Silla Ejecutiva","isGamer":false,"variantId":"52774726500484","inStock":true},{"id":"silla-ejecutiva-ergonomica-naceb-cafe-na-0930c","title":"Silla Ejecutiva Ergonómica Naceb Café NA-0930C","vendor":"Naceb Technology","price":3218,"img":"https://static.ctonline.mx/imagenes/SILNCB030/SILNCB030_full.jpg","sku":"NA-0930C","socket":"","brand":"Naceb Technology","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Silla Ejecutiva","isGamer":false,"variantId":"52774727188612","inStock":true},{"id":"escritorio-ergonomico-doble-acteck-ed727","title":"Escritorio Ergonómico Doble ACTECK ED727","vendor":"ACTECK","price":4971,"img":"https://static.ctonline.mx/imagenes/ESCACT040/ESCACT040_full.jpg","sku":"AC-937276","socket":"","brand":"ACTECK","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Escritorio","isGamer":false,"variantId":"52774727221380","inStock":true},{"id":"escritorio-gaming-balam-rush-mrx4000","title":"Escritorio Gaming Balam Rush MRX4000","vendor":"Balam Rush","price":1700,"img":"https://static.ctonline.mx/imagenes/ESCBLR030/ESCBLR030_full.jpg","sku":"BR-941426","socket":"","brand":"Balam Rush","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Escritorio","isGamer":false,"variantId":"52774727254148","inStock":true},{"id":"escritorio-gaming-pro-balam-rush-mrx8000","title":"Escritorio Gaming Pro Balam Rush MRX8000","vendor":"Balam Rush","price":3179,"img":"https://static.ctonline.mx/imagenes/ESCBLR040/ESCBLR040_full.jpg","sku":"BR-941372","socket":"","brand":"Balam Rush","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Escritorio","isGamer":false,"variantId":"52774727286916","inStock":false}],"peripherals":[{"id":"kit-teclado-y-mouse-inalambrico-acteck-mk470","title":"Kit Teclado y Mouse Inalámbrico ACTECK MK470","vendor":"ACTECK","price":555,"img":"https://static.ctonline.mx/imagenes/KITACT1100/KITACT1100_full.jpg","sku":"AC-935197","socket":"","brand":"ACTECK","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Kit Inalámbrico","isGamer":false,"variantId":"52774727319684","inStock":true},{"id":"kit-inalambrico-silencioso-acteck-creator-mk440","title":"Kit Inalámbrico Silencioso ACTECK CREATOR MK440","vendor":"ACTECK","price":236,"img":"https://static.ctonline.mx/imagenes/KITACT1050/KITACT1050_full.jpg","sku":"AC-931755","socket":"","brand":"ACTECK","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Kit Inalámbrico","isGamer":false,"variantId":"52774727385220","inStock":true},{"id":"kit-teclado-y-mouse-acer-ekw111-inalambrico","title":"Kit Teclado y Mouse ACER EKW111 Inalámbrico","vendor":"ACER","price":383,"img":"https://static.ctonline.mx/imagenes/KITACC020/KITACC020_full.jpg","sku":"EKW111","socket":"","brand":"ACER","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Kit Inalámbrico","isGamer":false,"variantId":"52774727417988","inStock":true},{"id":"kit-teclado-y-mouse-alambrico-acer-eak030","title":"Kit Teclado y Mouse Alámbrico ACER EAK030","vendor":"ACER","price":263,"img":"https://static.ctonline.mx/imagenes/KITACC010/KITACC010_full.jpg","sku":"EAK030","socket":"","brand":"ACER","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Kit Alámbrico","isGamer":false,"variantId":"52774727450756","inStock":true},{"id":"kit-teclado-y-mouse-estandar-acteck-ac-928984","title":"Kit Teclado y Mouse Estándar ACTECK AC-928984","vendor":"ACTECK","price":170,"img":"https://static.ctonline.mx/imagenes/KITACT630/KITACT630_full.jpg","sku":"AC-928984","socket":"","brand":"ACTECK","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Kit Alámbrico","isGamer":false,"variantId":"52774727483524","inStock":true},{"id":"teclado-gamer-alambrico-led-acteck-ta477g","title":"Teclado Gamer Alámbrico LED ACTECK TA477G","vendor":"ACTECK","price":237,"img":"https://static.ctonline.mx/imagenes/TECACT180/TECACT180_full.jpg","sku":"AC-936743","socket":"","brand":"ACTECK","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Teclado Gamer","isGamer":true,"variantId":"52774727516292","inStock":true},{"id":"teclado-clasico-alambrico-usb-acteck-te-200","title":"Teclado Clásico Alámbrico USB ACTECK TE-200","vendor":"ACTECK","price":102,"img":"https://static.ctonline.mx/imagenes/TECACT010/TECACT010_full.jpg","sku":"AC-928946","socket":"","brand":"ACTECK","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Teclado Oficina","isGamer":false,"variantId":"52774727614596","inStock":true},{"id":"teclado-inalambrico-compacto-acteck-ac-913973","title":"Teclado Inalámbrico Compacto ACTECK AC-913973","vendor":"ACTECK","price":147,"img":"https://static.ctonline.mx/imagenes/TECACT080/TECACT080_full.jpg","sku":"AC-913973","socket":"","brand":"ACTECK","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Teclado Oficina","isGamer":false,"variantId":"52774727647364","inStock":false},{"id":"mouse-optico-inalambrico-acer-emw211","title":"Mouse Óptico Inalámbrico ACER EMW211","vendor":"ACER","price":263,"img":"https://static.ctonline.mx/imagenes/MOUACC010/MOUACC010_full.jpg","sku":"EMW211","socket":"","brand":"ACER","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Mouse Inalámbrico","isGamer":false,"variantId":"52774727680132","inStock":true},{"id":"mouse-ergonomico-inalambrico-acer-emr213-bk","title":"Mouse Ergonómico Inalámbrico ACER EMR213-BK","vendor":"ACER","price":354,"img":"https://static.ctonline.mx/imagenes/MOUACC020/MOUACC020_full.jpg","sku":"EMR213","socket":"","brand":"ACER","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Mouse Ergonómico","isGamer":false,"variantId":"52774727712900","inStock":true},{"id":"mouse-optico-usb-acteck-mi240","title":"Mouse Óptico USB ACTECK MI240","vendor":"ACTECK","price":88,"img":"https://static.ctonline.mx/imagenes/MOUACT280/MOUACT280_full.jpg","sku":"AC-928885","socket":"","brand":"ACTECK","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Mouse Oficina","isGamer":false,"variantId":"52774727745668","inStock":true},{"id":"mouse-optico-alambrico-acteck-entry","title":"Mouse Óptico Alámbrico ACTECK ENTRY","vendor":"ACTECK","price":49,"img":"https://static.ctonline.mx/imagenes/MOUACT030/MOUACT030_full.jpg","sku":"AC-928830","socket":"","brand":"ACTECK","ramType":"","capacity":"","watts":"","coolerType":"","hz":"","category":"Mouse Oficina","isGamer":false,"variantId":"52774727778436","inStock":true}]}
+${catalogJson}
 </script>
 
 <script>
@@ -2019,51 +2078,51 @@
         const availableItems = this.getAvailableProducts(catKey);
 
         if (availableItems.length === 0) {
-          gridEl.innerHTML = `
+          gridEl.innerHTML = \`
             <div style="grid-column: 1 / -1; padding: 2rem 1rem; text-align: center; color: #64748b; font-size: 0.88rem;">
-              🔍 No se encontraron piezas que coincidan con <strong>"${this.searchFilters[catKey] || ''}"</strong>. Prueba con otra palabra clave o marca.
+              🔍 No se encontraron piezas que coincidan con <strong>"\${this.searchFilters[catKey] || ''}"</strong>. Prueba con otra palabra clave o marca.
             </div>
-          `;
+          \`;
           return;
         }
 
         let html = '';
         availableItems.forEach(item => {
           const inStock = item.inStock !== false;
-          html += `
+          html += \`
             <div class="pcb-product-option-card">
               <div class="pcb-opt-top">
                 <div class="pcb-opt-img-wrap">
-                  <img src="${item.img}" alt="${item.title}" class="pcb-opt-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=pcbApp.fallbackImg;">
+                  <img src="\${item.img}" alt="\${item.title}" class="pcb-opt-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=pcbApp.fallbackImg;">
                 </div>
                 <div class="pcb-opt-info">
-                  <span class="pcb-opt-stock-badge ${inStock ? 'in-stock' : 'on-order'}">
-                    ${inStock ? '🟢 En Stock (24-48h)' : '🟡 Sobre Pedido (3-5 días)'}
+                  <span class="pcb-opt-stock-badge \${inStock ? 'in-stock' : 'on-order'}">
+                    \${inStock ? '🟢 En Stock (24-48h)' : '🟡 Sobre Pedido (3-5 días)'}
                   </span>
-                  <h4 class="pcb-opt-title" title="${item.title}">${item.title}</h4>
+                  <h4 class="pcb-opt-title" title="\${item.title}">\${item.title}</h4>
                   <div class="pcb-opt-tags">
-                    ${item.category ? '<span class="pcb-opt-tag" style="background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe;">' + item.category + '</span>' : ''}
-                    ${item.socket ? '<span class="pcb-opt-tag">' + item.socket + '</span>' : ''}
-                    ${item.ramType ? '<span class="pcb-opt-tag">' + item.ramType + '</span>' : ''}
-                    ${item.capacity ? '<span class="pcb-opt-tag">' + item.capacity + '</span>' : ''}
-                    ${item.watts ? '<span class="pcb-opt-tag">' + item.watts + '</span>' : ''}
-                    ${item.hz ? '<span class="pcb-opt-tag">' + item.hz + '</span>' : ''}
-                    ${item.coolerType ? '<span class="pcb-opt-tag">' + item.coolerType + '</span>' : ''}
-                    ${item.vendor ? '<span class="pcb-opt-tag">' + item.vendor + '</span>' : ''}
+                    \${item.category ? '<span class="pcb-opt-tag" style="background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe;">' + item.category + '</span>' : ''}
+                    \${item.socket ? '<span class="pcb-opt-tag">' + item.socket + '</span>' : ''}
+                    \${item.ramType ? '<span class="pcb-opt-tag">' + item.ramType + '</span>' : ''}
+                    \${item.capacity ? '<span class="pcb-opt-tag">' + item.capacity + '</span>' : ''}
+                    \${item.watts ? '<span class="pcb-opt-tag">' + item.watts + '</span>' : ''}
+                    \${item.hz ? '<span class="pcb-opt-tag">' + item.hz + '</span>' : ''}
+                    \${item.coolerType ? '<span class="pcb-opt-tag">' + item.coolerType + '</span>' : ''}
+                    \${item.vendor ? '<span class="pcb-opt-tag">' + item.vendor + '</span>' : ''}
                   </div>
                 </div>
               </div>
               <div class="pcb-opt-bottom">
                 <div class="pcb-opt-price-wrap">
-                  <span class="pcb-opt-price">$${item.price.toLocaleString('es-MX')}</span>
+                  <span class="pcb-opt-price">$\${item.price.toLocaleString('es-MX')}</span>
                   <span class="pcb-opt-vat">IVA incluido</span>
                 </div>
-                <button type="button" class="pcb-opt-select-btn" onclick='pcbApp.selectItem("${catKey}", ${JSON.stringify(item)})'>
+                <button type="button" class="pcb-opt-select-btn" onclick='pcbApp.selectItem("\${catKey}", \${JSON.stringify(item)})'>
                   + Seleccionar
                 </button>
               </div>
             </div>
-          `;
+          \`;
         });
         gridEl.innerHTML = html;
       },
@@ -2098,7 +2157,7 @@
         // Search text filtering
         const query = (this.searchFilters[catKey] || '').toLowerCase().trim();
         if (query) {
-          const terms = query.split(/\s+/).filter(Boolean);
+          const terms = query.split(/\\s+/).filter(Boolean);
           items = items.filter(x => {
             const haystack = [
               x.title || '',
@@ -2134,52 +2193,52 @@
           const isActive = this.activeStep === step.key;
           const isEditing = this.editingStep === step.key;
 
-          html += `
-            <li class="pcb-step-item ${isActive ? 'active' : ''}">
-              <div class="pcb-step-header" onclick="pcbApp.toggleStep('${step.key}')">
+          html += \`
+            <li class="pcb-step-item \${isActive ? 'active' : ''}">
+              <div class="pcb-step-header" onclick="pcbApp.toggleStep('\${step.key}')">
                 <div class="pcb-step-left">
-                  <div class="pcb-step-icon ${step.iconClass}">${step.icon}</div>
+                  <div class="pcb-step-icon \${step.iconClass}">\${step.icon}</div>
                   <div class="pcb-step-title-wrap">
                     <span class="pcb-step-name">
-                      ${step.name}
-                      ${isSelected ? '<span class="pcb-badge-compat">✓ Seleccionado</span>' : ''}
+                      \${step.name}
+                      \${isSelected ? '<span class="pcb-badge-compat">✓ Seleccionado</span>' : ''}
                     </span>
-                    <span class="pcb-step-status ${isSelected ? 'selected' : ''}">
-                      ${isSelected ? selectedItem.title + ((selectedItem.qty || 1) > 1 ? ' (' + selectedItem.qty + ' pzas)' : '') + ' — $' + (selectedItem.price * (selectedItem.qty || 1)).toLocaleString('es-MX') + ' MXN' : step.placeholder}
+                    <span class="pcb-step-status \${isSelected ? 'selected' : ''}">
+                      \${isSelected ? selectedItem.title + ((selectedItem.qty || 1) > 1 ? ' (' + selectedItem.qty + ' pzas)' : '') + ' — $' + (selectedItem.price * (selectedItem.qty || 1)).toLocaleString('es-MX') + ' MXN' : step.placeholder}
                     </span>
                   </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 0.55rem;">
-                  ${isSelected ? `
-                    <button type="button" class="pcb-header-edit-btn" onclick="event.stopPropagation(); pcbApp.editStep('${step.key}')" title="Editar este componente">
+                  \${isSelected ? \`
+                    <button type="button" class="pcb-header-edit-btn" onclick="event.stopPropagation(); pcbApp.editStep('\${step.key}')" title="Editar este componente">
                       ✏️ Cambiar
                     </button>
-                  ` : ''}
+                  \` : ''}
                   <svg class="pcb-step-arrow" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
                 </div>
               </div>
 
               <div class="pcb-step-body">
-          `;
+          \`;
 
           if (isSelected && !isEditing) {
-            html += `
+            html += \`
               <div class="pcb-selected-card">
                 <div class="pcb-selected-card-left">
-                  <img src="${selectedItem.img}" alt="${selectedItem.title}" class="pcb-selected-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=pcbApp.fallbackImg;">
+                  <img src="\${selectedItem.img}" alt="\${selectedItem.title}" class="pcb-selected-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=pcbApp.fallbackImg;">
                   <div>
-                    <h4 class="pcb-selected-title">${selectedItem.title}</h4>
+                    <h4 class="pcb-selected-title">\${selectedItem.title}</h4>
                     <div style="margin: 0.25rem 0;">
-                      <span class="pcb-opt-stock-badge ${selectedItem.inStock !== false ? 'in-stock' : 'on-order'}">
-                        ${selectedItem.inStock !== false ? '🟢 En Stock (24-48h)' : '🟡 Sobre Pedido (3-5 días)'}
+                      <span class="pcb-opt-stock-badge \${selectedItem.inStock !== false ? 'in-stock' : 'on-order'}">
+                        \${selectedItem.inStock !== false ? '🟢 En Stock (24-48h)' : '🟡 Sobre Pedido (3-5 días)'}
                       </span>
-                      ${selectedItem.category ? '<span class="pcb-opt-tag" style="background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe; margin-left: 0.35rem;">' + selectedItem.category + '</span>' : ''}
+                      \${selectedItem.category ? '<span class="pcb-opt-tag" style="background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe; margin-left: 0.35rem;">' + selectedItem.category + '</span>' : ''}
                     </div>
                     <div class="pcb-selected-meta">
-                      <span>Marca: <strong>${selectedItem.vendor}</strong></span>
-                      ${selectedItem.socket ? '<span>Socket: <strong>' + selectedItem.socket + '</strong></span>' : ''}
-                      ${selectedItem.ramType ? '<span>Tipo: <strong>' + selectedItem.ramType + '</strong></span>' : ''}
-                      ${selectedItem.sku ? '<span>SKU: ' + selectedItem.sku + '</span>' : ''}
+                      <span>Marca: <strong>\${selectedItem.vendor}</strong></span>
+                      \${selectedItem.socket ? '<span>Socket: <strong>' + selectedItem.socket + '</strong></span>' : ''}
+                      \${selectedItem.ramType ? '<span>Tipo: <strong>' + selectedItem.ramType + '</strong></span>' : ''}
+                      \${selectedItem.sku ? '<span>SKU: ' + selectedItem.sku + '</span>' : ''}
                     </div>
                   </div>
                 </div>
@@ -2187,131 +2246,131 @@
                   <div class="pcb-qty-picker-row" title="Modificar cantidad de piezas">
                     <span class="pcb-qty-label">Cantidad:</span>
                     <div class="pcb-component-stepper">
-                      <button type="button" class="pcb-comp-step-btn" onclick="pcbApp.setItemQty('${step.key}', -1)" title="Disminuir cantidad">−</button>
-                      <input type="number" min="1" max="8" value="${selectedItem.qty || 1}" class="pcb-comp-qty-input" onchange="pcbApp.setItemQtyDirect('${step.key}', this.value)">
-                      <button type="button" class="pcb-comp-step-btn" onclick="pcbApp.setItemQty('${step.key}', 1)" title="Aumentar cantidad">+</button>
+                      <button type="button" class="pcb-comp-step-btn" onclick="pcbApp.setItemQty('\${step.key}', -1)" title="Disminuir cantidad">−</button>
+                      <input type="number" min="1" max="8" value="\${selectedItem.qty || 1}" class="pcb-comp-qty-input" onchange="pcbApp.setItemQtyDirect('\${step.key}', this.value)">
+                      <button type="button" class="pcb-comp-step-btn" onclick="pcbApp.setItemQty('\${step.key}', 1)" title="Aumentar cantidad">+</button>
                     </div>
                   </div>
 
                   <div class="pcb-selected-price-box">
-                    <div class="pcb-selected-price">$${(selectedItem.price * (selectedItem.qty || 1)).toLocaleString('es-MX')} MXN</div>
-                    ${(selectedItem.qty || 1) > 1 ? '<div class="pcb-selected-unit-price">($' + selectedItem.price.toLocaleString('es-MX') + ' c/u)</div>' : ''}
+                    <div class="pcb-selected-price">$\${(selectedItem.price * (selectedItem.qty || 1)).toLocaleString('es-MX')} MXN</div>
+                    \${(selectedItem.qty || 1) > 1 ? '<div class="pcb-selected-unit-price">($' + selectedItem.price.toLocaleString('es-MX') + ' c/u)</div>' : ''}
                   </div>
 
                   <div class="pcb-selected-actions">
-                    <button type="button" class="pcb-btn-change" onclick="pcbApp.editStep('${step.key}')">✏️ Cambiar</button>
-                    <button type="button" class="pcb-btn-remove" onclick="pcbApp.removeItem('${step.key}')">Quitar</button>
+                    <button type="button" class="pcb-btn-change" onclick="pcbApp.editStep('\${step.key}')">✏️ Cambiar</button>
+                    <button type="button" class="pcb-btn-remove" onclick="pcbApp.removeItem('\${step.key}')">Quitar</button>
                   </div>
                 </div>
               </div>
-            `;
+            \`;
           } else {
             const availableItems = this.getAvailableProducts(step.key);
-            html += `
+            html += \`
               <div class="pcb-picker-wrap">
-                ${isEditing ? `
+                \${isEditing ? \`
                   <div class="pcb-editing-banner">
                     <div class="pcb-editing-text">
-                      ✏️ <strong>Modo Edición:</strong> Elige otra opción para reemplazar <strong>${selectedItem.title}</strong> (${selectedItem.qty || 1} pza${(selectedItem.qty || 1) > 1 ? 's' : ''}).
+                      ✏️ <strong>Modo Edición:</strong> Elige otra opción para reemplazar <strong>\${selectedItem.title}</strong> (\${selectedItem.qty || 1} pza\${(selectedItem.qty || 1) > 1 ? 's' : ''}).
                     </div>
                     <button type="button" class="pcb-editing-cancel-btn" onclick="pcbApp.cancelEdit()">✕ Conservar pieza actual</button>
                   </div>
-                ` : ''}
+                \` : ''}
 
-                ${step.key === 'peripherals' ? `
+                \${step.key === 'peripherals' ? \`
                   <div class="pcb-subcat-pills" id="pcbSubFilterWrap_peripherals">
-                    <button type="button" class="pcb-subcat-pill ${!this.subFilters['peripherals'] ? 'active' : ''}" data-filter="" onclick="pcbApp.setSubFilter('peripherals', '')">🔘 Todos los Periféricos (12)</button>
-                    <button type="button" class="pcb-subcat-pill ${this.subFilters['peripherals'] === 'kit' ? 'active' : ''}" data-filter="kit" onclick="pcbApp.setSubFilter('peripherals', 'kit')">📦 Kits Teclado + Mouse</button>
-                    <button type="button" class="pcb-subcat-pill ${this.subFilters['peripherals'] === 'teclado' ? 'active' : ''}" data-filter="teclado" onclick="pcbApp.setSubFilter('peripherals', 'teclado')">⌨️ Teclados Individuales</button>
-                    <button type="button" class="pcb-subcat-pill ${this.subFilters['peripherals'] === 'mouse' ? 'active' : ''}" data-filter="mouse" onclick="pcbApp.setSubFilter('peripherals', 'mouse')">🖱️ Mouses Ópticos & Ergonómicos</button>
+                    <button type="button" class="pcb-subcat-pill \${!this.subFilters['peripherals'] ? 'active' : ''}" data-filter="" onclick="pcbApp.setSubFilter('peripherals', '')">🔘 Todos los Periféricos (12)</button>
+                    <button type="button" class="pcb-subcat-pill \${this.subFilters['peripherals'] === 'kit' ? 'active' : ''}" data-filter="kit" onclick="pcbApp.setSubFilter('peripherals', 'kit')">📦 Kits Teclado + Mouse</button>
+                    <button type="button" class="pcb-subcat-pill \${this.subFilters['peripherals'] === 'teclado' ? 'active' : ''}" data-filter="teclado" onclick="pcbApp.setSubFilter('peripherals', 'teclado')">⌨️ Teclados Individuales</button>
+                    <button type="button" class="pcb-subcat-pill \${this.subFilters['peripherals'] === 'mouse' ? 'active' : ''}" data-filter="mouse" onclick="pcbApp.setSubFilter('peripherals', 'mouse')">🖱️ Mouses Ópticos & Ergonómicos</button>
                   </div>
-                ` : ''}
+                \` : ''}
 
-                ${step.key === 'furniture' ? `
+                \${step.key === 'furniture' ? \`
                   <div class="pcb-subcat-pills" id="pcbSubFilterWrap_furniture">
-                    <button type="button" class="pcb-subcat-pill ${!this.subFilters['furniture'] ? 'active' : ''}" data-filter="" onclick="pcbApp.setSubFilter('furniture', '')">🔘 Todo el Mobiliario (11)</button>
-                    <button type="button" class="pcb-subcat-pill ${this.subFilters['furniture'] === 'silla gamer' ? 'active' : ''}" data-filter="silla gamer" onclick="pcbApp.setSubFilter('furniture', 'silla gamer')">🎮 Sillas Gamer</button>
-                    <button type="button" class="pcb-subcat-pill ${this.subFilters['furniture'] === 'silla ejecutiva' ? 'active' : ''}" data-filter="silla ejecutiva" onclick="pcbApp.setSubFilter('furniture', 'silla ejecutiva')">💼 Sillas Ejecutivas</button>
-                    <button type="button" class="pcb-subcat-pill ${this.subFilters['furniture'] === 'escritorio' ? 'active' : ''}" data-filter="escritorio" onclick="pcbApp.setSubFilter('furniture', 'escritorio')">🖥️ Escritorios</button>
+                    <button type="button" class="pcb-subcat-pill \${!this.subFilters['furniture'] ? 'active' : ''}" data-filter="" onclick="pcbApp.setSubFilter('furniture', '')">🔘 Todo el Mobiliario (11)</button>
+                    <button type="button" class="pcb-subcat-pill \${this.subFilters['furniture'] === 'silla gamer' ? 'active' : ''}" data-filter="silla gamer" onclick="pcbApp.setSubFilter('furniture', 'silla gamer')">🎮 Sillas Gamer</button>
+                    <button type="button" class="pcb-subcat-pill \${this.subFilters['furniture'] === 'silla ejecutiva' ? 'active' : ''}" data-filter="silla ejecutiva" onclick="pcbApp.setSubFilter('furniture', 'silla ejecutiva')">💼 Sillas Ejecutivas</button>
+                    <button type="button" class="pcb-subcat-pill \${this.subFilters['furniture'] === 'escritorio' ? 'active' : ''}" data-filter="escritorio" onclick="pcbApp.setSubFilter('furniture', 'escritorio')">🖥️ Escritorios</button>
                   </div>
-                ` : ''}
+                \` : ''}
 
                 <div class="pcb-picker-controls">
                   <div class="pcb-search-wrap">
                     <span class="pcb-search-icon">🔍</span>
-                    <input type="text" class="pcb-search-input" id="pcbSearch_${step.key}" placeholder="Buscar por modelo, marca o especificación..." 
-                      value="${this.searchFilters[step.key] || ''}" 
-                      oninput="pcbApp.handleSearch('${step.key}', this.value)">
+                    <input type="text" class="pcb-search-input" id="pcbSearch_\${step.key}" placeholder="Buscar por modelo, marca o especificación..." 
+                      value="\${this.searchFilters[step.key] || ''}" 
+                      oninput="pcbApp.handleSearch('\${step.key}', this.value)">
                   </div>
                   <div class="pcb-stock-filter-toggle">
-                    <button type="button" id="pcbStockFilterAll_${step.key}" class="pcb-stock-filter-btn ${this.onlyInStockFilter[step.key] ? '' : 'active'}" onclick="pcbApp.toggleStockFilter('${step.key}', false)">
+                    <button type="button" id="pcbStockFilterAll_\${step.key}" class="pcb-stock-filter-btn \${this.onlyInStockFilter[step.key] ? '' : 'active'}" onclick="pcbApp.toggleStockFilter('\${step.key}', false)">
                       📦 Todos
                     </button>
-                    <button type="button" id="pcbStockFilterStock_${step.key}" class="pcb-stock-filter-btn ${this.onlyInStockFilter[step.key] ? 'active' : ''}" onclick="pcbApp.toggleStockFilter('${step.key}', true)">
+                    <button type="button" id="pcbStockFilterStock_\${step.key}" class="pcb-stock-filter-btn \${this.onlyInStockFilter[step.key] ? 'active' : ''}" onclick="pcbApp.toggleStockFilter('\${step.key}', true)">
                       🟢 En Stock
                     </button>
                   </div>
                 </div>
 
-                <div class="pcb-products-grid" id="pcbProductsGrid_${step.key}">
-            `;
+                <div class="pcb-products-grid" id="pcbProductsGrid_\${step.key}">
+            \`;
 
             if (availableItems.length === 0) {
-              html += `
+              html += \`
                 <div style="grid-column: 1 / -1; padding: 2rem 1rem; text-align: center; color: #64748b; font-size: 0.88rem;">
                   No se encontraron piezas compatibles con los filtros actuales.
                 </div>
-              `;
+              \`;
             } else {
               availableItems.forEach(item => {
                 const inStock = item.inStock !== false;
-                html += `
+                html += \`
                   <div class="pcb-product-option-card">
                     <div class="pcb-opt-top">
                       <div class="pcb-opt-img-wrap">
-                        <img src="${item.img}" alt="${item.title}" class="pcb-opt-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=pcbApp.fallbackImg;">
+                        <img src="\${item.img}" alt="\${item.title}" class="pcb-opt-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=pcbApp.fallbackImg;">
                       </div>
                       <div class="pcb-opt-info">
-                        <span class="pcb-opt-stock-badge ${inStock ? 'in-stock' : 'on-order'}">
-                          ${inStock ? '🟢 En Stock (24-48h)' : '🟡 Sobre Pedido (3-5 días)'}
+                        <span class="pcb-opt-stock-badge \${inStock ? 'in-stock' : 'on-order'}">
+                          \${inStock ? '🟢 En Stock (24-48h)' : '🟡 Sobre Pedido (3-5 días)'}
                         </span>
-                        <h4 class="pcb-opt-title" title="${item.title}">${item.title}</h4>
+                        <h4 class="pcb-opt-title" title="\${item.title}">\${item.title}</h4>
                         <div class="pcb-opt-tags">
-                          ${item.category ? '<span class="pcb-opt-tag" style="background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe;">' + item.category + '</span>' : ''}
-                          ${item.socket ? '<span class="pcb-opt-tag">' + item.socket + '</span>' : ''}
-                          ${item.ramType ? '<span class="pcb-opt-tag">' + item.ramType + '</span>' : ''}
-                          ${item.capacity ? '<span class="pcb-opt-tag">' + item.capacity + '</span>' : ''}
-                          ${item.watts ? '<span class="pcb-opt-tag">' + item.watts + '</span>' : ''}
-                          ${item.hz ? '<span class="pcb-opt-tag">' + item.hz + '</span>' : ''}
-                          ${item.coolerType ? '<span class="pcb-opt-tag">' + item.coolerType + '</span>' : ''}
-                          ${item.vendor ? '<span class="pcb-opt-tag">' + item.vendor + '</span>' : ''}
+                          \${item.category ? '<span class="pcb-opt-tag" style="background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe;">' + item.category + '</span>' : ''}
+                          \${item.socket ? '<span class="pcb-opt-tag">' + item.socket + '</span>' : ''}
+                          \${item.ramType ? '<span class="pcb-opt-tag">' + item.ramType + '</span>' : ''}
+                          \${item.capacity ? '<span class="pcb-opt-tag">' + item.capacity + '</span>' : ''}
+                          \${item.watts ? '<span class="pcb-opt-tag">' + item.watts + '</span>' : ''}
+                          \${item.hz ? '<span class="pcb-opt-tag">' + item.hz + '</span>' : ''}
+                          \${item.coolerType ? '<span class="pcb-opt-tag">' + item.coolerType + '</span>' : ''}
+                          \${item.vendor ? '<span class="pcb-opt-tag">' + item.vendor + '</span>' : ''}
                         </div>
                       </div>
                     </div>
                     <div class="pcb-opt-bottom">
                       <div class="pcb-opt-price-wrap">
-                        <span class="pcb-opt-price">$${item.price.toLocaleString('es-MX')}</span>
+                        <span class="pcb-opt-price">$\${item.price.toLocaleString('es-MX')}</span>
                         <span class="pcb-opt-vat">IVA incluido</span>
                       </div>
-                      <button type="button" class="pcb-opt-select-btn" onclick='pcbApp.selectItem("${step.key}", ${JSON.stringify(item)})'>
+                      <button type="button" class="pcb-opt-select-btn" onclick='pcbApp.selectItem("\${step.key}", \${JSON.stringify(item)})'>
                         + Seleccionar
                       </button>
                     </div>
                   </div>
-                `;
+                \`;
               });
             }
 
-            html += `
+            html += \`
                 </div>
               </div>
-            `;
+            \`;
           }
 
-          html += `
+          html += \`
               </div>
             </li>
-          `;
+          \`;
         });
 
         container.innerHTML = html;
@@ -2409,11 +2468,11 @@
 
         if (keys.length === 0) {
           if (listEl) {
-            listEl.innerHTML = `
+            listEl.innerHTML = \`
               <div style="text-align: center; color: #94a3b8; padding: 2rem 1rem; font-size: 0.88rem;">
                 Aún no has agregado componentes. Haz clic en las categorías de la izquierda para comenzar.
               </div>
-            `;
+            \`;
           }
           if (countEl) countEl.textContent = '0 piezas';
           if (alertEl) {
@@ -2432,21 +2491,21 @@
             const lineTotal = item.price * qty;
             totalSingle += lineTotal;
 
-            itemsHtml += `
+            itemsHtml += \`
               <div class="pcb-summary-item">
                 <div class="pcb-summary-item-left">
-                  <img src="${item.img}" alt="${item.title}" class="pcb-summary-item-img" onerror="this.onerror=null; this.src=pcbApp.fallbackImg;">
+                  <img src="\${item.img}" alt="\${item.title}" class="pcb-summary-item-img" onerror="this.onerror=null; this.src=pcbApp.fallbackImg;">
                   <div style="min-width: 0;">
-                    <div class="pcb-summary-item-title" title="${item.title}">${item.title}</div>
-                    <div class="pcb-summary-item-qty">${qty > 1 ? qty + ' piezas &bull; $' + item.price.toLocaleString('es-MX') + ' c/u' : '1 pieza'}</div>
+                    <div class="pcb-summary-item-title" title="\${item.title}">\${item.title}</div>
+                    <div class="pcb-summary-item-qty">\${qty > 1 ? qty + ' piezas &bull; $' + item.price.toLocaleString('es-MX') + ' c/u' : '1 pieza'}</div>
                   </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 0.45rem;">
-                  <span class="pcb-summary-item-price">$${lineTotal.toLocaleString('es-MX')}</span>
-                  <button type="button" onclick="pcbApp.removeItem('${k}')" style="background:none; border:none; color:#94a3b8; cursor:pointer; font-size:0.85rem; padding:2px;" title="Quitar pieza">✕</button>
+                  <span class="pcb-summary-item-price">$\${lineTotal.toLocaleString('es-MX')}</span>
+                  <button type="button" onclick="pcbApp.removeItem('\${k}')" style="background:none; border:none; color:#94a3b8; cursor:pointer; font-size:0.85rem; padding:2px;" title="Quitar pieza">✕</button>
                 </div>
               </div>
-            `;
+            \`;
           });
 
           if (listEl) listEl.innerHTML = itemsHtml;
@@ -2711,29 +2770,29 @@
         let html = '';
         filtered.forEach(tpl => {
           const price = this.calculateTemplatePrice(tpl);
-          html += `
+          html += \`
             <div class="pcb-template-card">
               <div>
-                <span class="pcb-tpl-badge">${tpl.badge}</span>
-                <h4 class="pcb-tpl-title">${tpl.title}</h4>
-                <p class="pcb-tpl-desc">${tpl.desc}</p>
+                <span class="pcb-tpl-badge">\${tpl.badge}</span>
+                <h4 class="pcb-tpl-title">\${tpl.title}</h4>
+                <p class="pcb-tpl-desc">\${tpl.desc}</p>
                 <ul class="pcb-tpl-specs-list">
-                  ${tpl.specs.map(s => '<li><span>⚡</span> <span>' + s + '</span></li>').join('')}
+                  \${tpl.specs.map(s => '<li><span>⚡</span> <span>' + s + '</span></li>').join('')}
                 </ul>
               </div>
               <div>
                 <div class="pcb-tpl-price-box">
                   <span style="font-size: 0.8rem; color: #64748b;">Precio estimado:</span>
-                  <span class="pcb-tpl-price">$${price.toLocaleString('es-MX')} MXN</span>
+                  <span class="pcb-tpl-price">$\${price.toLocaleString('es-MX')} MXN</span>
                 </div>
                 <div class="pcb-tpl-actions">
-                  <button type="button" class="pcb-tpl-btn-load" onclick="pcbApp.loadTemplate('${tpl.id}')">
+                  <button type="button" class="pcb-tpl-btn-load" onclick="pcbApp.loadTemplate('\${tpl.id}')">
                     Cargar esta configuración
                   </button>
                 </div>
               </div>
             </div>
-          `;
+          \`;
         });
 
         grid.innerHTML = html;
@@ -2833,7 +2892,7 @@
         }
 
         let totalSingle = 0;
-        let msg = 'Hola Seguridad Avanzada, deseo cotizar el siguiente ensamble de PC personalizado:\n\n';
+        let msg = 'Hola Seguridad Avanzada, deseo cotizar el siguiente ensamble de PC personalizado:\\n\\n';
 
         keys.forEach(k => {
           const item = this.selected[k];
@@ -2842,20 +2901,20 @@
           totalSingle += lineTotal;
           const stepObj = STEP_CONFIG.find(x => x.key === k);
           const catName = stepObj ? stepObj.name : k;
-          msg += '• ' + catName + ': ' + item.title + (qty > 1 ? ' (' + qty + ' pzas)' : '') + ' - $' + lineTotal.toLocaleString('es-MX') + ' MXN\n';
+          msg += '• ' + catName + ': ' + item.title + (qty > 1 ? ' (' + qty + ' pzas)' : '') + ' - $' + lineTotal.toLocaleString('es-MX') + ' MXN\\n';
         });
 
         const assemblyCost = (this.includeAssembly) ? 499 : 0;
         if (this.includeAssembly) {
-          msg += '• Servicio de Ensamble y Pruebas Térmicas: $499.00 MXN\n';
+          msg += '• Servicio de Ensamble y Pruebas Térmicas: $499.00 MXN\\n';
         }
 
         const grandTotalSingle = totalSingle + assemblyCost;
         const grandTotalAll = grandTotalSingle * this.systemQty;
 
-        msg += '\nCantidad de Equipos: ' + this.systemQty + ' unidad(es)';
-        msg += '\nTotal Estimado: $' + grandTotalAll.toLocaleString('es-MX') + ' MXN (IVA incluido 16% CFDI 4.0)';
-        msg += '\n\n¿Me podrían confirmar disponibilidad y tiempo de entrega por favor?';
+        msg += '\\nCantidad de Equipos: ' + this.systemQty + ' unidad(es)';
+        msg += '\\nTotal Estimado: $' + grandTotalAll.toLocaleString('es-MX') + ' MXN (IVA incluido 16% CFDI 4.0)';
+        msg += '\\n\\n¿Me podrían confirmar disponibilidad y tiempo de entrega por favor?';
 
         const url = 'https://wa.me/523318257008?text=' + encodeURIComponent(msg);
         window.open(url, '_blank');
@@ -2896,3 +2955,7 @@
   ]
 }
 {% endschema %}
+`;
+
+fs.writeFileSync('sections/page-configurador-pc.liquid', newLiquidContent, 'utf8');
+console.log('Successfully written minimalist, sober, zero-friction configurator to sections/page-configurador-pc.liquid!');
