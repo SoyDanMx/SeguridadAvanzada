@@ -114,8 +114,8 @@ const newLiquidContent = `{% comment %}
     background: #ffffff;
     border: 1px solid var(--pcb-border);
     border-radius: 16px;
-    padding: 1.75rem 2rem;
-    margin-bottom: 1.75rem;
+    padding: 2rem 2.25rem;
+    margin-bottom: 2rem;
     box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
   }
 
@@ -129,70 +129,70 @@ const newLiquidContent = `{% comment %}
 
   .pcb-header-text {
     flex: 1;
-    min-width: 300px;
+    min-width: 320px;
   }
 
   .pcb-header-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.55rem;
     background: #f1f5f9;
-    color: #475569;
+    color: #334155;
     font-family: var(--pcb-font-display);
     font-weight: 700;
-    font-size: 0.8rem;
-    padding: 0.3rem 0.75rem;
+    font-size: 0.88rem;
+    padding: 0.35rem 0.85rem;
     border-radius: 9999px;
     letter-spacing: 0.03em;
     text-transform: uppercase;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.85rem;
     border: 1px solid #e2e8f0;
   }
 
   .pcb-pulse-dot {
-    width: 7px;
-    height: 7px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: #10b981;
   }
 
   .pcb-clean-title {
     font-family: var(--pcb-font-display);
-    font-size: 2.1rem;
-    font-weight: 800;
-    line-height: 1.2;
-    margin: 0 0 0.5rem 0;
+    font-size: 2.6rem;
+    font-weight: 900;
+    line-height: 1.18;
+    margin: 0 0 0.6rem 0;
     color: #0f172a;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
   }
 
   .pcb-clean-desc {
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     color: var(--pcb-text-muted);
-    max-width: 680px;
-    line-height: 1.5;
-    margin: 0 0 1rem 0;
+    max-width: 720px;
+    line-height: 1.55;
+    margin: 0 0 1.25rem 0;
   }
 
   .pcb-clean-trust-list {
     display: flex;
     align-items: center;
-    gap: 0.85rem;
+    gap: 1rem;
     flex-wrap: wrap;
-    font-size: 0.82rem;
-    color: #475569;
-    font-weight: 500;
+    font-size: 0.95rem;
+    color: #334155;
+    font-weight: 600;
   }
 
   .pcb-trust-item {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.4rem;
   }
 
   .pcb-trust-icon {
     color: #059669;
-    font-weight: 700;
+    font-weight: 800;
   }
 
   .pcb-trust-sep {
@@ -202,22 +202,22 @@ const newLiquidContent = `{% comment %}
   .pcb-header-templates-card {
     background: #f8fafc;
     border: 1px solid var(--pcb-border);
-    border-radius: 12px;
-    padding: 1.15rem 1.35rem;
-    min-width: 320px;
+    border-radius: 14px;
+    padding: 1.35rem 1.5rem;
+    min-width: 340px;
   }
 
   .pcb-tpl-card-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.85rem;
   }
 
   .pcb-tpl-card-title {
     font-family: var(--pcb-font-display);
-    font-size: 0.88rem;
-    font-weight: 700;
+    font-size: 1rem;
+    font-weight: 800;
     color: #0f172a;
   }
 
@@ -225,7 +225,7 @@ const newLiquidContent = `{% comment %}
     background: transparent;
     border: none;
     color: var(--pcb-accent);
-    font-size: 0.82rem;
+    font-size: 0.92rem;
     font-weight: 700;
     cursor: pointer;
     padding: 0;
@@ -240,18 +240,18 @@ const newLiquidContent = `{% comment %}
   .pcb-tpl-pills-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+    gap: 0.6rem;
   }
 
   .pcb-tpl-quick-pill {
     background: #ffffff;
     border: 1px solid var(--pcb-border);
-    color: #334155;
-    padding: 0.5rem 0.65rem;
+    color: #1e293b;
+    padding: 0.65rem 0.85rem;
     border-radius: 8px;
     font-family: var(--pcb-font-display);
-    font-size: 0.82rem;
-    font-weight: 600;
+    font-size: 0.92rem;
+    font-weight: 700;
     cursor: pointer;
     text-align: center;
     transition: all 0.15s ease;
@@ -269,13 +269,13 @@ const newLiquidContent = `{% comment %}
   .pcb-main-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.75rem;
+    gap: 2rem;
     align-items: start;
   }
 
   @media (min-width: 1080px) {
     .pcb-main-grid {
-      grid-template-columns: 1.9fr 1.1fr;
+      grid-template-columns: 1.85fr 1.15fr;
     }
   }
 
@@ -291,7 +291,7 @@ const newLiquidContent = `{% comment %}
   }
 
   .pcb-accordion-header-top {
-    padding: 1.35rem 1.75rem;
+    padding: 1.5rem 2rem;
     border-bottom: 1px solid var(--pcb-border);
     display: flex;
     justify-content: space-between;
@@ -303,32 +303,33 @@ const newLiquidContent = `{% comment %}
 
   .pcb-accordion-main-title {
     font-family: var(--pcb-font-display);
-    font-size: 1.45rem;
-    font-weight: 800;
+    font-size: 1.75rem;
+    font-weight: 900;
     color: var(--pcb-text);
-    margin: 0 0 0.25rem 0;
-    letter-spacing: -0.01em;
+    margin: 0 0 0.35rem 0;
+    letter-spacing: -0.015em;
   }
 
   .pcb-accordion-main-desc {
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     color: var(--pcb-text-muted);
     margin: 0;
+    line-height: 1.45;
   }
 
   .pcb-actions-dropdown-btn {
     background: #ffffff;
-    color: #475569;
+    color: #334155;
     border: 1px solid var(--pcb-border);
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.15rem;
     border-radius: 8px;
     font-family: var(--pcb-font-display);
-    font-weight: 600;
-    font-size: 0.85rem;
+    font-weight: 700;
+    font-size: 0.95rem;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.45rem;
     transition: all 0.15s ease;
   }
 
@@ -340,7 +341,7 @@ const newLiquidContent = `{% comment %}
 
   /* BARRA DE AVANCE DINÁMICA (STEP TRACKER) */
   .pcb-progress-bar-wrap {
-    padding: 1rem 1.75rem;
+    padding: 1.25rem 2rem;
     background: #f8fafc;
     border-bottom: 1px solid var(--pcb-border);
   }
@@ -349,32 +350,32 @@ const newLiquidContent = `{% comment %}
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5rem;
-    font-size: 0.88rem;
+    margin-bottom: 0.65rem;
+    font-size: 1.02rem;
   }
 
   .pcb-progress-label {
     font-family: var(--pcb-font-display);
-    font-weight: 700;
-    color: #334155;
+    font-weight: 800;
+    color: #1e293b;
     display: flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.45rem;
   }
 
   .pcb-progress-count {
     font-family: var(--pcb-font-display);
-    font-weight: 700;
+    font-weight: 800;
     color: #059669;
     background: #ffffff;
-    padding: 0.2rem 0.65rem;
+    padding: 0.25rem 0.85rem;
     border-radius: 9999px;
     border: 1px solid #bbf7d0;
-    font-size: 0.82rem;
+    font-size: 0.92rem;
   }
 
   .pcb-progress-track {
-    height: 6px;
+    height: 8px;
     background: #e2e8f0;
     border-radius: 9999px;
     overflow: hidden;
@@ -391,18 +392,18 @@ const newLiquidContent = `{% comment %}
 
   .pcb-essential-chips {
     display: flex;
-    gap: 0.45rem;
-    margin-top: 0.65rem;
+    gap: 0.55rem;
+    margin-top: 0.85rem;
     flex-wrap: wrap;
   }
 
   .pcb-chip {
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.2rem 0.55rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.3rem 0.65rem;
     border-radius: 6px;
     background: #ffffff;
-    color: #64748b;
+    color: #475569;
     border: 1px solid #e2e8f0;
     cursor: pointer;
     transition: all 0.15s;
@@ -441,7 +442,7 @@ const newLiquidContent = `{% comment %}
   }
 
   .pcb-step-header {
-    padding: 1.15rem 1.75rem;
+    padding: 1.35rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -457,24 +458,24 @@ const newLiquidContent = `{% comment %}
   .pcb-step-left {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem;
     flex: 1;
     min-width: 0;
   }
 
   /* Iconos sobrios y neutrales */
   .pcb-step-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
+    font-size: 1.45rem;
     flex-shrink: 0;
     background: #f8fafc;
     border: 1px solid var(--pcb-border);
-    color: #334155;
+    color: #1e293b;
   }
 
   .pcb-step-title-wrap {
@@ -485,12 +486,12 @@ const newLiquidContent = `{% comment %}
 
   .pcb-step-name {
     font-family: var(--pcb-font-display);
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1.3rem;
+    font-weight: 800;
     color: var(--pcb-text);
     display: flex;
     align-items: center;
-    gap: 0.55rem;
+    gap: 0.65rem;
     flex-wrap: wrap;
   }
 
@@ -498,17 +499,17 @@ const newLiquidContent = `{% comment %}
     background: #ecfdf5;
     color: #065f46;
     border: 1px solid #a7f3d0;
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 0.15rem 0.5rem;
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 0.2rem 0.65rem;
     border-radius: 9999px;
   }
 
   .pcb-step-status {
-    font-size: 0.85rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 600;
     color: var(--pcb-text-muted);
-    margin-top: 0.15rem;
+    margin-top: 0.25rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -516,18 +517,18 @@ const newLiquidContent = `{% comment %}
 
   .pcb-step-status.selected {
     color: #059669;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .pcb-header-edit-btn {
     background: #ffffff;
     border: 1px solid var(--pcb-border);
-    color: #334155;
-    padding: 0.35rem 0.75rem;
-    border-radius: 6px;
+    color: #1e293b;
+    padding: 0.45rem 0.95rem;
+    border-radius: 8px;
     font-family: var(--pcb-font-display);
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 0.92rem;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.15s;
   }
@@ -539,8 +540,8 @@ const newLiquidContent = `{% comment %}
   }
 
   .pcb-step-arrow {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     color: #94a3b8;
     transition: transform 0.2s ease;
   }
@@ -551,7 +552,7 @@ const newLiquidContent = `{% comment %}
 
   .pcb-step-body {
     display: none;
-    padding: 1.25rem 1.75rem;
+    padding: 1.5rem 2rem;
     background: #fbfcfe;
     border-top: 1px solid var(--pcb-border-subtle);
   }
@@ -565,75 +566,75 @@ const newLiquidContent = `{% comment %}
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.25rem;
+    gap: 1.5rem;
     background: #ffffff;
     border: 1px solid var(--pcb-border);
-    border-radius: 12px;
-    padding: 1.15rem 1.35rem;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    border-radius: 14px;
+    padding: 1.35rem 1.65rem;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
     flex-wrap: wrap;
   }
 
   .pcb-selected-card-left {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem;
     flex: 1;
-    min-width: 260px;
+    min-width: 280px;
   }
 
   .pcb-selected-img {
-    width: 60px;
-    height: 60px;
+    width: 75px;
+    height: 75px;
     object-fit: contain;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid #e2e8f0;
     background: #f8fafc;
-    padding: 4px;
+    padding: 6px;
     flex-shrink: 0;
   }
 
   .pcb-selected-title {
     font-family: var(--pcb-font-display);
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.2rem;
+    font-weight: 800;
     color: #0f172a;
-    margin: 0 0 0.25rem 0;
+    margin: 0 0 0.35rem 0;
     line-height: 1.35;
   }
 
   .pcb-selected-meta {
     display: flex;
-    gap: 0.65rem;
+    gap: 0.85rem;
     flex-wrap: wrap;
-    font-size: 0.78rem;
-    color: #64748b;
+    font-size: 0.92rem;
+    color: #475569;
   }
 
   .pcb-selected-card-right {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
   }
 
   .pcb-qty-picker-row {
     display: flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.55rem;
   }
 
   .pcb-qty-label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #64748b;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #475569;
   }
 
   .pcb-component-stepper {
     display: inline-flex;
     align-items: center;
     border: 1px solid var(--pcb-border);
-    border-radius: 6px;
+    border-radius: 8px;
     background: #ffffff;
     overflow: hidden;
   }
@@ -641,11 +642,11 @@ const newLiquidContent = `{% comment %}
   .pcb-comp-step-btn {
     background: #f8fafc;
     border: none;
-    width: 28px;
-    height: 28px;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #334155;
+    width: 34px;
+    height: 34px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #1e293b;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -658,15 +659,15 @@ const newLiquidContent = `{% comment %}
   }
 
   .pcb-comp-qty-input {
-    width: 32px;
-    height: 28px;
+    width: 38px;
+    height: 34px;
     border: none;
     border-left: 1px solid var(--pcb-border);
     border-right: 1px solid var(--pcb-border);
     text-align: center;
     font-family: var(--pcb-font-display);
-    font-size: 0.88rem;
-    font-weight: 700;
+    font-size: 1.05rem;
+    font-weight: 800;
     color: #0f172a;
     background: #ffffff;
     -moz-appearance: textfield;
@@ -684,31 +685,32 @@ const newLiquidContent = `{% comment %}
 
   .pcb-selected-price {
     font-family: var(--pcb-font-display);
-    font-size: 1.15rem;
-    font-weight: 800;
+    font-size: 1.45rem;
+    font-weight: 900;
     color: #0f172a;
   }
 
   .pcb-selected-unit-price {
-    font-size: 0.75rem;
+    font-size: 0.88rem;
     color: #64748b;
+    font-weight: 600;
   }
 
   .pcb-selected-actions {
     display: flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.55rem;
   }
 
   .pcb-btn-change {
     background: #ffffff;
-    color: #334155;
+    color: #1e293b;
     border: 1px solid var(--pcb-border);
-    padding: 0.4rem 0.85rem;
-    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
     font-family: var(--pcb-font-display);
-    font-size: 0.82rem;
-    font-weight: 600;
+    font-size: 0.92rem;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.15s;
   }
@@ -722,11 +724,11 @@ const newLiquidContent = `{% comment %}
     background: #ffffff;
     color: #dc2626;
     border: 1px solid #fecaca;
-    padding: 0.4rem 0.75rem;
-    border-radius: 6px;
+    padding: 0.5rem 0.95rem;
+    border-radius: 8px;
     font-family: var(--pcb-font-display);
-    font-size: 0.82rem;
-    font-weight: 600;
+    font-size: 0.92rem;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.15s;
   }
@@ -739,7 +741,7 @@ const newLiquidContent = `{% comment %}
   .pcb-picker-wrap {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 
   .pcb-editing-banner {
@@ -748,41 +750,41 @@ const newLiquidContent = `{% comment %}
     align-items: center;
     background: #f0fdf4;
     border: 1px solid #bbf7d0;
-    border-radius: 8px;
-    padding: 0.65rem 1rem;
-    font-size: 0.85rem;
+    border-radius: 10px;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.98rem;
     color: #166534;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.65rem;
   }
 
   .pcb-editing-cancel-btn {
     background: #ffffff;
     border: 1px solid #bbf7d0;
     color: #166534;
-    padding: 0.25rem 0.65rem;
+    padding: 0.35rem 0.85rem;
     border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 0.88rem;
+    font-weight: 700;
     cursor: pointer;
   }
 
   /* PÍLDORAS DE SUBCATEGORÍA */
   .pcb-subcat-pills {
     display: flex;
-    gap: 0.45rem;
+    gap: 0.55rem;
     flex-wrap: wrap;
   }
 
   .pcb-subcat-pill {
     background: #ffffff;
     border: 1px solid var(--pcb-border);
-    color: #475569;
-    padding: 0.4rem 0.85rem;
+    color: #334155;
+    padding: 0.5rem 1.15rem;
     border-radius: 9999px;
     font-family: var(--pcb-font-display);
-    font-size: 0.82rem;
-    font-weight: 600;
+    font-size: 0.92rem;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.15s;
   }
@@ -804,33 +806,33 @@ const newLiquidContent = `{% comment %}
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
     flex-wrap: wrap;
   }
 
   .pcb-search-wrap {
     flex: 1;
-    min-width: 240px;
+    min-width: 260px;
     position: relative;
   }
 
   .pcb-search-icon {
     position: absolute;
-    left: 0.85rem;
+    left: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    color: #94a3b8;
-    font-size: 0.95rem;
+    color: #64748b;
+    font-size: 1.15rem;
     pointer-events: none;
   }
 
   .pcb-search-input {
     width: 100%;
-    padding: 0.6rem 0.85rem 0.6rem 2.25rem;
+    padding: 0.75rem 1rem 0.75rem 2.6rem;
     border: 1px solid var(--pcb-border);
-    border-radius: 8px;
+    border-radius: 10px;
     font-family: var(--pcb-font-main);
-    font-size: 0.88rem;
+    font-size: 1rem;
     color: #0f172a;
     background: #ffffff;
     outline: none;
@@ -839,13 +841,13 @@ const newLiquidContent = `{% comment %}
 
   .pcb-search-input:focus {
     border-color: var(--pcb-accent);
-    box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.15);
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
   }
 
   .pcb-stock-filter-toggle {
     display: inline-flex;
     border: 1px solid var(--pcb-border);
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
     background: #ffffff;
   }
@@ -853,11 +855,11 @@ const newLiquidContent = `{% comment %}
   .pcb-stock-filter-btn {
     background: transparent;
     border: none;
-    padding: 0.55rem 0.85rem;
+    padding: 0.65rem 1.05rem;
     font-family: var(--pcb-font-display);
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: #64748b;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #475569;
     cursor: pointer;
     transition: all 0.15s;
   }
@@ -865,24 +867,24 @@ const newLiquidContent = `{% comment %}
   .pcb-stock-filter-btn.active {
     background: #f1f5f9;
     color: #0f172a;
-    font-weight: 700;
+    font-weight: 800;
   }
 
   /* GRID DE PRODUCTOS */
   .pcb-products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1rem;
-    max-height: 520px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.25rem;
+    max-height: 560px;
     overflow-y: auto;
-    padding-right: 0.35rem;
+    padding-right: 0.45rem;
   }
 
   .pcb-product-option-card {
     background: #ffffff;
     border: 1px solid var(--pcb-border);
-    border-radius: 12px;
-    padding: 1rem;
+    border-radius: 14px;
+    padding: 1.15rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -891,24 +893,24 @@ const newLiquidContent = `{% comment %}
 
   .pcb-product-option-card:hover {
     border-color: #94a3b8;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
   }
 
   .pcb-opt-top {
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
+    gap: 0.75rem;
   }
 
   .pcb-opt-img-wrap {
     width: 100%;
-    height: 120px;
+    height: 140px;
     background: #f8fafc;
-    border-radius: 8px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px;
+    padding: 10px;
   }
 
   .pcb-opt-img {
@@ -924,11 +926,11 @@ const newLiquidContent = `{% comment %}
 
   .pcb-opt-stock-badge {
     display: inline-block;
-    font-size: 0.72rem;
-    font-weight: 600;
-    padding: 0.15rem 0.45rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
     border-radius: 4px;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.45rem;
   }
 
   .pcb-opt-stock-badge.in-stock {
@@ -943,11 +945,11 @@ const newLiquidContent = `{% comment %}
 
   .pcb-opt-title {
     font-family: var(--pcb-font-display);
-    font-size: 0.92rem;
-    font-weight: 700;
+    font-size: 1.05rem;
+    font-weight: 800;
     color: #0f172a;
     line-height: 1.35;
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 0.55rem 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -956,19 +958,19 @@ const newLiquidContent = `{% comment %}
 
   .pcb-opt-tags {
     display: flex;
-    gap: 0.35rem;
+    gap: 0.4rem;
     flex-wrap: wrap;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.85rem;
   }
 
   .pcb-opt-tag {
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     background: #f1f5f9;
-    color: #475569;
+    color: #334155;
     border: 1px solid #e2e8f0;
-    padding: 0.15rem 0.45rem;
+    padding: 0.2rem 0.55rem;
     border-radius: 4px;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .pcb-opt-bottom {
@@ -976,8 +978,8 @@ const newLiquidContent = `{% comment %}
     justify-content: space-between;
     align-items: center;
     border-top: 1px solid #f1f5f9;
-    padding-top: 0.75rem;
-    margin-top: 0.5rem;
+    padding-top: 0.85rem;
+    margin-top: 0.65rem;
   }
 
   .pcb-opt-price-wrap {
@@ -987,25 +989,26 @@ const newLiquidContent = `{% comment %}
 
   .pcb-opt-price {
     font-family: var(--pcb-font-display);
-    font-size: 1.15rem;
-    font-weight: 800;
+    font-size: 1.45rem;
+    font-weight: 900;
     color: #0f172a;
   }
 
   .pcb-opt-vat {
-    font-size: 0.7rem;
-    color: #94a3b8;
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 500;
   }
 
   .pcb-opt-select-btn {
     background: #0f172a;
     color: #ffffff;
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
+    padding: 0.65rem 1.25rem;
+    border-radius: 8px;
     font-family: var(--pcb-font-display);
-    font-size: 0.85rem;
-    font-weight: 700;
+    font-size: 0.95rem;
+    font-weight: 800;
     cursor: pointer;
     transition: background 0.15s;
   }
@@ -1021,7 +1024,7 @@ const newLiquidContent = `{% comment %}
     background: #ffffff;
     border: 1px solid var(--pcb-border);
     border-radius: 16px;
-    padding: 1.5rem 1.75rem;
+    padding: 1.75rem 2rem;
     box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
     position: sticky;
     top: 20px;
@@ -1029,23 +1032,23 @@ const newLiquidContent = `{% comment %}
 
   .pcb-summary-title {
     font-family: var(--pcb-font-display);
-    font-size: 1.25rem;
-    font-weight: 800;
+    font-size: 1.55rem;
+    font-weight: 900;
     color: #0f172a;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.85rem;
+    margin-bottom: 1.35rem;
+    padding-bottom: 0.95rem;
     border-bottom: 1px solid var(--pcb-border);
   }
 
   .pcb-summary-count {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #475569;
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #334155;
     background: #f1f5f9;
-    padding: 0.2rem 0.65rem;
+    padding: 0.25rem 0.85rem;
     border-radius: 9999px;
   }
 
@@ -1053,38 +1056,38 @@ const newLiquidContent = `{% comment %}
   .pcb-watt-meter-card {
     background: #f8fafc;
     border: 1px solid var(--pcb-border);
-    border-radius: 10px;
-    padding: 0.85rem 1rem;
-    margin-bottom: 1.15rem;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
   }
 
   .pcb-watt-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
   }
 
   .pcb-watt-label {
     font-family: var(--pcb-font-display);
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: #475569;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #334155;
   }
 
   .pcb-watt-number {
     font-family: var(--pcb-font-display);
-    font-size: 0.95rem;
-    font-weight: 800;
+    font-size: 1.25rem;
+    font-weight: 900;
     color: #0f172a;
   }
 
   .pcb-watt-bar-bg {
-    height: 5px;
+    height: 7px;
     background: #e2e8f0;
     border-radius: 9999px;
     overflow: hidden;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
   }
 
   .pcb-watt-bar-fill {
@@ -1099,69 +1102,71 @@ const newLiquidContent = `{% comment %}
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.78rem;
-    color: #64748b;
+    font-size: 0.88rem;
+    color: #475569;
+    font-weight: 600;
   }
 
   .pcb-watt-status-tag {
-    font-weight: 700;
-    font-size: 0.75rem;
+    font-weight: 800;
+    font-size: 0.85rem;
   }
 
   .pcb-compat-alert {
     background: #f0fdf4;
     border: 1px solid #bbf7d0;
-    border-radius: 8px;
-    padding: 0.6rem 0.85rem;
-    font-size: 0.82rem;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
     color: #166534;
-    margin-bottom: 1.15rem;
-    font-weight: 500;
+    margin-bottom: 1.25rem;
+    font-weight: 600;
   }
 
   .pcb-summary-list {
-    max-height: 260px;
+    max-height: 280px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1.15rem;
-    padding-right: 0.25rem;
+    gap: 0.65rem;
+    margin-bottom: 1.25rem;
+    padding-right: 0.35rem;
   }
 
   .pcb-summary-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.55rem 0.65rem;
-    border-radius: 8px;
+    padding: 0.65rem 0.85rem;
+    border-radius: 10px;
     background: #f8fafc;
     border: 1px solid #f1f5f9;
-    font-size: 0.82rem;
+    font-size: 0.92rem;
   }
 
   .pcb-summary-item-left {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 0.75rem;
     flex: 1;
     min-width: 0;
   }
 
   .pcb-summary-item-img {
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     object-fit: contain;
-    border-radius: 4px;
+    border-radius: 6px;
     background: #ffffff;
     border: 1px solid #e2e8f0;
-    padding: 2px;
+    padding: 3px;
     flex-shrink: 0;
   }
 
   .pcb-summary-item-title {
-    font-weight: 600;
+    font-weight: 700;
     color: #0f172a;
+    font-size: 0.95rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1169,14 +1174,16 @@ const newLiquidContent = `{% comment %}
 
   .pcb-summary-item-qty {
     color: #64748b;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
   }
 
   .pcb-summary-item-price {
     font-family: var(--pcb-font-display);
-    font-weight: 700;
+    font-weight: 800;
     color: #0f172a;
-    margin-left: 0.65rem;
+    font-size: 1.1rem;
+    margin-left: 0.75rem;
     white-space: nowrap;
   }
 
@@ -1184,100 +1191,103 @@ const newLiquidContent = `{% comment %}
   .pcb-assembly-option-card {
     background: #f8fafc;
     border: 1px solid var(--pcb-border);
-    border-radius: 10px;
-    padding: 0.85rem 1rem;
-    margin-bottom: 1.25rem;
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.35rem;
   }
 
   .pcb-assembly-check-label {
     display: flex;
     align-items: flex-start;
-    gap: 0.65rem;
+    gap: 0.75rem;
     cursor: pointer;
   }
 
   .pcb-assembly-title {
     font-family: var(--pcb-font-display);
-    font-size: 0.88rem;
-    font-weight: 700;
+    font-size: 1.02rem;
+    font-weight: 800;
     color: #0f172a;
     display: block;
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.25rem;
   }
 
   .pcb-assembly-desc {
-    font-size: 0.78rem;
-    color: #64748b;
+    font-size: 0.88rem;
+    color: #475569;
     display: block;
-    line-height: 1.35;
+    line-height: 1.45;
   }
 
   .pcb-summary-totals {
     border-top: 1px solid var(--pcb-border);
-    padding-top: 1rem;
-    margin-bottom: 1.25rem;
+    padding-top: 1.15rem;
+    margin-bottom: 1.35rem;
   }
 
   .pcb-total-row {
     display: flex;
     justify-content: space-between;
-    font-size: 0.88rem;
-    color: #64748b;
-    margin-bottom: 0.4rem;
+    font-size: 1.02rem;
+    color: #475569;
+    margin-bottom: 0.55rem;
+    font-weight: 500;
   }
 
   .pcb-grand-total-row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-top: 0.75rem;
-    padding-top: 0.75rem;
+    margin-top: 0.85rem;
+    padding-top: 0.85rem;
     border-top: 1px solid #f1f5f9;
   }
 
   .pcb-grand-total-label {
     font-family: var(--pcb-font-display);
-    font-size: 1.05rem;
+    font-size: 1.25rem;
     font-weight: 800;
     color: #0f172a;
   }
 
   .pcb-grand-total-val {
     font-family: var(--pcb-font-display);
-    font-size: 1.6rem;
+    font-size: 2.1rem;
     font-weight: 900;
     color: #0f172a;
+    letter-spacing: -0.02em;
   }
 
   .pcb-vat-hint {
-    font-size: 0.75rem;
-    color: #94a3b8;
+    font-size: 0.82rem;
+    color: #64748b;
     text-align: right;
-    margin-top: 0.15rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
   }
 
   .pcb-summary-actions {
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
+    gap: 0.75rem;
   }
 
   .pcb-btn-cart-main {
     background: #0f172a;
     color: #ffffff;
     border: none;
-    border-radius: 10px;
-    padding: 0.95rem;
+    border-radius: 12px;
+    padding: 1.1rem;
     font-family: var(--pcb-font-display);
-    font-size: 1.02rem;
-    font-weight: 700;
+    font-size: 1.15rem;
+    font-weight: 800;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     transition: all 0.15s ease;
-    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
   }
 
   .pcb-btn-cart-main:hover {
@@ -1289,16 +1299,16 @@ const newLiquidContent = `{% comment %}
     background: #ffffff;
     color: #1e293b;
     border: 1px solid var(--pcb-border);
-    border-radius: 10px;
-    padding: 0.85rem;
+    border-radius: 12px;
+    padding: 1rem;
     font-family: var(--pcb-font-display);
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 1.05rem;
+    font-weight: 700;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.55rem;
     transition: all 0.15s ease;
   }
 
@@ -1320,7 +1330,7 @@ const newLiquidContent = `{% comment %}
     -webkit-backdrop-filter: blur(12px);
     border-top: 1px solid var(--pcb-border);
     box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.06);
-    padding: 0.85rem 1.5rem;
+    padding: 1rem 1.75rem;
     z-index: 990;
   }
 
@@ -1330,7 +1340,7 @@ const newLiquidContent = `{% comment %}
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.25rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
     padding-right: 85px; /* Espacio para no chocar con widget flotante de WhatsApp */
   }
@@ -1338,28 +1348,28 @@ const newLiquidContent = `{% comment %}
   .pcb-sticky-left {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
   }
 
   .pcb-delivery-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    color: #475569;
+    gap: 0.45rem;
+    color: #334155;
     font-family: var(--pcb-font-display);
-    font-weight: 600;
-    font-size: 0.88rem;
+    font-weight: 700;
+    font-size: 0.98rem;
     background: #f1f5f9;
-    padding: 0.35rem 0.75rem;
-    border-radius: 6px;
+    padding: 0.45rem 0.95rem;
+    border-radius: 8px;
   }
 
   .pcb-qty-stepper {
     display: flex;
     align-items: center;
     border: 1px solid var(--pcb-border);
-    border-radius: 6px;
+    border-radius: 8px;
     overflow: hidden;
     background: #ffffff;
   }
@@ -1367,11 +1377,11 @@ const newLiquidContent = `{% comment %}
   .pcb-qty-btn {
     background: #f8fafc;
     border: none;
-    width: 32px;
-    height: 32px;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: #334155;
+    width: 36px;
+    height: 36px;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #1e293b;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1383,51 +1393,53 @@ const newLiquidContent = `{% comment %}
   }
 
   .pcb-qty-val {
-    width: 36px;
+    width: 42px;
     text-align: center;
     font-family: var(--pcb-font-display);
-    font-weight: 700;
-    font-size: 0.95rem;
+    font-weight: 800;
+    font-size: 1.1rem;
   }
 
   .pcb-sticky-total {
     display: flex;
     align-items: baseline;
-    gap: 0.5rem;
+    gap: 0.6rem;
   }
 
   .pcb-sticky-total-label {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: #64748b;
+    font-weight: 600;
   }
 
   .pcb-sticky-total-amount {
     font-family: var(--pcb-font-display);
-    font-size: 1.45rem;
+    font-size: 1.85rem;
     font-weight: 900;
     color: #0f172a;
+    letter-spacing: -0.02em;
   }
 
   .pcb-sticky-actions {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 0.75rem;
   }
 
   .pcb-btn-cart {
     background: #0f172a;
     color: #ffffff;
     border: none;
-    padding: 0.75rem 1.35rem;
-    border-radius: 8px;
+    padding: 0.85rem 1.6rem;
+    border-radius: 10px;
     font-family: var(--pcb-font-display);
-    font-size: 0.95rem;
-    font-weight: 700;
+    font-size: 1.08rem;
+    font-weight: 800;
     cursor: pointer;
     transition: all 0.15s;
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.5rem;
   }
 
   .pcb-btn-cart:hover {
@@ -1438,16 +1450,16 @@ const newLiquidContent = `{% comment %}
     background: #ffffff;
     color: #1e293b;
     border: 1px solid var(--pcb-border);
-    padding: 0.75rem 1.15rem;
-    border-radius: 8px;
+    padding: 0.85rem 1.35rem;
+    border-radius: 10px;
     font-family: var(--pcb-font-display);
-    font-size: 0.92rem;
-    font-weight: 600;
+    font-size: 1.02rem;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.15s;
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.5rem;
   }
 
   .pcb-btn-quote:hover {
