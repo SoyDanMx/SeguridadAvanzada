@@ -249,8 +249,8 @@ export async function POST(request: Request) {
       const p = products[0];
       const stockCount = typeof p.stock === 'number' ? p.stock : 0;
       const stockMsg = stockCount > 0
-        ? `Disponible para envío inmediato (${stockCount} unidades en stock)`
-        : "Disponible bajo pedido (consultar tiempo de entrega)";
+        ? `Disponible en almacén central mayorista (${stockCount} unidades disponibles). Envío asegurado a domicilio de 2 a 4 días hábiles. RECOLECCIÓN EN OFICINAS / ENTREGA INMEDIATA NO DISPONIBLE sin previa confirmación de un asesor.`
+        : "Disponible bajo pedido (consultar tiempo de entrega con un asesor)";
 
       responseObj.title = p.name;
       responseObj.sku = p.sku;
@@ -259,13 +259,16 @@ export async function POST(request: Request) {
       responseObj.description = cleanDescription(p.description, 120);
       responseObj.stock = stockMsg;
       responseObj.stock_count = stockCount;
+      responseObj.delivery_time = "2 a 4 días hábiles vía paquetería asegurada a domicilio";
+      responseObj.pickup_available = false;
+      responseObj.pickup_policy = "Toda compra se despacha exclusivamente por paquetería asegurada a domicilio. Queda prohibido prometer recolección física en oficinas o entrega al día siguiente sin validación previa de un asesor.";
       responseObj.datasheet_url = p.datasheet_url || null;
     } else {
       products.forEach((p, index) => {
         const i = index + 1;
         const stockCount = typeof p.stock === 'number' ? p.stock : 0;
         const stockMsg = stockCount > 0
-          ? `Disponible (${stockCount} en stock)`
+          ? `Disponible en almacén mayorista (${stockCount} en stock). Envío a domicilio 2-4 días hábiles.`
           : "Bajo pedido";
 
         responseObj[`title${i}`] = p.name;
@@ -275,6 +278,8 @@ export async function POST(request: Request) {
         responseObj[`vendor${i}`] = formatBrand(p.brand, p.sku);
         responseObj[`datasheet_url${i}`] = p.datasheet_url || null;
       });
+      responseObj.pickup_available = false;
+      responseObj.pickup_policy = "Toda compra se despacha exclusivamente por paquetería asegurada a domicilio.";
     }
 
     return NextResponse.json(responseObj, { status: 200 });
