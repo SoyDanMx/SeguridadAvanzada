@@ -77,7 +77,7 @@ export default function SucursalesPage() {
               <svg className="w-6 h-6 text-sky-400 flex-shrink-0 fill-current" viewBox="0 0 24 24">
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
               </svg>
-              <span><strong>Av. Clavería 237</strong>, Claveria, Azcapotzalco, 02080 Ciudad de México, CDMX</span>
+              <span><strong>Av. Clavería 237, Int. Oficina 1</strong>, Col. Claveria, Azcapotzalco, 02080 Ciudad de México, CDMX</span>
             </div>
 
             <div className="bg-white/5 border border-white/10 rounded-xl p-5 space-y-3 text-base text-slate-200">

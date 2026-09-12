@@ -91,7 +91,7 @@ export default function FormasDePagoPage() {
       <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 border border-sky-400/40 rounded-2xl p-8 sm:p-10 text-white mb-10 shadow-xl">
         <h2 className="text-2xl sm:text-3xl font-extrabold mb-3">🏢 Pago Directo en Sitio: Corporativo México</h2>
         <p className="text-slate-300 text-lg sm:text-xl leading-relaxed max-w-3xl mb-6">
-          Puedes acudir directamente a nuestra sede central en <strong>Av. Clavería 237, Col. Claveria, Azcapotzalco, 02080 CDMX</strong> para pagar y recolectar tu pedido personalmente. Contamos con caja de cobro en sitio donde aceptamos efectivo, terminales bancarias y SPEI en mostrador.
+          Puedes acudir directamente a nuestra sede central en <strong>Av. Clavería 237, Int. Oficina 1, Col. Claveria, Azcapotzalco, 02080 CDMX</strong> para pagar y recolectar tu pedido personalmente. Contamos con caja de cobro en sitio donde aceptamos efectivo, terminales bancarias y SPEI en mostrador.
         </p>
         <a
           href="https://wa.me/525636741156?text=Hola,%20deseo%20coordinar%20mi%20visita%20para%20pagar%20en%20Corporativo%20Claver%C3%ADa"
