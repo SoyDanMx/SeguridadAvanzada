@@ -4,6 +4,6 @@
   "buildCommand": "next build",
   "crons": [
     { "path": "/api/cron/sync", "schedule": "0 8 * * *" },
-    { "path": "/api/cron/followup", "schedule": "*/15 * * * *" }
+    { "path": "/api/cron/followup", "schedule": "0 14 * * *" }
   ]
 }
