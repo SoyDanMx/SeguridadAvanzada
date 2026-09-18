@@ -103,6 +103,17 @@ export async function POST(request: Request) {
     const trimmedSuffix = skuToken.replace(/[\-\/]?[A-Za-z]$/, "");
     if (trimmedSuffix && trimmedSuffix !== skuToken && trimmedSuffix.length >= 3) searchTargets.push(trimmedSuffix);
 
+    // Alias comercial canónico para Kits de CCTV
+    const lowerRaw = rawQuery.toLowerCase();
+    if (
+      (lowerRaw.includes("kit") && (lowerRaw.includes("camara") || lowerRaw.includes("cctv"))) ||
+      lowerRaw.includes("hl1080ps")
+    ) {
+      if (!searchTargets.includes("HL1080PS/INSTALADO")) {
+        searchTargets.unshift("HL1080PS/INSTALADO");
+      }
+    }
+
     let products: any[] = [];
 
     // 1. Coincidencia exacta o parcial en Prisma DB
