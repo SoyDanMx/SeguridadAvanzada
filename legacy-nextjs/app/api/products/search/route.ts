@@ -319,24 +319,39 @@ export async function POST(request: Request) {
           hasImmediateCdmx = false;
           stockMsg = `📦 Stock en almacén central foráneo (${stockProv || stockCount} pzas). Lo tendríamos disponible bajo pedido para recolección en oficina Clavería 237 en 24 a 72 horas hábiles (previa colocación del pedido en línea, transferencia SPEI o pago en sucursal), o con envío asegurado a domicilio en 2 a 4 días.`;
         } else {
-          stockMsg = "Disponible bajo pedido de 24 a 72 horas hábiles previa confirmación de compra.";
+          hasImmediateCdmx = false;
+          stockMsg = "❌ Agotado temporalmente sin existencias en almacenes locales ni foráneos.";
         }
       } else if (branches && (branches.azcapotzalco !== undefined || branches.palacio !== undefined || branches.tlalnepantla !== undefined || branches.coacalco !== undefined)) {
         const localCt = (branches.azcapotzalco || 0) + (branches.palacio || 0) + (branches.tlalnepantla || 0) + (branches.coacalco || 0);
         if (localCt > 0) {
           hasImmediateCdmx = true;
           stockMsg = `✅ Stock disponible de inmediato en sucursales locales CDMX/ZMVM (${localCt} pzas). Recolección en oficina Clavería 237 lista en 2 a 4 horas previa cita.`;
-        } else {
+        } else if (branches.provincia > 0 || stockCount > 0) {
           hasImmediateCdmx = false;
           stockMsg = `📦 Stock en almacén central foráneo (${branches.provincia || stockCount} pzas). Lo tendríamos disponible bajo pedido para recolección en oficina Clavería 237 en 24 a 72 horas hábiles (previa colocación del pedido en línea, transferencia SPEI o pago en sucursal), o con envío directo a domicilio en 2 a 4 días.`;
+        } else {
+          hasImmediateCdmx = false;
+          stockMsg = "❌ Agotado temporalmente sin existencias en almacenes locales ni foráneos.";
         }
       } else {
-        stockMsg = hasImmediateCdmx
-          ? `✅ Disponible de inmediato en almacén local (${cdmxQty} pzas). Recolección en oficina Clavería 237 lista en 2 a 4 horas previa cita, o envío express.`
-          : (stockCount > 0
-            ? `📦 Disponible en almacén central foráneo (${stockCount} pzas). Lo tendríamos listo bajo pedido en oficina Clavería 237 de 24 a 72 horas hábiles (previa colocación del pedido en línea, transferencia SPEI o pago en sucursal), o con envío nacional en 2 a 4 días.`
-            : "Disponible bajo pedido de 24 a 72 horas hábiles previa confirmación de compra.");
+        if (hasImmediateCdmx) {
+          stockMsg = `✅ Disponible de inmediato en almacén local (${cdmxQty} pzas). Recolección en oficina Clavería 237 lista en 2 a 4 horas previa cita, o envío express.`;
+        } else if (stockCount > 0) {
+          stockMsg = `📦 Disponible en almacén central foráneo (${stockCount} pzas). Lo tendríamos listo bajo pedido en oficina Clavería 237 de 24 a 72 horas hábiles (previa colocación del pedido en línea, transferencia SPEI o pago en sucursal), o con envío nacional en 2 a 4 días.`;
+        } else {
+          hasImmediateCdmx = false;
+          stockMsg = "❌ Agotado temporalmente sin existencias en almacenes locales ni foráneos.";
+        }
       }
+
+      // Detectar si el producto es AUDIO-PACK-PRO-S4 (negro agotado) y sugerir AUDIO-PACK-PRO-S4W (blanco con 8 pzas)
+      const isAudioPackBlack = p.sku.toUpperCase().includes("AUDIO-PACK-PRO-S4") && !p.sku.toUpperCase().includes("AUDIO-PACK-PRO-S4W");
+      if (stockCount === 0 && isAudioPackBlack) {
+        stockMsg += " (💡 Nota: Contamos con 8 unidades disponibles para entrega inmediata en color Blanco modelo AUDIO-PACK-PRO-S4W por $24,082.62 MXN).";
+      }
+
+      const isOutOfStock = stockCount === 0 && !hasImmediateCdmx;
 
       responseObj.title = p.name;
       responseObj.sku = p.sku;
@@ -350,23 +365,31 @@ export async function POST(request: Request) {
       responseObj.cdmx_qty = cdmxQty;
       responseObj.resto_pais_qty = restoPaisQty;
       responseObj.branches = branches;
-      responseObj.pickup_available = true;
-      responseObj.pickup_branch = is24hTransfer ? "CEDIS Central / Sucursal Sur" : "Sucursal Azcapotzalco / Almacén CDMX Norte";
+      responseObj.pickup_available = !isOutOfStock;
+      responseObj.pickup_branch = isOutOfStock
+        ? "Sin disponibilidad física en sucursales"
+        : (is24hTransfer ? "CEDIS Central / Sucursal Sur" : "Sucursal Azcapotzalco / Almacén CDMX Norte");
       responseObj.pickup_office_address = "Av. Clavería 237, Int. Oficina 1, Col. Claveria, Azcapotzalco, CDMX (a una cuadra del Parque de la China)";
-      responseObj.pickup_prep_time = hasImmediateCdmx && !is24hTransfer
-        ? "Almacén local (Azcapotzalco / CDMX Norte): 2 a 4 horas previa cita."
-        : (is24hTransfer
-          ? "Traspaso local (CEDIS Central / Sucursal Sur): 24 horas hábiles (al siguiente día hábil)."
-          : "Almacén central foráneo: bajo pedido de 24 a 72 horas hábiles previa colocación de pedido o transferencia.");
-      responseObj.delivery_time = hasImmediateCdmx && !is24hTransfer
-        ? "Entrega local express CDMX mismo día o 2 a 4 días resto del país"
-        : "2 a 4 días hábiles vía paquetería asegurada a domicilio";
-      responseObj.pickup_policy = hasImmediateCdmx && !is24hTransfer
-        ? "Recolección disponible en oficina Clavería 237 previa cita (2 a 4 horas con stock verificado)."
-        : (is24hTransfer
-          ? "Recolección disponible en oficina Clavería 237 al siguiente día hábil (traspaso local en 24 horas)."
-          : "Artículo en almacén central foráneo. Lo tendríamos disponible en oficina de 24 a 72 horas hábiles previa colocación de pedido en línea, transferencia SPEI o pago en sucursal.");
-      responseObj.pickup_payment_accepted = true;
+      responseObj.pickup_prep_time = isOutOfStock
+        ? "Equipo agotado. Consultar fecha de reabastecimiento con un asesor."
+        : (hasImmediateCdmx && !is24hTransfer
+          ? "Almacén local (Azcapotzalco / CDMX Norte): 2 a 4 horas previa cita."
+          : (is24hTransfer
+            ? "Traspaso local (CEDIS Central / Sucursal Sur): 24 horas hábiles (al siguiente día hábil)."
+            : "Almacén central foráneo: bajo pedido de 24 a 72 horas hábiles previa colocación de pedido o transferencia."));
+      responseObj.delivery_time = isOutOfStock
+        ? "Sujeto a tiempo de resurtido de planta / fabricante"
+        : (hasImmediateCdmx && !is24hTransfer
+          ? "Entrega local express CDMX mismo día o 2 a 4 días resto del país"
+          : "2 a 4 días hábiles vía paquetería asegurada a domicilio");
+      responseObj.pickup_policy = isOutOfStock
+        ? "Equipo sin existencias para entrega o recolección. Se recomienda consultar al coordinador técnico para verificar fecha de llegada o adquirir variante disponible."
+        : (hasImmediateCdmx && !is24hTransfer
+          ? "Recolección disponible en oficina Clavería 237 previa cita (2 a 4 horas con stock verificado)."
+          : (is24hTransfer
+            ? "Recolección disponible en oficina Clavería 237 al siguiente día hábil (traspaso local en 24 horas)."
+            : "Artículo en almacén central foráneo. Lo tendríamos disponible en oficina de 24 a 72 horas hábiles previa colocación de pedido en línea, transferencia SPEI o pago en sucursal."));
+      responseObj.pickup_payment_accepted = !isOutOfStock;
       responseObj.pickup_payment_methods = "Tarjeta de crédito/débito en terminal bancaria, transferencia SPEI y efectivo en mostrador al recolectar previa cita";
       responseObj.datasheet_url = p.datasheet_url || tech?.datasheet_url || `https://seguridad-avanzada.com/search?q=${encodeURIComponent(p.sku)}`;
       if (tech?.manual_url) responseObj.manual_url = tech.manual_url;
