@@ -95,14 +95,24 @@ export async function POST(request: Request) {
     const searchTargets: string[] = [];
     if (skuToken) searchTargets.push(skuToken);
     if (cleanQuery && cleanQuery !== skuToken) searchTargets.push(cleanQuery);
-    
-    // Variación 1: Sin guiones ni diagonales (ej. ST1460E)
-    const unhyphenated = skuToken.replace(/[\-\/]/g, "");
-    if (unhyphenated && unhyphenated !== skuToken) searchTargets.push(unhyphenated);
 
-    // Variación 2: Sin sufijos de letra única final (ej. ST-1460 para ST-1460E)
-    const trimmedSuffix = skuToken.replace(/[\-\/]?[A-Za-z]$/, "");
-    if (trimmedSuffix && trimmedSuffix !== skuToken && trimmedSuffix.length >= 3) searchTargets.push(trimmedSuffix);
+    // Variación con/sin paréntesis si aplica (ej. "MW5G (3-PACK)" -> "MW5G 3-PACK" y "MW5G")
+    if (skuToken.includes("(") || skuToken.includes(")")) {
+      const withoutParens = skuToken.replace(/[\(\)]/g, " ").replace(/\s+/g, " ").trim();
+      if (withoutParens && !searchTargets.includes(withoutParens)) searchTargets.push(withoutParens);
+      const basePart = skuToken.split(/[\(\s]/)[0]?.trim();
+      if (basePart && basePart.length >= 3 && !searchTargets.includes(basePart)) searchTargets.push(basePart);
+    }
+    
+    // Variación 1: Sin guiones ni diagonales solo si no contiene espacios ni paréntesis (ej. ST-1460E -> ST1460E)
+    if (!skuToken.includes(" ") && !skuToken.includes("(")) {
+      const unhyphenated = skuToken.replace(/[\-\/]/g, "");
+      if (unhyphenated && unhyphenated !== skuToken) searchTargets.push(unhyphenated);
+
+      // Variación 2: Sin sufijos de letra única final (ej. ST-1460 para ST-1460E)
+      const trimmedSuffix = skuToken.replace(/[\-\/]?[A-Za-z]$/, "");
+      if (trimmedSuffix && trimmedSuffix !== skuToken && trimmedSuffix.length >= 3) searchTargets.push(trimmedSuffix);
+    }
 
     // Alias comercial canónico para Kits de CCTV
     const lowerRaw = rawQuery.toLowerCase();
@@ -213,44 +223,20 @@ export async function POST(request: Request) {
       }
     }
 
-    // FASE 2: BÚSQUEDA APROXIMADA / CANDIDATOS (Solo si no hubo coincidencia exacta)
-    if (products.length === 0) {
-      for (const target of searchTargets) {
-        if (products.length > 0) break;
-
-        // Intentar candidatos en Prisma DB
-        if (target.length >= 3) {
-          const candidates = await prisma.product.findMany({
-            where: {
-              OR: [
-                { sku: { contains: target, mode: "insensitive" } },
-                { name: { contains: target, mode: "insensitive" } }
-              ]
-            },
-            take: 5
-          });
-
-          if (candidates.length > 0) {
-            console.log(`[Product Search] ${candidates.length} candidato(s) encontrado(s) en BD para "${target}"`);
-            candidates.sort((a, b) => {
-              const aExact = a.sku.toLowerCase() === target.toLowerCase();
-              const bExact = b.sku.toLowerCase() === target.toLowerCase();
-              if (aExact && !bExact) return -1;
-              if (!aExact && bExact) return 1;
-              return a.sku.length - b.sku.length;
-            });
-            products = candidates.slice(0, 3);
-            break;
-          }
-        }
-      }
-    }
-
-    // FASE 3: Fallback a Syscom general o Shopify general
+    // FASE 2: BÚSQUEDA EN SYSCOM API Y SHOPIFY/CT (Mayor actualidad y catálogo en vivo)
     if (products.length === 0) {
       for (const target of searchTargets) {
         if (products.length > 0 || target.length < 3) continue;
 
+        // 2A. Consultar Shopify (CT Internacional y catálogo web)
+        const shopifyProd = await fetchShopifyProduct(target);
+        if (shopifyProd) {
+          console.log(`[Product Search] Producto encontrado en Shopify/CT en Fase 2 para "${target}": ${shopifyProd.sku}`);
+          products.push(shopifyProd);
+          break;
+        }
+
+        // 2B. Consultar API Syscom en vivo
         try {
           console.log(`[Product Search] Consultando API Syscom en vivo para "${target}"...`);
           const syscomRes = await getSyscomProducts({ search: target, limit: 3 });
@@ -337,6 +323,7 @@ export async function POST(request: Request) {
                 datasheet_url: datasheetUrl
               });
             }
+            if (products.length > 0) break;
           }
         } catch (sysErr) {
           console.error(`[Product Search] Error en fallback de Syscom API para "${target}":`, sysErr);
@@ -344,13 +331,32 @@ export async function POST(request: Request) {
       }
     }
 
-    // FASE 4: Fallback final a Shopify aproximado
+    // FASE 3: Fallback a Prisma DB local (candidatos aproximados)
     if (products.length === 0) {
       for (const target of searchTargets) {
-        if (products.length > 0) continue;
-        const shopifyProd = await fetchShopifyProduct(target);
-        if (shopifyProd) {
-          products.push(shopifyProd);
+        if (products.length > 0 || target.length < 3) continue;
+
+        const candidates = await prisma.product.findMany({
+          where: {
+            OR: [
+              { sku: { contains: target, mode: "insensitive" } },
+              { name: { contains: target, mode: "insensitive" } }
+            ]
+          },
+          take: 5
+        });
+
+        if (candidates.length > 0) {
+          console.log(`[Product Search] ${candidates.length} candidato(s) encontrado(s) en BD para "${target}"`);
+          candidates.sort((a, b) => {
+            const aExact = a.sku.toLowerCase() === target.toLowerCase();
+            const bExact = b.sku.toLowerCase() === target.toLowerCase();
+            if (aExact && !bExact) return -1;
+            if (!aExact && bExact) return 1;
+            return a.sku.length - b.sku.length;
+          });
+          products = candidates.slice(0, 3);
+          break;
         }
       }
     }
@@ -555,15 +561,33 @@ async function fetchShopifyProduct(sku: string): Promise<any> {
     const productNodes: any[] = data?.data?.products?.nodes || [];
     if (productNodes.length === 0) return null;
 
-    // Priorizar el producto cuyo precio sea mayor a $100 MXN o cuyo título/vendor sea más específico (evitar accesorios de $96 de CT cuando hay kit de $3499)
-    productNodes.sort((a, b) => {
-      const priceA = parseFloat(a.variants?.nodes?.[0]?.price || "0");
-      const priceB = parseFloat(b.variants?.nodes?.[0]?.price || "0");
-      return priceB - priceA;
-    });
+    // Buscar si algún nodo tiene una variante con coincidencia exacta con el SKU consultado
+    const targetLower = sku.trim().toLowerCase();
+    let selectedProduct: any = null;
+    let selectedVariant: any = null;
 
-    const productNode = productNodes[0];
-    const variant = productNode.variants?.nodes?.[0];
+    for (const node of productNodes) {
+      const vMatch = node.variants?.nodes?.find((v: any) => v.sku && v.sku.trim().toLowerCase() === targetLower);
+      if (vMatch) {
+        selectedProduct = node;
+        selectedVariant = vMatch;
+        break;
+      }
+    }
+
+    // Si no hubo coincidencia exacta de variante, ordenar por precio y tomar la primera
+    if (!selectedProduct) {
+      productNodes.sort((a, b) => {
+        const priceA = parseFloat(a.variants?.nodes?.[0]?.price || "0");
+        const priceB = parseFloat(b.variants?.nodes?.[0]?.price || "0");
+        return priceB - priceA;
+      });
+      selectedProduct = productNodes[0];
+      selectedVariant = selectedProduct.variants?.nodes?.[0];
+    }
+
+    const productNode = selectedProduct;
+    const variant = selectedVariant;
     let cleanDesc = "";
     if (productNode.descriptionHtml) {
       cleanDesc = productNode.descriptionHtml.replace(/<[^>]*>?/gm, '');
