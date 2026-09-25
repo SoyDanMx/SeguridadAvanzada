@@ -401,11 +401,12 @@ export async function POST(request: Request) {
           hasImmediateCdmx = false;
           stockMsg = "❌ Agotado temporalmente sin existencias en almacenes locales ni foráneos.";
         }
-      } else if (branches && (branches.azcapotzalco !== undefined || branches.palacio !== undefined || branches.tlalnepantla !== undefined || branches.coacalco !== undefined)) {
-        const localCt = (branches.azcapotzalco || 0) + (branches.palacio || 0) + (branches.tlalnepantla || 0) + (branches.coacalco || 0);
+      } else if (branches && (branches.azcapotzalco !== undefined || branches.palacio !== undefined || branches.coacalco !== undefined)) {
+        // Únicamente DFA (Azcapotzalco), DFC (Coacalco) y DFP (Palacio) son bodegas locales CDMX
+        const localCt = (branches.azcapotzalco || 0) + (branches.palacio || 0) + (branches.coacalco || 0);
         if (localCt > 0) {
           hasImmediateCdmx = true;
-          stockMsg = `✅ Stock disponible de inmediato en sucursales locales CDMX/ZMVM (${localCt} pzas). Recolección en oficina Clavería 237 lista en 2 a 4 horas previa cita.`;
+          stockMsg = `✅ Stock disponible de inmediato en sucursales locales CDMX (${localCt} pzas). Recolección en oficina Clavería 237 lista en 2 a 4 horas previa cita.`;
         } else if (branches.provincia > 0 || stockCount > 0) {
           hasImmediateCdmx = false;
           stockMsg = `📦 Stock en almacén central foráneo (${branches.provincia || stockCount} pzas). Lo tendríamos disponible bajo pedido para recolección en oficina Clavería 237 en 24 a 72 horas hábiles (previa colocación del pedido en línea, transferencia SPEI o pago en sucursal), o con envío directo a domicilio en 2 a 4 días.`;
