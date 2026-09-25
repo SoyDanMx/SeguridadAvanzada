@@ -117,51 +117,136 @@ export async function POST(request: Request) {
 
     let products: any[] = [];
 
-    // 1. Coincidencia exacta o parcial en Prisma DB
-    for (const target of searchTargets) {
+    // FASE 1: BÚSQUEDA EXACTA PRIORITARIA MULTI-CATÁLOGO (Shopify / CT -> Prisma DB -> Syscom API)
+    // Buscamos coincidencia exacta del skuToken o targets principales para evitar que una coincidencia parcial
+    // (ej. Candado MX123) opaque un producto exacto (ej. Sistema Mesh Tenda MX12-3 de CT/Shopify).
+    const exactTargets = [skuToken, cleanQuery].filter(Boolean) as string[];
+
+    // 1A. Coincidencia Exacta en Shopify (donde vive el catálogo de CT Internacional y productos activos de la tienda)
+    for (const target of exactTargets) {
       if (products.length > 0) break;
-
-      const exactMatch = await prisma.product.findFirst({
-        where: {
-          OR: [
-            { sku: { equals: target, mode: "insensitive" } },
-            { name: { equals: target, mode: "insensitive" } }
-          ]
-        }
-      });
-
-      if (exactMatch) {
-        console.log(`[Product Search] Coincidencia exacta encontrada en BD para "${target}": ${exactMatch.sku}`);
-        products.push(exactMatch);
+      const shopifyProd = await fetchShopifyProduct(target);
+      if (shopifyProd && shopifyProd.sku.toLowerCase() === target.toLowerCase()) {
+        console.log(`[Product Search] Coincidencia exacta encontrada en Shopify/CT para "${target}": ${shopifyProd.sku}`);
+        products.push(shopifyProd);
         break;
       }
+    }
 
-      if (target.length >= 3) {
-        const candidates = await prisma.product.findMany({
+    // 1B. Coincidencia Exacta en Prisma DB
+    if (products.length === 0) {
+      for (const target of exactTargets) {
+        if (products.length > 0) break;
+        const exactMatch = await prisma.product.findFirst({
           where: {
             OR: [
-              { sku: { contains: target, mode: "insensitive" } },
-              { name: { contains: target, mode: "insensitive" } }
+              { sku: { equals: target, mode: "insensitive" } },
+              { name: { equals: target, mode: "insensitive" } }
             ]
-          },
-          take: 5
+          }
         });
-
-        if (candidates.length > 0) {
-          console.log(`[Product Search] ${candidates.length} candidato(s) encontrado(s) en BD para "${target}"`);
-          candidates.sort((a, b) => {
-            const aExact = a.sku.toLowerCase() === target.toLowerCase();
-            const bExact = b.sku.toLowerCase() === target.toLowerCase();
-            if (aExact && !bExact) return -1;
-            if (!aExact && bExact) return 1;
-            return a.sku.length - b.sku.length;
-          });
-          products = candidates.slice(0, 3);
+        if (exactMatch) {
+          console.log(`[Product Search] Coincidencia exacta encontrada en BD para "${target}": ${exactMatch.sku}`);
+          products.push(exactMatch);
+          break;
         }
       }
     }
 
-    // 2. Fallback: Consultar API Syscom en vivo con los distintos searchTargets
+    // 1C. Coincidencia Exacta en Syscom API en vivo
+    if (products.length === 0) {
+      for (const target of exactTargets) {
+        if (products.length > 0 || target.length < 3) continue;
+        try {
+          const syscomRes = await getSyscomProducts({ search: target, limit: 3 });
+          if (syscomRes && syscomRes.products && syscomRes.products.length > 0) {
+            const exactSyscom = syscomRes.products.find((sp: any) => {
+              const spSku = (sp.modelo || sp.sku || "").toString().toLowerCase();
+              return spSku === target.toLowerCase();
+            });
+
+            if (exactSyscom) {
+              const skuVal = (exactSyscom.modelo || exactSyscom.sku || target).toString();
+              const titleVal = (exactSyscom.titulo || exactSyscom.modelo || skuVal).toString();
+              let priceNum = 0;
+              if (typeof exactSyscom.precio === 'number') {
+                priceNum = exactSyscom.precio;
+              } else if (typeof exactSyscom.precio === 'object' && exactSyscom.precio !== null) {
+                priceNum = exactSyscom.precio.precio_1 || exactSyscom.precio.precio_especial || exactSyscom.precio.precio_lista || 0;
+              }
+
+              let stockNum = 0;
+              let cdmxStockNum = 0;
+              let restoPaisStockNum = 0;
+              if (typeof exactSyscom.total_existencia === 'number') stockNum = exactSyscom.total_existencia;
+              else if (typeof exactSyscom.existencia === 'number') stockNum = exactSyscom.existencia;
+
+              if (exactSyscom.existencia && typeof exactSyscom.existencia === 'object') {
+                for (const [key, val] of Object.entries(exactSyscom.existencia)) {
+                  const kUpper = key.toUpperCase();
+                  const qty = Number(val) || 0;
+                  if (kUpper.includes('CDMX') || kUpper.includes('VALLEJO') || kUpper.includes('TEPOTZOTLAN')) {
+                    cdmxStockNum += qty;
+                  } else if (kUpper !== 'TOTAL') {
+                    restoPaisStockNum += qty;
+                  }
+                }
+              }
+
+              products.push({
+                sku: skuVal,
+                name: titleVal,
+                price_mxn: priceNum,
+                brand: formatBrand(typeof exactSyscom.marca === 'string' ? exactSyscom.marca : (exactSyscom.marca as any)?.nombre, skuVal),
+                description: cleanDescription(exactSyscom.descripcion, 120),
+                stock: stockNum,
+                cdmx_stock: cdmxStockNum,
+                resto_pais_stock: restoPaisStockNum,
+                datasheet_url: null
+              });
+              break;
+            }
+          }
+        } catch (err) {
+          // ignore
+        }
+      }
+    }
+
+    // FASE 2: BÚSQUEDA APROXIMADA / CANDIDATOS (Solo si no hubo coincidencia exacta)
+    if (products.length === 0) {
+      for (const target of searchTargets) {
+        if (products.length > 0) break;
+
+        // Intentar candidatos en Prisma DB
+        if (target.length >= 3) {
+          const candidates = await prisma.product.findMany({
+            where: {
+              OR: [
+                { sku: { contains: target, mode: "insensitive" } },
+                { name: { contains: target, mode: "insensitive" } }
+              ]
+            },
+            take: 5
+          });
+
+          if (candidates.length > 0) {
+            console.log(`[Product Search] ${candidates.length} candidato(s) encontrado(s) en BD para "${target}"`);
+            candidates.sort((a, b) => {
+              const aExact = a.sku.toLowerCase() === target.toLowerCase();
+              const bExact = b.sku.toLowerCase() === target.toLowerCase();
+              if (aExact && !bExact) return -1;
+              if (!aExact && bExact) return 1;
+              return a.sku.length - b.sku.length;
+            });
+            products = candidates.slice(0, 3);
+            break;
+          }
+        }
+      }
+    }
+
+    // FASE 3: Fallback a Syscom general o Shopify general
     if (products.length === 0) {
       for (const target of searchTargets) {
         if (products.length > 0 || target.length < 3) continue;
@@ -210,7 +295,6 @@ export async function POST(request: Request) {
                 for (const [key, val] of Object.entries(sp.existencia)) {
                   const kUpper = key.toUpperCase();
                   const qty = Number(val) || 0;
-                  // Sucursales CDMX / Zona Metropolitana (Syscom: CDMX, VALLEJO, TEPOTZOTLAN, TULTITLAN; CT: DFA, D2A, DFP, DFT, DFC)
                   if (
                     kUpper.includes('CDMX') ||
                     kUpper.includes('VALLEJO') ||
@@ -239,14 +323,6 @@ export async function POST(request: Request) {
                 datasheetUrl = sp.datasheet.trim();
               } else if (typeof sp.link_privado === 'string' && sp.link_privado.trim()) {
                 datasheetUrl = sp.link_privado.trim();
-              } else if (Array.isArray(sp.recursos) && sp.recursos.length > 0) {
-                const rec = (sp.recursos as any[]).find((r: any) => {
-                  const name = (r.recurso || r.titulo || '').toLowerCase();
-                  return name.includes("ficha") || name.includes("datasheet") || name.includes("especificaci") || name.includes("manual");
-                }) || sp.recursos[0];
-                if (rec && rec.path) {
-                  datasheetUrl = rec.path;
-                }
               }
 
               products.push({
@@ -268,15 +344,12 @@ export async function POST(request: Request) {
       }
     }
 
-    // 3. Fallback final: Consultar API GraphQL de Shopify
+    // FASE 4: Fallback final a Shopify aproximado
     if (products.length === 0) {
       for (const target of searchTargets) {
         if (products.length > 0) continue;
-        
-        console.log(`[Product Search] Consultando API Shopify GraphQL para "${target}"...`);
         const shopifyProd = await fetchShopifyProduct(target);
         if (shopifyProd) {
-          console.log(`[Product Search] Producto encontrado en Shopify para "${target}"`);
           products.push(shopifyProd);
         }
       }
@@ -442,6 +515,7 @@ async function fetchShopifyProduct(sku: string): Promise<any> {
   }
   
   try {
+    const escapedSku = sku.replace(/"/g, '\\"');
     const res = await fetch(`https://${domain}/admin/api/2024-07/graphql.json`, {
       method: "POST",
       headers: {
@@ -451,17 +525,19 @@ async function fetchShopifyProduct(sku: string): Promise<any> {
       body: JSON.stringify({
         query: `
           query {
-            products(first: 1, query: "sku:'${sku}'") {
+            products(first: 5, query: "sku:\\"${escapedSku}\\"") {
               nodes {
                 id
                 title
                 vendor
+                tags
                 descriptionHtml
                 metafieldCdmx: metafield(namespace: "custom", key: "stock_cdmx") { value }
                 metafieldCdmxQty: metafield(namespace: "custom", key: "stock_cdmx_qty") { value }
                 metafieldBranches: metafield(namespace: "custom", key: "stock_branches_json") { value }
-                variants(first: 1) {
+                variants(first: 5) {
                   nodes {
+                    id
                     sku
                     price
                     inventoryQuantity
@@ -476,44 +552,51 @@ async function fetchShopifyProduct(sku: string): Promise<any> {
     
     if (!res.ok) return null;
     const data = await res.json();
-    const productNode = data?.data?.products?.nodes?.[0];
-    
-    if (productNode) {
-      const variant = productNode.variants?.nodes?.[0];
-      let cleanDesc = "";
-      if (productNode.descriptionHtml) {
-        cleanDesc = productNode.descriptionHtml.replace(/<[^>]*>?/gm, '');
-      }
+    const productNodes: any[] = data?.data?.products?.nodes || [];
+    if (productNodes.length === 0) return null;
 
-      const totalStock = variant?.inventoryQuantity || 0;
-      const isCdmx = productNode.metafieldCdmx?.value === 'true' || productNode.metafieldCdmx?.value === '1';
-      const cdmxStock = isCdmx
-        ? (parseInt(productNode.metafieldCdmxQty?.value || '0', 10) || totalStock)
-        : 0;
-      const restoPaisStock = Math.max(0, totalStock - cdmxStock);
+    // Priorizar el producto cuyo precio sea mayor a $100 MXN o cuyo título/vendor sea más específico (evitar accesorios de $96 de CT cuando hay kit de $3499)
+    productNodes.sort((a, b) => {
+      const priceA = parseFloat(a.variants?.nodes?.[0]?.price || "0");
+      const priceB = parseFloat(b.variants?.nodes?.[0]?.price || "0");
+      return priceB - priceA;
+    });
 
-      let branchData: any = null;
-      if (productNode.metafieldBranches?.value) {
-        try {
-          branchData = JSON.parse(productNode.metafieldBranches.value);
-        } catch (err) {
-          // ignore
-        }
-      }
-
-      return {
-        sku: variant?.sku || sku,
-        name: productNode.title,
-        price_mxn: parseFloat(variant?.price || "0"),
-        brand: productNode.vendor || "Seguridad Avanzada",
-        description: cleanDescription(cleanDesc, 120),
-        stock: totalStock,
-        cdmx_stock: cdmxStock,
-        resto_pais_stock: restoPaisStock,
-        branches: branchData,
-        datasheet_url: null,
-      };
+    const productNode = productNodes[0];
+    const variant = productNode.variants?.nodes?.[0];
+    let cleanDesc = "";
+    if (productNode.descriptionHtml) {
+      cleanDesc = productNode.descriptionHtml.replace(/<[^>]*>?/gm, '');
     }
+
+    const totalStock = variant?.inventoryQuantity || 0;
+    const isCdmx = productNode.metafieldCdmx?.value === 'true' || productNode.metafieldCdmx?.value === '1';
+    const cdmxStock = isCdmx
+      ? (parseInt(productNode.metafieldCdmxQty?.value || '0', 10) || totalStock)
+      : 0;
+    const restoPaisStock = Math.max(0, totalStock - cdmxStock);
+
+    let branchData: any = null;
+    if (productNode.metafieldBranches?.value) {
+      try {
+        branchData = JSON.parse(productNode.metafieldBranches.value);
+      } catch (err) {
+        // ignore
+      }
+    }
+
+    return {
+      sku: variant?.sku || sku,
+      name: productNode.title,
+      price_mxn: parseFloat(variant?.price || "0"),
+      brand: productNode.vendor || "Seguridad Avanzada",
+      description: cleanDescription(cleanDesc, 120),
+      stock: totalStock,
+      cdmx_stock: cdmxStock,
+      resto_pais_stock: restoPaisStock,
+      branches: branchData,
+      datasheet_url: null,
+    };
   } catch (e) {
     console.error("[Product Search] Error en fallback de Shopify API:", e);
   }

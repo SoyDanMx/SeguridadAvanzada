@@ -14,8 +14,8 @@ export function extractSkuToken(rawQuery: string): string {
   // 2. Limpiar marcas de tiempo de WhatsApp tipo "11:00 a.m.", "11:00am", "11:00"
   let clean = rawQuery.replace(/\b\d{1,2}:\d{2}\s*(?:a\.?m\.?|p\.?m\.?)?/gi, "").trim();
 
-  // 3. Buscar patrón técnico de modelo con guion/diagonal (ej. 2600-858, DS-2CD2043G0-I, ST-1460E, DK-9300)
-  const skuMatch = clean.match(/\b([A-Za-z0-9]+[\-\/][A-Za-z0-9\-\/]+)\b/);
+  // 3. Buscar patrón técnico de modelo con guion/diagonal (ej. 2600-858, DS-2CD2043G0-I, ST-1460E, MX12-3, DK-9300)
+  const skuMatch = clean.match(/\b([A-Za-z0-9]+(?:[\-\/][A-Za-z0-9]+)+)\b/);
   if (skuMatch && skuMatch[1]) {
     return skuMatch[1].trim();
   }
@@ -38,8 +38,8 @@ export function sanitizeQuery(rawQuery: string): string {
   // Remover prefijo SKU
   clean = clean.replace(/^sku:\s*/i, "").trim();
 
-  // Remover puntuación al inicio y final
-  clean = clean.replace(/^[^\w\d\-\/]+|[^\w\d\-\/]+$/g, "").trim();
+  // Remover puntuación al inicio y final pero conservando guiones internos
+  clean = clean.replace(/^[^\w\d]+|[^\w\d]+$/g, "").trim();
   return clean;
 }
 
