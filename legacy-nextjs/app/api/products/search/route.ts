@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { getProducts as getSyscomProducts } from "@/lib/syscom-client";
 import { sanitizeQuery, extractSkuToken } from "@/lib/query-sanitizer";
+import { getTechnicalData } from "@/lib/technical-catalog";
 
 const prisma = new PrismaClient();
 
@@ -192,6 +193,9 @@ export async function POST(request: Request) {
               const descVal = cleanDescription(rawDesc, 120);
 
               let stockNum = 0;
+              let cdmxStockNum = 0;
+              let restoPaisStockNum = 0;
+
               if (typeof sp.total_existencia === 'number') {
                 stockNum = sp.total_existencia;
               } else if (typeof sp.existencia === 'number') {
@@ -200,6 +204,34 @@ export async function POST(request: Request) {
                 stockNum = sp.stock;
               } else if (sp.existencia && typeof sp.existencia === 'object') {
                 stockNum = (sp.existencia as any).total || 0;
+              }
+
+              if (sp.existencia && typeof sp.existencia === 'object') {
+                for (const [key, val] of Object.entries(sp.existencia)) {
+                  const kUpper = key.toUpperCase();
+                  const qty = Number(val) || 0;
+                  // Sucursales CDMX / Zona Metropolitana (Syscom: CDMX, VALLEJO, TEPOTZOTLAN, TULTITLAN; CT: DFA, D2A, DFP, DFT, DFC)
+                  if (
+                    kUpper.includes('CDMX') ||
+                    kUpper.includes('VALLEJO') ||
+                    kUpper.includes('AZCAPOTZALCO') ||
+                    kUpper.includes('TEPOTZOTLAN') ||
+                    kUpper.includes('TULTITLAN') ||
+                    kUpper === 'DFA' ||
+                    kUpper === 'D2A' ||
+                    kUpper === 'DFP' ||
+                    kUpper === 'DFT' ||
+                    kUpper === 'DFC'
+                  ) {
+                    cdmxStockNum += qty;
+                  } else if (kUpper !== 'TOTAL') {
+                    restoPaisStockNum += qty;
+                  }
+                }
+              }
+
+              if (restoPaisStockNum === 0 && stockNum > cdmxStockNum) {
+                restoPaisStockNum = Math.max(0, stockNum - cdmxStockNum);
               }
 
               let datasheetUrl: string | null = null;
@@ -224,6 +256,8 @@ export async function POST(request: Request) {
                 brand: vendorVal,
                 description: descVal,
                 stock: stockNum,
+                cdmx_stock: cdmxStockNum,
+                resto_pais_stock: restoPaisStockNum,
                 datasheet_url: datasheetUrl
               });
             }
@@ -258,39 +292,113 @@ export async function POST(request: Request) {
 
     if (products.length === 1) {
       const p = products[0];
+      const tech = getTechnicalData(p.sku);
       const stockCount = typeof p.stock === 'number' ? p.stock : 0;
-      const stockMsg = stockCount > 0
-        ? `Disponible en almacén central mayorista (${stockCount} unidades disponibles). Envío asegurado a domicilio de 2 a 4 días hábiles. RECOLECCIÓN EN OFICINAS / ENTREGA INMEDIATA NO DISPONIBLE sin previa confirmación de un asesor.`
-        : "Disponible bajo pedido (consultar tiempo de entrega con un asesor)";
+      const cdmxQty = (typeof p.cdmx_stock === 'number' && p.cdmx_stock > 0) ? p.cdmx_stock : 0;
+      const restoPaisQty = (typeof p.resto_pais_stock === 'number' && p.resto_pais_stock > 0) ? p.resto_pais_stock : (stockCount > cdmxQty ? stockCount - cdmxQty : 0);
+      const branches = p.branches || null;
+
+      let hasImmediateCdmx = cdmxQty > 0;
+      let is24hTransfer = false;
+      let stockMsg = "";
+
+      if (branches && (branches.mexico_norte !== undefined || branches.tepotzotlan !== undefined || branches.mexico_sur !== undefined)) {
+        const stockNorte = branches.mexico_norte || 0;
+        const stockTepo = branches.tepotzotlan || 0;
+        const stockSur = branches.mexico_sur || 0;
+        const stockProv = branches.provincia || 0;
+
+        if (stockNorte > 0) {
+          hasImmediateCdmx = true;
+          stockMsg = `✅ Stock disponible de inmediato en almacén local CDMX Norte (${stockNorte} pzas). Recolección en nuestra oficina de Azcapotzalco (Av. Clavería 237) lista en 2 a 4 horas previa cita, o envío local express.`;
+        } else if (stockTepo > 0 || stockSur > 0) {
+          hasImmediateCdmx = true;
+          is24hTransfer = true;
+          stockMsg = `🟡 Stock disponible mediante traspaso local (${stockTepo > 0 ? stockTepo + ' pzas en CEDIS Central' : ''}${stockSur > 0 ? ' ' + stockSur + ' pzas en Sucursal Sur' : ''}). Disponible para recolección en oficina Clavería 237 en 24 horas hábiles (al día siguiente hábil).`;
+        } else if (stockProv > 0 || stockCount > 0) {
+          hasImmediateCdmx = false;
+          stockMsg = `📦 Stock en almacén central foráneo (${stockProv || stockCount} pzas). Lo tendríamos disponible bajo pedido para recolección en oficina Clavería 237 en 24 a 72 horas hábiles (previa colocación del pedido en línea, transferencia SPEI o pago en sucursal), o con envío asegurado a domicilio en 2 a 4 días.`;
+        } else {
+          stockMsg = "Disponible bajo pedido de 24 a 72 horas hábiles previa confirmación de compra.";
+        }
+      } else if (branches && (branches.azcapotzalco !== undefined || branches.palacio !== undefined || branches.tlalnepantla !== undefined || branches.coacalco !== undefined)) {
+        const localCt = (branches.azcapotzalco || 0) + (branches.palacio || 0) + (branches.tlalnepantla || 0) + (branches.coacalco || 0);
+        if (localCt > 0) {
+          hasImmediateCdmx = true;
+          stockMsg = `✅ Stock disponible de inmediato en sucursales locales CDMX/ZMVM (${localCt} pzas). Recolección en oficina Clavería 237 lista en 2 a 4 horas previa cita.`;
+        } else {
+          hasImmediateCdmx = false;
+          stockMsg = `📦 Stock en almacén central foráneo (${branches.provincia || stockCount} pzas). Lo tendríamos disponible bajo pedido para recolección en oficina Clavería 237 en 24 a 72 horas hábiles (previa colocación del pedido en línea, transferencia SPEI o pago en sucursal), o con envío directo a domicilio en 2 a 4 días.`;
+        }
+      } else {
+        stockMsg = hasImmediateCdmx
+          ? `✅ Disponible de inmediato en almacén local (${cdmxQty} pzas). Recolección en oficina Clavería 237 lista en 2 a 4 horas previa cita, o envío express.`
+          : (stockCount > 0
+            ? `📦 Disponible en almacén central foráneo (${stockCount} pzas). Lo tendríamos listo bajo pedido en oficina Clavería 237 de 24 a 72 horas hábiles (previa colocación del pedido en línea, transferencia SPEI o pago en sucursal), o con envío nacional en 2 a 4 días.`
+            : "Disponible bajo pedido de 24 a 72 horas hábiles previa confirmación de compra.");
+      }
 
       responseObj.title = p.name;
       responseObj.sku = p.sku;
       responseObj.price = p.price_mxn > 0 ? `$${p.price_mxn.toFixed(2)} MXN` : "Consultar precio";
-      responseObj.vendor = formatBrand(p.brand, p.sku);
+      responseObj.vendor = formatBrand(p.brand || tech?.vendor, p.sku);
       responseObj.description = cleanDescription(p.description, 120);
       responseObj.stock = stockMsg;
       responseObj.stock_count = stockCount;
-      responseObj.delivery_time = "2 a 4 días hábiles vía paquetería asegurada a domicilio";
-      responseObj.pickup_available = false;
-      responseObj.pickup_policy = "Toda compra se despacha exclusivamente por paquetería asegurada a domicilio. Queda prohibido prometer recolección física en oficinas o entrega al día siguiente sin validación previa de un asesor.";
-      responseObj.datasheet_url = p.datasheet_url || null;
+      responseObj.has_cdmx_stock = hasImmediateCdmx;
+      responseObj.is_24h_transfer = is24hTransfer;
+      responseObj.cdmx_qty = cdmxQty;
+      responseObj.resto_pais_qty = restoPaisQty;
+      responseObj.branches = branches;
+      responseObj.pickup_available = true;
+      responseObj.pickup_branch = is24hTransfer ? "CEDIS Central / Sucursal Sur" : "Sucursal Azcapotzalco / Almacén CDMX Norte";
+      responseObj.pickup_office_address = "Av. Clavería 237, Int. Oficina 1, Col. Claveria, Azcapotzalco, CDMX (a una cuadra del Parque de la China)";
+      responseObj.pickup_prep_time = hasImmediateCdmx && !is24hTransfer
+        ? "Almacén local (Azcapotzalco / CDMX Norte): 2 a 4 horas previa cita."
+        : (is24hTransfer
+          ? "Traspaso local (CEDIS Central / Sucursal Sur): 24 horas hábiles (al siguiente día hábil)."
+          : "Almacén central foráneo: bajo pedido de 24 a 72 horas hábiles previa colocación de pedido o transferencia.");
+      responseObj.delivery_time = hasImmediateCdmx && !is24hTransfer
+        ? "Entrega local express CDMX mismo día o 2 a 4 días resto del país"
+        : "2 a 4 días hábiles vía paquetería asegurada a domicilio";
+      responseObj.pickup_policy = hasImmediateCdmx && !is24hTransfer
+        ? "Recolección disponible en oficina Clavería 237 previa cita (2 a 4 horas con stock verificado)."
+        : (is24hTransfer
+          ? "Recolección disponible en oficina Clavería 237 al siguiente día hábil (traspaso local en 24 horas)."
+          : "Artículo en almacén central foráneo. Lo tendríamos disponible en oficina de 24 a 72 horas hábiles previa colocación de pedido en línea, transferencia SPEI o pago en sucursal.");
+      responseObj.pickup_payment_accepted = true;
+      responseObj.pickup_payment_methods = "Tarjeta de crédito/débito en terminal bancaria, transferencia SPEI y efectivo en mostrador al recolectar previa cita";
+      responseObj.datasheet_url = p.datasheet_url || tech?.datasheet_url || `https://seguridad-avanzada.com/search?q=${encodeURIComponent(p.sku)}`;
+      if (tech?.manual_url) responseObj.manual_url = tech.manual_url;
+      if (tech?.specs_summary) responseObj.specs = tech.specs_summary;
     } else {
       products.forEach((p, index) => {
         const i = index + 1;
+        const tech = getTechnicalData(p.sku);
         const stockCount = typeof p.stock === 'number' ? p.stock : 0;
-        const stockMsg = stockCount > 0
-          ? `Disponible en almacén mayorista (${stockCount} en stock). Envío a domicilio 2-4 días hábiles.`
-          : "Bajo pedido";
+        const cdmxQty = (typeof p.cdmx_stock === 'number' && p.cdmx_stock > 0) ? p.cdmx_stock : 0;
+        const restoPaisQty = (typeof p.resto_pais_stock === 'number' && p.resto_pais_stock > 0) ? p.resto_pais_stock : (stockCount > cdmxQty ? stockCount - cdmxQty : 0);
+        const hasCdmxStock = cdmxQty > 0;
+
+        const stockMsg = hasCdmxStock
+          ? `CDMX / ZMVM: ${cdmxQty} pzas. Resto del país: ${restoPaisQty} pzas.`
+          : `Resto del país: ${stockCount} pzas (Envío 2-4 días o retiro bajo pedido 24-72 hrs).`;
 
         responseObj[`title${i}`] = p.name;
         responseObj[`sku${i}`] = p.sku;
         responseObj[`price${i}`] = p.price_mxn > 0 ? `$${p.price_mxn.toFixed(2)} MXN` : "Consultar precio";
         responseObj[`stock${i}`] = stockMsg;
-        responseObj[`vendor${i}`] = formatBrand(p.brand, p.sku);
-        responseObj[`datasheet_url${i}`] = p.datasheet_url || null;
+        responseObj[`has_cdmx_stock${i}`] = hasCdmxStock;
+        responseObj[`cdmx_qty${i}`] = cdmxQty;
+        responseObj[`resto_pais_qty${i}`] = restoPaisQty;
+        responseObj[`vendor${i}`] = formatBrand(p.brand || tech?.vendor, p.sku);
+        responseObj[`datasheet_url${i}`] = p.datasheet_url || tech?.datasheet_url || `https://www.syscom.mx/producto/${encodeURIComponent(p.sku)}.html`;
+        if (tech?.manual_url) responseObj[`manual_url${i}`] = tech.manual_url;
+        if (tech?.specs_summary) responseObj[`specs${i}`] = tech.specs_summary;
       });
-      responseObj.pickup_available = false;
-      responseObj.pickup_policy = "Toda compra se despacha exclusivamente por paquetería asegurada a domicilio.";
+      responseObj.pickup_available = true;
+      responseObj.pickup_office_address = "Av. Clavería 237, Int. Oficina 1, Col. Claveria, Azcapotzalco, CDMX (a una cuadra del Parque de la China)";
+      responseObj.pickup_policy = "Recolección disponible en nuestra oficina corporativa en Av. Clavería 237 previa cita.";
     }
 
     return NextResponse.json(responseObj, { status: 200 });
@@ -326,6 +434,9 @@ async function fetchShopifyProduct(sku: string): Promise<any> {
                 title
                 vendor
                 descriptionHtml
+                metafieldCdmx: metafield(namespace: "custom", key: "stock_cdmx") { value }
+                metafieldCdmxQty: metafield(namespace: "custom", key: "stock_cdmx_qty") { value }
+                metafieldBranches: metafield(namespace: "custom", key: "stock_branches_json") { value }
                 variants(first: 1) {
                   nodes {
                     sku
@@ -350,13 +461,33 @@ async function fetchShopifyProduct(sku: string): Promise<any> {
       if (productNode.descriptionHtml) {
         cleanDesc = productNode.descriptionHtml.replace(/<[^>]*>?/gm, '');
       }
+
+      const totalStock = variant?.inventoryQuantity || 0;
+      const isCdmx = productNode.metafieldCdmx?.value === 'true' || productNode.metafieldCdmx?.value === '1';
+      const cdmxStock = isCdmx
+        ? (parseInt(productNode.metafieldCdmxQty?.value || '0', 10) || totalStock)
+        : 0;
+      const restoPaisStock = Math.max(0, totalStock - cdmxStock);
+
+      let branchData: any = null;
+      if (productNode.metafieldBranches?.value) {
+        try {
+          branchData = JSON.parse(productNode.metafieldBranches.value);
+        } catch (err) {
+          // ignore
+        }
+      }
+
       return {
         sku: variant?.sku || sku,
         name: productNode.title,
         price_mxn: parseFloat(variant?.price || "0"),
         brand: productNode.vendor || "Seguridad Avanzada",
         description: cleanDescription(cleanDesc, 120),
-        stock: variant?.inventoryQuantity || 0,
+        stock: totalStock,
+        cdmx_stock: cdmxStock,
+        resto_pais_stock: restoPaisStock,
+        branches: branchData,
         datasheet_url: null,
       };
     }
