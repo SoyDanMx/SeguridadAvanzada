@@ -264,11 +264,7 @@ export async function getProducts(
     search.set("busqueda", params.search.trim()); // Syscom usa "busqueda", no "q"
   }
   const pageNum = typeof params.page === "number" && params.page >= 1 ? params.page : 1;
-  const limitNum = typeof params.limit === "number" && params.limit >= 10 ? params.limit : 24;
-  const itemsPerPage = Math.min(60, Math.max(10, limitNum));
-  // Syscom México (syscom-integration.md): pagina = ítems por página (10-60), page = número de página
-  search.set("pagina", String(itemsPerPage));
-  search.set("page", String(pageNum));
+  search.set("pagina", String(pageNum));
 
   const productsPath = SYSCOM_BASE.includes("developers.syscom") ? "/api/v1/productos" : "/productos";
   const url = `${SYSCOM_BASE.replace(/\/$/, "")}${productsPath}?${search.toString()}`;

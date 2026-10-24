@@ -3,8 +3,30 @@ import { PrismaClient } from "@prisma/client";
 import { getProducts as getSyscomProducts } from "@/lib/syscom-client";
 import { sanitizeQuery, extractSkuToken } from "@/lib/query-sanitizer";
 import { getTechnicalData } from "@/lib/technical-catalog";
+import { calculatePvpMxn } from "@/lib/pricing";
 
 const prisma = new PrismaClient();
+
+function extractSyscomPvp(sp: any): number {
+  let cost = 0;
+  if (typeof sp.precio === 'number' && sp.precio > 0) {
+    cost = sp.precio;
+  } else if (typeof sp.precio === 'object' && sp.precio !== null) {
+    cost = parseFloat(sp.precio.precio_descuento || sp.precio.precio_especial || sp.precio.precio_1 || sp.precio.precio_lista || 0);
+  } else if (sp.precios && typeof sp.precios === 'object') {
+    cost = parseFloat(sp.precios.precio_descuento || sp.precios.precio_especial || sp.precios.precio_1 || sp.precios.precio_lista || 0);
+  }
+  const mapPrice = parseFloat(sp.precios?.precio_map || sp.precio?.precio_map || 0);
+  const currency = (sp.moneda || "USD").toString().toUpperCase() === "MXN" ? "MXN" : "USD";
+  return cost > 0 ? calculatePvpMxn(cost, currency, mapPrice) : 0;
+}
+
+function getPrismaPvp(p: any): number {
+  if (p.price_usd && p.price_usd > 0) {
+    return calculatePvpMxn(p.price_usd, "USD");
+  }
+  return typeof p.price_mxn === "number" ? p.price_mxn : parseFloat(p.price_mxn || "0");
+}
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -17,53 +39,75 @@ export async function GET(request: Request) {
   const sku = sanitizeQuery(rawSku);
 
   try {
-    let product: any = await prisma.product.findFirst({
-      where: {
-        sku: { equals: sku, mode: "insensitive" }
-      },
-      select: {
-        sku: true,
-        name: true,
-        price_mxn: true,
-      }
-    });
+    let product: any = null;
 
+    // 1. PRIORIDAD 1: Catálogo en vivo de Shopify (tienda activa, CT Internacional y productos sincronizados con Banxico FIX)
+    try {
+      const shopifyProd = await fetchShopifyProduct(sku, true);
+      if (shopifyProd) {
+        product = {
+          sku: shopifyProd.sku || sku,
+          name: shopifyProd.name,
+          price_mxn: shopifyProd.price_mxn
+        };
+      }
+    } catch (e) {
+      console.error("[GET Search] Error consultando Shopify fallback:", e);
+    }
+
+    // 2. PRIORIDAD 2: Syscom API en vivo (con cálculo canónico de PVP: Costo USD x Tipo de Cambio Banxico FIX x 1.48)
     if (!product) {
-      // Fallback a Syscom API
       try {
-        const syscomRes = await getSyscomProducts({ search: sku, limit: 1 });
+        const syscomRes = await getSyscomProducts({ search: sku, limit: 5 });
         if (syscomRes && syscomRes.products && syscomRes.products.length > 0) {
-          const sp = syscomRes.products[0];
-          let priceNum = 0;
-          if (typeof sp.precio === 'number') {
-            priceNum = sp.precio;
-          } else if (typeof sp.precio === 'object' && sp.precio !== null) {
-            priceNum = sp.precio.precio_1 || sp.precio.precio_especial || sp.precio.precio_lista || 0;
+          const targetLower = sku.trim().toLowerCase();
+          const cleanTarget = sku.replace(/[\-\/\s]/g, "").toLowerCase();
+
+          // Buscar coincidencia exacta o normalizada por SKU/modelo
+          const sp = syscomRes.products.find((p: any) => {
+            const m = (p.modelo || p.sku || "").toString().trim().toLowerCase();
+            const cleanM = m.replace(/[\-\/\s]/g, "");
+            return m === targetLower || cleanM === cleanTarget;
+          }) || syscomRes.products[0];
+
+          if (sp) {
+            const calculatedPvp = extractSyscomPvp(sp);
+            product = {
+              sku: sp.modelo || sp.sku || sku,
+              name: sp.titulo || sp.modelo || sku,
+              price_mxn: calculatedPvp
+            };
           }
-          product = {
-            sku: sp.modelo || sp.sku || sku,
-            name: sp.titulo || sp.modelo || sku,
-            price_mxn: priceNum
-          };
         }
       } catch (e) {
-        console.error("Error fetching product by SKU from Syscom API fallback:", e);
+        console.error("[GET Search] Error fetching product by SKU from Syscom API fallback:", e);
       }
     }
 
+    // 3. PRIORIDAD 3: Respaldo en Base de Datos Prisma (solo si no se encontró en APIs en vivo)
     if (!product) {
-      // Fallback a Shopify GraphQL API
       try {
-        const shopifyProd = await fetchShopifyProduct(sku);
-        if (shopifyProd) {
+        const dbProduct = await prisma.product.findFirst({
+          where: {
+            sku: { equals: sku, mode: "insensitive" }
+          },
+          select: {
+            sku: true,
+            name: true,
+            price_usd: true,
+            price_mxn: true,
+          }
+        });
+
+        if (dbProduct) {
           product = {
-            sku: shopifyProd.sku || sku,
-            name: shopifyProd.name,
-            price_mxn: shopifyProd.price_mxn
+            sku: dbProduct.sku,
+            name: dbProduct.name,
+            price_mxn: getPrismaPvp(dbProduct)
           };
         }
       } catch (e) {
-        console.error("Error fetching product by SKU from Shopify fallback:", e);
+        console.error("[GET Search] Error consultando Prisma DB:", e);
       }
     }
 
@@ -157,6 +201,7 @@ export async function POST(request: Request) {
         });
         if (exactMatch) {
           console.log(`[Product Search] Coincidencia exacta encontrada en BD para "${target}": ${exactMatch.sku}`);
+          exactMatch.price_mxn = getPrismaPvp(exactMatch);
           products.push(exactMatch);
           break;
         }
@@ -178,12 +223,7 @@ export async function POST(request: Request) {
             if (exactSyscom) {
               const skuVal = (exactSyscom.modelo || exactSyscom.sku || target).toString();
               const titleVal = (exactSyscom.titulo || exactSyscom.modelo || skuVal).toString();
-              let priceNum = 0;
-              if (typeof exactSyscom.precio === 'number') {
-                priceNum = exactSyscom.precio;
-              } else if (typeof exactSyscom.precio === 'object' && exactSyscom.precio !== null) {
-                priceNum = exactSyscom.precio.precio_1 || exactSyscom.precio.precio_especial || exactSyscom.precio.precio_lista || 0;
-              }
+              const priceNum = extractSyscomPvp(exactSyscom);
 
               let stockNum = 0;
               let cdmxStockNum = 0;
@@ -246,15 +286,7 @@ export async function POST(request: Request) {
             for (const sp of syscomRes.products) {
               const skuVal = (sp.modelo || sp.sku || target).toString();
               const titleVal = (sp.titulo || sp.modelo || skuVal).toString();
-
-              let priceNum = 0;
-              if (typeof sp.precio === 'number') {
-                priceNum = sp.precio;
-              } else if (typeof sp.precio === 'object' && sp.precio !== null) {
-                priceNum = sp.precio.precio_1 || sp.precio.precio_especial || sp.precio.precio_lista || 0;
-              } else if (sp.precios && typeof sp.precios === 'object') {
-                priceNum = (sp.precios.precio_1 as number) || (sp.precios.precio_especial as number) || 0;
-              }
+              const priceNum = extractSyscomPvp(sp);
 
               const vendorVal = formatBrand(
                 typeof sp.marca === 'string' ? sp.marca : (sp.marca as any)?.nombre,
@@ -355,7 +387,10 @@ export async function POST(request: Request) {
             if (!aExact && bExact) return 1;
             return a.sku.length - b.sku.length;
           });
-          products = candidates.slice(0, 3);
+          products = candidates.slice(0, 3).map((c: any) => ({
+            ...c,
+            price_mxn: getPrismaPvp(c)
+          }));
           break;
         }
       }
@@ -383,23 +418,19 @@ export async function POST(request: Request) {
 
       if (branches && (branches.mexico_norte !== undefined || branches.tepotzotlan !== undefined || branches.mexico_sur !== undefined)) {
         const stockNorte = branches.mexico_norte || 0;
-        const stockTepo = branches.tepotzotlan || 0;
-        const stockSur = branches.mexico_sur || 0;
-        const stockProv = branches.provincia || 0;
+        const stockOtrasSucursales = (branches.tepotzotlan || 0) + (branches.mexico_sur || 0) + (branches.provincia || 0);
 
         if (stockNorte > 0) {
           hasImmediateCdmx = true;
-          stockMsg = `✅ Stock disponible de inmediato en almacén local CDMX Norte (${stockNorte} pzas). Recolección en nuestra oficina de Azcapotzalco (Av. Clavería 237) lista en 2 a 4 horas previa cita, o envío local express.`;
-        } else if (stockTepo > 0 || stockSur > 0) {
-          hasImmediateCdmx = true;
-          is24hTransfer = true;
-          stockMsg = `🟡 Stock disponible mediante traspaso local (${stockTepo > 0 ? stockTepo + ' pzas en CEDIS Central' : ''}${stockSur > 0 ? ' ' + stockSur + ' pzas en Sucursal Sur' : ''}). Disponible para recolección en oficina Clavería 237 en 24 horas hábiles (al día siguiente hábil).`;
-        } else if (stockProv > 0 || stockCount > 0) {
+          is24hTransfer = false;
+          stockMsg = `🟢 Stock disponible de inmediato en Sucursal México Norte (${stockNorte} pzas). Recolección en oficina Av. Clavería 237 de 2 a 4 horas.`;
+        } else if (stockOtrasSucursales > 0 || stockCount > 0) {
           hasImmediateCdmx = false;
-          stockMsg = `📦 Stock en almacén central foráneo (${stockProv || stockCount} pzas). Lo tendríamos disponible bajo pedido para recolección en oficina Clavería 237 en 24 a 72 horas hábiles (previa colocación del pedido en línea, transferencia SPEI o pago en sucursal), o con envío asegurado a domicilio en 2 a 4 días.`;
+          is24hTransfer = true;
+          stockMsg = `🟡 Bajo pedido de 24 a 72 horas hábiles (${stockOtrasSucursales || stockCount} pzas en otras sucursales). Recolección en oficina Av. Clavería 237 o con envío asegurado a domicilio.`;
         } else {
           hasImmediateCdmx = false;
-          stockMsg = "❌ Agotado temporalmente sin existencias en almacenes locales ni foráneos.";
+          stockMsg = "🔴 Equipos sin existencia en almacenes locales ni foráneos.";
         }
       } else if (branches && (branches.azcapotzalco !== undefined || branches.palacio !== undefined || branches.coacalco !== undefined || branches.tlalnepantla !== undefined)) {
         // Bodegas locales CDMX/ZMVM: DFA (Azcapotzalco), DFT (Tlalnepantla), DFC (Coacalco) y DFP (Palacio)
@@ -512,7 +543,7 @@ export async function POST(request: Request) {
   }
 }
 
-async function fetchShopifyProduct(sku: string): Promise<any> {
+async function fetchShopifyProduct(sku: string, exactOnly = false): Promise<any> {
   const domain = process.env.SHOPIFY_STORE_DOMAIN;
   const token = process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
   
@@ -522,7 +553,8 @@ async function fetchShopifyProduct(sku: string): Promise<any> {
   }
   
   try {
-    const escapedSku = sku.replace(/"/g, '\\"');
+    const cleanSku = sku.trim();
+    const escapedSku = cleanSku.replace(/["\\]/g, "");
     const res = await fetch(`https://${domain}/admin/api/2024-07/graphql.json`, {
       method: "POST",
       headers: {
@@ -532,7 +564,25 @@ async function fetchShopifyProduct(sku: string): Promise<any> {
       body: JSON.stringify({
         query: `
           query {
-            products(first: 5, query: "sku:\\"${escapedSku}\\"") {
+            productVariants(first: 10, query: "sku:${escapedSku}") {
+              nodes {
+                id
+                sku
+                price
+                inventoryQuantity
+                product {
+                  id
+                  title
+                  vendor
+                  tags
+                  descriptionHtml
+                  metafieldCdmx: metafield(namespace: "custom", key: "stock_cdmx") { value }
+                  metafieldCdmxQty: metafield(namespace: "custom", key: "stock_cdmx_qty") { value }
+                  metafieldBranches: metafield(namespace: "custom", key: "stock_branches_json") { value }
+                }
+              }
+            }
+            products(first: 5, query: "sku:${escapedSku}") {
               nodes {
                 id
                 title
@@ -559,62 +609,89 @@ async function fetchShopifyProduct(sku: string): Promise<any> {
     
     if (!res.ok) return null;
     const data = await res.json();
+    const variantNodes: any[] = data?.data?.productVariants?.nodes || [];
     const productNodes: any[] = data?.data?.products?.nodes || [];
-    if (productNodes.length === 0) return null;
 
-    // Buscar si algún nodo tiene una variante con coincidencia exacta con el SKU consultado
-    const targetLower = sku.trim().toLowerCase();
+    const targetLower = cleanSku.toLowerCase();
+    const targetNormalized = targetLower.replace(/[\-\/\s]/g, "");
+
     let selectedProduct: any = null;
     let selectedVariant: any = null;
 
-    for (const node of productNodes) {
-      const vMatch = node.variants?.nodes?.find((v: any) => v.sku && v.sku.trim().toLowerCase() === targetLower);
-      if (vMatch) {
-        selectedProduct = node;
-        selectedVariant = vMatch;
+    // 1. Buscar coincidencia exacta en variantNodes
+    for (const v of variantNodes) {
+      const vSku = (v.sku || "").trim().toLowerCase();
+      if (vSku === targetLower) {
+        selectedVariant = v;
+        selectedProduct = v.product;
         break;
       }
     }
 
-    // Si no hubo coincidencia exacta de variante, ordenar por precio y tomar la primera
-    if (!selectedProduct) {
-      productNodes.sort((a, b) => {
-        const priceA = parseFloat(a.variants?.nodes?.[0]?.price || "0");
-        const priceB = parseFloat(b.variants?.nodes?.[0]?.price || "0");
-        return priceB - priceA;
-      });
-      selectedProduct = productNodes[0];
-      selectedVariant = selectedProduct.variants?.nodes?.[0];
+    // 2. Si no hubo coincidencia, buscar en productNodes
+    if (!selectedVariant) {
+      for (const node of productNodes) {
+        const vMatch = node.variants?.nodes?.find((v: any) => {
+          const vSku = (v.sku || "").trim().toLowerCase();
+          return vSku === targetLower;
+        });
+        if (vMatch) {
+          selectedProduct = node;
+          selectedVariant = vMatch;
+          break;
+        }
+      }
     }
 
-    const productNode = selectedProduct;
-    const variant = selectedVariant;
+    // 3. Buscar coincidencia normalizada (sin guiones/diagonales) si no se encontró exacta
+    if (!selectedVariant) {
+      for (const v of variantNodes) {
+        const vNorm = (v.sku || "").trim().toLowerCase().replace(/[\-\/\s]/g, "");
+        if (vNorm === targetNormalized) {
+          selectedVariant = v;
+          selectedProduct = v.product;
+          break;
+        }
+      }
+    }
+
+    // Si es búsqueda estricta para el cotizador y no coincidió el SKU, no retornar producto falso
+    if (!selectedVariant || !selectedProduct) {
+      if (exactOnly) return null;
+      if (productNodes.length > 0) {
+        selectedProduct = productNodes[0];
+        selectedVariant = selectedProduct.variants?.nodes?.[0];
+      }
+    }
+
+    if (!selectedVariant || !selectedProduct) return null;
+
     let cleanDesc = "";
-    if (productNode.descriptionHtml) {
-      cleanDesc = productNode.descriptionHtml.replace(/<[^>]*>?/gm, '');
+    if (selectedProduct.descriptionHtml) {
+      cleanDesc = selectedProduct.descriptionHtml.replace(/<[^>]*>?/gm, '');
     }
 
-    const totalStock = variant?.inventoryQuantity || 0;
-    const isCdmx = productNode.metafieldCdmx?.value === 'true' || productNode.metafieldCdmx?.value === '1';
+    const totalStock = selectedVariant.inventoryQuantity || 0;
+    const isCdmx = selectedProduct.metafieldCdmx?.value === 'true' || selectedProduct.metafieldCdmx?.value === '1';
     const cdmxStock = isCdmx
-      ? (parseInt(productNode.metafieldCdmxQty?.value || '0', 10) || totalStock)
+      ? (parseInt(selectedProduct.metafieldCdmxQty?.value || '0', 10) || totalStock)
       : 0;
     const restoPaisStock = Math.max(0, totalStock - cdmxStock);
 
     let branchData: any = null;
-    if (productNode.metafieldBranches?.value) {
+    if (selectedProduct.metafieldBranches?.value) {
       try {
-        branchData = JSON.parse(productNode.metafieldBranches.value);
+        branchData = JSON.parse(selectedProduct.metafieldBranches.value);
       } catch (err) {
         // ignore
       }
     }
 
     return {
-      sku: variant?.sku || sku,
-      name: productNode.title,
-      price_mxn: parseFloat(variant?.price || "0"),
-      brand: productNode.vendor || "Seguridad Avanzada",
+      sku: selectedVariant.sku || sku,
+      name: selectedProduct.title,
+      price_mxn: parseFloat(selectedVariant.price || "0"),
+      brand: selectedProduct.vendor || "Seguridad Avanzada",
       description: cleanDescription(cleanDesc, 120),
       stock: totalStock,
       cdmx_stock: cdmxStock,
@@ -623,7 +700,7 @@ async function fetchShopifyProduct(sku: string): Promise<any> {
       datasheet_url: null,
     };
   } catch (e) {
-    console.error("[Product Search] Error en fallback de Shopify API:", e);
+    console.error("[Product Search] Error en fetchShopifyProduct:", e);
   }
   return null;
 }
