@@ -500,9 +500,12 @@ export async function POST(request: Request) {
           : (is24hTransfer
             ? "Recolección disponible en oficina Clavería 237 al siguiente día hábil (traspaso local en 24 horas)."
             : "Artículo en almacén central foráneo. Lo tendríamos disponible en oficina de 24 a 72 horas hábiles previa colocación de pedido en línea, transferencia SPEI o pago en sucursal."));
-      responseObj.pickup_payment_accepted = !isOutOfStock;
-      responseObj.pickup_payment_methods = "Tarjeta de crédito/débito en terminal bancaria, transferencia SPEI y efectivo en mostrador al recolectar previa cita";
-      responseObj.datasheet_url = p.datasheet_url || tech?.datasheet_url || `https://seguridad-avanzada.com/search?q=${encodeURIComponent(p.sku)}`;
+      const productUrl = p.handle
+        ? `https://seguridad-avanzada.com/products/${p.handle}`
+        : `https://seguridad-avanzada.com/search?q=${encodeURIComponent(p.sku)}`;
+
+      responseObj.datasheet_url = sanitizeDatasheetUrl(p.datasheet_url) || sanitizeDatasheetUrl(tech?.datasheet_url);
+      responseObj.product_url = productUrl;
       if (tech?.manual_url) responseObj.manual_url = tech.manual_url;
       if (tech?.specs_summary) responseObj.specs = tech.specs_summary;
     } else {
@@ -518,6 +521,10 @@ export async function POST(request: Request) {
           ? `CDMX / ZMVM: ${cdmxQty} pzas. Resto del país: ${restoPaisQty} pzas.`
           : `Resto del país: ${stockCount} pzas (Envío 2-4 días o retiro bajo pedido 24-72 hrs).`;
 
+        const itemProductUrl = p.handle
+          ? `https://seguridad-avanzada.com/products/${p.handle}`
+          : `https://seguridad-avanzada.com/search?q=${encodeURIComponent(p.sku)}`;
+
         responseObj[`title${i}`] = p.name;
         responseObj[`sku${i}`] = p.sku;
         responseObj[`price${i}`] = p.price_mxn > 0 ? `$${p.price_mxn.toFixed(2)} MXN` : "Consultar precio";
@@ -526,7 +533,8 @@ export async function POST(request: Request) {
         responseObj[`cdmx_qty${i}`] = cdmxQty;
         responseObj[`resto_pais_qty${i}`] = restoPaisQty;
         responseObj[`vendor${i}`] = formatBrand(p.brand || tech?.vendor, p.sku);
-        responseObj[`datasheet_url${i}`] = p.datasheet_url || tech?.datasheet_url || `https://www.syscom.mx/producto/${encodeURIComponent(p.sku)}.html`;
+        responseObj[`datasheet_url${i}`] = sanitizeDatasheetUrl(p.datasheet_url) || sanitizeDatasheetUrl(tech?.datasheet_url);
+        responseObj[`product_url${i}`] = itemProductUrl;
         if (tech?.manual_url) responseObj[`manual_url${i}`] = tech.manual_url;
         if (tech?.specs_summary) responseObj[`specs${i}`] = tech.specs_summary;
       });
@@ -541,6 +549,15 @@ export async function POST(request: Request) {
     console.error("Error in Kapso search webhook:", error);
     return NextResponse.json({ found: false, error: "Internal Server Error" }, { status: 500 });
   }
+}
+
+function sanitizeDatasheetUrl(url?: string | null): string | null {
+  if (!url || typeof url !== 'string') return null;
+  const trimmed = url.trim();
+  if (!trimmed || trimmed.toLowerCase() === 'null') return null;
+  if (trimmed.includes('productos-info.com')) return trimmed;
+  if (trimmed.includes('syscom.mx/producto/') || trimmed.endsWith('.html')) return null;
+  return trimmed;
 }
 
 async function fetchShopifyProduct(sku: string, exactOnly = false): Promise<any> {
@@ -573,6 +590,7 @@ async function fetchShopifyProduct(sku: string, exactOnly = false): Promise<any>
                 product {
                   id
                   title
+                  handle
                   vendor
                   tags
                   descriptionHtml
@@ -586,6 +604,7 @@ async function fetchShopifyProduct(sku: string, exactOnly = false): Promise<any>
               nodes {
                 id
                 title
+                handle
                 vendor
                 tags
                 descriptionHtml
@@ -690,6 +709,7 @@ async function fetchShopifyProduct(sku: string, exactOnly = false): Promise<any>
     return {
       sku: selectedVariant.sku || sku,
       name: selectedProduct.title,
+      handle: selectedProduct.handle || null,
       price_mxn: parseFloat(selectedVariant.price || "0"),
       brand: selectedProduct.vendor || "Seguridad Avanzada",
       description: cleanDescription(cleanDesc, 120),

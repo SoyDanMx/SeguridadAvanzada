@@ -10,7 +10,7 @@ interface TechnicalProductData {
   manual_url: string | null;
   all_pdfs?: string[];
   specs_summary: string | null;
-  syscom_page: string;
+  syscom_page?: string | null;
 }
 
 let cachedCatalog: Record<string, TechnicalProductData> | null = null;
@@ -55,15 +55,15 @@ export function getTechnicalData(sku: string): TechnicalProductData | null {
     return catalog[unhyphenated];
   }
 
-  // 3. Fallback canónico con enlace Syscom
+  // 3. Fallback canónico cuando el producto no tiene ficha en el índice local
   return {
     sku: sku.trim(),
     title: sku.trim(),
     vendor: "Seguridad Avanzada",
     category: "Seguridad Electrónica",
-    datasheet_url: `https://www.syscom.mx/producto/${encodeURIComponent(sku.trim())}.html`,
+    datasheet_url: null,
     manual_url: null,
     specs_summary: null,
-    syscom_page: `https://www.syscom.mx/producto/${encodeURIComponent(sku.trim())}.html`
+    syscom_page: null
   };
 }
